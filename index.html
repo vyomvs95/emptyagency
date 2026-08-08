@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>empty agency // interface · kinetic · identity</title>
+    <meta
+      name="description"
+      content="empty agency — we clear the clutter. Structural interface design, kinetic 3D motion, and brand identity systems."
+    />
+    <meta name="theme-color" content="#f4f4f2" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Paint the correct ground colour before React mounts (no theme flash). -->
+    <script>
+      try {
+        var stored = localStorage.getItem('empty-agency:theme')
+        var dark =
+          stored === 'dark' ||
+          (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        if (dark) document.documentElement.classList.add('dark')
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      EMPTY AGENCY // THIS CANVAS REQUIRES JAVASCRIPT. STATUS: OFFLINE.
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
