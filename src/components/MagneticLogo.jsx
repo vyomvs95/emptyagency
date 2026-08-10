@@ -53,7 +53,7 @@ export default function MagneticLogo({ onClick }) {
     <button
       type="button"
       onClick={onClick}
-      data-cursor="[HOME]"
+      data-cursor="[Back to Home]"
       aria-label="empty agency — index"
       className="group flex items-center gap-[10px] text-left"
     >

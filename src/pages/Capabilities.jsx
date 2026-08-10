@@ -9,7 +9,7 @@ import { PILLARS, PIPELINE, STACK } from '../lib/site.js'
  */
 export default function CapabilitiesPage({ onNavigate }) {
   // All tools engaged by default; toggling reads out as a live config.
-  const [engaged, setEngaged] = useState(() => new Set(STACK))
+  const [engaged, setEngaged] = useState(() => new Set(STACK.map((t) => t.id)))
 
   const toggle = (tool) =>
     setEngaged((prev) => {
@@ -46,13 +46,13 @@ export default function CapabilitiesPage({ onNavigate }) {
           />
           <div className="mt-6 flex flex-wrap items-center gap-2">
             {STACK.map((tool) => {
-              const on = engaged.has(tool)
+              const on = engaged.has(tool.id)
               return (
                 <motion.button
-                  key={tool}
+                  key={tool.id}
                   type="button"
-                  onClick={() => toggle(tool)}
-                  data-cursor={on ? '[DISENGAGE]' : '[ENGAGE]'}
+                  onClick={() => toggle(tool.id)}
+                  data-cursor={`[${tool.human}]`}
                   whileTap={{ scale: 0.96 }}
                   className="flex items-center gap-[10px] border px-4 py-[10px] text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-200"
                   style={{
@@ -64,13 +64,16 @@ export default function CapabilitiesPage({ onNavigate }) {
                     className="block size-[7px] transition-colors duration-200"
                     style={{ background: on ? 'var(--c-accent)' : 'transparent', border: on ? 'none' : '1px solid var(--c-hair)' }}
                   />
-                  [{tool}]
+                  [{tool.id}]
                 </motion.button>
               )
             })}
           </div>
           <p className="tnum mt-4 text-[11px] uppercase tracking-[0.14em] text-muted">
-            CONFIG: {STACK.filter((t) => engaged.has(t)).join(' + ') || 'NULL — NO_TOOLS_ENGAGED'}
+            CONFIG:{' '}
+            {STACK.filter((t) => engaged.has(t.id))
+              .map((t) => t.id)
+              .join(' + ') || 'NULL — NO_TOOLS_ENGAGED'}
           </p>
         </div>
 
@@ -80,7 +83,10 @@ export default function CapabilitiesPage({ onNavigate }) {
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-12 lg:grid-cols-3">
             {PILLARS.map((p, i) => (
               <Reveal key={p.index} delay={i * 0.08}>
-                <article className="group flex h-full flex-col border-t border-hair pt-5">
+                <article
+                  className="group flex h-full flex-col border-t border-hair pt-5"
+                  data-cursor={`[${p.human}]`}
+                >
                   <div className="flex items-baseline gap-4">
                     <span className="label label-ink">[{p.index}]</span>
                     <h2 className="text-[clamp(26px,3.2vw,44px)] font-medium leading-[1] tracking-[-0.03em]">
@@ -119,7 +125,10 @@ export default function CapabilitiesPage({ onNavigate }) {
           <div className="mt-10 flex flex-col">
             {PIPELINE.map((s, i) => (
               <Reveal key={s.step} delay={i * 0.06}>
-                <div className="group grid grid-cols-12 items-start gap-x-6 gap-y-4 border-t border-hair py-8 transition-colors duration-300 hover:border-[var(--c-accent)]">
+                <div
+                  className="group grid grid-cols-12 items-start gap-x-6 gap-y-4 border-t border-hair py-8 transition-colors duration-300 hover:border-[var(--c-accent)]"
+                  data-cursor={`[${s.human}]`}
+                >
                   <div className="col-span-12 flex items-baseline gap-4 md:col-span-3">
                     <span className="label label-ink">{s.step}</span>
                     <span className="label">{s.duration}</span>
@@ -152,7 +161,7 @@ export default function CapabilitiesPage({ onNavigate }) {
             <button
               type="button"
               onClick={() => onNavigate('initiate')}
-              data-cursor="[INITIATE]"
+              data-cursor="[Start a Project]"
               className="shrink-0 border px-6 py-[13px] text-[11px] font-medium uppercase tracking-[0.16em]"
               style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
             >

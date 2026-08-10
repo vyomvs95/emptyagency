@@ -86,7 +86,7 @@ export default function KineticPlayer({
         dims={dims}
         ratio={ratio}
         zoom={false}
-        cursor={playing ? '[PAUSE]' : '[PLAY]'}
+        cursor={playing ? '[Playing]' : '[Hover to Play]'}
         onClick={onClick}
         boxClassName="bg-void"
       >

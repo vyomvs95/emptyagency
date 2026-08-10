@@ -18,7 +18,7 @@ export default function StillFrame({
   variant = 'dashboard',
   zoom = true,
   className = '',
-  cursor = '[VIEW]',
+  cursor = '[View Project]',
   onClick,
 }) {
   return (

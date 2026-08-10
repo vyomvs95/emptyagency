@@ -19,7 +19,7 @@ function NavItem({ route, active, onClick }) {
     <button
       type="button"
       onClick={onClick}
-      data-cursor={`[${route.label.replace(' ↗', '')}]`}
+      data-cursor={`[${route.human}]`}
       aria-current={active ? 'page' : undefined}
       className="group relative px-[10px] py-[6px] text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-200"
       style={{ color: active ? 'var(--c-void)' : 'var(--c-ink)' }}
@@ -93,7 +93,7 @@ export default function Header({ current, onNavigate }) {
           <button
             type="button"
             onClick={() => setMenu((m) => !m)}
-            data-cursor={menu ? '[CLOSE]' : '[MENU]'}
+            data-cursor={menu ? '[Close Menu]' : '[Open Menu]'}
             className="border border-hair px-3 py-[7px] text-[11px] font-medium uppercase tracking-[0.14em] lg:hidden"
           >
             {menu ? '[ CLOSE ]' : '[ MENU ]'}

@@ -11,12 +11,12 @@ import { CATEGORIES, PROJECTS } from '../lib/site.js'
  * bounding box (handled by <Frame /> / <KineticPlayer />).
  */
 
-function FilterToggle({ active, label, count, onClick }) {
+function FilterToggle({ active, label, human, count, onClick }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      data-cursor={`[${label}]`}
+      data-cursor={`[${human}]`}
       className="relative border px-4 py-[9px] text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-200"
       style={{
         borderColor: active ? 'var(--c-ink)' : 'var(--c-hair)',
@@ -29,6 +29,9 @@ function FilterToggle({ active, label, count, onClick }) {
     </button>
   )
 }
+
+/** category id -> plain-English name, for the cursor tag. */
+const HUMAN = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.human]))
 
 export default function ArchivePage() {
   const [filter, setFilter] = useState('all')
@@ -69,6 +72,7 @@ export default function ArchivePage() {
             <FilterToggle
               key={c.id}
               label={c.label}
+              human={c.human}
               count={counts[c.id] ?? 0}
               active={filter === c.id}
               onClick={() => setFilter(c.id)}
@@ -125,6 +129,7 @@ export default function ArchivePage() {
                       dims={p.dims.replace('x', ' × ')}
                       ratio="4 / 3"
                       variant={p.variant}
+                      cursor={`[${HUMAN[p.category]}]`}
                     />
                   )}
 

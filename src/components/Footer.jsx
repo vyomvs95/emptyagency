@@ -55,7 +55,7 @@ export default function Footer() {
                 href={s.href}
                 target="_blank"
                 rel="noreferrer noopener"
-                data-cursor="[OPEN ↗]"
+                data-cursor={`[Visit ${s.human} ↗]`}
                 className="group border border-hair px-3 py-[7px] text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
               >
                 [ {s.label} ]

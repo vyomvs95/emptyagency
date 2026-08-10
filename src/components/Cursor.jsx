@@ -12,12 +12,17 @@ import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motio
  * Any element can retitle the tag by declaring `data-cursor="[LABEL]"`.
  * Elements are detected by hit-testing on move, so nothing has to be
  * wired up through context.
+ *
+ * COPY RULE: the tag always speaks plain English, never the technical
+ * label already printed on the element. Hovering KINETIC reads
+ * "[Motion Graphics]" — the UI stays brutalist, the cursor translates.
+ * Those translations live as `human` fields in lib/site.js.
  */
 
 const ARROW =
   'M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.36Z'
 
-const DEFAULT_LABEL = '[Client]'
+const DEFAULT_LABEL = '[Prospect Client]'
 
 export default function Cursor() {
   const [enabled, setEnabled] = useState(false)

@@ -23,7 +23,7 @@ export default function ThemeToggle({ className = '' }) {
       type="button"
       onClick={fire}
       disabled={Boolean(wipe)}
-      data-cursor={theme === 'dark' ? '[LIGHT]' : '[DARK]'}
+      data-cursor={theme === 'dark' ? '[Light Mode]' : '[Dark Mode]'}
       aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
       className={`relative grid size-8 place-items-center border border-hair transition-colors duration-200 hover:border-[var(--c-accent)] ${className}`}
     >

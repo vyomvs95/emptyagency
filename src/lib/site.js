@@ -3,12 +3,30 @@ import { IMAGE, VIDEO } from './media.js'
 /* ------------------------------------------------------------------ */
 /*  NAVIGATION                                                         */
 /* ------------------------------------------------------------------ */
+/**
+ * `human` is the plain-English translation shown in the cursor tag on
+ * hover. The UI keeps its technical label; the cursor explains what it
+ * actually means, so a non-technical visitor is never lost.
+ */
 export const ROUTES = [
-  { id: 'index', label: 'INDEX', path: '/', dir: 'root' },
-  { id: 'archive', label: 'ARCHIVE', path: '/archive', dir: 'root/archive' },
-  { id: 'capabilities', label: 'CAPABILITIES', path: '/capabilities', dir: 'root/capabilities' },
-  { id: 'vision', label: 'VISION', path: '/vision', dir: 'root/vision' },
-  { id: 'initiate', label: 'INITIATE ↗', path: '/initiate', dir: 'root/initiate', cta: true },
+  { id: 'index', label: 'INDEX', human: 'Home', path: '/', dir: 'root' },
+  { id: 'archive', label: 'ARCHIVE', human: 'Our Work', path: '/archive', dir: 'root/archive' },
+  {
+    id: 'capabilities',
+    label: 'CAPABILITIES',
+    human: 'What We Do',
+    path: '/capabilities',
+    dir: 'root/capabilities',
+  },
+  { id: 'vision', label: 'VISION', human: 'About Us', path: '/vision', dir: 'root/vision' },
+  {
+    id: 'initiate',
+    label: 'INITIATE ↗',
+    human: 'Start a Project',
+    path: '/initiate',
+    dir: 'root/initiate',
+    cta: true,
+  },
 ]
 
 export const ROUTE_IDS = ROUTES.map((r) => r.id)
@@ -17,10 +35,10 @@ export const ROUTE_IDS = ROUTES.map((r) => r.id)
 /*  ARCHIVE — 15 deployments, 5 per category                           */
 /* ------------------------------------------------------------------ */
 export const CATEGORIES = [
-  { id: 'all', label: 'SHOW_ALL' },
-  { id: 'interface', label: 'INTERFACE' },
-  { id: 'kinetic', label: 'KINETIC' },
-  { id: 'identity', label: 'IDENTITY' },
+  { id: 'all', label: 'SHOW_ALL', human: 'Everything' },
+  { id: 'interface', label: 'INTERFACE', human: 'App & Website Design' },
+  { id: 'kinetic', label: 'KINETIC', human: 'Motion Graphics' },
+  { id: 'identity', label: 'IDENTITY', human: 'Logo & Branding' },
 ]
 
 export const PROJECTS = [
@@ -250,29 +268,32 @@ export const FEATURED = [
 /*  CAPABILITIES                                                       */
 /* ------------------------------------------------------------------ */
 export const STACK = [
-  'FIGMA',
-  'AFTER_EFFECTS',
-  'CINEMA_4D',
-  'REACT',
-  'BLENDER',
+  { id: 'FIGMA', human: 'Design Tool' },
+  { id: 'AFTER_EFFECTS', human: 'Motion Software' },
+  { id: 'CINEMA_4D', human: '3D Animation' },
+  { id: 'REACT', human: 'Website Code' },
+  { id: 'BLENDER', human: '3D Modeling' },
 ]
 
 export const PILLARS = [
   {
     index: '01',
     title: 'INTERFACE',
+    human: 'App & Website Design',
     body: 'Structural wireframing, high-fidelity UI/UX, and frictionless user flows. We architect systems, not just screens.',
     outputs: ['WIREFRAME_KITS', 'DESIGN_SYSTEMS', 'PROTOTYPES', 'HANDOFF_SPECS'],
   },
   {
     index: '02',
     title: 'KINETIC',
+    human: 'Motion Graphics',
     body: 'Motion systems, 3D product rendering, video editing, and cinematic production. We make the static world move.',
     outputs: ['3D_RENDER', 'MOTION_SYSTEMS', 'EDIT_&_GRADE', 'SOUND_DESIGN'],
   },
   {
     index: '03',
     title: 'IDENTITY',
+    human: 'Logo & Branding',
     body: 'Brand architecture, geometric logo construction, and visual rulebooks. We build the DNA of your company.',
     outputs: ['LOGO_SYSTEMS', 'TYPE_SYSTEMS', 'BRAND_RULEBOOK', 'PRINT_&_ENV'],
   },
@@ -282,18 +303,21 @@ export const PIPELINE = [
   {
     step: 'STEP_01',
     title: 'SUBTRACT.',
+    human: 'Step 1 — Simplify',
     body: 'We strip your brief down to its absolute core objective. No decorative fluff.',
     duration: '01_WEEK',
   },
   {
     step: 'STEP_02',
     title: 'WIREFRAME.',
+    human: 'Step 2 — Blueprint',
     body: 'We build the structural logic. The blueprint must function flawlessly before we add the paint.',
     duration: '02-03_WEEKS',
   },
   {
     step: 'STEP_03',
     title: 'RENDER.',
+    human: 'Step 3 — Build It',
     body: 'High-fidelity execution across 3D, motion, and interactive deployment.',
     duration: '04-08_WEEKS',
   },
@@ -306,9 +330,9 @@ export const MARQUEE_TEXT =
   '// STRIP DOWN TO THE FOUNDATION // DESIGN THE INVISIBLE // RENDER THE FUTURE '
 
 export const SOCIALS = [
-  { label: 'DRIBBBLE_NODE', href: 'https://dribbble.com' },
-  { label: 'LINKEDIN_NODE', href: 'https://linkedin.com' },
-  { label: 'X_NODE', href: 'https://x.com' },
+  { label: 'DRIBBBLE_NODE', human: 'Dribbble', href: 'https://dribbble.com' },
+  { label: 'LINKEDIN_NODE', human: 'LinkedIn', href: 'https://linkedin.com' },
+  { label: 'X_NODE', human: 'X (Twitter)', href: 'https://x.com' },
 ]
 
 export const BUDGETS = ['$10k - $25k', '$25k - $50k', '$50k+']

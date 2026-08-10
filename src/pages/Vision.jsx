@@ -174,7 +174,7 @@ export default function VisionPage({ onNavigate }) {
             <button
               type="button"
               onClick={() => onNavigate('initiate')}
-              data-cursor="[INITIATE]"
+              data-cursor="[Start a Project]"
               className="shrink-0 border px-6 py-[13px] text-[11px] font-medium uppercase tracking-[0.16em]"
               style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
             >

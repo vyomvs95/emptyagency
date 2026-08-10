@@ -69,7 +69,7 @@ function BudgetSelect({ value, onChange, error }) {
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        data-cursor="[SELECT]"
+        data-cursor="[Choose Your Budget]"
         aria-haspopup="listbox"
         aria-expanded={open}
         className="flex w-full items-center justify-between gap-4 border-b pb-3 text-left text-[15px] md:text-[17px]"
@@ -108,7 +108,7 @@ function BudgetSelect({ value, onChange, error }) {
                     onChange(b)
                     setOpen(false)
                   }}
-                  data-cursor="[SET]"
+                  data-cursor="[Select This Range]"
                   className="flex w-full items-center justify-between px-4 py-3 text-left text-[14px] transition-colors duration-150 hover:bg-[var(--c-ink)] hover:text-[var(--c-void)]"
                   style={{
                     borderTop: i === 0 ? 'none' : '1px solid var(--c-hair-soft)',
@@ -205,7 +205,7 @@ export default function InitiatePage() {
                     onChange={set('name')}
                     onFocus={() => setFocus('name')}
                     onBlur={() => setFocus(null)}
-                    data-cursor="[TYPE]"
+                    data-cursor="[Type Here]"
                     autoComplete="organization"
                     className="w-full bg-transparent text-[15px] tracking-[0.01em] md:text-[17px]"
                     style={{ caretColor: 'var(--c-accent)' }}
@@ -226,7 +226,7 @@ export default function InitiatePage() {
                     onChange={set('scope')}
                     onFocus={() => setFocus('scope')}
                     onBlur={() => setFocus(null)}
-                    data-cursor="[TYPE]"
+                    data-cursor="[Type Here]"
                     className="w-full resize-none bg-transparent text-[15px] leading-[1.5] md:text-[17px]"
                     style={{ caretColor: 'var(--c-accent)' }}
                   />
@@ -244,7 +244,7 @@ export default function InitiatePage() {
                 <motion.button
                   type="submit"
                   disabled={status !== 'idle'}
-                  data-cursor={status === 'idle' ? '[DEPLOY]' : '[WAIT]'}
+                  data-cursor={status === 'idle' ? '[Send My Brief]' : '[Sending…]'}
                   whileTap={status === 'idle' ? { scale: 0.985 } : undefined}
                   className="w-full border px-6 py-[16px] text-[12px] font-medium uppercase tracking-[0.18em] transition-colors duration-300 md:w-auto md:px-10"
                   style={{
@@ -322,7 +322,7 @@ export default function InitiatePage() {
                     {href ? (
                       <a
                         href={href}
-                        data-cursor="[MAIL]"
+                        data-cursor="[Email Us]"
                         className="text-[14px] lowercase transition-colors duration-200 hover:text-[var(--c-accent)]"
                       >
                         {v}

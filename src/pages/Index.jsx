@@ -66,7 +66,7 @@ export default function IndexPage({ onNavigate }) {
                 <button
                   type="button"
                   onClick={() => onNavigate('initiate')}
-                  data-cursor="[INITIATE]"
+                  data-cursor="[Start a Project]"
                   className="border px-5 py-[11px] text-[11px] font-medium uppercase tracking-[0.16em] transition-colors duration-200"
                   style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
                 >
@@ -75,7 +75,7 @@ export default function IndexPage({ onNavigate }) {
                 <button
                   type="button"
                   onClick={() => onNavigate('archive')}
-                  data-cursor="[ARCHIVE]"
+                  data-cursor="[See Our Work]"
                   className="border border-hair px-5 py-[11px] text-[11px] font-medium uppercase tracking-[0.16em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
                 >
                   [ VIEW_ARCHIVE ]
@@ -210,13 +210,13 @@ export default function IndexPage({ onNavigate }) {
           <Reveal className="mt-14" delay={0.1}>
             <div className="flex flex-col items-start gap-5 border-t border-hair pt-6 md:flex-row md:items-center md:justify-between">
               <p className="max-w-[46ch] text-[16px] leading-[1.45] lowercase text-muted md:text-[18px]">
-                fifteen more deployments are catalogued in the archive. filter by
+                fifteen more deployments are cataloged in the archive. filter by
                 interface, kinetic, or identity.
               </p>
               <button
                 type="button"
                 onClick={() => onNavigate('archive')}
-                data-cursor="[ARCHIVE]"
+                data-cursor="[See Our Work]"
                 className="shrink-0 border border-hair px-5 py-[11px] text-[11px] font-medium uppercase tracking-[0.16em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
               >
                 [ OPEN_ARCHIVE ↗ ]
@@ -237,7 +237,7 @@ export default function IndexPage({ onNavigate }) {
             <button
               type="button"
               onClick={() => onNavigate('initiate')}
-              data-cursor="[INITIATE]"
+              data-cursor="[Start a Project]"
               className="border px-6 py-[13px] text-[11px] font-medium uppercase tracking-[0.16em]"
               style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
             >
