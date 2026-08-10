@@ -4,8 +4,7 @@ import StillFrame from '../components/StillFrame.jsx'
 import Marquee from '../components/Marquee.jsx'
 import Reveal, { RuleIn } from '../components/Reveal.jsx'
 import { Block, Container, SectionHeader } from '../components/Section.jsx'
-import { FEATURED, MARQUEE_TEXT } from '../lib/site.js'
-import { VIDEO } from '../lib/media.js'
+import { FEATURED, MARQUEE_TEXT, SHOWREEL } from '../lib/site.js'
 
 const HEADLINE = ['We clear the clutter.', 'You get the results.']
 
@@ -95,10 +94,12 @@ export default function IndexPage({ onNavigate }) {
               transition={{ duration: 0.85, delay: 0.35, ease: [0.2, 0, 0, 1] }}
             >
               <KineticPlayer
-                src={VIDEO.showreel}
+                youtube={SHOWREEL.youtube}
+                placeholder={SHOWREEL.placeholder}
+                credit={SHOWREEL.credit}
                 label="ASSET: SHOWREEL // FRAME_00"
-                meta="[3840x2160] // 00:48"
-                dims="3840 × 2160"
+                meta={`[${SHOWREEL.dims}]`}
+                dims={SHOWREEL.dims.replace('x', ' × ')}
                 ratio="16 / 9"
                 poster="video"
               />
@@ -167,6 +168,9 @@ export default function IndexPage({ onNavigate }) {
                     {item.type === 'video' ? (
                       <KineticPlayer
                         src={item.src}
+                        youtube={item.youtube}
+                        placeholder={item.placeholder}
+                        credit={item.credit}
                         label={label}
                         meta={meta}
                         dims={item.dims.replace('x', ' × ')}

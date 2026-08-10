@@ -115,6 +115,9 @@ export default function ArchivePage() {
                   {p.type === 'video' ? (
                     <KineticPlayer
                       src={p.src}
+                      youtube={p.youtube}
+                      placeholder={p.placeholder}
+                      credit={p.credit}
                       label={label}
                       meta={meta}
                       dims={p.dims.replace('x', ' × ')}

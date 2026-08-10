@@ -17,14 +17,15 @@
       rel="stylesheet"
     />
 
-    <!-- Paint the correct ground colour before React mounts (no theme flash). -->
+    <!-- Paint the correct ground colour before React mounts (no theme flash).
+         The site always opens in LIGHT mode. The OS `prefers-color-scheme`
+         is deliberately ignored: dark is opt-in, and only a previous
+         explicit choice by this visitor carries over. -->
     <script>
       try {
-        var stored = localStorage.getItem('empty-agency:theme')
-        var dark =
-          stored === 'dark' ||
-          (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)
-        if (dark) document.documentElement.classList.add('dark')
+        if (localStorage.getItem('empty-agency:theme') === 'dark') {
+          document.documentElement.classList.add('dark')
+        }
       } catch (e) {}
     </script>
   </head>

@@ -1,4 +1,4 @@
-import { IMAGE, VIDEO } from './media.js'
+import { IMAGE, YOUTUBE } from './media.js'
 
 /* ------------------------------------------------------------------ */
 /*  NAVIGATION                                                         */
@@ -105,23 +105,30 @@ export const PROJECTS = [
   },
 
   /* ----------------------------- KINETIC ---------------------------- */
+  /* After Effects, motion graphics and video editing. Every entry below
+     is a PLACEHOLDER reel by a third party — see media.js. Swap
+     `youtube` for `src` and drop `placeholder` to go live. */
   {
     id: 'KN_001',
-    name: 'PRODUCT_LAUNCH.C4D',
+    name: 'PRODUCT_LAUNCH.AEP',
     category: 'kinetic',
     type: 'video',
-    src: VIDEO.productLaunch,
+    youtube: YOUTUBE.showreel.id,
+    credit: YOUTUBE.showreel.credit,
+    placeholder: true,
     client: 'NULL_AUDIO',
     year: '2026',
     dims: '3840x2160',
-    note: 'Hard-surface product reveal. Redshift, 240 frames.',
+    note: 'Product launch film. Motion graphics, titles, and grade.',
   },
   {
     id: 'KN_002',
     name: 'TYPOGRAPHY_LOOP.AEP',
     category: 'kinetic',
     type: 'video',
-    src: VIDEO.typographyLoop,
+    youtube: YOUTUBE.motionReel2D.id,
+    credit: YOUTUBE.motionReel2D.credit,
+    placeholder: true,
     client: 'INTERNAL_R&D',
     year: '2025',
     dims: '1920x1920',
@@ -129,49 +136,56 @@ export const PROJECTS = [
   },
   {
     id: 'KN_003',
-    name: 'ABSTRACT_SIM_01.OBJ',
-    category: 'kinetic',
-    type: 'video',
-    src: VIDEO.abstractSim,
-    client: 'FIELD_STUDY',
-    year: '2025',
-    dims: '2048x2048',
-    note: 'Soft-body simulation. 4.2M polygons, zero decoration.',
-  },
-  {
-    id: 'KN_004',
     name: 'BRAND_ANTHEM.MP4',
     category: 'kinetic',
     type: 'video',
-    src: VIDEO.brandAnthem,
+    youtube: YOUTUBE.motionPortfolio.id,
+    credit: YOUTUBE.motionPortfolio.credit,
+    placeholder: true,
     client: 'ATLAS_MOBILITY',
     year: '2026',
     dims: '3840x1608',
     note: 'Cinematic anthem cut. Direction, edit, grade, sound.',
   },
   {
-    id: 'KN_005',
-    name: '3D_UI_RENDER.C4D',
+    id: 'KN_004',
+    name: 'SOCIAL_CUTDOWNS.PRPROJ',
     category: 'kinetic',
     type: 'video',
-    src: VIDEO.uiRender,
+    youtube: YOUTUBE.editorReel26.id,
+    credit: YOUTUBE.editorReel26.credit,
+    placeholder: true,
+    client: 'MONO_SUPPLY',
+    year: '2026',
+    dims: '1080x1920',
+    note: 'One long-form master cut down to 24 vertical deliverables.',
+  },
+  {
+    id: 'KN_005',
+    name: 'LONGFORM_EDIT.PRPROJ',
+    category: 'kinetic',
+    type: 'video',
+    youtube: YOUTUBE.editorReel24.id,
+    credit: YOUTUBE.editorReel24.credit,
+    placeholder: true,
     client: 'ORBIT_LABS',
     year: '2026',
     dims: '2560x1440',
-    note: 'Spatial interface study. UI as a physical object.',
+    note: 'Documentary-length edit. Story, pacing, sound, color.',
   },
 
   /* ---------------------------- IDENTITY ---------------------------- */
   {
     id: 'ID_001',
-    name: 'BRAND_ARCHITECTURE.AI',
+    name: 'BRAND_SYSTEM.MP4',
     category: 'identity',
-    type: 'image',
-    src: IMAGE.brandArchitecture,
+    type: 'video',
+    youtube: YOUTUBE.brandPortfolio.id,
+    credit: YOUTUBE.brandPortfolio.credit,
+    placeholder: true,
     client: 'ATLAS_MOBILITY',
     year: '2026',
-    dims: '4000x4000',
-    variant: 'construction',
+    dims: '3840x2160',
     note: 'Master brand, four sub-brands, one geometric root.',
   },
   {
@@ -188,15 +202,16 @@ export const PROJECTS = [
   },
   {
     id: 'ID_003',
-    name: 'LOGO_CONSTRUCTION.AI',
+    name: 'LOGO_ANIMATION.AEP',
     category: 'identity',
-    type: 'image',
-    src: IMAGE.logoConstruction,
+    type: 'video',
+    youtube: YOUTUBE.logoAnimation.id,
+    credit: YOUTUBE.logoAnimation.credit,
+    placeholder: true,
     client: 'VAULT_ZERO',
     year: '2025',
     dims: '2400x2400',
-    variant: 'construction',
-    note: 'Every curve derived from a circle and a 15° grid.',
+    note: 'Static mark to animated signature. Built from one circle.',
   },
   {
     id: 'ID_004',
@@ -242,21 +257,25 @@ export const FEATURED = [
   },
   {
     id: 'DEP_002',
-    name: 'PRODUCT_LAUNCH.C4D',
-    discipline: 'KINETIC / 3D',
+    name: 'PRODUCT_LAUNCH.AEP',
+    discipline: 'KINETIC / MOTION',
     type: 'video',
-    src: VIDEO.featuredKinetic,
+    youtube: YOUTUBE.motionPortfolio.id,
+    credit: YOUTUBE.motionPortfolio.credit,
+    placeholder: true,
     client: 'NULL_AUDIO',
     year: '2026',
     dims: '3840x2160',
-    note: 'Hard-surface reveal, rendered in Cinema 4D.',
+    note: 'Product launch film. Motion graphics, titles, and grade.',
   },
   {
     id: 'DEP_003',
     name: 'BRAND_ANTHEM.MP4',
-    discipline: 'KINETIC / MOTION',
+    discipline: 'KINETIC / EDIT',
     type: 'video',
-    src: VIDEO.featuredMotion,
+    youtube: YOUTUBE.editorPortfolio.id,
+    credit: YOUTUBE.editorPortfolio.credit,
+    placeholder: true,
     client: 'ATLAS_MOBILITY',
     year: '2026',
     dims: '3840x1608',
@@ -264,13 +283,21 @@ export const FEATURED = [
   },
 ]
 
+/** Hero showreel on the index page. */
+export const SHOWREEL = {
+  youtube: YOUTUBE.showreel.id,
+  credit: YOUTUBE.showreel.credit,
+  placeholder: true,
+  dims: '3840x2160',
+}
+
 /* ------------------------------------------------------------------ */
 /*  CAPABILITIES                                                       */
 /* ------------------------------------------------------------------ */
 export const STACK = [
   { id: 'FIGMA', human: 'Design Tool' },
   { id: 'AFTER_EFFECTS', human: 'Motion Software' },
-  { id: 'CINEMA_4D', human: '3D Animation' },
+  { id: 'PREMIERE_PRO', human: 'Video Editing' },
   { id: 'REACT', human: 'Website Code' },
   { id: 'BLENDER', human: '3D Modeling' },
 ]

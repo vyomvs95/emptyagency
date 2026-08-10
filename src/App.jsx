@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import Layout from './components/Layout.jsx'
 import Cursor from './components/Cursor.jsx'
-import BootSequence from './components/BootSequence.jsx'
+import LogoLoader from './components/LogoLoader.jsx'
 import ThemeWipe from './components/ThemeWipe.jsx'
 
 import IndexPage from './pages/Index.jsx'
@@ -66,7 +66,7 @@ export default function App() {
       <ThemeWipe />
 
       <AnimatePresence>
-        {!booted && <BootSequence onComplete={() => setBooted(true)} />}
+        {!booted && <LogoLoader onComplete={() => setBooted(true)} />}
       </AnimatePresence>
 
       {/* Scan line that sweeps the viewport on every route change */}

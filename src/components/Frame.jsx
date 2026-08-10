@@ -46,9 +46,10 @@ export default function Frame({
         </div>
       )}
 
-      {/* BOUNDING BOX */}
+      {/* BOUNDING BOX — `group` drives the greyscale→colour hover on the
+          media inside it, without any extra state. */}
       <div
-        className="relative"
+        className="group relative"
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         onClick={onClick}

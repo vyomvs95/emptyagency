@@ -34,12 +34,14 @@ export default function StillFrame({
       boxClassName="bg-void"
     >
       {src ? (
+        // Black and white at rest, full colour on hover. Wireframe
+        // posters are exempt — they are already monochrome by design.
         <img
           src={src}
           alt={alt}
           loading="lazy"
           draggable={false}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover grayscale transition-[filter] duration-[600ms] ease-out group-hover:grayscale-0"
         />
       ) : (
         <WireframePoster variant={variant} />
