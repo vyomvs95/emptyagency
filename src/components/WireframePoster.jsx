@@ -295,7 +295,61 @@ function VideoPlate() {
   )
 }
 
+/**
+ * SCAFFOLD — the overlay laid over real artwork.
+ * Deliberately structural and text-free: thirds, diagonals, a centre
+ * registration target and corner ticks. It reads as construction lines
+ * drawn over the work, which is the point — we show the bones first.
+ */
+function Scaffold() {
+  return (
+    <div className="relative h-full w-full">
+      <svg
+        className="absolute inset-0 h-full w-full"
+        viewBox="0 0 100 50"
+        preserveAspectRatio="none"
+        fill="none"
+      >
+        {/* rule of thirds */}
+        {[33.33, 66.66].map((xx) => (
+          <line key={xx} x1={xx} y1="0" x2={xx} y2="50" stroke="var(--c-hair)" strokeWidth="1" strokeDasharray="3 3" {...stroke} />
+        ))}
+        {[16.66, 33.33].map((yy) => (
+          <line key={yy} x1="0" y1={yy} x2="100" y2={yy} stroke="var(--c-hair)" strokeWidth="1" strokeDasharray="3 3" {...stroke} />
+        ))}
+        {/* construction diagonals */}
+        <line x1="0" y1="0" x2="100" y2="50" stroke="var(--c-hair)" strokeWidth="1" {...stroke} />
+        <line x1="100" y1="0" x2="0" y2="50" stroke="var(--c-hair)" strokeWidth="1" {...stroke} />
+      </svg>
+
+      {/* centre registration target — its own square svg so it stays round */}
+      <div className="absolute inset-0 grid place-items-center">
+        <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+          <circle cx="19" cy="19" r="18" stroke="var(--c-hair)" strokeWidth="1" />
+          <circle cx="19" cy="19" r="2" fill="var(--c-hair)" />
+          <path d="M19 1 V11 M19 27 V37 M1 19 H11 M27 19 H37" stroke="var(--c-hair)" strokeWidth="1" />
+        </svg>
+      </div>
+
+      {/* corner ticks */}
+      {[
+        'left-2 top-2 border-l border-t',
+        'right-2 top-2 border-r border-t',
+        'left-2 bottom-2 border-b border-l',
+        'right-2 bottom-2 border-b border-r',
+      ].map((pos) => (
+        <span
+          key={pos}
+          className={`absolute block size-[10px] ${pos}`}
+          style={{ borderColor: 'var(--c-hair)' }}
+        />
+      ))}
+    </div>
+  )
+}
+
 const VARIANTS = {
+  scaffold: Scaffold,
   dashboard: Dashboard,
   app: AppShell,
   mobile: Mobile,
@@ -312,7 +366,7 @@ export default function WireframePoster({ variant = 'dashboard', className = '' 
   return (
     <div className={`relative h-full w-full select-none overflow-hidden ${className}`}>
       {/* Full-bleed crosshair — the "no asset bound" mark */}
-      {variant !== 'video' && (
+      {variant !== 'video' && variant !== 'scaffold' && (
         <svg
           className="absolute inset-0 h-full w-full opacity-45"
           viewBox="0 0 100 50"
