@@ -64,14 +64,20 @@ Type is **Space Grotesk** throughout. All structural UI is uppercase with
 
 ## The interactions
 
-**Logo loader** — `LogoLoader.jsx`. Built from the mark itself over
-~1.9s: the void scales in on a spring while crosshair guides and the
-dashed magnetic field draw around it, the wordmark unfurls from
-tracked-out to set, then the whole cluster flies to the measured
-coordinates of the header logo and shrinks to its 13px size. The loader
-hands off to the real mark rather than cutting to it. The dock target is
-recomputed from the live gutter and header height, so it stays
-registered at every breakpoint.
+**Logo loader** — `LogoLoader.jsx`. Built from the mark itself, in four
+beats over ~2.8s:
+
+1. **ORBIT** — the void breaks off and travels around its dashed magnetic
+   field ring three full times. Same field the header logo uses on hover,
+   here completed as a full orbit.
+2. **GATHER** — the ring collapses and the mark falls back to centre.
+3. **COVER** — it expands from 14px until it swallows the viewport.
+4. **REVEAL** — the black turns white, then dissolves off a blurred page
+   that sharpens into focus.
+
+The blur is a `backdrop-filter` on the **loader overlay**, never on the
+page tree. When the loader unmounts, the filter leaves with it — so no
+residual `blur(0px)` is left behind to soften the 1px hairlines.
 
 **Figma cursor** — `Cursor.jsx`. Two springs: the arrow is stiff
 (`stiffness 900 / damping 45`), the `[Client]` tag is loose
@@ -115,11 +121,17 @@ chrome never appears and our overlay owns all hover behaviour. `.yt-cover`
 uses container query units to crop the always-16:9 embed to fill any frame
 ratio, with a plain `100%` fallback.
 
-**Black and white until hover** — media renders `grayscale(1)` at rest and
-returns to full colour on hover, driven by a `group` class on the frame so
-it needs no extra state. The chrome sits outside that filter, so the accent
-progress bar never desaturates. Wireframe posters are exempt — they are
-already monochrome by design.
+**Black and white until hover** — every frame shows a real poster still up
+front in `grayscale(1)`, turning to full colour the moment the cursor
+arrives, before the video has even begun to stream. Driven by a `group`
+class on the frame, so it needs no extra state. The chrome sits outside
+that filter, so the accent progress bar never desaturates.
+
+Poster resolution order: an explicit `image`, else the YouTube still
+(`maxresdefault` → `hqdefault` on error), and only if there is no still at
+all does it fall back to the abstract `WireframePoster` plate. Interface
+projects have no artwork yet, so those are the only frames still showing a
+wireframe.
 
 **Page transitions** — `App.jsx`. `AnimatePresence mode="wait"` with an
 opacity/blur/lift, plus an accent scan line that sweeps the viewport on

@@ -6,6 +6,16 @@
  * than overwritten so we never clobber another consumer.
  */
 
+/**
+ * Poster frame for a video id.
+ * `maxresdefault` is a true 16:9 1280x720 still but does not exist for
+ * every upload; `hqdefault` always exists but is 4:3 with letterbox bars
+ * baked in — those bars crop away under `object-fit: cover`.
+ */
+export function thumbnail(id, quality = 'maxresdefault') {
+  return `https://i.ytimg.com/vi/${id}/${quality}.jpg`
+}
+
 let apiPromise = null
 
 export function loadYouTubeAPI() {

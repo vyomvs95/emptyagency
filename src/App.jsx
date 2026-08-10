@@ -83,11 +83,11 @@ export default function App() {
         />
       </AnimatePresence>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: booted ? 1 : 0 }}
-        transition={{ duration: 0.4, delay: booted ? 0.05 : 0 }}
-      >
+      {/* The page mounts immediately and stays fully opaque — the loader
+          sits on top and blurs it with its own backdrop-filter, so no
+          filter is ever applied to this tree and no residual blur is left
+          behind to soften the hairlines. */}
+      <div>
         <Layout current={route} onNavigate={navigate}>
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
@@ -101,7 +101,7 @@ export default function App() {
             </motion.div>
           </AnimatePresence>
         </Layout>
-      </motion.div>
+      </div>
     </>
   )
 }

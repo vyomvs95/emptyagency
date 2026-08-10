@@ -9,7 +9,7 @@ import {
 import { AnimatePresence, motion } from 'framer-motion'
 import Frame from './Frame.jsx'
 import WireframePoster from './WireframePoster.jsx'
-import { loadYouTubeAPI, playerVars } from '../lib/youtube.js'
+import { loadYouTubeAPI, playerVars, thumbnail } from '../lib/youtube.js'
 
 /**
  * KINETIC PLAYER
@@ -37,6 +37,36 @@ function timecode(seconds) {
 /* Shared: greyscale by default, full colour while the frame is hovered. */
 const MEDIA_FILTER =
   'h-full w-full grayscale transition-[filter,transform] duration-[600ms] ease-out group-hover:grayscale-0'
+
+/**
+ * POSTER FRAME
+ * The real still, shown up front in black and white, turning to colour
+ * the moment the cursor arrives — before the video has even started to
+ * stream. Falls back through YouTube's thumbnail qualities, and only
+ * lands on the abstract wireframe plate if there is no still at all.
+ */
+function Poster({ youtube, image, variant }) {
+  const [quality, setQuality] = useState('maxresdefault')
+  const [failed, setFailed] = useState(false)
+
+  const src = image || (youtube && !failed ? thumbnail(youtube, quality) : null)
+  if (!src) return <WireframePoster variant={variant} />
+
+  return (
+    <img
+      src={src}
+      alt=""
+      draggable={false}
+      className={`${MEDIA_FILTER} object-cover`}
+      onError={() => {
+        // maxresdefault is missing for some uploads; hqdefault always
+        // exists (4:3, letterboxed — the bars crop away under cover).
+        if (quality === 'maxresdefault') setQuality('hqdefault')
+        else setFailed(true)
+      }}
+    />
+  )
+}
 
 /* ------------------------- NATIVE ENGINE ------------------------- */
 const NativeEngine = forwardRef(function NativeEngine({ src, zoom, onState }, ref) {
@@ -206,6 +236,7 @@ const YouTubeEngine = forwardRef(function YouTubeEngine({ id, zoom, onState }, r
 export default function KineticPlayer({
   src,
   youtube,
+  image,
   label,
   meta,
   dims,
@@ -228,14 +259,26 @@ export default function KineticPlayer({
   const play = useCallback(() => engine.current?.play(), [])
   const pause = useCallback(() => engine.current?.pause(), [])
 
-  const { started, playing, current, duration } = state
+  const { playing, current, duration } = state
   const progress = duration > 0 ? Math.min(1, current / duration) : 0
+
+  // Attribution rides in the technical label rather than as chips over
+  // the artwork — the frame stays clean, the credit stays visible.
+  const metaNode = placeholder ? (
+    <>
+      {meta}
+      <span style={{ color: 'var(--c-signal)' }}> // PLACEHOLDER</span>
+      {credit && <span> © {credit}</span>}
+    </>
+  ) : (
+    meta
+  )
 
   return (
     <div className={className} onMouseEnter={play} onMouseLeave={pause}>
       <Frame
         label={label}
-        meta={meta}
+        meta={metaNode}
         dims={dims}
         ratio={ratio}
         zoom={false}
@@ -250,37 +293,18 @@ export default function KineticPlayer({
             <NativeEngine ref={engine} src={src} zoom={zoom && playing} onState={setState} />
           )}
 
-          {/* STATIC WIREFRAME POSTER — lifts on first play */}
+          {/* POSTER — the real still, lifts once playback actually starts */}
           <AnimatePresence>
-            {!started && (
+            {!playing && (
               <motion.div
                 key="poster"
                 className="absolute inset-0 bg-void"
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.32, ease: [0.2, 0, 0, 1] }}
+                transition={{ duration: 0.45, ease: [0.2, 0, 0, 1] }}
               >
-                <WireframePoster variant={poster} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* HELD-FRAME STATE */}
-          <AnimatePresence>
-            {started && !playing && (
-              <motion.div
-                key="held"
-                className="absolute inset-0 flex items-center justify-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.18 }}
-                style={{ background: 'color-mix(in srgb, var(--c-void) 55%, transparent)' }}
-              >
-                <span className="label label-ink border border-hair bg-void px-3 py-[6px]">
-                  FRAME_HELD
-                </span>
+                <Poster youtube={youtube} image={image} variant={poster} />
               </motion.div>
             )}
           </AnimatePresence>
@@ -293,23 +317,6 @@ export default function KineticPlayer({
             />
             <span className="label label-ink">{playing ? 'PLAYING' : 'STANDBY'}</span>
           </div>
-
-          {/* PLACEHOLDER + CREDIT — third-party reel, not our work */}
-          {placeholder && (
-            <div className="pointer-events-none absolute right-3 top-3 flex flex-col items-end gap-[5px]">
-              <span
-                className="label px-[6px] py-[3px]"
-                style={{ background: 'var(--c-signal)', color: 'var(--c-void)' }}
-              >
-                PLACEHOLDER
-              </span>
-              {credit && (
-                <span className="label border border-hair bg-void px-[6px] py-[3px]">
-                  © {credit}
-                </span>
-              )}
-            </div>
-          )}
 
           {/* TIMECODE */}
           <div className="pointer-events-none absolute bottom-3 right-3">
