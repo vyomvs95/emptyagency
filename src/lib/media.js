@@ -45,17 +45,35 @@ export const VIDEO = {
   // productLaunch: '/media/product-launch.mp4',
 }
 
-/** Drop real stills here — null keeps the procedural wireframe poster. */
+/* ------------------------------------------------------------------ */
+/*  PLACEHOLDER STILLS                                                 */
+/*  Frames from third-party design reels, standing in until real work  */
+/*  lands. Verified reachable on 2026-08-11. Same rule as the video     */
+/*  placeholders: every project using one is marked `placeholder: true` */
+/*  and carries its creator's credit in the frame label.                */
+/*                                                                      */
+/*  TO REPLACE: swap the value for '/media/your-file.jpg' and drop      */
+/*  `placeholder`/`credit` from the project in site.js. Setting a value */
+/*  back to null restores the procedural wireframe poster.              */
+/* ------------------------------------------------------------------ */
+const still = (id, quality = 'maxresdefault') =>
+  `https://i.ytimg.com/vi/${id}/${quality}.jpg`
+
 export const IMAGE = {
-  fintechDash: null,
-  saasWebApp: null,
-  cryptoWallet: null,
-  ecommerceFlow: null,
-  healthTracker: null,
-  brandArchitecture: null,
-  typographicSystem: null,
-  logoConstruction: null,
-  colorPalette: null,
-  stationeryGrid: null,
-  featuredInterface: null,
+  // interface — UI/UX reels
+  fintechDash: { src: still('cRg0H4OfjPs'), credit: 'MUSEMIND' },
+  saasWebApp: { src: still('6-_OIjwphp4'), credit: 'SHAKURO' },
+  cryptoWallet: { src: still('LvERlEDOU40'), credit: 'SUMAN BAKSHI' },
+  ecommerceFlow: { src: still('brQ74EpkafY'), credit: 'ENRIDEIA' },
+  // no maxresdefault on this upload — sddefault is 4:3 and its bars
+  // crop away under object-fit: cover
+  healthTracker: { src: still('JxXzrEqFdSc', 'sddefault'), credit: 'MOKEN DIGITAL' },
+
+  // identity — branding + graphic design reels
+  typographicSystem: { src: still('W6ZDTqE6jWU'), credit: 'STUDIO CONTRE.COURANT' },
+  colorPalette: { src: still('nN58DTqaCt8'), credit: 'EVERYTHING DESIGN' },
+  stationeryGrid: { src: still('rCodAT4QV_U'), credit: 'ONOMY STUDIO' },
 }
+
+/** The index hero still reuses the same project as IX_001. */
+IMAGE.featuredInterface = IMAGE.fintechDash

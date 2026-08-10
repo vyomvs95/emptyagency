@@ -186,6 +186,8 @@ export default function IndexPage({ onNavigate }) {
                         dims={item.dims.replace('x', ' × ')}
                         ratio="4 / 3"
                         variant={item.variant}
+                        placeholder={item.placeholder}
+                        credit={item.credit}
                         onClick={() => onNavigate('archive')}
                       />
                     )}

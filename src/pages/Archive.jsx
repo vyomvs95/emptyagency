@@ -132,6 +132,8 @@ export default function ArchivePage() {
                       dims={p.dims.replace('x', ' × ')}
                       ratio="4 / 3"
                       variant={p.variant}
+                      placeholder={p.placeholder}
+                      credit={p.credit}
                       cursor={`[${HUMAN[p.category]}]`}
                     />
                   )}

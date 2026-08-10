@@ -9,6 +9,7 @@ import {
 import { AnimatePresence, motion } from 'framer-motion'
 import Frame from './Frame.jsx'
 import WireframePoster from './WireframePoster.jsx'
+import PosterImage from './PosterImage.jsx'
 import { loadYouTubeAPI, playerVars, thumbnail } from '../lib/youtube.js'
 
 /**
@@ -53,11 +54,8 @@ function Poster({ youtube, image, variant }) {
   if (!src) return <WireframePoster variant={variant} />
 
   return (
-    <img
+    <PosterImage
       src={src}
-      alt=""
-      draggable={false}
-      className={`${MEDIA_FILTER} object-cover`}
       onError={() => {
         // maxresdefault is missing for some uploads; hqdefault always
         // exists (4:3, letterboxed — the bars crop away under cover).

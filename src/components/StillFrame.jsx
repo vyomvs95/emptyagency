@@ -1,12 +1,17 @@
 import Frame from './Frame.jsx'
 import WireframePoster from './WireframePoster.jsx'
+import PosterImage from './PosterImage.jsx'
 
 /**
  * STILL FRAME
  * ----------------------------------------------------------------
  * Image counterpart to <KineticPlayer />. Drop a real file in via
- * `src` and it renders an <img>; leave it null and the procedural
- * wireframe poster stands in. Nothing else changes.
+ * `src` and it renders the monochrome poster plate; leave it null and
+ * the procedural wireframe stands in.
+ *
+ * `placeholder` / `credit` fold attribution into the technical label
+ * rather than laying chips over the artwork — same contract as
+ * <KineticPlayer />, so borrowed work is always marked as borrowed.
  */
 export default function StillFrame({
   src,
@@ -17,14 +22,26 @@ export default function StillFrame({
   ratio = '16 / 9',
   variant = 'dashboard',
   zoom = true,
+  placeholder = false,
+  credit,
   className = '',
   cursor = '[View Project]',
   onClick,
 }) {
+  const metaNode = placeholder ? (
+    <>
+      {meta}
+      <span style={{ color: 'var(--c-signal)' }}> // PLACEHOLDER</span>
+      {credit && <span> © {credit}</span>}
+    </>
+  ) : (
+    meta
+  )
+
   return (
     <Frame
       label={label}
-      meta={meta}
+      meta={metaNode}
       dims={dims}
       ratio={ratio}
       zoom={zoom}
@@ -34,15 +51,7 @@ export default function StillFrame({
       boxClassName="bg-void"
     >
       {src ? (
-        // Black and white at rest, full colour on hover. Wireframe
-        // posters are exempt — they are already monochrome by design.
-        <img
-          src={src}
-          alt={alt}
-          loading="lazy"
-          draggable={false}
-          className="h-full w-full object-cover grayscale transition-[filter] duration-[600ms] ease-out group-hover:grayscale-0"
-        />
+        <PosterImage src={src} alt={alt} />
       ) : (
         <WireframePoster variant={variant} />
       )}

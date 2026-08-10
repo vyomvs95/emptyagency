@@ -121,17 +121,25 @@ chrome never appears and our overlay owns all hover behaviour. `.yt-cover`
 uses container query units to crop the always-16:9 embed to fill any frame
 ratio, with a plain `100%` fallback.
 
-**Black and white until hover** — every frame shows a real poster still up
-front in `grayscale(1)`, turning to full colour the moment the cursor
-arrives, before the video has even begun to stream. Driven by a `group`
-class on the frame, so it needs no extra state. The chrome sits outside
-that filter, so the accent progress bar never desaturates.
+**The poster plate** — `PosterImage.jsx` + `.poster-plate` /
+`.poster-screen` in `index.css`. Flat `grayscale(1)` on a photograph reads
+muddy and sits apart from the rest of the canvas, so the rest state is
+instead:
 
-Poster resolution order: an explicit `image`, else the YouTube still
-(`maxresdefault` → `hqdefault` on error), and only if there is no still at
-all does it fall back to the abstract `WireframePoster` plate. Interface
-projects have no artwork yet, so those are the only frames still showing a
-wireframe.
+- high-contrast monochrome — `grayscale(1) contrast(1.38) brightness(1.06)`
+- a **dot-matrix screen** at 4px, punched in the page's own ground colour,
+  at the same rhythm as the background grid
+- a hairline inner edge seating the plate inside its frame
+
+The effect is artwork *printed onto* the canvas rather than dropped on top
+of it. On hover the screen clears and full colour returns over 600ms —
+driven by the `group` class `<Frame />` puts on the bounding box, so it
+needs no extra state. Chrome sits outside the filter, so the accent
+progress bar never desaturates.
+
+Poster resolution order: an explicit `image`/`src`, else the YouTube still
+(`maxresdefault` → `hqdefault` on error), and only with no still at all
+does it fall back to the abstract `WireframePoster` plate.
 
 **Page transitions** — `App.jsx`. `AnimatePresence mode="wait"` with an
 opacity/blur/lift, plus an accent scan line that sweeps the viewport on
@@ -148,17 +156,18 @@ Everything routes through `src/lib/media.js`. Three source kinds:
 | `src: '/media/x.mp4'` | native `<video>` — the **production** path |
 | `src: null` (images) | procedural wireframe poster |
 
-> ### ⚠ The kinetic and identity reels are NOT empty agency's work
+> ### ⚠ NONE of the current media is empty agency's work
 >
-> They are third-party showreels on YouTube, used so the first cut reads
-> as a real portfolio. Every one is marked `placeholder: true`, which
-> renders a red **PLACEHOLDER** chip and a **© CREATOR** credit on the
-> frame. Do not remove those chips while the borrowed footage is still in
-> place — they are what keeps the demo honest.
+> All 18 slots — every video **and** every still — are third-party design
+> reels, used so the first cut reads as a real portfolio. Every one is
+> marked `placeholder: true`, which prints **PLACEHOLDER © CREATOR** in
+> the frame's technical label. Do not remove those markers while the
+> borrowed work is still in place — they are what keeps the demo honest,
+> and they are the only thing distinguishing it from a false claim.
 
-To go live with real work: replace `youtube:` with `src:` pointing at a
-file in `public/media/`, and drop `placeholder`/`credit`. No component
-changes. Export as H.264 `.mp4` — Google Drive links will not work as
+To go live with real work: replace `youtube:`/`src:` with a file in
+`public/media/`, and drop `placeholder`/`credit`. No component changes.
+Export video as H.264 `.mp4` — Google Drive links will not work as
 `<video>` sources (wrong content type, and it throttles).
 
 Per-project metadata (names, clients, dimensions, categories) lives in
