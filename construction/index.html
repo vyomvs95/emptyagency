@@ -460,13 +460,14 @@
         animation: caret-blink 1s step-end infinite;
       }
 
-      /* PROGRESS — a 1px rule that fills, the same bar the kinetic
-         player draws under a playing frame. */
-      .progress {
-        margin-top: 26px;
+      /* LOADER — an indeterminate 1px sweep on the same rule the kinetic
+         player draws under a playing frame. Deliberately has no percentage:
+         there is no real number to report, and a fake one is a promise. */
+      .loader {
+        margin-top: 30px;
       }
 
-      .progress__track {
+      .loader__track {
         position: relative;
         height: 1px;
         width: 100%;
@@ -474,59 +475,30 @@
         overflow: hidden;
       }
 
-      .progress__fill {
+      .loader__sweep {
         position: absolute;
         inset-block: 0;
         left: 0;
-        width: 0%;
+        width: 26%;
         background: var(--c-accent);
-        transition: width 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+        animation: sweep 2.1s cubic-bezier(0.65, 0, 0.35, 1) infinite;
       }
 
-      .progress__meta {
+      .loader__meta {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        margin-top: 9px;
+        margin-top: 10px;
       }
 
-      /* CONTACT — the one live action on the page. */
-      .contact {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 10px 14px;
-        margin-top: 22px;
-        padding-top: 18px;
-        border-top-width: 1px;
-        border-top-color: var(--c-hair-soft);
-      }
-
-      .contact__link {
-        position: relative;
-        font-size: 15px;
-        font-weight: 500;
-        letter-spacing: -0.01em;
-      }
-
-      .contact__link::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -3px;
-        height: 1px;
-        background: var(--c-ink);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
-          background-color 0.2s ease;
-      }
-
-      .contact__link:hover::after {
-        transform: scaleX(1);
-        background: var(--c-accent);
+      /* Three dots that fill in one at a time, held in a fixed-width slot
+         so the label beside them never reflows. */
+      .ellipsis {
+        display: inline-block;
+        width: 1.6em;
+        text-align: left;
+        letter-spacing: 0.16em;
       }
 
       /* ---------------------------------------------------------- */
@@ -618,6 +590,19 @@
         50%,
         100% {
           opacity: 0;
+        }
+      }
+
+      /* Travels the full track and off the far edge, so the bar reads as
+         work in progress rather than progress toward a known end. */
+      @keyframes sweep {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          /* percentages here resolve against the sweep's own width (26% of
+             the track), so 385% carries its left edge to the far end. */
+          transform: translateX(385%);
         }
       }
 
@@ -765,35 +750,20 @@
 
             <p class="lede">
               A new canvas is being assembled — structural interface design,
-              kinetic 3D motion, and identity systems. The full site lands
-              shortly.
+              kinetic 3D motion, and identity systems. The full site will be
+              available soon.
             </p>
 
-            <div class="progress">
-              <div
-                class="progress__track"
-                role="progressbar"
-                aria-valuemin="0"
-                aria-valuemax="100"
-                aria-valuenow="72"
-                aria-label="Build progress"
-              >
-                <span class="progress__fill" id="progress-fill"></span>
+            <div class="loader">
+              <div class="loader__track" aria-hidden="true">
+                <span class="loader__sweep"></span>
               </div>
-              <div class="progress__meta">
-                <span class="label">ASSEMBLING_CANVAS</span>
-                <span class="label tnum">72%</span>
+              <div class="loader__meta">
+                <span class="label" role="status"
+                  >LOADING<span class="ellipsis" id="ellipsis">...</span></span
+                >
+                <span class="label">AVAILABLE_SOON</span>
               </div>
-            </div>
-
-            <div class="contact">
-              <span class="label">NEW_BUSINESS //</span>
-              <a
-                class="contact__link"
-                href="mailto:hello@emptyagency.com"
-                data-cursor="[Email Us]"
-                >hello@emptyagency.com</a
-              >
             </div>
           </div>
         </div>
@@ -881,13 +851,17 @@
         sync()
         window.addEventListener('resize', sync)
 
-        /* ---------------- PROGRESS ---------------- */
-        var fill = document.getElementById('progress-fill')
-        requestAnimationFrame(function () {
-          requestAnimationFrame(function () {
-            fill.style.width = '72%'
-          })
-        })
+        /* ---------------- LOADING ELLIPSIS ----------------
+           Cycles . → .. → ... in step with the sweep. Under reduced motion
+           the three dots are left static rather than animated. */
+        var ellipsis = document.getElementById('ellipsis')
+        if (!reduced) {
+          var dots = 0
+          setInterval(function () {
+            dots = (dots + 1) % 4
+            ellipsis.textContent = '.'.repeat(dots)
+          }, 520)
+        }
 
         /* Everything below is pointer sugar — skipped on coarse pointers
            and under reduced motion, where the native cursor stays. */
@@ -923,12 +897,30 @@
         tag.textContent = ''
         document.body.appendChild(tag)
 
-        root.classList.add('has-cursor')
+        /* NOTE: `has-cursor` is deliberately NOT set here. Hiding the OS
+           pointer before the first pointermove would leave the page with no
+           cursor at all for anyone who lands and doesn't immediately move. */
 
         var mouse = { x: -100, y: -100 }
         var arrow = { x: -100, y: -100 }
         var label = { x: -100, y: -100 }
         var seen = false
+
+        /* The native cursor is hidden ONLY while the custom one is up, and
+           the two are flipped together — never a frame with neither. That
+           pairing is the whole contract: `has-cursor` is what applies
+           `cursor: none`, so anything that hides the arrow must also hand
+           the OS pointer back. */
+        function showCursor() {
+          root.classList.add('has-cursor')
+          cursor.classList.add('is-visible')
+        }
+
+        function hideCursor() {
+          root.classList.remove('has-cursor')
+          cursor.classList.remove('is-visible')
+          tag.classList.remove('is-visible')
+        }
 
         window.addEventListener(
           'pointermove',
@@ -938,10 +930,14 @@
 
             if (!seen) {
               seen = true
+              /* Jump, don't glide, to the first known position — otherwise
+                 the arrow eases in from the top-left corner. */
               arrow.x = label.x = mouse.x
               arrow.y = label.y = mouse.y
-              cursor.classList.add('is-visible')
             }
+            /* Re-asserted every move, not just the first: the pointer
+               leaving and re-entering the window must bring it back. */
+            showCursor()
 
             /* magnetic field */
             var r = field.getBoundingClientRect()
@@ -971,10 +967,12 @@
           { passive: true }
         )
 
-        document.addEventListener('pointerleave', function () {
-          cursor.classList.remove('is-visible')
-          tag.classList.remove('is-visible')
-        })
+        /* Every way the pointer can stop being ours. `mouseleave` on the
+           document is the one that actually fires when the pointer exits
+           the viewport into browser chrome; `blur` covers tabbing away. */
+        document.addEventListener('mouseleave', hideCursor)
+        document.addEventListener('pointerleave', hideCursor)
+        window.addEventListener('blur', hideCursor)
 
         function frame() {
           /* mark: critically-under-damped spring, so it overshoots home */
