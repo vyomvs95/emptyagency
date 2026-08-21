@@ -45,6 +45,19 @@ side carries across.
 Edit it directly and open it in a browser — there is nothing to compile. It is
 copied verbatim into `dist/` by `scripts/dist.mjs shell`.
 
+Two invariants in that file break quietly, so they are worth knowing:
+
+- **The tokens are a copy, not an import.** Nothing propagates from
+  `src/index.css`. Change a colour there and the holding page keeps the old one
+  until you change it in both places.
+- **`has-cursor` and the custom arrow must flip together.** `has-cursor` is what
+  applies `cursor: none`; the arrow is what replaces it. Hide one without the
+  other and the page has no cursor at all. `showCursor()` / `hideCursor()` exist
+  to keep the pair honest — always go through them. This was a live bug: the
+  arrow was shown on the first pointer move only while `pointerleave` removed it
+  on every exit, so the first time the pointer left the window the cursor
+  vanished for good.
+
 **Why `/mockup` needs no server config.** `vite.config.js` sets
 `base: '/mockup/'` and `outDir: 'dist/mockup'`, so every asset URL is absolute
 under `/mockup/`. Routing inside the SPA is hash-based (`/mockup/#/archive`),
