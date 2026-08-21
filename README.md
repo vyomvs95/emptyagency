@@ -5,14 +5,89 @@ React 19 · Framer Motion 12 · Tailwind CSS 4 · Vite.
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173
-npm run build
-npm run preview
+npm run dev      # http://localhost:5173/mockup/  — the SPA alone
+npm run build    # produces the full dist/ tree (holding page + mockup)
+npm run preview  # http://localhost:4173/         — the deployed tree, exactly
 ```
 
-> Node 20+ required. This machine had no Node installed at build time —
-> install it (nodejs.org, `nvm install --lts`, or `brew install node`)
-> before the first `npm install`.
+> Node 20+ required.
+
+---
+
+## Deployed shape — holding page at `/`, work-in-progress at `/mockup`
+
+The domain is live but the site is not finished, so `emptyagency.com` serves a
+standalone **holding page** and the real build is parked one level down:
+
+| URL | Serves |
+|---|---|
+| `emptyagency.com` | `construction/index.html` — under-construction page |
+| `emptyagency.com/mockup` | this SPA, the full work-in-progress site |
+
+```
+dist/
+├─ index.html      ← construction/index.html
+├─ robots.txt      ← disallows /mockup
+├─ sitemap.xml     ← lists / only
+└─ mockup/
+   ├─ index.html   ← the SPA
+   └─ assets/…
+```
+
+**The holding page** (`construction/index.html`) is one hand-written file with
+zero dependencies — no React, no Tailwind, no build step. It re-declares the
+design tokens verbatim from `src/index.css` and reimplements the magnetic mark,
+the Figma cursor, the dot-matrix canvas and the terminal read-out in ~200 lines
+of vanilla JS, so the two pages read as one system. It shares the
+`empty-agency:theme` localStorage key with the SPA, so a theme chosen on either
+side carries across.
+
+Edit it directly and open it in a browser — there is nothing to compile. It is
+copied verbatim into `dist/` by `scripts/dist.mjs shell`.
+
+**Why `/mockup` needs no server config.** `vite.config.js` sets
+`base: '/mockup/'` and `outDir: 'dist/mockup'`, so every asset URL is absolute
+under `/mockup/`. Routing inside the SPA is hash-based (`/mockup/#/archive`),
+which means every URL on the site is a plain static file lookup — no SPA
+rewrite rule, no catch-all, on any host.
+
+**`/mockup` is unlisted, not private.** Anyone with the URL can open it; it is
+kept out of search by `robots.txt` *and* an `X-Robots-Tag: noindex` header from
+`vercel.json` (robots.txt alone stops crawling, not indexing of a URL someone
+links to). Do not put a link to it on the holding page.
+
+### Going live with the real site
+
+Move the SPA back to the root when the work is ready:
+
+1. `vite.config.js` — drop `base` and set `outDir: 'dist'`
+2. `package.json` — `"build": "vite build"`
+3. delete `construction/`, `scripts/dist.mjs`, and the `/mockup` header blocks
+   in `vercel.json`
+4. add `{"source": "/(.*)", "destination": "/index.html"}` under `rewrites`
+   only if you also move off hash routing
+
+### Deploying (Vercel)
+
+The repo is wired for it — `vercel.json` declares the build command and output
+directory, so a push to `main` is the whole deploy:
+
+```bash
+git push origin main
+```
+
+For the first deploy, in the Vercel dashboard: **New Project → import
+`vyomvs95/emptyagency`**. Framework preset *Vite*, and leave build settings
+alone — `vercel.json` overrides them. Then **Settings → Domains → add
+`emptyagency.com` and `www.emptyagency.com`**, and point GoDaddy at what Vercel
+shows there:
+
+| Record | Host | Value |
+|---|---|---|
+| `A` | `@` | `76.76.21.21` |
+| `CNAME` | `www` | `cname.vercel-dns.com` |
+
+DNS changes take anywhere from minutes to a few hours to propagate.
 
 ---
 

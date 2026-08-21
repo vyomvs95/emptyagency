@@ -1,0 +1,14 @@
+# emptyagency.com
+#
+# The holding page at / is public and indexable.
+# The work-in-progress build at /mockup/ is unlisted: reachable by anyone
+# with the URL, but kept out of search results. Belt and braces — this
+# file plus an `X-Robots-Tag: noindex` header from vercel.json, because
+# robots.txt alone stops crawling, not indexing of a linked URL.
+
+User-agent: *
+Disallow: /mockup
+Disallow: /mockup/
+Allow: /
+
+Sitemap: https://www.emptyagency.com/sitemap.xml

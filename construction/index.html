@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>empty agency // under construction</title>
+    <meta
+      name="description"
+      content="empty agency — structural interface design, kinetic 3D motion, and brand identity systems. A new canvas is being assembled."
+    />
+    <meta name="theme-color" content="#f4f4f2" />
+    <link rel="canonical" href="https://www.emptyagency.com/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="empty agency // under construction" />
+    <meta
+      property="og:description"
+      content="We clear the clutter. A new canvas is being assembled."
+    />
+    <meta property="og:url" content="https://www.emptyagency.com/" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Paint the correct ground colour before first paint (no theme flash).
+         Same contract as the main site: it always opens LIGHT, the OS
+         `prefers-color-scheme` is deliberately ignored, and only a previous
+         explicit choice by this visitor carries over. The key is shared with
+         the SPA, so a theme picked here survives into /mockup and back. -->
+    <script>
+      try {
+        if (localStorage.getItem('empty-agency:theme') === 'dark') {
+          document.documentElement.classList.add('dark')
+        }
+      } catch (e) {}
+    </script>
+
+    <style>
+      /* ============================================================
+         TOKENS — mirrored verbatim from src/index.css so this page and
+         the SPA are the same system. No Tailwind here: this file must
+         stay a single dependency-free document that renders even if the
+         build never runs.
+         ============================================================ */
+      :root {
+        --c-void: #f4f4f2;
+        --c-ink: #0b0b0b;
+        --c-hair: rgba(11, 11, 11, 0.28);
+        --c-hair-soft: rgba(11, 11, 11, 0.14);
+        --c-grid: rgba(11, 11, 11, 0.16);
+        --c-muted: rgba(11, 11, 11, 0.5);
+        --c-accent: #0091ff;
+        --c-signal: #ff3b30;
+        --font-stack: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system,
+          sans-serif;
+      }
+
+      .dark {
+        --c-void: #0a0a0a;
+        --c-ink: #f2f2f0;
+        --c-hair: rgba(242, 242, 240, 0.26);
+        --c-hair-soft: rgba(242, 242, 240, 0.12);
+        --c-grid: rgba(242, 242, 240, 0.14);
+        --c-muted: rgba(242, 242, 240, 0.46);
+        --c-accent: #21c7ff;
+        --c-signal: #ff5449;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        border: 0 solid var(--c-hair);
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--c-void);
+        color: var(--c-ink);
+        font-family: var(--font-stack);
+        font-feature-settings: 'ss01', 'ss02', 'tnum';
+        overflow-x: hidden;
+        transition: background-color 0.28s ease, color 0.28s ease;
+      }
+
+      /* The OS cursor is replaced by the custom arrow on fine pointers.
+         `*` rather than a list, so buttons and links can't win by
+         specificity and leave the native pointer showing. */
+      @media (pointer: fine) {
+        html.has-cursor *,
+        html.has-cursor *::before,
+        html.has-cursor *::after {
+          cursor: none;
+        }
+      }
+
+      ::selection {
+        background: var(--c-accent);
+        color: var(--c-void);
+      }
+
+      :focus-visible {
+        outline: 1px solid var(--c-accent);
+        outline-offset: 3px;
+      }
+
+      button,
+      a {
+        font: inherit;
+        color: inherit;
+        background: transparent;
+        text-decoration: none;
+      }
+
+      ::-webkit-scrollbar {
+        width: 9px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--c-hair);
+        border: 3px solid var(--c-void);
+      }
+
+      /* ---------------------------------------------------------- */
+      /*  PRIMITIVES                                                 */
+      /* ---------------------------------------------------------- */
+      .label {
+        font-size: 10px;
+        line-height: 1.4;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-weight: 500;
+        color: var(--c-muted);
+      }
+
+      .label-ink {
+        color: var(--c-ink);
+      }
+
+      .tnum {
+        font-variant-numeric: tabular-nums;
+      }
+
+      .gutter {
+        padding-inline: 20px;
+      }
+      @media (min-width: 768px) {
+        .gutter {
+          padding-inline: 40px;
+        }
+      }
+      @media (min-width: 1280px) {
+        .gutter {
+          padding-inline: 64px;
+        }
+      }
+
+      .shell {
+        margin-inline: auto;
+        width: 100%;
+        max-width: 1680px;
+      }
+
+      /* ---------------------------------------------------------- */
+      /*  THE CANVAS — dot matrix + 12-col grid + horizon rule        */
+      /*  Identical substrate to GridCanvas.jsx.                      */
+      /* ---------------------------------------------------------- */
+      .canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .canvas__dots {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(var(--c-grid) 1px, transparent 1px);
+        background-size: 32px 32px;
+        background-position: -1px -1px;
+      }
+
+      .canvas__cols {
+        position: absolute;
+        inset: 0;
+        opacity: 0.6;
+        display: none;
+      }
+      @media (min-width: 768px) {
+        .canvas__cols {
+          display: block;
+        }
+      }
+
+      .canvas__cols-inner {
+        margin-inline: auto;
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        height: 100%;
+        width: 100%;
+        max-width: 1680px;
+      }
+
+      .canvas__col {
+        height: 100%;
+        border-left-width: 1px;
+        border-color: var(--c-hair-soft);
+      }
+      .canvas__col:last-child {
+        border-right-width: 1px;
+      }
+
+      .canvas__horizon {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 1px;
+        background: var(--c-hair-soft);
+        opacity: 0.6;
+      }
+
+      /* ---------------------------------------------------------- */
+      /*  HEADER                                                     */
+      /* ---------------------------------------------------------- */
+      header,
+      main,
+      footer {
+        position: relative;
+        z-index: 10;
+      }
+
+      header {
+        border-bottom-width: 1px;
+        background: var(--c-void);
+      }
+
+      .header__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding-block: 16px;
+      }
+
+      /* THE MARK — ● empty agency. The void detaches and is pulled toward
+         the pointer inside a 130px field; the wordmark never moves. */
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo__field {
+        position: relative;
+        display: block;
+        width: 13px;
+        height: 13px;
+      }
+
+      .logo__ghost {
+        position: absolute;
+        inset: 0;
+        border-radius: 9999px;
+        border-width: 1px;
+        border-style: dashed;
+        border-color: var(--c-hair);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      .logo__void {
+        position: absolute;
+        inset: 0;
+        border-radius: 9999px;
+        background: var(--c-ink);
+        will-change: transform;
+      }
+
+      .logo__field.is-engaged .logo__ghost {
+        opacity: 1;
+      }
+
+      .logo__word {
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+
+      .toggle {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 32px;
+        height: 32px;
+        border-width: 1px;
+        border-color: var(--c-hair);
+        transition: border-color 0.2s ease;
+        flex: none;
+      }
+      .toggle:hover {
+        border-color: var(--c-accent);
+      }
+
+      /* STATUS BAR — the header's second hairline row. */
+      .status {
+        border-top-width: 1px;
+        border-top-color: var(--c-hair-soft);
+      }
+
+      .status__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding-block: 7px;
+      }
+
+      .status__vp {
+        display: none;
+      }
+      @media (min-width: 640px) {
+        .status__vp {
+          display: block;
+        }
+      }
+
+      /* ---------------------------------------------------------- */
+      /*  MAIN                                                       */
+      /* ---------------------------------------------------------- */
+      main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-block: 36px;
+      }
+      @media (min-width: 768px) {
+        main {
+          padding-block: 44px;
+        }
+      }
+
+      .stage {
+        width: 100%;
+        max-width: 760px;
+        margin-inline: auto;
+      }
+
+      /* THE BOUNDING BOX — 1px border, four 8×8 anchors dead on the
+         corners, technical label above. Frame.jsx, in plain CSS. */
+      .frame__label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 9px;
+      }
+
+      .frame {
+        position: relative;
+        border-width: 1px;
+        border-color: var(--c-hair);
+        padding: 34px 24px 30px;
+      }
+      @media (min-width: 768px) {
+        .frame {
+          padding: 44px 44px 38px;
+        }
+      }
+
+      .anchor {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-width: 1px;
+        border-color: var(--c-ink);
+        background: var(--c-void);
+      }
+      .anchor--tl {
+        top: -4px;
+        left: -4px;
+      }
+      .anchor--tr {
+        top: -4px;
+        right: -4px;
+      }
+      .anchor--bl {
+        bottom: -4px;
+        left: -4px;
+      }
+      .anchor--br {
+        bottom: -4px;
+        right: -4px;
+      }
+
+      .rec {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .rec__dot {
+        display: block;
+        width: 6px;
+        height: 6px;
+        border-radius: 9999px;
+        background: var(--c-signal);
+        animation: pulse 1.6s ease-in-out infinite;
+      }
+
+      h1 {
+        margin: 16px 0 0;
+        font-size: clamp(29px, 6.6vw, 56px);
+        line-height: 0.98;
+        font-weight: 500;
+        letter-spacing: -0.035em;
+        text-transform: lowercase;
+      }
+
+      .lede {
+        margin: 20px 0 0;
+        max-width: 44ch;
+        font-size: 15px;
+        line-height: 1.62;
+        font-weight: 300;
+        color: var(--c-muted);
+      }
+      @media (min-width: 768px) {
+        .lede {
+          font-size: 16px;
+        }
+      }
+
+      .caret {
+        display: inline-block;
+        width: 0.5em;
+        margin-left: 0.08em;
+        color: var(--c-accent);
+        animation: caret-blink 1s step-end infinite;
+      }
+
+      /* PROGRESS — a 1px rule that fills, the same bar the kinetic
+         player draws under a playing frame. */
+      .progress {
+        margin-top: 26px;
+      }
+
+      .progress__track {
+        position: relative;
+        height: 1px;
+        width: 100%;
+        background: var(--c-hair-soft);
+        overflow: hidden;
+      }
+
+      .progress__fill {
+        position: absolute;
+        inset-block: 0;
+        left: 0;
+        width: 0%;
+        background: var(--c-accent);
+        transition: width 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .progress__meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 9px;
+      }
+
+      /* CONTACT — the one live action on the page. */
+      .contact {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px 14px;
+        margin-top: 22px;
+        padding-top: 18px;
+        border-top-width: 1px;
+        border-top-color: var(--c-hair-soft);
+      }
+
+      .contact__link {
+        position: relative;
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+
+      .contact__link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -3px;
+        height: 1px;
+        background: var(--c-ink);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+          background-color 0.2s ease;
+      }
+
+      .contact__link:hover::after {
+        transform: scaleX(1);
+        background: var(--c-accent);
+      }
+
+      /* ---------------------------------------------------------- */
+      /*  FOOTER                                                     */
+      /* ---------------------------------------------------------- */
+      footer {
+        border-top-width: 1px;
+        background: var(--c-void);
+      }
+
+      .footer__row {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-block: 16px;
+      }
+      @media (min-width: 768px) {
+        .footer__row {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+        }
+      }
+
+      .footer__left {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 12px;
+      }
+
+      .pulse-dot {
+        display: block;
+        width: 6px;
+        height: 6px;
+        border-radius: 9999px;
+        background: var(--c-accent);
+        animation: pulse 1.8s ease-in-out infinite;
+      }
+
+      /* ---------------------------------------------------------- */
+      /*  CURSOR — Figma arrow + plain-English tag. Two springs, done  */
+      /*  here as two lerp rates: the arrow is stiff, the tag swings   */
+      /*  in behind it. Built only on (pointer: fine).                 */
+      /* ---------------------------------------------------------- */
+      .cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 90;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        will-change: transform;
+      }
+      .cursor.is-visible {
+        opacity: 1;
+      }
+
+      .cursor__tag {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 89;
+        pointer-events: none;
+        padding: 3px 7px;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+        color: #fff;
+        background: var(--c-accent);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        will-change: transform;
+      }
+      .cursor__tag.is-visible {
+        opacity: 1;
+      }
+
+      /* ---------------------------------------------------------- */
+      /*  KEYFRAMES                                                  */
+      /* ---------------------------------------------------------- */
+      @keyframes caret-blink {
+        0%,
+        49% {
+          opacity: 1;
+        }
+        50%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.35;
+          transform: scale(0.78);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- THE CANVAS -->
+    <div class="canvas" aria-hidden="true">
+      <div class="canvas__dots"></div>
+      <div class="canvas__cols gutter">
+        <div class="canvas__cols-inner">
+          <div class="canvas__col"></div>
+          <div class="canvas__col"></div>
+          <div class="canvas__col"></div>
+          <div class="canvas__col"></div>
+          <div class="canvas__col"></div>
+          <div class="canvas__col"></div>
+          <div class="canvas__col"></div>
+          <div class="canvas__col"></div>
+          <div class="canvas__col"></div>
+          <div class="canvas__col"></div>
+          <div class="canvas__col"></div>
+          <div class="canvas__col"></div>
+        </div>
+      </div>
+      <div class="canvas__horizon"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+      <div class="gutter shell">
+        <div class="header__row">
+          <div class="logo" data-cursor="[empty agency]">
+            <span class="logo__field" id="logo-field">
+              <span class="logo__ghost" aria-hidden="true"></span>
+              <span class="logo__void" id="logo-void" aria-hidden="true"></span>
+            </span>
+            <span class="logo__word">empty agency</span>
+          </div>
+
+          <button
+            type="button"
+            class="toggle"
+            id="theme-toggle"
+            aria-label="Switch colour theme"
+            data-cursor="[Dark Mode]"
+          >
+            <svg
+              id="icon-moon"
+              width="14"
+              height="14"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M13 9.6A5.6 5.6 0 0 1 6.4 3a5.6 5.6 0 1 0 6.6 6.6Z"
+                stroke="var(--c-ink)"
+                stroke-width="1"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <svg
+              id="icon-sun"
+              width="14"
+              height="14"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+              style="display: none"
+            >
+              <circle cx="8" cy="8" r="3" stroke="var(--c-ink)" stroke-width="1" />
+              <g stroke="var(--c-ink)" stroke-width="1">
+                <line x1="8" y1="1" x2="8" y2="3" />
+                <line x1="8" y1="1" x2="8" y2="3" transform="rotate(45 8 8)" />
+                <line x1="8" y1="1" x2="8" y2="3" transform="rotate(90 8 8)" />
+                <line x1="8" y1="1" x2="8" y2="3" transform="rotate(135 8 8)" />
+                <line x1="8" y1="1" x2="8" y2="3" transform="rotate(180 8 8)" />
+                <line x1="8" y1="1" x2="8" y2="3" transform="rotate(225 8 8)" />
+                <line x1="8" y1="1" x2="8" y2="3" transform="rotate(270 8 8)" />
+                <line x1="8" y1="1" x2="8" y2="3" transform="rotate(315 8 8)" />
+              </g>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="status">
+        <div class="gutter shell">
+          <div class="status__row">
+            <span class="label label-ink">ROOT / — BUILD_IN_PROGRESS</span>
+            <span class="label tnum status__vp" id="viewport">VIEWPORT: —</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+      <div class="gutter shell">
+        <div class="stage">
+          <div class="frame__label">
+            <span class="rec">
+              <span class="rec__dot" aria-hidden="true"></span>
+              <span class="label label-ink">SITE_UNDER_CONSTRUCTION</span>
+            </span>
+            <span class="label">01 / 01</span>
+          </div>
+
+          <div class="frame">
+            <span class="anchor anchor--tl" aria-hidden="true"></span>
+            <span class="anchor anchor--tr" aria-hidden="true"></span>
+            <span class="anchor anchor--bl" aria-hidden="true"></span>
+            <span class="anchor anchor--br" aria-hidden="true"></span>
+
+            <span class="label">STATUS_READOUT</span>
+
+            <h1>
+              we clear<br />the clutter<span class="caret" aria-hidden="true"
+                >_</span
+              >
+            </h1>
+
+            <p class="lede">
+              A new canvas is being assembled — structural interface design,
+              kinetic 3D motion, and identity systems. The full site lands
+              shortly.
+            </p>
+
+            <div class="progress">
+              <div
+                class="progress__track"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="72"
+                aria-label="Build progress"
+              >
+                <span class="progress__fill" id="progress-fill"></span>
+              </div>
+              <div class="progress__meta">
+                <span class="label">ASSEMBLING_CANVAS</span>
+                <span class="label tnum">72%</span>
+              </div>
+            </div>
+
+            <div class="contact">
+              <span class="label">NEW_BUSINESS //</span>
+              <a
+                class="contact__link"
+                href="mailto:hello@emptyagency.com"
+                data-cursor="[Email Us]"
+                >hello@emptyagency.com</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="gutter shell">
+        <div class="footer__row">
+          <div class="footer__left">
+            <span class="rec">
+              <span class="pulse-dot" aria-hidden="true"></span>
+              <span class="label label-ink">STATUS: BUILDING</span>
+            </span>
+            <span class="label">//</span>
+            <span class="label label-ink tnum" id="clock">LOCAL_TIME: —</span>
+          </div>
+          <span class="label">© 2026 EMPTY AGENCY</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      ;(function () {
+        var root = document.documentElement
+        var reduced = window.matchMedia(
+          '(prefers-reduced-motion: reduce)'
+        ).matches
+
+        /* ---------------- THEME ----------------
+           Shares the `empty-agency:theme` key with the SPA, so a theme
+           chosen here carries into /mockup and back. */
+        var toggle = document.getElementById('theme-toggle')
+        var sun = document.getElementById('icon-sun')
+        var moon = document.getElementById('icon-moon')
+
+        function paint() {
+          var dark = root.classList.contains('dark')
+          sun.style.display = dark ? 'block' : 'none'
+          moon.style.display = dark ? 'none' : 'block'
+          toggle.setAttribute('data-cursor', dark ? '[Light Mode]' : '[Dark Mode]')
+          var meta = document.querySelector('meta[name="theme-color"]')
+          if (meta) meta.setAttribute('content', dark ? '#0a0a0a' : '#f4f4f2')
+        }
+
+        toggle.addEventListener('click', function () {
+          var dark = root.classList.toggle('dark')
+          try {
+            localStorage.setItem('empty-agency:theme', dark ? 'dark' : 'light')
+          } catch (e) {}
+          paint()
+        })
+        paint()
+
+        /* ---------------- CLOCK ---------------- */
+        var clock = document.getElementById('clock')
+        var zone = 'LOCAL'
+        try {
+          var tz = Intl.DateTimeFormat().resolvedOptions().timeZone
+          if (tz) zone = tz.split('/').pop().toUpperCase()
+        } catch (e) {}
+
+        function tick() {
+          clock.textContent =
+            'LOCAL_TIME: ' +
+            new Date().toLocaleTimeString('en-GB', {
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+              hour12: false,
+            }) +
+            ' ' +
+            zone
+        }
+        tick()
+        setInterval(tick, 1000)
+
+        /* ---------------- VIEWPORT READ-OUT ---------------- */
+        var vp = document.getElementById('viewport')
+        function sync() {
+          vp.textContent =
+            'VIEWPORT: ' + window.innerWidth + ' × ' + window.innerHeight
+        }
+        sync()
+        window.addEventListener('resize', sync)
+
+        /* ---------------- PROGRESS ---------------- */
+        var fill = document.getElementById('progress-fill')
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            fill.style.width = '72%'
+          })
+        })
+
+        /* Everything below is pointer sugar — skipped on coarse pointers
+           and under reduced motion, where the native cursor stays. */
+        if (reduced || !window.matchMedia('(pointer: fine)').matches) return
+
+        /* ---------------- MAGNETIC MARK ----------------
+           Inside a 130px field the void travels 0.42× the pointer delta
+           with a centre-weighted falloff, chased on a spring so it
+           overshoots and settles. */
+        var FIELD = 130
+        var PULL = 0.42
+        var field = document.getElementById('logo-field')
+        var dot = document.getElementById('logo-void')
+        var target = { x: 0, y: 0 }
+        var pos = { x: 0, y: 0 }
+        var vel = { x: 0, y: 0 }
+
+        /* ---------------- CURSOR ----------------
+           Arrow chases hard (0.35), the tag loose (0.16) so it swings in
+           behind the point. The label is resolved by hit-test on move,
+           so nothing needs wiring up per element — any node can rename
+           the tag with data-cursor. */
+        var cursor = document.createElement('div')
+        cursor.className = 'cursor'
+        cursor.innerHTML =
+          '<svg width="17" height="19" viewBox="0 0 17 19" fill="none">' +
+          '<path d="M1 1.2 15.4 8.6 8.9 10.4 6.2 17Z" fill="var(--c-accent)"/>' +
+          '</svg>'
+        document.body.appendChild(cursor)
+
+        var tag = document.createElement('div')
+        tag.className = 'cursor__tag'
+        tag.textContent = ''
+        document.body.appendChild(tag)
+
+        root.classList.add('has-cursor')
+
+        var mouse = { x: -100, y: -100 }
+        var arrow = { x: -100, y: -100 }
+        var label = { x: -100, y: -100 }
+        var seen = false
+
+        window.addEventListener(
+          'pointermove',
+          function (e) {
+            mouse.x = e.clientX
+            mouse.y = e.clientY
+
+            if (!seen) {
+              seen = true
+              arrow.x = label.x = mouse.x
+              arrow.y = label.y = mouse.y
+              cursor.classList.add('is-visible')
+            }
+
+            /* magnetic field */
+            var r = field.getBoundingClientRect()
+            var dx = e.clientX - (r.left + r.width / 2)
+            var dy = e.clientY - (r.top + r.height / 2)
+            var dist = Math.hypot(dx, dy)
+
+            if (dist < FIELD) {
+              var falloff = 1 - dist / FIELD
+              var k = PULL * (0.45 + falloff * 0.55)
+              target.x = dx * k
+              target.y = dy * k
+              field.classList.add('is-engaged')
+            } else {
+              target.x = 0
+              target.y = 0
+              field.classList.remove('is-engaged')
+            }
+
+            /* cursor tag — nearest ancestor that declares one wins */
+            var hit = document.elementFromPoint(e.clientX, e.clientY)
+            var owner = hit && hit.closest ? hit.closest('[data-cursor]') : null
+            var next = owner ? owner.getAttribute('data-cursor') : ''
+            if (next !== tag.textContent) tag.textContent = next
+            tag.classList.toggle('is-visible', Boolean(next))
+          },
+          { passive: true }
+        )
+
+        document.addEventListener('pointerleave', function () {
+          cursor.classList.remove('is-visible')
+          tag.classList.remove('is-visible')
+        })
+
+        function frame() {
+          /* mark: critically-under-damped spring, so it overshoots home */
+          vel.x = (vel.x + (target.x - pos.x) * 0.22) * 0.76
+          vel.y = (vel.y + (target.y - pos.y) * 0.22) * 0.76
+          pos.x += vel.x
+          pos.y += vel.y
+          dot.style.transform =
+            'translate3d(' + pos.x + 'px,' + pos.y + 'px,0) scale(' +
+            (field.classList.contains('is-engaged') ? 1.22 : 1) +
+            ')'
+
+          arrow.x += (mouse.x - arrow.x) * 0.35
+          arrow.y += (mouse.y - arrow.y) * 0.35
+          label.x += (mouse.x - label.x) * 0.16
+          label.y += (mouse.y - label.y) * 0.16
+
+          cursor.style.transform =
+            'translate3d(' + arrow.x + 'px,' + arrow.y + 'px,0)'
+          tag.style.transform =
+            'translate3d(' + (label.x + 18) + 'px,' + (label.y + 20) + 'px,0)'
+
+          requestAnimationFrame(frame)
+        }
+        requestAnimationFrame(frame)
+      })()
+    </script>
+  </body>
+</html>
