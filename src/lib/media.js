@@ -89,3 +89,48 @@ export const MEDIA = {
   kidsRoom: image('3d/kids-room', 1280, 720),
   sofaRender: image('3d/sofa-render', 640, 480),
 }
+
+/* ------------------------------------------------------------------ */
+/*  FILMS — our own long-form video, /public/media/films               */
+/* ------------------------------------------------------------------ */
+/**
+ * Generated from the encoder's output (sizes are measured, not typed),
+ * so it lives in its own file. `excerpt: true` marks a ~45-second cut
+ * of a longer film; those carry an EXCERPT tag wherever they play.
+ */
+export { FILM } from './films.js'
+
+/* ------------------------------------------------------------------ */
+/*  YOUTUBE — work that lives on YouTube, played via the standard embed */
+/* ------------------------------------------------------------------ */
+/**
+ * Video ids only. Stills come from i.ytimg.com; playback is YouTube's
+ * own embedded player inside the project panel (see ProjectPanel.jsx).
+ * `jQiC5r0n7JI` (Jumanji promo) was supplied but has embedding
+ * disabled by its owner, so it cannot be shown on the site.
+ */
+export const YT = {
+  // Osho Jain — lyric videos
+  oshoKaunApna: 'j_Ab4LbCP6o',
+  oshoMazhabHai: 'a6WDmVd4tGo',
+  oshoTujhse: 'XAq8MdN_H70',
+  oshoSahare: 'zidFnshFTXc',
+  oshoUljhe: 'ArAQG5cvh2Q',
+  oshoNaaMila: 'AE9XkdzCE2E',
+  oshoUljheRaw: 'YiFHidZa23M',
+  oshoHumara: 'h2vf1mFBe6E',
+  oshoKyaDekhu: '_81V4fvdmG8',
+  oshoBohotHua: 'MikcOnq7jB0',
+  // Janice Sequeira — Pasandida Ladies
+  pasandidaLadies: 'sgXxsq5NRQ0',
+  // TMC Talent Management Company
+  tmcReel: 'brX3oLRzP3E',
+  sandeepBatraa: 'i6tBOnVb7XE',
+  vipulRoyWedding: 'm8hiFR5x_kw',
+  // Adil Hussaini
+  adilShowreel: 'uXbGjY7e9YQ',
+  adilDaayera: '09l_-Kx6tfk',
+  // Event Soul
+  eventSoulReel: 'y8UwKQ3ifKE',
+  rohanRohan: 'KW_1j4cg4XA',
+}

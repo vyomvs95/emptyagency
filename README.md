@@ -114,7 +114,8 @@ src/
 ├─ lib/
 │  ├─ media.js                ← every media file + its pixel size
 │  ├─ youtube.js              shared IFrame API loader + player params
-│  └─ site.js                 routes, 44 projects, credits notice, copy
+│  ├─ films.js                GENERATED — every film + its measured size
+│  └─ site.js                 routes, projects & buckets, credits notice, copy
 ├─ components/
 │  ├─ Cursor.jsx              Figma arrow + plain-English [label] tag
 │  ├─ LogoLoader.jsx          logo-built loader that docks into the header
@@ -234,36 +235,49 @@ opacity/blur/lift, plus an accent scan line that sweeps the viewport on
 every route change. Routing is hash-based (`#/archive`), so deep links and
 the back button work without a router dependency.
 
-## The portfolio and its media
+## The portfolio — projects, buckets and the project panel
 
-All 44 pieces are real work by Umar Khan (World Style), who is associated
-with the studio, much of it made while working with One Digital
-Entertainment. They were selected from his Google Drive portfolio folders
-on 2026-09-26 and optimised for the web (344 MB of originals → ~10 MB):
+Our Work is organised as **projects**, not loose files. Every piece
+belongs to exactly one project and every project to exactly one bucket —
+**Videos · Motion · Graphics · 3D** — so nothing appears twice on the
+site. A poster and its motion version, a client's four showreels, ten
+lyric videos for one artist: each is one project, one card.
 
-| Folder (`public/media/`) | What | Format |
-|---|---|---|
-| `graphics/` | song & film artwork, thumbnails, posters, logos (26) | WebP, ≤1600px |
-| `motion/`   | logo animations, animated stickers (6)            | H.264 MP4, ≤1080px, no audio |
-| `videos/`   | motion posters, animated stories (6)              | H.264 MP4, ≤1080px, no audio |
-| `3d/`       | interior and product renders (6)                  | WebP |
+Clicking a card opens the **project panel** (`ProjectPanel.jsx`): a
+full-screen sheet with the meta rail (client, what we did, credit, agency),
+a stage that plays one piece at a time, and a strip of every piece in the
+project. The slug rides in the hash — `#/archive/tmc` — so any project
+can be linked to directly; Esc closes it, ← / → step through pieces.
 
-Each video has a `-poster.webp` still beside it. `src/lib/media.js`
-registers every file with its pixel size; `src/lib/site.js` holds the
-projects (name, client, note, category, agency) and what the home page
-features. Cards keep each piece's own aspect ratio; Our Work is a masonry
-grid so square covers, 16:9 thumbnails and 9:16 stories are never cropped.
+The home page puts `HERO` (ELF × Tamannaah) in focus, with `FEATURED`
+below it. Both are set at the bottom of the projects list in `site.js`.
 
-**Credits are part of the contract.** Every card prints
-`DESIGN: UMAR KHAN / WORLD STYLE`, plus `VIA ONE DIGITAL ENTERTAINMENT`
-where the work was made through them, and `RIGHTS_NOTICE` (in `site.js`)
-is shown on Our Work and in the footer. It claims authorship of the
-design only, disclaims ownership of every client's marks and likenesses,
-and gives a removal contact. Keep both when adding work, and have the
+### Where each piece's media comes from
+
+| Kind | Stored as | Registered in | Plays as |
+|---|---|---|---|
+| Stills (graphics, 3D) | `public/media/{graphics,3d}/*.webp` | `MEDIA` in `media.js` | image |
+| Short motion / video | `public/media/{motion,videos}/*.mp4` + `-poster.webp` | `MEDIA` | native video |
+| Films | `public/media/films/*.mp4` + `-poster.webp` | `FILM` in `films.js` (**generated**) | native video with sound |
+| YouTube work | not stored — id only | `YT` in `media.js` | YouTube's standard embed |
+
+- **Films** longer than a minute are ~45-second **excerpts** (720p, ~6.6 MB,
+  marked `EXCERPT`). The originals are in the "Video Edits" Drive folder;
+  if they are uploaded (unlisted) to the studio's own YouTube or Vimeo,
+  swap the excerpt for the link. `films.js` is generated from the files on
+  disk with measured sizes — regenerate it after adding a film.
+- **YouTube** pieces are shown with YouTube's own embedded player, unmodified
+  — their terms forbid covering or restyling it. It plays inside the panel;
+  the grid only ever shows the still. `jQiC5r0n7JI` has embedding disabled
+  by its owner and cannot be shown.
+- A piece whose file is missing is dropped from its project automatically
+  (see `exists` in `site.js`), so the site never shows a broken frame.
+
+**Credits are part of the contract.** Every card and panel prints the
+credit (`DESIGN: UMAR KHAN / WORLD STYLE` or `EMPTY AGENCY CORE TEAM`) and
+the agency where the work was made through one, and `RIGHTS_NOTICE` is shown
+on Our Work and in the footer. Keep both when adding work, and have the
 notice checked by a lawyer — it cannot override a client NDA.
-
-To add a piece: drop the optimised file in the right folder, register it
-in `media.js` with its size, and add a project to `PROJECTS`.
 
 ## Theme
 

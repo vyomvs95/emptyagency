@@ -5,6 +5,7 @@ import Layout from './components/Layout.jsx'
 import Cursor from './components/Cursor.jsx'
 import LogoLoader from './components/LogoLoader.jsx'
 import ThemeWipe from './components/ThemeWipe.jsx'
+import ProjectPanel from './components/ProjectPanel.jsx'
 
 import IndexPage from './pages/Index.jsx'
 import ArchivePage from './pages/Archive.jsx'
@@ -12,7 +13,7 @@ import CapabilitiesPage from './pages/Capabilities.jsx'
 import VisionPage from './pages/Vision.jsx'
 import InitiatePage from './pages/Initiate.jsx'
 
-import { ROUTE_IDS } from './lib/site.js'
+import { PROJECTS, ROUTE_IDS } from './lib/site.js'
 
 const PAGES = {
   index: IndexPage,
@@ -22,23 +23,53 @@ const PAGES = {
   initiate: InitiatePage,
 }
 
+/**
+ * Hash shape: #/<route>[/<project-slug>] — e.g. #/archive/tmc.
+ * The optional slug opens that project's panel over the route, so any
+ * project can be linked to directly and Back closes the panel.
+ */
+const SLUGS = new Set(PROJECTS.map((p) => p.slug))
+
 const readHash = () => {
-  const id = window.location.hash.replace('#/', '').replace('#', '')
-  return ROUTE_IDS.includes(id) ? id : 'index'
+  const [id, slug] = window.location.hash.replace(/^#\/?/, '').split('/')
+  return {
+    route: ROUTE_IDS.includes(id) ? id : 'index',
+    project: SLUGS.has(slug) ? slug : null,
+  }
 }
 
 export default function App() {
   const [booted, setBooted] = useState(false)
   const [route, setRoute] = useState(() =>
-    typeof window === 'undefined' ? 'index' : readHash()
+    typeof window === 'undefined' ? 'index' : readHash().route
+  )
+  const [project, setProject] = useState(() =>
+    typeof window === 'undefined' ? null : readHash().project
   )
 
   /* Hash <-> state sync so deep links and the back button both work. */
   useEffect(() => {
-    const onHash = () => setRoute(readHash())
+    const onHash = () => {
+      const h = readHash()
+      setRoute(h.route)
+      setProject(h.project)
+    }
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
+
+  const openProject = useCallback(
+    (slug) => {
+      window.location.hash = `/${route}/${slug}`
+      setProject(slug)
+    },
+    [route]
+  )
+
+  const closeProject = useCallback(() => {
+    window.location.hash = `/${route}`
+    setProject(null)
+  }, [route])
 
   const navigate = useCallback(
     (id) => {
@@ -97,11 +128,13 @@ export default function App() {
               exit={{ opacity: 0, y: -14 }}
               transition={{ duration: 0.38, ease: [0.2, 0, 0, 1] }}
             >
-              <Page onNavigate={navigate} />
+              <Page onNavigate={navigate} onOpenProject={openProject} />
             </motion.div>
           </AnimatePresence>
         </Layout>
       </div>
+
+      <ProjectPanel slug={project} onClose={closeProject} onOpen={openProject} />
     </>
   )
 }

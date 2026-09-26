@@ -1,66 +1,69 @@
 import KineticPlayer from './KineticPlayer.jsx'
 import StillFrame from './StillFrame.jsx'
-import { CATEGORIES, DESIGNER } from '../lib/site.js'
+import { thumbnail } from '../lib/youtube.js'
+import { BUCKETS } from '../lib/site.js'
 
-/** category id -> printed name, and -> original name for the cursor tag. */
-const LABEL = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]))
-const TECH = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.tech]))
+const BUCKET = Object.fromEntries(BUCKETS.map((b) => [b.id, b]))
 
 /**
  * PROJECT CARD
  * ----------------------------------------------------------------
- * One piece of work: the framed media at its own aspect ratio (or a
- * forced `ratio`), then name, note, client and the credit line.
+ * One project — however many pieces it holds — shown by its cover at
+ * the cover's own aspect ratio (or a forced `ratio`). Clicking anywhere
+ * on the frame opens the project panel with every piece inside.
  *
- * The credit line is not decoration — every card names the designer,
- * and the agency where the work was made through one. See
- * RIGHTS_NOTICE in lib/site.js.
+ * Covers: our own video plays muted on hover; a YouTube piece shows its
+ * still only (the player itself lives in the panel, never in the grid).
+ *
+ * The credit line is not decoration — see RIGHTS_NOTICE in lib/site.js.
  */
-export default function ProjectCard({ project: p, ratio, onClick }) {
-  const { media } = p
-  const frameRatio = ratio ?? `${media.w} / ${media.h}`
-  // Numbered by project id (GR_07 -> 07) so the number stays with the piece
-  // whatever the filter or column order.
-  const label = `${LABEL[p.category]} // ${p.id.split('_')[1]}`
-  const dims = `${media.w} × ${media.h}`
+export default function ProjectCard({ project: p, ratio, onOpen }) {
+  const c = p.cover
+  const frameRatio = ratio ?? `${c.w} / ${c.h}`
+  const pieces = String(p.assets.length).padStart(2, '0')
+  const label = `${BUCKET[p.bucket].label} // ${pieces} ${p.assets.length === 1 ? 'PIECE' : 'PIECES'}`
+  const open = () => onOpen(p.slug)
 
   return (
     <article className="flex flex-col">
-      {p.type === 'video' ? (
+      {c.kind === 'video' ? (
         <KineticPlayer
-          src={media.src}
-          image={media.poster}
+          src={c.src}
+          image={c.poster}
           label={label}
-          dims={dims}
+          meta={p.hero ? 'FEATURED' : undefined}
+          dims={`${c.w} × ${c.h}`}
           ratio={frameRatio}
-          onClick={onClick}
+          onClick={open}
         />
       ) : (
         <StillFrame
-          src={media.src}
-          alt={`${p.name} — ${p.client}`}
+          src={c.kind === 'youtube' ? thumbnail(c.id, 'maxresdefault') : c.src}
+          fallback={c.kind === 'youtube' ? thumbnail(c.id, 'hqdefault') : undefined}
+          alt={`${p.title} — ${p.client}`}
           label={label}
-          dims={dims}
+          meta={c.kind === 'youtube' ? '▶ VIDEO' : undefined}
+          dims={`${c.w} × ${c.h}`}
           ratio={frameRatio}
-          cursor={onClick ? '[View Project]' : `[${TECH[p.category]}]`}
-          onClick={onClick}
+          cursor="[OPEN PROJECT]"
+          onClick={open}
         />
       )}
 
-      <div className="mt-5 border-t border-hair pt-3">
+      <button type="button" onClick={open} data-cursor="[OPEN PROJECT]" className="mt-5 border-t border-hair pt-3 text-left">
         <h3 className="text-[14px] font-medium uppercase leading-[1.3] tracking-[0.02em]">
-          {p.name}
+          {p.title}
         </h3>
-        <p className="mt-[6px] text-[13px] leading-[1.5] lowercase text-muted">{p.note}</p>
-        <div className="mt-3 flex items-baseline justify-between gap-3 border-t border-hair-soft pt-[8px]">
+        <p className="mt-[6px] text-[13px] leading-[1.5] lowercase text-muted">{p.role}</p>
+        <span className="mt-3 flex items-baseline justify-between gap-3 border-t border-hair-soft pt-[8px]">
           <span className="label">{p.client}</span>
-          <span className="label shrink-0">{LABEL[p.category]}</span>
-        </div>
-        <p className="label mt-[6px] opacity-70">
-          DESIGN: {DESIGNER}
+          <span className="label shrink-0 label-ink">[ OPEN ↗ ]</span>
+        </span>
+        <span className="label mt-[6px] block opacity-70">
+          {p.credit}
           {p.agency && <> // VIA {p.agency}</>}
-        </p>
-      </div>
+        </span>
+      </button>
     </article>
   )
 }

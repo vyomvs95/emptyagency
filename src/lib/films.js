@@ -1,0 +1,38 @@
+/**
+ * GENERATED — films in /public/media/films with measured sizes.
+ * Regenerate after adding or re-encoding a film; do not hand-edit sizes.
+ */
+const url = (path) => `${import.meta.env.BASE_URL}media/${path}`
+
+const film = (slug, w, h, duration, excerpt = false) => ({
+  src: url(`films/${slug}.mp4`),
+  poster: url(`films/${slug}-poster.webp`),
+  w,
+  h,
+  duration,
+  excerpt,
+})
+
+export const FILM = {
+  '26-jan-aftermovie': film('26-jan-aftermovie', 1280, 720, 45.0, true),
+  '31st-reel': film('31st-reel', 720, 1280, 34.7, true),
+  'artist-entertainment-final': film('artist-entertainment-final', 1280, 720, 45.0, true),
+  'award-nominee-st': film('award-nominee-st', 1280, 720, 45.0, true),
+  'baraat-aftermovie-final': film('baraat-aftermovie-final', 1280, 720, 45.0, true),
+  'bollywood-2023-new-final': film('bollywood-2023-new-final', 1280, 720, 45.0, true),
+  'club-bollywood1': film('club-bollywood1', 1280, 720, 45.0, true),
+  'dubai-atlantis-aftermovie': film('dubai-atlantis-aftermovie', 1280, 720, 45.0, true),
+  'elf-denim-h': film('elf-denim-h', 1080, 608, 8.6),
+  'elf-denim-v': film('elf-denim-v', 608, 1080, 8.6),
+  'elf-glam-h': film('elf-glam-h', 1080, 608, 10.8),
+  'elf-glam-v': film('elf-glam-v', 608, 1080, 10.8),
+  'elf-slim-green-h': film('elf-slim-green-h', 1080, 608, 10.2),
+  'elf-slim-green-v': film('elf-slim-green-v', 608, 1080, 10.1),
+  'final-gift-song': film('final-gift-song', 1280, 720, 45.0, true),
+  'jab-tu-meri-na-rahi-final-teaser-2k': film('jab-tu-meri-na-rahi-final-teaser-2k', 1280, 676, 27.8, true),
+  'mehndi-final': film('mehndi-final', 1280, 720, 45.0, true),
+  'new-showreel-2024': film('new-showreel-2024', 1280, 720, 45.0, true),
+  'new-sufi-showreel-finall': film('new-sufi-showreel-finall', 1280, 720, 45.0, true),
+  'p-i-showreel-2024-final': film('p-i-showreel-2024-final', 1280, 720, 45.0, true),
+  'purva-award-nominee': film('purva-award-nominee', 1280, 720, 45.0, true),
+}

@@ -2,11 +2,12 @@ import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import ProjectCard from '../components/ProjectCard.jsx'
 import { Block, Container, SectionHeader } from '../components/Section.jsx'
-import { CATEGORIES, PROJECTS, RIGHTS_NOTICE } from '../lib/site.js'
+import { BUCKETS, PROJECTS, RIGHTS_NOTICE } from '../lib/site.js'
 
 /**
- * OUR WORK (route: archive) — filterable masonry grid of the portfolio,
- * closed by the credits & rights notice. Cards are <ProjectCard />.
+ * OUR WORK (route: archive) — every project, one card each, filterable
+ * by bucket, in a masonry grid; closed by the credits & rights notice.
+ * A card opens the project panel (App owns it) with every piece inside.
  */
 
 function FilterToggle({ active, label, tech, count, onClick }) {
@@ -28,20 +29,22 @@ function FilterToggle({ active, label, tech, count, onClick }) {
   )
 }
 
-/** category id -> printed name. */
-const LABEL = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]))
+/** bucket id -> printed name. */
+const LABEL = Object.fromEntries(BUCKETS.map((b) => [b.id, b.label]))
 
-export default function ArchivePage() {
+const PIECES = PROJECTS.reduce((n, p) => n + p.assets.length, 0)
+
+export default function ArchivePage({ onOpenProject }) {
   const [filter, setFilter] = useState('all')
 
   const counts = useMemo(() => {
     const map = { all: PROJECTS.length }
-    for (const p of PROJECTS) map[p.category] = (map[p.category] || 0) + 1
+    for (const p of PROJECTS) map[p.bucket] = (map[p.bucket] || 0) + 1
     return map
   }, [])
 
   const visible = useMemo(
-    () => (filter === 'all' ? PROJECTS : PROJECTS.filter((p) => p.category === filter)),
+    () => (filter === 'all' ? PROJECTS : PROJECTS.filter((p) => p.bucket === filter)),
     [filter]
   )
 
@@ -60,16 +63,16 @@ export default function ArchivePage() {
           </div>
           <div className="col-span-12 lg:col-span-4">
             <p className="max-w-[40ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
-              {PROJECTS.length} pieces across graphics, motion, video and 3d,
-              made for music labels, artists, film studios and brands. hover over
-              any piece to see it in colour or play it.
+              {PROJECTS.length} projects, {PIECES} pieces — videos, motion,
+              graphics and 3d for brands, artists, labels and film studios. open
+              any project to see everything we made for it.
             </p>
           </div>
         </div>
 
         {/* FILTERS */}
         <div className="sticky top-[58px] z-30 -mx-1 flex flex-wrap items-center gap-2 bg-void/85 px-1 py-4 backdrop-blur-[6px] md:top-[84px]">
-          {CATEGORIES.map((c) => (
+          {BUCKETS.map((c) => (
             <FilterToggle
               key={c.id}
               label={c.label}
@@ -102,7 +105,7 @@ export default function ArchivePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: Math.min(i * 0.035, 0.28), ease: [0.2, 0, 0, 1] }}
             >
-              <ProjectCard project={p} />
+              <ProjectCard project={p} onOpen={onOpenProject} />
             </motion.div>
           ))}
         </div>

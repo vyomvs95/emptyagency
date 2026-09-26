@@ -15,6 +15,7 @@ import PosterImage from './PosterImage.jsx'
  */
 export default function StillFrame({
   src,
+  fallback,
   alt = '',
   label,
   meta,
@@ -51,7 +52,18 @@ export default function StillFrame({
       boxClassName="bg-void"
     >
       {src ? (
-        <PosterImage src={src} alt={alt} />
+        <PosterImage
+          src={src}
+          alt={alt}
+          // e.g. a YouTube upload with no maxres still: drop to hqdefault once.
+          onError={
+            fallback
+              ? (e) => {
+                  if (e.currentTarget.src !== fallback) e.currentTarget.src = fallback
+                }
+              : undefined
+          }
+        />
       ) : (
         <WireframePoster variant={variant} />
       )}

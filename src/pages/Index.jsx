@@ -4,11 +4,13 @@ import ProjectCard from '../components/ProjectCard.jsx'
 import Marquee from '../components/Marquee.jsx'
 import Reveal, { RuleIn } from '../components/Reveal.jsx'
 import { Block, Container, SectionHeader } from '../components/Section.jsx'
-import { FEATURED, MARQUEE_TEXT, PROJECTS, SHOWREEL } from '../lib/site.js'
+import { FEATURED, HERO, MARQUEE_TEXT, PROJECTS } from '../lib/site.js'
+
+const HERO_FILM = HERO.assets[0]
 
 const HEADLINE = ['We clear the clutter.', 'You get the results.']
 
-export default function IndexPage({ onNavigate }) {
+export default function IndexPage({ onNavigate, onOpenProject }) {
   return (
     <>
       {/* ============================ HERO ============================ */}
@@ -35,7 +37,7 @@ export default function IndexPage({ onNavigate }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.75, delay: 0.26, ease: [0.2, 0, 0, 1] }}
                 >
-                  We design song and film artwork, thumbnails, logos, motion graphics and 3D visuals that people stop and look at.
+                  We make campaign films, showreels, motion graphics, artwork and 3D visuals that people stop and look at.
                 </motion.span>
               </h1>
 
@@ -72,7 +74,7 @@ export default function IndexPage({ onNavigate }) {
                   ['STUDIO', 'EMPTY AGENCY'],
                   ['FOUNDED', '2026'],
                   ['WHERE', 'WORKING WORLDWIDE'],
-                  ['WE DO', 'GRAPHICS · MOTION · 3D'],
+                  ['WE DO', 'VIDEO · MOTION · GRAPHICS · 3D'],
                 ].map(([k, v]) => (
                   <div key={k} className="flex items-baseline justify-between gap-4">
                     <span className="label">{k}</span>
@@ -85,7 +87,7 @@ export default function IndexPage({ onNavigate }) {
           </div>
         </Container>
 
-        {/* SHOWREEL — 70% of the canvas */}
+        {/* HERO PROJECT — in focus, 70% of the canvas */}
         <Container className="mt-14 md:mt-20">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
             <motion.div
@@ -95,12 +97,12 @@ export default function IndexPage({ onNavigate }) {
               transition={{ duration: 0.85, delay: 0.35, ease: [0.2, 0, 0, 1] }}
             >
               <KineticPlayer
-                src={SHOWREEL.media.src}
-                image={SHOWREEL.media.poster}
-                label={`FEATURED // ${SHOWREEL.name}`}
-                meta={SHOWREEL.client}
-                dims={`${SHOWREEL.media.w} × ${SHOWREEL.media.h}`}
-                ratio="16 / 9"
+                src={HERO_FILM.src}
+                image={HERO_FILM.poster}
+                label={`FEATURED PROJECT // ${HERO.title}`}
+                dims={`${HERO_FILM.w} × ${HERO_FILM.h}`}
+                ratio={`${HERO_FILM.w} / ${HERO_FILM.h}`}
+                onClick={() => onOpenProject(HERO.slug)}
               />
             </motion.div>
 
@@ -111,17 +113,19 @@ export default function IndexPage({ onNavigate }) {
               transition={{ duration: 0.7, delay: 0.6 }}
             >
               <div className="border-t border-hair pt-3">
-                <p className="max-w-[38ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
-                  we're a small design studio. we plan every project carefully
-                  before we make it look good, so what you get is clear, simple
-                  and works the way it should.
+                <span className="label label-ink">FEATURED PROJECT</span>
+                <h2 className="mt-3 text-[clamp(22px,2.2vw,32px)] font-medium leading-[1.05] tracking-[-0.03em]">
+                  {HERO.title}
+                </h2>
+                <p className="mt-4 max-w-[38ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
+                  {HERO.summary}
                 </p>
                 <div className="mt-6 flex flex-col gap-[10px]">
                   {[
-                    ['WHAT IT IS', 'LOGO ANIMATION'],
-                    ['CLIENT', SHOWREEL.client],
-                    ['SOUND', 'MUTED'],
-                    ['HOW TO WATCH', 'HOVER TO PLAY'],
+                    ['CLIENT', HERO.client],
+                    ['WHAT WE DID', 'CAMPAIGN FILM + CUT-DOWNS'],
+                    ['PIECES', String(HERO.assets.length).padStart(2, '0')],
+                    ['HOW TO WATCH', 'HOVER TO PREVIEW'],
                   ].map(([k, v]) => (
                     <div
                       key={k}
@@ -132,6 +136,15 @@ export default function IndexPage({ onNavigate }) {
                     </div>
                   ))}
                 </div>
+                <button
+                  type="button"
+                  onClick={() => onOpenProject(HERO.slug)}
+                  data-cursor="[OPEN PROJECT]"
+                  className="mt-6 w-full border px-5 py-[12px] text-[11px] font-medium uppercase tracking-[0.16em]"
+                  style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
+                >
+                  [ SEE THE WHOLE CAMPAIGN ↗ ]
+                </button>
               </div>
             </motion.div>
           </div>
@@ -160,11 +173,7 @@ export default function IndexPage({ onNavigate }) {
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
             {FEATURED.map((item, i) => (
               <Reveal key={item.id} delay={i * 0.08}>
-                <ProjectCard
-                  project={item}
-                  ratio="1 / 1"
-                  onClick={() => onNavigate('archive')}
-                />
+                <ProjectCard project={item} ratio="16 / 9" onOpen={onOpenProject} />
               </Reveal>
             ))}
           </div>
@@ -172,8 +181,8 @@ export default function IndexPage({ onNavigate }) {
           <Reveal className="mt-14" delay={0.1}>
             <div className="flex flex-col items-start gap-5 border-t border-hair pt-6 md:flex-row md:items-center md:justify-between">
               <p className="max-w-[46ch] text-[16px] leading-[1.45] lowercase text-muted md:text-[18px]">
-                see all {PROJECTS.length} pieces on our work page, sorted into
-                graphics, motion, videos and 3d.
+                see all {PROJECTS.length} projects on our work page, sorted into
+                videos, motion, graphics and 3d.
               </p>
               <button
                 type="button"
