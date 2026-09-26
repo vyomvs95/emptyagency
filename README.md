@@ -1,5 +1,8 @@
 # empty agency
 
+> **Picking the work back up? Read [`PROJECT_LOG.md`](PROJECT_LOG.md) first** —
+> current state, open items, and the decisions behind them.
+
 Brutalist-minimal portfolio SPA for a UI/UX + 3D motion studio.
 React 19 · Framer Motion 12 · Tailwind CSS 4 · Vite.
 
@@ -265,7 +268,8 @@ below it. Both are set at the bottom of the projects list in `site.js`.
   marked `EXCERPT`). The originals are in the "Video Edits" Drive folder;
   if they are uploaded (unlisted) to the studio's own YouTube or Vimeo,
   swap the excerpt for the link. `films.js` is generated from the files on
-  disk with measured sizes — regenerate it after adding a film.
+  disk with measured sizes — encode with `scripts/media/encode-film.sh`, then
+  regenerate with `scripts/media/gen-films.py`.
 - **YouTube** pieces are shown with YouTube's own embedded player, unmodified
   — their terms forbid covering or restyling it. It plays inside the panel;
   the grid only ever shows the still. `jQiC5r0n7JI` has embedding disabled
