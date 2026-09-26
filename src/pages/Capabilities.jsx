@@ -5,7 +5,7 @@ import { Block, Container, SectionHeader } from '../components/Section.jsx'
 import { PILLARS, PIPELINE, STACK } from '../lib/site.js'
 
 /**
- * CAPABILITIES — stack toggles, three pillars, the pipeline.
+ * WHAT WE DO (route: capabilities) — tools, three services, the process.
  */
 export default function CapabilitiesPage({ onNavigate }) {
   // All tools engaged by default; toggling reads out as a live config.
@@ -24,15 +24,17 @@ export default function CapabilitiesPage({ onNavigate }) {
         {/* TITLE */}
         <div className="grid grid-cols-12 items-end gap-x-6 gap-y-6 border-b border-hair pb-8">
           <div className="col-span-12 lg:col-span-8">
-            <span className="label">DIRECTORY // ~/root/capabilities</span>
-            <h1 className="mt-3 text-[clamp(38px,7vw,104px)] font-medium leading-[0.9] tracking-[-0.045em]">
-              CAPABILITIES
+            <span className="label">OUR SERVICES</span>
+            <h1
+              data-cursor="[CAPABILITIES]"
+              className="mt-3 text-[clamp(38px,7vw,104px)] font-medium leading-[0.9] tracking-[-0.045em]">
+              WHAT WE DO
             </h1>
           </div>
           <div className="col-span-12 lg:col-span-4">
             <p className="max-w-[40ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
-              three disciplines, one pipeline. we take the brief apart, build the
-              structure, then render it at full fidelity.
+              three services, one simple process. we understand what you need,
+              plan it properly, then make it.
             </p>
           </div>
         </div>
@@ -41,8 +43,8 @@ export default function CapabilitiesPage({ onNavigate }) {
         <div className="mt-12">
           <SectionHeader
             index="01"
-            title="TECH_STACK"
-            meta={`ENGAGED: ${String(engaged.size).padStart(2, '0')} / ${STACK.length}`}
+            title="TOOLS WE USE"
+            meta={`${String(engaged.size).padStart(2, '0')} OF ${STACK.length} SELECTED // TAP TO TOGGLE`}
           />
           <div className="mt-6 flex flex-wrap items-center gap-2">
             {STACK.map((tool) => {
@@ -64,28 +66,28 @@ export default function CapabilitiesPage({ onNavigate }) {
                     className="block size-[7px] transition-colors duration-200"
                     style={{ background: on ? 'var(--c-accent)' : 'transparent', border: on ? 'none' : '1px solid var(--c-hair)' }}
                   />
-                  [{tool.id}]
+                  [{tool.name}]
                 </motion.button>
               )
             })}
           </div>
           <p className="tnum mt-4 text-[11px] uppercase tracking-[0.14em] text-muted">
-            CONFIG:{' '}
+            USING:{' '}
             {STACK.filter((t) => engaged.has(t.id))
-              .map((t) => t.id)
-              .join(' + ') || 'NULL — NO_TOOLS_ENGAGED'}
+              .map((t) => t.name)
+              .join(' + ') || 'NO TOOLS SELECTED'}
           </p>
         </div>
 
         {/* ====================== THREE PILLARS ===================== */}
         <div className="mt-24">
-          <SectionHeader index="02" title="THE_THREE_PILLARS" meta="GRID: 3_COL" />
+          <SectionHeader index="02" title="WHAT WE OFFER" meta="03 SERVICES" />
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-12 lg:grid-cols-3">
             {PILLARS.map((p, i) => (
               <Reveal key={p.index} delay={i * 0.08}>
                 <article
                   className="group flex h-full flex-col border-t border-hair pt-5"
-                  data-cursor={`[${p.human}]`}
+                  data-cursor={`[${p.tech}]`}
                 >
                   <div className="flex items-baseline gap-4">
                     <span className="label label-ink">[{p.index}]</span>
@@ -120,14 +122,14 @@ export default function CapabilitiesPage({ onNavigate }) {
 
         {/* ======================== PIPELINE ======================== */}
         <div className="mt-24">
-          <SectionHeader index="03" title="THE_PIPELINE" meta="METHODOLOGY // 03_STAGES" />
+          <SectionHeader index="03" title="HOW WE WORK" meta="03 STEPS" />
 
           <div className="mt-10 flex flex-col">
             {PIPELINE.map((s, i) => (
               <Reveal key={s.step} delay={i * 0.06}>
                 <div
                   className="group grid grid-cols-12 items-start gap-x-6 gap-y-4 border-t border-hair py-8 transition-colors duration-300 hover:border-[var(--c-accent)]"
-                  data-cursor={`[${s.human}]`}
+                  data-cursor={`[${s.tech}]`}
                 >
                   <div className="col-span-12 flex items-baseline gap-4 md:col-span-3">
                     <span className="label label-ink">{s.step}</span>
@@ -156,16 +158,16 @@ export default function CapabilitiesPage({ onNavigate }) {
         <Reveal className="mt-20">
           <div className="flex flex-col items-start justify-between gap-6 border border-hair p-8 md:flex-row md:items-center md:p-12">
             <h2 className="max-w-[20ch] text-[clamp(24px,3.4vw,44px)] font-medium leading-[1] tracking-[-0.03em]">
-              Bring us a brief. We&apos;ll bring the subtraction.
+              Tell us about your project. We&apos;ll keep it simple.
             </h2>
             <button
               type="button"
               onClick={() => onNavigate('initiate')}
-              data-cursor="[Start a Project]"
+              data-cursor="[INITIATE]"
               className="shrink-0 border px-6 py-[13px] text-[11px] font-medium uppercase tracking-[0.16em]"
               style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
             >
-              [ INITIATE ↗ ]
+              [ START A PROJECT ↗ ]
             </button>
           </div>
         </Reveal>

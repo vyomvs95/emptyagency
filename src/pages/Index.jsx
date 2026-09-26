@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
 import KineticPlayer from '../components/KineticPlayer.jsx'
-import StillFrame from '../components/StillFrame.jsx'
+import ProjectCard from '../components/ProjectCard.jsx'
 import Marquee from '../components/Marquee.jsx'
 import Reveal, { RuleIn } from '../components/Reveal.jsx'
 import { Block, Container, SectionHeader } from '../components/Section.jsx'
-import { FEATURED, MARQUEE_TEXT, SHOWREEL } from '../lib/site.js'
+import { FEATURED, MARQUEE_TEXT, PROJECTS, SHOWREEL } from '../lib/site.js'
 
 const HEADLINE = ['We clear the clutter.', 'You get the results.']
 
@@ -15,23 +15,6 @@ export default function IndexPage({ onNavigate }) {
       <Block className="pt-10 md:pt-16">
         <Container>
           <div className="grid grid-cols-12 gap-x-6 gap-y-10">
-            {/* META RAIL */}
-            <div className="col-span-12 lg:col-span-3">
-              <div className="flex flex-col gap-3 border-t border-hair pt-3">
-                {[
-                  ['NODE', 'INDEX_01'],
-                  ['STUDIO', 'EMPTY AGENCY'],
-                  ['EST', '2026 // GLOBAL'],
-                  ['DISCIPLINE', 'INTERFACE · KINETIC · IDENTITY'],
-                ].map(([k, v]) => (
-                  <div key={k} className="flex items-baseline justify-between gap-4">
-                    <span className="label">{k}</span>
-                    <span className="label label-ink text-right">{v}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             {/* HEADLINE */}
             <div className="col-span-12 lg:col-span-9">
               <h1 className="text-[clamp(38px,7.2vw,112px)] font-medium leading-[0.9] tracking-[-0.045em]">
@@ -47,12 +30,12 @@ export default function IndexPage({ onNavigate }) {
                   </motion.span>
                 ))}
                 <motion.span
-                  className="mt-5 block max-w-[22ch] text-[clamp(18px,2.1vw,32px)] font-normal leading-[1.15] tracking-[-0.02em] text-muted"
+                  className="mt-5 block max-w-[30ch] text-[clamp(18px,2.1vw,32px)] font-normal leading-[1.15] tracking-[-0.02em] text-muted"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.75, delay: 0.26, ease: [0.2, 0, 0, 1] }}
                 >
-                  The ultimate baseline for interface, kinetic, and identity design.
+                  We design song and film artwork, thumbnails, logos, motion graphics and 3D visuals that people stop and look at.
                 </motion.span>
               </h1>
 
@@ -65,22 +48,40 @@ export default function IndexPage({ onNavigate }) {
                 <button
                   type="button"
                   onClick={() => onNavigate('initiate')}
-                  data-cursor="[Start a Project]"
+                  data-cursor="[INITIATE_PROJECT]"
                   className="border px-5 py-[11px] text-[11px] font-medium uppercase tracking-[0.16em] transition-colors duration-200"
                   style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
                 >
-                  [ INITIATE_PROJECT ↗ ]
+                  [ START A PROJECT ↗ ]
                 </button>
                 <button
                   type="button"
                   onClick={() => onNavigate('archive')}
-                  data-cursor="[See Our Work]"
+                  data-cursor="[VIEW_ARCHIVE]"
                   className="border border-hair px-5 py-[11px] text-[11px] font-medium uppercase tracking-[0.16em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
                 >
-                  [ VIEW_ARCHIVE ]
+                  [ SEE OUR WORK ]
                 </button>
               </motion.div>
             </div>
+
+            {/* META RAIL — sits right of the headline on desktop */}
+            <div className="col-span-12 lg:col-span-3 lg:pt-4">
+              <div className="flex flex-col gap-3 border-t border-hair pt-3">
+                {[
+                  ['STUDIO', 'EMPTY AGENCY'],
+                  ['FOUNDED', '2026'],
+                  ['WHERE', 'WORKING WORLDWIDE'],
+                  ['WE DO', 'GRAPHICS · MOTION · 3D'],
+                ].map(([k, v]) => (
+                  <div key={k} className="flex items-baseline justify-between gap-4">
+                    <span className="label">{k}</span>
+                    <span className="label label-ink text-right">{v}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </Container>
 
@@ -94,14 +95,12 @@ export default function IndexPage({ onNavigate }) {
               transition={{ duration: 0.85, delay: 0.35, ease: [0.2, 0, 0, 1] }}
             >
               <KineticPlayer
-                youtube={SHOWREEL.youtube}
-                placeholder={SHOWREEL.placeholder}
-                credit={SHOWREEL.credit}
-                label="ASSET: SHOWREEL // FRAME_00"
-                meta={`[${SHOWREEL.dims}]`}
-                dims={SHOWREEL.dims.replace('x', ' × ')}
+                src={SHOWREEL.media.src}
+                image={SHOWREEL.media.poster}
+                label={`FEATURED // ${SHOWREEL.name}`}
+                meta={SHOWREEL.client}
+                dims={`${SHOWREEL.media.w} × ${SHOWREEL.media.h}`}
                 ratio="16 / 9"
-                poster="video"
               />
             </motion.div>
 
@@ -113,16 +112,16 @@ export default function IndexPage({ onNavigate }) {
             >
               <div className="border-t border-hair pt-3">
                 <p className="max-w-[38ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
-                  we are a design studio that treats the wireframe as the final
-                  deliverable and the render as the proof. everything you see on
-                  this canvas is structure first, surface second.
+                  we're a small design studio. we plan every project carefully
+                  before we make it look good, so what you get is clear, simple
+                  and works the way it should.
                 </p>
                 <div className="mt-6 flex flex-col gap-[10px]">
                   {[
-                    ['RUNTIME', '00:48:12'],
-                    ['CODEC', 'H.264 // 4:2:0'],
-                    ['RENDERER', 'REDSHIFT_GPU'],
-                    ['STATE', 'HOVER_TO_PLAY'],
+                    ['WHAT IT IS', 'LOGO ANIMATION'],
+                    ['CLIENT', SHOWREEL.client],
+                    ['SOUND', 'MUTED'],
+                    ['HOW TO WATCH', 'HOVER TO PLAY'],
                   ].map(([k, v]) => (
                     <div
                       key={k}
@@ -149,83 +148,40 @@ export default function IndexPage({ onNavigate }) {
         </motion.div>
       </Block>
 
-      {/* ==================== RECENT DEPLOYMENTS ===================== */}
+      {/* ==================== RECENT WORK ===================== */}
       <Block className="mt-20 md:mt-28">
         <Container>
           <SectionHeader
             index="01"
-            title="RECENT_DEPLOYMENTS"
-            meta={`COUNT: ${String(FEATURED.length).padStart(2, '0')} // SORT: NEWEST`}
+            title="RECENT WORK"
+            meta={`${String(FEATURED.length).padStart(2, '0')} PROJECTS // NEWEST FIRST`}
           />
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
-            {FEATURED.map((item, i) => {
-              const label = `ASSET: ${item.discipline} // FRAME_${String(i + 1).padStart(2, '0')}`
-              const meta = `[${item.dims}]`
-              return (
-                <Reveal key={item.id} delay={i * 0.08}>
-                  <article className="group flex flex-col">
-                    {item.type === 'video' ? (
-                      <KineticPlayer
-                        src={item.src}
-                        youtube={item.youtube}
-                        placeholder={item.placeholder}
-                        credit={item.credit}
-                        label={label}
-                        meta={meta}
-                        dims={item.dims.replace('x', ' × ')}
-                        ratio="4 / 3"
-                        onClick={() => onNavigate('archive')}
-                      />
-                    ) : (
-                      <StillFrame
-                        src={item.src}
-                        alt={item.name}
-                        label={label}
-                        meta={meta}
-                        dims={item.dims.replace('x', ' × ')}
-                        ratio="4 / 3"
-                        variant={item.variant}
-                        placeholder={item.placeholder}
-                        credit={item.credit}
-                        onClick={() => onNavigate('archive')}
-                      />
-                    )}
-
-                    <div className="mt-5 flex items-start justify-between gap-4 border-t border-hair pt-3">
-                      <div>
-                        <h3 className="text-[15px] font-medium uppercase tracking-[0.02em]">
-                          {item.name}
-                        </h3>
-                        <p className="mt-[6px] max-w-[32ch] text-[13px] leading-[1.5] lowercase text-muted">
-                          {item.note}
-                        </p>
-                      </div>
-                      <span className="label shrink-0 text-right">
-                        {item.client}
-                        <br />
-                        {item.year}
-                      </span>
-                    </div>
-                  </article>
-                </Reveal>
-              )
-            })}
+            {FEATURED.map((item, i) => (
+              <Reveal key={item.id} delay={i * 0.08}>
+                <ProjectCard
+                  project={item}
+                  ratio="1 / 1"
+                  onClick={() => onNavigate('archive')}
+                />
+              </Reveal>
+            ))}
           </div>
 
           <Reveal className="mt-14" delay={0.1}>
             <div className="flex flex-col items-start gap-5 border-t border-hair pt-6 md:flex-row md:items-center md:justify-between">
               <p className="max-w-[46ch] text-[16px] leading-[1.45] lowercase text-muted md:text-[18px]">
-                fifteen more deployments are cataloged in the archive. filter by
-                interface, kinetic, or identity.
+                see all {PROJECTS.length} pieces on our work page, sorted into
+                graphics, motion, videos and 3d.
               </p>
               <button
                 type="button"
                 onClick={() => onNavigate('archive')}
-                data-cursor="[See Our Work]"
+                data-cursor="[OPEN_ARCHIVE]"
                 className="shrink-0 border border-hair px-5 py-[11px] text-[11px] font-medium uppercase tracking-[0.16em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
               >
-                [ OPEN_ARCHIVE ↗ ]
+                [ SEE ALL OUR WORK ↗ ]
               </button>
             </div>
           </Reveal>
@@ -238,16 +194,16 @@ export default function IndexPage({ onNavigate }) {
           <RuleIn />
           <div className="flex flex-col items-start justify-between gap-8 py-14 md:flex-row md:items-end">
             <h2 className="max-w-[16ch] text-[clamp(30px,5vw,74px)] font-medium leading-[0.94] tracking-[-0.04em]">
-              Start from the void.
+              Have a project in mind?
             </h2>
             <button
               type="button"
               onClick={() => onNavigate('initiate')}
-              data-cursor="[Start a Project]"
+              data-cursor="[SYSTEM.INITIATE_PROJECT()]"
               className="border px-6 py-[13px] text-[11px] font-medium uppercase tracking-[0.16em]"
               style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
             >
-              [ SYSTEM.INITIATE_PROJECT() ]
+              [ START A PROJECT ↗ ]
             </button>
           </div>
           <RuleIn />

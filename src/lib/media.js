@@ -5,75 +5,87 @@
  *  Single swap-point for every asset in the build. Nothing else in the
  *  app hard-codes a URL.
  *
- *  Three source kinds are supported by <KineticPlayer /> and
- *  <StillFrame />:
+ *  Files live in /public/media, one folder per category:
  *
- *    youtube : { id, credit }  → embedded via the YouTube IFrame API
- *    file    : '/media/x.mp4'  → native <video>, the production path
- *    null    : (images only)   → procedural wireframe poster
+ *    graphics/  posters, song artwork, thumbnails, logos   (.webp)
+ *    motion/    logo animations, animated stickers         (.mp4)
+ *    videos/    motion posters, animated stories           (.mp4)
+ *    3d/        interior and product renders               (.webp)
  *
- *  TO GO LIVE WITH REAL WORK: replace a `youtube:` field on a project
- *  in site.js with `src: VIDEO.something` pointing at a file in
- *  /public/media, and drop `placeholder: true`. No component changes.
+ *  Every video has a `-poster.webp` still beside it, shown before
+ *  playback and as the rest state.
+ *
+ *  Sources: Umar Khan's portfolio folders on Google Drive (2026-09-26).
+ *  Images were resized to max 1600px and re-encoded as WebP; videos were
+ *  re-encoded to H.264 MP4, max 1080px, no audio (the site plays muted).
+ *
+ *  TO ADD A PIECE: drop the file in the right folder, add an entry
+ *  below with its pixel size, and reference it from a project in
+ *  site.js. No component changes.
  */
 
-/* ------------------------------------------------------------------ */
-/*  PLACEHOLDER REELS — third-party work, verified live + embeddable   */
-/*  on 2026-08-11. These are NOT empty agency's work. Every project     */
-/*  using one carries `placeholder: true`, which renders a visible      */
-/*  PLACEHOLDER chip and a credit line on the frame.                    */
-/* ------------------------------------------------------------------ */
-export const YOUTUBE = {
-  // motion graphics / after effects
-  showreel: { id: 'W2EPTWY7Hzo', credit: 'CHARGE MOTIONS' },
-  motionReel2D: { id: 'BMx2NTZRElU', credit: 'MUKUND MAYANK' },
-  motionPortfolio: { id: 'U8_fktQz0w8', credit: 'LUCID REELS' },
-  // video editing
-  editorReel26: { id: 'LGj_fL_xnrA', credit: 'USDANCER' },
-  editorReel24: { id: '9Fsa0_uuaDM', credit: 'LORENZ MIGUEL' },
-  editorPortfolio: { id: 'WUB2pSkwN2M', credit: 'RYAN FERGUSON' },
-  // identity in motion
-  logoAnimation: { id: 'aFtsGDsnvZM', credit: 'MOTIONREELS' },
-  brandPortfolio: { id: 'vtpbDlqaXQQ', credit: 'DESIGNER RAGHU' },
+// The SPA is served from /mockup/ (see vite.config.js), so public files
+// resolve against Vite's base URL rather than the domain root.
+const url = (path) => `${import.meta.env.BASE_URL}media/${path}`
+
+const image = (path, w, h) => ({ src: url(`${path}.webp`), w, h })
+const video = (path, w, h) => ({
+  src: url(`${path}.mp4`),
+  poster: url(`${path}-poster.webp`),
+  w,
+  h,
+})
+
+export const MEDIA = {
+  /* ------------------------------ GRAPHICS ----------------------------- */
+  indianWine: image('graphics/indian-wine', 1600, 1600),
+  zindagiPoster: image('graphics/zindagi-poster', 1600, 1600),
+  rangreza: image('graphics/rangreza', 1600, 1600),
+  sanju: image('graphics/sanju', 1080, 1080),
+  ilzaam: image('graphics/ilzaam', 1500, 1500),
+  musafir: image('graphics/musafir', 1500, 1500),
+  ronaPaiGaya: image('graphics/rona-pai-gaya', 1500, 1500),
+  dhoopAaneDo: image('graphics/dhoop-aane-do', 1500, 1500),
+  diamond: image('graphics/diamond', 1500, 1500),
+  powerOfDreams: image('graphics/power-of-dreams', 1600, 1600),
+  sonyBeautifulDay: image('graphics/sony-a-beautiful-day', 1600, 900),
+  sonyDjango: image('graphics/sony-django-unchained', 1600, 900),
+  sonyBloodshot: image('graphics/sony-bloodshot', 1600, 900),
+  aajaSoneya: image('graphics/aaja-soneya', 1600, 900),
+  mereRangMein: image('graphics/mere-rang-mein', 1600, 900),
+  sheikhChilli: image('graphics/sheikh-chilli-100m', 1500, 1500),
+  maskKhoGaya: image('graphics/mask-kho-gaya', 1500, 1500),
+  unboxCountdown: image('graphics/unbox-2017-countdown', 1131, 1600),
+  unboxLaunch: image('graphics/unbox-2017-launch', 1131, 1600),
+  pocketSeat: image('graphics/pocket-seat-2018', 567, 533),
+  logoDangalDawgs: image('graphics/logo-dangal-dawgs', 1600, 1600),
+  logoHyperOctane: image('graphics/logo-hyper-octane', 1500, 1500),
+  logoSocialNation: image('graphics/logo-social-nation', 898, 568),
+  logoShivangi: image('graphics/logo-shivangi-bhayana', 1600, 1600),
+  logoVbMusic: image('graphics/logo-vb-music', 1500, 1500),
+  logoShailshri: image('graphics/logo-shailshri-couture', 868, 868),
+
+  /* ------------------------------- MOTION ------------------------------ */
+  hyperOctaneLogo: video('motion/hyper-octane-logo', 1080, 608),
+  oneDigitalSting: video('motion/one-digital-logo-sting', 1080, 608),
+  snCheckThisOut: video('motion/social-nation-check-this-out', 1080, 1080),
+  snMakeSomeNoise: video('motion/social-nation-make-some-noise', 1080, 1080),
+  snPerformance: video('motion/social-nation-performance', 1080, 1080),
+  snYeApna: video('motion/social-nation-ye-apna-festival', 1080, 1080),
+
+  /* ------------------------------- VIDEOS ------------------------------ */
+  zindagiMotion: video('videos/zindagi-motion-poster', 1080, 1080),
+  maskKhoGayaMotion1: video('videos/mask-kho-gaya-motion-1', 1080, 1080),
+  maskKhoGayaMotion2: video('videos/mask-kho-gaya-motion-2', 1080, 1080),
+  alia40m: video('videos/alia-bhatt-40m', 608, 1080),
+  smzs: video('videos/smzs-films-this-month', 608, 1080),
+  ranveerDecade: video('videos/ranveer-singh-decade', 608, 1080),
+
+  /* --------------------------------- 3D -------------------------------- */
+  oceanBedroom: image('3d/ocean-bedroom', 1280, 720),
+  redKitchen: image('3d/red-kitchen', 1280, 720),
+  babyRoom: image('3d/baby-room', 1280, 720),
+  dhaba: image('3d/dhaba', 1280, 720),
+  kidsRoom: image('3d/kids-room', 1280, 720),
+  sofaRender: image('3d/sofa-render', 640, 480),
 }
-
-/* ------------------------------------------------------------------ */
-/*  PRODUCTION VIDEO — drop H.264 .mp4 files into /public/media        */
-/* ------------------------------------------------------------------ */
-export const VIDEO = {
-  // showreel: '/media/showreel.mp4',
-  // productLaunch: '/media/product-launch.mp4',
-}
-
-/* ------------------------------------------------------------------ */
-/*  PLACEHOLDER STILLS                                                 */
-/*  Frames from third-party design reels, standing in until real work  */
-/*  lands. Verified reachable on 2026-08-11. Same rule as the video     */
-/*  placeholders: every project using one is marked `placeholder: true` */
-/*  and carries its creator's credit in the frame label.                */
-/*                                                                      */
-/*  TO REPLACE: swap the value for '/media/your-file.jpg' and drop      */
-/*  `placeholder`/`credit` from the project in site.js. Setting a value */
-/*  back to null restores the procedural wireframe poster.              */
-/* ------------------------------------------------------------------ */
-const still = (id, quality = 'maxresdefault') =>
-  `https://i.ytimg.com/vi/${id}/${quality}.jpg`
-
-export const IMAGE = {
-  // interface — UI/UX reels
-  fintechDash: { src: still('cRg0H4OfjPs'), credit: 'MUSEMIND' },
-  saasWebApp: { src: still('6-_OIjwphp4'), credit: 'SHAKURO' },
-  cryptoWallet: { src: still('LvERlEDOU40'), credit: 'SUMAN BAKSHI' },
-  ecommerceFlow: { src: still('brQ74EpkafY'), credit: 'ENRIDEIA' },
-  // no maxresdefault on this upload — sddefault is 4:3 and its bars
-  // crop away under object-fit: cover
-  healthTracker: { src: still('JxXzrEqFdSc', 'sddefault'), credit: 'MOKEN DIGITAL' },
-
-  // identity — branding + graphic design reels
-  typographicSystem: { src: still('W6ZDTqE6jWU'), credit: 'STUDIO CONTRE.COURANT' },
-  colorPalette: { src: still('nN58DTqaCt8'), credit: 'EVERYTHING DESIGN' },
-  stationeryGrid: { src: still('rCodAT4QV_U'), credit: 'ONOMY STUDIO' },
-}
-
-/** The index hero still reuses the same project as IX_001. */
-IMAGE.featuredInterface = IMAGE.fintechDash

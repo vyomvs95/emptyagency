@@ -7,10 +7,11 @@ import { ROUTES } from '../lib/site.js'
 /**
  * GLOBAL HEADER
  * ----------------------------------------------------------------
- * ● empty agency  //  [ INDEX ] [ ARCHIVE ] [ CAPABILITIES ] [ VISION ] [ INITIATE ↗ ]
+ * ● empty agency  //  [ HOME ] [ OUR WORK ] [ WHAT WE DO ] [ ABOUT US ] [ START A PROJECT ↗ ]
  *
- * Sticky, formatted as a directory path. A second hairline row reads
- * out the active directory and live viewport dimensions, like a
+ * Sticky. Buttons print the plain-English page name; hovering one puts
+ * the original studio name (INDEX, ARCHIVE…) in the cursor tag. A second
+ * hairline row reads out the current page and live screen size, like a
  * canvas status bar.
  */
 
@@ -19,7 +20,7 @@ function NavItem({ route, active, onClick }) {
     <button
       type="button"
       onClick={onClick}
-      data-cursor={`[${route.human}]`}
+      data-cursor={`[${route.tech}]`}
       aria-current={active ? 'page' : undefined}
       className="group relative px-[10px] py-[6px] text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-200"
       style={{ color: active ? 'var(--c-void)' : 'var(--c-ink)' }}
@@ -61,6 +62,7 @@ export default function Header({ current, onNavigate }) {
   }, [current])
 
   const active = ROUTES.find((r) => r.id === current)
+  const here = (active?.label ?? 'HOME').replace(' ↗', '')
 
   const go = (id) => {
     onNavigate(id)
@@ -104,10 +106,10 @@ export default function Header({ current, onNavigate }) {
       {/* STATUS ROW */}
       <div className="gutter mx-auto hidden h-[26px] w-full max-w-[1680px] items-center justify-between border-t border-hair-soft md:flex">
         <span className="label">
-          DIR: ~/{active?.dir ?? 'root'} <span className="caret">|</span>
+          YOU ARE HERE: {here} <span className="caret">|</span>
         </span>
         <span className="tnum label">
-          VIEWPORT: {vp.w}x{vp.h} // ZOOM: 100% // GRID: 32U
+          YOUR SCREEN: {vp.w} × {vp.h}
         </span>
       </div>
 
@@ -127,6 +129,7 @@ export default function Header({ current, onNavigate }) {
                   key={r.id}
                   type="button"
                   onClick={() => go(r.id)}
+                  data-cursor={`[${r.tech}]`}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.04 * i }}
@@ -137,7 +140,7 @@ export default function Header({ current, onNavigate }) {
                   </span>
                   <span className="label">
                     {String(i + 1).padStart(2, '0')}
-                    {current === r.id ? ' // ACTIVE' : ''}
+                    {current === r.id ? ' // YOU ARE HERE' : ''}
                   </span>
                 </motion.button>
               ))}

@@ -289,7 +289,7 @@ function VideoPlate() {
         <svg width="9" height="11" viewBox="0 0 9 11" fill="var(--c-ink)">
           <path d="M0 0 L9 5.5 L0 11 Z" />
         </svg>
-        <span className="label label-ink">HOVER_TO_PLAY</span>
+        <span className="label label-ink">HOVER TO PLAY</span>
       </div>
     </div>
   )

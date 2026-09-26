@@ -1,22 +1,20 @@
 import { useMemo, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import KineticPlayer from '../components/KineticPlayer.jsx'
-import StillFrame from '../components/StillFrame.jsx'
+import { motion } from 'framer-motion'
+import ProjectCard from '../components/ProjectCard.jsx'
 import { Block, Container, SectionHeader } from '../components/Section.jsx'
-import { CATEGORIES, PROJECTS } from '../lib/site.js'
+import { CATEGORIES, PROJECTS, RIGHTS_NOTICE } from '../lib/site.js'
 
 /**
- * ARCHIVE — filterable deployment grid.
- * Hovering a card scales the media 1.05× inside a completely static
- * bounding box (handled by <Frame /> / <KineticPlayer />).
+ * OUR WORK (route: archive) — filterable masonry grid of the portfolio,
+ * closed by the credits & rights notice. Cards are <ProjectCard />.
  */
 
-function FilterToggle({ active, label, human, count, onClick }) {
+function FilterToggle({ active, label, tech, count, onClick }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      data-cursor={`[${human}]`}
+      data-cursor={`[${tech}]`}
       className="relative border px-4 py-[9px] text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-200"
       style={{
         borderColor: active ? 'var(--c-ink)' : 'var(--c-hair)',
@@ -30,8 +28,8 @@ function FilterToggle({ active, label, human, count, onClick }) {
   )
 }
 
-/** category id -> plain-English name, for the cursor tag. */
-const HUMAN = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.human]))
+/** category id -> printed name. */
+const LABEL = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]))
 
 export default function ArchivePage() {
   const [filter, setFilter] = useState('all')
@@ -53,15 +51,18 @@ export default function ArchivePage() {
         {/* PAGE TITLE */}
         <div className="grid grid-cols-12 items-end gap-x-6 gap-y-6 border-b border-hair pb-8">
           <div className="col-span-12 lg:col-span-8">
-            <span className="label">DIRECTORY // ~/root/archive</span>
-            <h1 className="mt-3 text-[clamp(38px,7vw,104px)] font-medium leading-[0.9] tracking-[-0.045em]">
-              ARCHIVE
+            <span className="label">OUR PORTFOLIO</span>
+            <h1
+              data-cursor="[ARCHIVE]"
+              className="mt-3 text-[clamp(38px,7vw,104px)] font-medium leading-[0.9] tracking-[-0.045em]">
+              OUR WORK
             </h1>
           </div>
           <div className="col-span-12 lg:col-span-4">
             <p className="max-w-[40ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
-              fifteen deployments. every asset is bound to a 1px frame with live
-              anchor points. hover any node to load its media.
+              {PROJECTS.length} pieces across graphics, motion, video and 3d,
+              made for music labels, artists, film studios and brands. hover over
+              any piece to see it in colour or play it.
             </p>
           </div>
         </div>
@@ -72,100 +73,51 @@ export default function ArchivePage() {
             <FilterToggle
               key={c.id}
               label={c.label}
-              human={c.human}
+              tech={c.tech}
               count={counts[c.id] ?? 0}
               active={filter === c.id}
               onClick={() => setFilter(c.id)}
             />
           ))}
           <span className="tnum label ml-auto hidden md:inline">
-            RENDERING {String(visible.length).padStart(2, '0')} /{' '}
-            {String(PROJECTS.length).padStart(2, '0')} NODES
+            SHOWING {String(visible.length).padStart(2, '0')} OF{' '}
+            {String(PROJECTS.length).padStart(2, '0')} PROJECTS
           </span>
         </div>
 
         <SectionHeader
           index="02"
-          title={`FILTER: ${CATEGORIES.find((c) => c.id === filter)?.label}`}
-          meta="GRID: 3_COL // GUTTER: 24PX"
+          title={`SHOWING: ${LABEL[filter]}`}
           className="mb-10"
         />
 
-        {/* GRID */}
-        <motion.div layout className="grid grid-cols-1 gap-x-6 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
-          <AnimatePresence mode="popLayout">
-            {visible.map((p, i) => {
-              const label = `ASSET: ${p.category.toUpperCase()} // FRAME_${String(i + 1).padStart(2, '0')}`
-              const meta = `[${p.dims}]`
-              return (
-                <motion.article
-                  key={p.id}
-                  layout
-                  initial={{ opacity: 0, y: 22 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12, scale: 0.985 }}
-                  transition={{
-                    duration: 0.45,
-                    delay: Math.min(i * 0.035, 0.28),
-                    ease: [0.2, 0, 0, 1],
-                    layout: { type: 'spring', stiffness: 260, damping: 32 },
-                  }}
-                  className="flex flex-col"
-                >
-                  {p.type === 'video' ? (
-                    <KineticPlayer
-                      src={p.src}
-                      youtube={p.youtube}
-                      placeholder={p.placeholder}
-                      credit={p.credit}
-                      label={label}
-                      meta={meta}
-                      dims={p.dims.replace('x', ' × ')}
-                      ratio="4 / 3"
-                    />
-                  ) : (
-                    <StillFrame
-                      src={p.src}
-                      alt={p.name}
-                      label={label}
-                      meta={meta}
-                      dims={p.dims.replace('x', ' × ')}
-                      ratio="4 / 3"
-                      variant={p.variant}
-                      placeholder={p.placeholder}
-                      credit={p.credit}
-                      cursor={`[${HUMAN[p.category]}]`}
-                    />
-                  )}
-
-                  <div className="mt-5 border-t border-hair pt-3">
-                    <div className="flex items-baseline justify-between gap-3">
-                      <h2 className="truncate text-[14px] font-medium uppercase tracking-[0.02em]">
-                        {p.name}
-                      </h2>
-                      <span className="tnum label shrink-0">{p.id}</span>
-                    </div>
-                    <p className="mt-[6px] text-[13px] leading-[1.5] lowercase text-muted">
-                      {p.note}
-                    </p>
-                    <div className="mt-3 flex items-center justify-between gap-3 border-t border-hair-soft pt-[8px]">
-                      <span className="label">{p.client}</span>
-                      <span className="label">
-                        {p.category.toUpperCase()} // {p.year}
-                      </span>
-                    </div>
-                  </div>
-                </motion.article>
-              )
-            })}
-          </AnimatePresence>
-        </motion.div>
+        {/* GRID — masonry columns, so every piece keeps its own shape
+            (square covers, 16:9 thumbnails, 9:16 stories) uncropped. */}
+        <div key={filter} className="columns-1 gap-x-6 sm:columns-2 lg:columns-3">
+          {visible.map((p, i) => (
+            <motion.div
+              key={p.id}
+              className="mb-16 break-inside-avoid"
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: Math.min(i * 0.035, 0.28), ease: [0.2, 0, 0, 1] }}
+            >
+              <ProjectCard project={p} />
+            </motion.div>
+          ))}
+        </div>
 
         {/* END OF DIRECTORY */}
         <div className="mt-20 flex items-center gap-3">
           <span className="block h-px flex-1 bg-hair" />
-          <span className="label">END_OF_DIRECTORY // {visible.length} NODES RENDERED</span>
+          <span className="label">THAT&apos;S EVERYTHING // {visible.length} PROJECTS</span>
           <span className="block h-px flex-1 bg-hair" />
+        </div>
+
+        {/* CREDITS & RIGHTS */}
+        <div className="mt-10 max-w-[92ch] border border-hair-soft p-5 md:p-6">
+          <span className="label label-ink">CREDITS &amp; RIGHTS</span>
+          <p className="mt-3 text-[12px] leading-[1.6] text-muted">{RIGHTS_NOTICE}</p>
         </div>
       </Container>
     </Block>

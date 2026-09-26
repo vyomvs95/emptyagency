@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { SOCIALS } from '../lib/site.js'
+import { EMAIL, RIGHTS_NOTICE, SOCIALS } from '../lib/site.js'
 
 /**
- * GLOBAL FOOTER — terminal read-out.
- * STATUS: ONLINE // LOCAL_TIME: <live>      [ DRIBBBLE ] [ LINKEDIN ] [ X ]
- *                    END_OF_CANVAS // © 2026 EMPTY AGENCY
+ * GLOBAL FOOTER — status read-out.
+ * WE'RE ONLINE // YOUR TIME: <live>   [ EMAIL ] [ DRIBBBLE ] [ LINKEDIN ] [ X ]
+ *                    © 2026 EMPTY AGENCY
  */
 
 function useClock() {
@@ -40,15 +40,22 @@ export default function Footer() {
                 className="pulse-dot block size-[6px] rounded-full"
                 style={{ background: 'var(--c-accent)' }}
               />
-              <span className="label label-ink">STATUS: ONLINE</span>
+              <span className="label label-ink">WE&apos;RE ONLINE</span>
             </span>
             <span className="label">//</span>
             <span className="tnum label label-ink">
-              LOCAL_TIME: {time} {zone}
+              YOUR TIME: {time} {zone}
             </span>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
+            <a
+              href={`mailto:${EMAIL}`}
+              data-cursor="[Email Us]"
+              className="border border-hair px-3 py-[7px] text-[10px] font-medium lowercase tracking-[0.08em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
+            >
+              {EMAIL}
+            </a>
             {SOCIALS.map((s) => (
               <a
                 key={s.label}
@@ -68,12 +75,15 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-2 border-t border-hair-soft py-6">
           <div className="flex items-center gap-3">
             <span className="block h-px w-8 bg-hair" />
-            <span className="label">END_OF_CANVAS // © 2026 EMPTY AGENCY</span>
+            <span className="label">© 2026 EMPTY AGENCY</span>
             <span className="block h-px w-8 bg-hair" />
           </div>
           <span className="label opacity-60">
-            ALL_RIGHTS_RESERVED // BUILT ON A 1PX GRID
+            ALL RIGHTS RESERVED
           </span>
+          <p className="mt-2 max-w-[110ch] text-center text-[10px] leading-[1.6] text-muted opacity-80">
+            {RIGHTS_NOTICE}
+          </p>
         </div>
       </div>
     </footer>

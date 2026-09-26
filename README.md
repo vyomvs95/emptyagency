@@ -112,9 +112,9 @@ src/
 ├─ index.css                  design tokens, base layer, utilities, keyframes
 ├─ context/ThemeContext.jsx   theme state + the wipe state machine
 ├─ lib/
-│  ├─ media.js                ← EVERY asset URL lives here. Only swap point.
+│  ├─ media.js                ← every media file + its pixel size
 │  ├─ youtube.js              shared IFrame API loader + player params
-│  └─ site.js                 routes, 15 projects, pillars, pipeline, copy
+│  └─ site.js                 routes, 44 projects, credits notice, copy
 ├─ components/
 │  ├─ Cursor.jsx              Figma arrow + plain-English [label] tag
 │  ├─ LogoLoader.jsx          logo-built loader that docks into the header
@@ -234,32 +234,36 @@ opacity/blur/lift, plus an accent scan line that sweeps the viewport on
 every route change. Routing is hash-based (`#/archive`), so deep links and
 the back button work without a router dependency.
 
-## Dropping in real media
+## The portfolio and its media
 
-Everything routes through `src/lib/media.js`. Three source kinds:
+All 44 pieces are real work by Umar Khan (World Style), who is associated
+with the studio, much of it made while working with One Digital
+Entertainment. They were selected from his Google Drive portfolio folders
+on 2026-09-26 and optimised for the web (344 MB of originals → ~10 MB):
 
-| Field on the project | Renders as |
-|---|---|
-| `youtube: 'VIDEO_ID'` | IFrame API embed — the **placeholder** path |
-| `src: '/media/x.mp4'` | native `<video>` — the **production** path |
-| `src: null` (images) | procedural wireframe poster |
+| Folder (`public/media/`) | What | Format |
+|---|---|---|
+| `graphics/` | song & film artwork, thumbnails, posters, logos (26) | WebP, ≤1600px |
+| `motion/`   | logo animations, animated stickers (6)            | H.264 MP4, ≤1080px, no audio |
+| `videos/`   | motion posters, animated stories (6)              | H.264 MP4, ≤1080px, no audio |
+| `3d/`       | interior and product renders (6)                  | WebP |
 
-> ### ⚠ NONE of the current media is empty agency's work
->
-> All 18 slots — every video **and** every still — are third-party design
-> reels, used so the first cut reads as a real portfolio. Every one is
-> marked `placeholder: true`, which prints **PLACEHOLDER © CREATOR** in
-> the frame's technical label. Do not remove those markers while the
-> borrowed work is still in place — they are what keeps the demo honest,
-> and they are the only thing distinguishing it from a false claim.
+Each video has a `-poster.webp` still beside it. `src/lib/media.js`
+registers every file with its pixel size; `src/lib/site.js` holds the
+projects (name, client, note, category, agency) and what the home page
+features. Cards keep each piece's own aspect ratio; Our Work is a masonry
+grid so square covers, 16:9 thumbnails and 9:16 stories are never cropped.
 
-To go live with real work: replace `youtube:`/`src:` with a file in
-`public/media/`, and drop `placeholder`/`credit`. No component changes.
-Export video as H.264 `.mp4` — Google Drive links will not work as
-`<video>` sources (wrong content type, and it throttles).
+**Credits are part of the contract.** Every card prints
+`DESIGN: UMAR KHAN / WORLD STYLE`, plus `VIA ONE DIGITAL ENTERTAINMENT`
+where the work was made through them, and `RIGHTS_NOTICE` (in `site.js`)
+is shown on Our Work and in the footer. It claims authorship of the
+design only, disclaims ownership of every client's marks and likenesses,
+and gives a removal contact. Keep both when adding work, and have the
+notice checked by a lawyer — it cannot override a client NDA.
 
-Per-project metadata (names, clients, dimensions, categories) lives in
-`src/lib/site.js`.
+To add a piece: drop the optimised file in the right folder, register it
+in `media.js` with its size, and add a project to `PROJECTS`.
 
 ## Theme
 
@@ -267,11 +271,22 @@ The site always opens in **light mode**. The OS `prefers-color-scheme` is
 deliberately ignored — dark is opt-in, and only a previous explicit choice
 by that visitor carries over (`localStorage: empty-agency:theme`).
 
-## Wiring the contact form
+## Contact email and the enquiry form
 
-`src/pages/Initiate.jsx` — replace the marked `TODO` in `submit()` with
-your POST. Validation, error states, and the
-`IDLE → TRANSMITTING… → TRANSMISSION_COMPLETE` machine are already built.
+The studio has one inbox, `EMAIL` in `src/lib/site.js`
+(`marketing@emptyagency.com`). It is shown on the Start a Project page and
+in the footer — change it there and it changes everywhere.
+
+The form on `src/pages/Initiate.jsx` asks four questions (name, email,
+project, budget) and posts them to [FormSubmit](https://formsubmit.co),
+which emails each enquiry to `EMAIL` with the visitor's address as
+reply-to. No server or API key is involved.
+
+**One-time activation:** the first enquiry sent from the live site makes
+FormSubmit email `EMAIL` an "Activate form" link. Nothing is delivered until
+that link is clicked, so submit a test enquiry right after going live and
+activate it. A hidden honeypot field filters basic spam bots. If a send
+fails, the visitor sees an error and the address to email directly.
 
 ## Accessibility notes
 

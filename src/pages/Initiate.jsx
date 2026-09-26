@@ -2,17 +2,17 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Block, Container, SectionHeader } from '../components/Section.jsx'
 import Reveal from '../components/Reveal.jsx'
-import { BUDGETS } from '../lib/site.js'
+import { BUDGETS, EMAIL, FORM_ENDPOINT } from '../lib/site.js'
 
 /**
- * INITIATE — SYSTEM.INITIATE_PROJECT()
+ * START A PROJECT (route: initiate)
  * ----------------------------------------------------------------
- * Brutalist form. Every field is a command-line prompt with a
- * blinking caret; the submit button runs a small state machine:
- *   IDLE → TRANSMITTING… → TRANSMISSION_COMPLETE
+ * Three-question form. Every field has a blinking caret; the submit
+ * button runs a small state machine:
+ *   IDLE → SENDING… → SENT
  *
- * Wire it to a real endpoint at the marked TODO — everything else
- * (validation, states, animation) is already in place.
+ * Submissions are emailed to EMAIL via FORM_ENDPOINT (see lib/site.js).
+ * If sending fails, the visitor is told and pointed to the address.
  */
 
 /* Blinking caret that hides itself while the native one is active. */
@@ -28,7 +28,7 @@ function Caret({ show }) {
   )
 }
 
-function PromptRow({ index, prompt, error, children }) {
+function PromptRow({ index, prompt, error, message = 'PLEASE FILL THIS IN', children }) {
   return (
     <div className="border-t border-hair py-6">
       <div className="flex items-baseline gap-4">
@@ -36,7 +36,7 @@ function PromptRow({ index, prompt, error, children }) {
         <span className="label label-ink">{prompt}</span>
         {error && (
           <span className="label ml-auto" style={{ color: 'var(--c-signal)' }}>
-            ERR: REQUIRED
+            {message}
           </span>
         )}
       </div>
@@ -77,7 +77,7 @@ function BudgetSelect({ value, onChange, error }) {
       >
         <span className="flex items-baseline gap-[2px]">
           <span style={{ color: value ? 'var(--c-ink)' : 'var(--c-muted)' }}>
-            {value ? `[ ${value} ]` : 'SELECT_RANGE'}
+            {value ? `[ ${value} ]` : 'CHOOSE A RANGE'}
           </span>
           <Caret show={!value && !open} />
         </span>
@@ -116,7 +116,7 @@ function BudgetSelect({ value, onChange, error }) {
                 >
                   <span>[ {b} ]</span>
                   <span className="label" style={{ color: 'inherit', opacity: 0.6 }}>
-                    {value === b ? 'ACTIVE' : `OPT_0${i + 1}`}
+                    {value === b ? 'SELECTED' : ''}
                   </span>
                 </button>
               </li>
@@ -130,10 +130,10 @@ function BudgetSelect({ value, onChange, error }) {
 
 /* ----------------------------- PAGE ------------------------------ */
 export default function InitiatePage() {
-  const [form, setForm] = useState({ name: '', scope: '', budget: '' })
+  const [form, setForm] = useState({ name: '', email: '', scope: '', budget: '' })
   const [focus, setFocus] = useState(null)
   const [errors, setErrors] = useState({})
-  const [status, setStatus] = useState('idle') // idle | sending | sent
+  const [status, setStatus] = useState('idle') // idle | sending | sent | failed
 
   const set = (k) => (e) => {
     const v = typeof e === 'string' ? e : e.target.value
@@ -141,12 +141,13 @@ export default function InitiatePage() {
     setErrors((x) => ({ ...x, [k]: false }))
   }
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
-    if (status !== 'idle') return
+    if (status === 'sending' || status === 'sent') return
 
     const next = {
       name: !form.name.trim(),
+      email: !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()),
       scope: !form.scope.trim(),
       budget: !form.budget,
     }
@@ -154,16 +155,37 @@ export default function InitiatePage() {
     if (Object.values(next).some(Boolean)) return
 
     setStatus('sending')
-    // TODO: POST `form` to your endpoint here.
-    setTimeout(() => setStatus('sent'), 1800)
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          _subject: `New enquiry from ${form.name.trim()}`,
+          _replyto: form.email.trim(),
+          _template: 'table',
+          _honey: form.website ?? '',
+          name: form.name.trim(),
+          email: form.email.trim(),
+          budget: form.budget,
+          project: form.scope.trim(),
+        }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok || data.success === false || data.success === 'false') throw new Error()
+      setStatus('sent')
+    } catch {
+      setStatus('failed')
+    }
   }
 
   const buttonText =
     status === 'sending'
-      ? '[ TRANSMITTING... ]'
+      ? '[ SENDING... ]'
       : status === 'sent'
-        ? '[ TRANSMISSION_COMPLETE ]'
-        : '[ DEPLOY_PARAMETERS ]'
+        ? '[ SENT, THANK YOU ]'
+        : status === 'failed'
+          ? '[ TRY AGAIN ]'
+          : '[ SEND ]'
 
   return (
     <Block className="pt-10 md:pt-16">
@@ -171,15 +193,17 @@ export default function InitiatePage() {
         {/* TITLE */}
         <div className="grid grid-cols-12 items-end gap-x-6 gap-y-6 border-b border-hair pb-8">
           <div className="col-span-12 lg:col-span-9">
-            <span className="label">DIRECTORY // ~/root/initiate</span>
-            <h1 className="mt-3 break-words text-[clamp(28px,5.6vw,84px)] font-medium leading-[0.92] tracking-[-0.045em]">
-              SYSTEM.INITIATE_PROJECT()
+            <span className="label">GET IN TOUCH</span>
+            <h1
+              data-cursor="[SYSTEM.INITIATE_PROJECT()]"
+              className="mt-3 break-words text-[clamp(28px,5.6vw,84px)] font-medium leading-[0.92] tracking-[-0.045em]">
+              START A PROJECT
             </h1>
           </div>
           <div className="col-span-12 lg:col-span-3">
             <p className="max-w-[34ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
-              three parameters. no forms with fourteen fields. we reply inside one
-              working day.
+              just three questions, no long forms. we reply within one working
+              day.
             </p>
           </div>
         </div>
@@ -189,12 +213,12 @@ export default function InitiatePage() {
           <div className="col-span-12 lg:col-span-8">
             <SectionHeader
               index="01"
-              title="PARAMETERS"
-              meta={`FIELDS: 03 // STATUS: ${status.toUpperCase()}`}
+              title="TELL US ABOUT IT"
+              meta="04 QUESTIONS"
             />
 
             <form onSubmit={submit} className="mt-8" noValidate>
-              <PromptRow index="01" prompt="> ENTER_CLIENT_NAME:" error={errors.name}>
+              <PromptRow index="01" prompt="YOUR NAME OR COMPANY" error={errors.name}>
                 <div className="flex max-w-[520px] items-baseline gap-[2px] border-b pb-3"
                   style={{ borderColor: errors.name ? 'var(--c-signal)' : 'var(--c-hair)' }}
                 >
@@ -213,7 +237,43 @@ export default function InitiatePage() {
                 </div>
               </PromptRow>
 
-              <PromptRow index="02" prompt="> DEFINE_PROJECT_SCOPE:" error={errors.scope}>
+              <PromptRow
+                index="02"
+                prompt="YOUR EMAIL"
+                error={errors.email}
+                message={form.email.trim() ? 'CHECK THIS EMAIL' : 'PLEASE FILL THIS IN'}
+              >
+                <div className="flex max-w-[520px] items-baseline gap-[2px] border-b pb-3"
+                  style={{ borderColor: errors.email ? 'var(--c-signal)' : 'var(--c-hair)' }}
+                >
+                  <Caret show={!form.email && focus !== 'email'} />
+                  <input
+                    type="email"
+                    value={form.email}
+                    onChange={set('email')}
+                    onFocus={() => setFocus('email')}
+                    onBlur={() => setFocus(null)}
+                    data-cursor="[Type Here]"
+                    autoComplete="email"
+                    className="w-full bg-transparent text-[15px] tracking-[0.01em] md:text-[17px]"
+                    style={{ caretColor: 'var(--c-accent)' }}
+                  />
+                </div>
+              </PromptRow>
+
+              {/* Spam trap: hidden from people, filled in by bots. */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden
+                value={form.website ?? ''}
+                onChange={set('website')}
+                className="hidden"
+              />
+
+              <PromptRow index="03" prompt="WHAT DO YOU NEED?" error={errors.scope}>
                 <div className="flex max-w-[640px] items-start gap-[2px] border-b pb-3"
                   style={{ borderColor: errors.scope ? 'var(--c-signal)' : 'var(--c-hair)' }}
                 >
@@ -232,26 +292,41 @@ export default function InitiatePage() {
                   />
                 </div>
                 <div className="tnum label mt-2">
-                  CHARS: {String(form.scope.length).padStart(4, '0')}
+                  {form.scope.length} CHARACTERS
                 </div>
               </PromptRow>
 
-              <PromptRow index="03" prompt="> ALLOCATE_BUDGET:" error={errors.budget}>
+              <PromptRow index="04" prompt="YOUR BUDGET" error={errors.budget}>
                 <BudgetSelect value={form.budget} onChange={set('budget')} error={errors.budget} />
               </PromptRow>
 
               <div className="border-t border-hair pt-8">
                 <motion.button
                   type="submit"
-                  disabled={status !== 'idle'}
-                  data-cursor={status === 'idle' ? '[Send My Brief]' : '[Sending…]'}
-                  whileTap={status === 'idle' ? { scale: 0.985 } : undefined}
+                  disabled={status === 'sending' || status === 'sent'}
+                  data-cursor={
+                    status === 'sending' ? '[Sending…]' : status === 'sent' ? '[Sent]' : '[Send My Brief]'
+                  }
+                  whileTap={status === 'idle' || status === 'failed' ? { scale: 0.985 } : undefined}
                   className="w-full border px-6 py-[16px] text-[12px] font-medium uppercase tracking-[0.18em] transition-colors duration-300 md:w-auto md:px-10"
                   style={{
                     background:
-                      status === 'sent' ? 'var(--c-accent)' : status === 'sending' ? 'transparent' : 'var(--c-ink)',
+                      status === 'sent'
+                        ? 'var(--c-accent)'
+                        : status === 'sending'
+                          ? 'transparent'
+                          : status === 'failed'
+                            ? 'var(--c-signal)'
+                            : 'var(--c-ink)',
                     color: status === 'sending' ? 'var(--c-ink)' : 'var(--c-void)',
-                    borderColor: status === 'sending' ? 'var(--c-hair)' : status === 'sent' ? 'var(--c-accent)' : 'var(--c-ink)',
+                    borderColor:
+                      status === 'sending'
+                        ? 'var(--c-hair)'
+                        : status === 'sent'
+                          ? 'var(--c-accent)'
+                          : status === 'failed'
+                            ? 'var(--c-signal)'
+                            : 'var(--c-ink)',
                   }}
                 >
                   <AnimatePresence mode="wait" initial={false}>
@@ -281,12 +356,14 @@ export default function InitiatePage() {
                     >
                       <div className="flex flex-col gap-2 p-5">
                         {[
-                          '> PACKAGING_PARAMETERS...',
-                          `> CLIENT: ${form.name.toUpperCase() || 'NULL'}`,
-                          `> BUDGET: ${form.budget || 'NULL'}`,
+                          '> SENDING YOUR DETAILS...',
+                          `> NAME: ${form.name.toUpperCase() || '—'}`,
+                          `> BUDGET: ${form.budget || '—'}`,
                           status === 'sent'
-                            ? '> RECEIVED. A HUMAN WILL RESPOND WITHIN 24H.'
-                            : '> OPENING_CHANNEL...',
+                            ? '> GOT IT. A REAL PERSON WILL REPLY WITHIN 24 HOURS.'
+                            : status === 'failed'
+                              ? `> THAT DIDN'T GO THROUGH. TRY AGAIN, OR EMAIL US AT ${EMAIL.toUpperCase()}.`
+                              : '> CONNECTING...',
                         ].map((line, i) => (
                           <motion.span
                             key={line}
@@ -308,13 +385,13 @@ export default function InitiatePage() {
 
           {/* CONTACT NODES */}
           <div className="col-span-12 lg:col-span-4">
-            <SectionHeader index="02" title="DIRECT_CHANNELS" meta="ALT_ROUTES" />
+            <SectionHeader index="02" title="OTHER WAYS TO REACH US" />
             <div className="mt-8 flex flex-col">
               {[
-                ['MAIL_NODE', 'hello@empty.agency', 'mailto:hello@empty.agency'],
-                ['DECK_NODE', 'REQUEST_STUDIO_DECK', null],
-                ['LOCATION', 'REMOTE // GMT±00', null],
-                ['RESPONSE', '< 24 HOURS', null],
+                ['EMAIL', EMAIL, `mailto:${EMAIL}`],
+                ['STUDIO DECK', 'ASK US FOR ONE', null],
+                ['LOCATION', 'REMOTE, WORLDWIDE', null],
+                ['REPLY TIME', 'WITHIN 24 HOURS', null],
               ].map(([k, v, href]) => (
                 <Reveal key={k}>
                   <div className="flex items-baseline justify-between gap-4 border-t border-hair py-5">
@@ -339,10 +416,10 @@ export default function InitiatePage() {
             </div>
 
             <div className="mt-10 border border-hair p-6">
-              <span className="label">NOTE</span>
+              <span className="label">GOOD TO KNOW</span>
               <p className="mt-3 text-[14px] leading-[1.55] lowercase text-muted">
-                we take on four engagements per quarter. if the brief is right,
-                we clear the canvas for it.
+                we take on only four projects every three months, so each one
+                gets our full attention.
               </p>
             </div>
           </div>

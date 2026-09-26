@@ -13,10 +13,12 @@ import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motio
  * Elements are detected by hit-testing on move, so nothing has to be
  * wired up through context.
  *
- * COPY RULE: the tag always speaks plain English, never the technical
- * label already printed on the element. Hovering KINETIC reads
- * "[Motion Graphics]" — the UI stays brutalist, the cursor translates.
- * Those translations live as `human` fields in lib/site.js.
+ * COPY RULE: the page prints plain English; the tag reveals the original
+ * studio name behind it. Hovering HOME reads "[INDEX]", MOTION GRAPHICS
+ * reads "[KINETIC]" — visitors are never lost, and the technical
+ * character lives in the cursor. The originals are the `tech` fields in
+ * lib/site.js. Actions with no original name (play, email, theme) keep
+ * a plain instruction such as "[Hover to Play]".
  */
 
 const ARROW =
