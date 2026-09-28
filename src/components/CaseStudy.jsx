@@ -63,11 +63,12 @@ export default function CaseStudy({ project }) {
 
       {/* THE BRIEF */}
       <section className="mt-14 border-t border-hair pt-6">
-        <span className="label">THE BRIEF</span>
+        <span className="label">OVERVIEW</span>
         <p className="mt-4 max-w-[62ch] text-[clamp(18px,1.7vw,24px)] font-medium leading-[1.35] tracking-[-0.01em]">
           {cs.brief}
         </p>
-        <div className="mt-6 flex flex-wrap gap-2">
+        <span className="label mt-8 block">SERVICES</span>
+        <div className="mt-3 flex flex-wrap gap-2">
           {cs.scope.map((s) => (
             <span key={s} className="border border-hair px-3 py-[6px] text-[10px] font-medium uppercase tracking-[0.16em]">
               {s}
@@ -102,7 +103,7 @@ export default function CaseStudy({ project }) {
 
       {/* DELIVERABLES */}
       <section className="mt-16 border-t border-hair pt-6 md:mt-20">
-        <span className="label">WHAT WAS DELIVERED</span>
+        <span className="label">DELIVERABLES</span>
         <div className="mt-4 flex flex-wrap gap-2">
           {cs.deliverables.map((d) => (
             <span

@@ -78,7 +78,7 @@ const UIUX_PROJECTS = [
       bucket: 'uiux',
       credit: UIUX_CREDIT,
       chapters,
-      assets: [img(UIUX_COVER(f.slug), 'Cover'), ...chapters.flatMap((c) => [c.cover, ...csImages(c)])],
+      assets: [img(UIUX_COVER(f.cover), 'Cover'), ...chapters.flatMap((c) => [c.cover, ...csImages(c)])],
     }
   }),
   ...CASE_STUDIES.filter((c) => !IN_FOLDER.has(c.slug)).map((c) => ({
@@ -490,8 +490,53 @@ const bySlug = Object.fromEntries(PROJECTS.map((p) => [p.slug, p]))
 /** The hero project — in focus at the top of the home page. */
 export const HERO = bySlug['elf-tamannaah']
 
-/** Three more under it, one per bucket, all with 16:9 covers. */
-export const FEATURED = [bySlug.tmc, bySlug['osho-jain'], bySlug['sony-prime-video']]
+/** Selected work under it — one per discipline, shown two by two. */
+export const FEATURED = [bySlug.mswipe, bySlug['sony-prime-video'], bySlug['osho-jain'], bySlug.tmc]
+
+/* ------------------------------------------------------------------ */
+/*  HOME — brands and FAQ                                             */
+/* ------------------------------------------------------------------ */
+/**
+ * Names taken only from projects on this site (their `client` fields).
+ * Some of that work was made through partner agencies, which the home
+ * page says right under the grid.
+ */
+export const BRANDS = [
+  'ELF', 'SONY PICTURES', 'BADSHAH', 'VB MUSIC', 'CARRYMINATI',
+  'MSWIPE', 'ETISALAT UTAP', 'ENQUEST ERP', 'CONNECTIFY', 'V2P',
+]
+
+/**
+ * Answers use only what the site already states: the services, the three
+ * steps and their durations (PIPELINE), the budget bands on the enquiry
+ * form (BUDGETS) and the one inbox (EMAIL). Keep them in step if those change.
+ */
+export const FAQ = [
+  [
+    'What does empty agency do?',
+    'Four things under one roof: graphic design, video and motion, 3D visuals, and UI/UX design for apps, platforms and websites. Because it is one team, a campaign film, its artwork and the product it points to can be made to feel like one brand.',
+  ],
+  [
+    'How does a project run?',
+    'In three steps. Simplify: we narrow the idea to what matters. Plan: we lay out the structure and check it works before anything is styled. Build: we design and deliver the finished work.',
+  ],
+  [
+    'How long does it take?',
+    'Roughly a week to simplify, two to three weeks to plan and four to eight weeks to build — so most projects land in two to three months. Smaller pieces, like a single film or a set of artwork, are faster.',
+  ],
+  [
+    'What budgets do you work with?',
+    'Most projects fall between $10k and $50k, and larger engagements start at $50k. Tell us your range on the enquiry form and we will say honestly what it can cover.',
+  ],
+  [
+    'Do you work with teams outside India?',
+    'Yes. We work with clients worldwide, remotely, across time zones.',
+  ],
+  [
+    'How do we start?',
+    'Answer three short questions on Start a Project, or email marketing@emptyagency.com. We reply within one working day.',
+  ],
+]
 
 /* ------------------------------------------------------------------ */
 /*  RIGHTS NOTICE                                                      */
@@ -535,28 +580,28 @@ export const PILLARS = [
     index: '01',
     title: 'GRAPHIC DESIGN',
     tech: 'STATIC',
-    body: 'Song and film artwork, YouTube thumbnails, social media posts, event posters and logos that stop the scroll.',
+    body: 'Film and song artwork, thumbnails, social campaigns, posters and logos — built to be recognised at a glance and hold together across every format.',
     outputs: ['SONG ARTWORK', 'THUMBNAILS', 'SOCIAL POSTS', 'LOGOS'],
   },
   {
     index: '02',
     title: 'VIDEO & MOTION',
     tech: 'KINETIC',
-    body: 'Campaign films, showreels, wedding and event films, lyric videos, logo animations and motion posters.',
+    body: 'Campaign films and their cut-downs, showreels, event films, lyric videos and motion graphics — edited for the screen they will be watched on.',
     outputs: ['CAMPAIGN FILMS', 'SHOWREELS & EVENTS', 'LYRIC VIDEOS', 'MOTION GRAPHICS'],
   },
   {
     index: '03',
     title: '3D VISUALS',
     tech: 'RENDER',
-    body: 'Realistic 3D renders of interiors, spaces and products, so you can see it before it is built.',
+    body: 'Photoreal renders of interiors, architecture and products, so decisions can be made before anything is built.',
     outputs: ['INTERIORS', 'ARCHITECTURE', 'PRODUCTS', 'CONCEPT RENDERS'],
   },
   {
     index: '04',
     title: 'UI/UX DESIGN',
     tech: 'INTERFACE',
-    body: 'Apps, dashboards and websites designed from user flow to wireframe to a finished, developer-ready interface.',
+    body: 'Mobile apps, web platforms, dashboards and websites — from research and user flows to wireframes, a design system and developer-ready screens.',
     outputs: ['MOBILE APPS', 'WEB APPS & DASHBOARDS', 'WEBSITES', 'DESIGN SYSTEMS'],
   },
 ]
@@ -580,7 +625,7 @@ export const PIPELINE = [
     step: 'STEP 3',
     title: 'BUILD.',
     tech: 'RENDER',
-    body: 'We design and deliver the finished work: artwork, animation, video or 3D.',
+    body: 'We design and deliver the finished work: artwork, animation, video, 3D or a product ready for development.',
     duration: '4–8 WEEKS',
   },
 ]
@@ -589,7 +634,7 @@ export const PIPELINE = [
 /*  MISC                                                               */
 /* ------------------------------------------------------------------ */
 export const MARQUEE_TEXT =
-  '// VIDEO // MOTION // GRAPHIC DESIGN // 3D VISUALS // UI/UX DESIGN // KEEP IT SIMPLE '
+  '// FILM // MOTION // GRAPHIC DESIGN // 3D VISUALS // UI/UX DESIGN // WE CLEAR THE CLUTTER '
 
 /** The studio's one inbox. Shown on the site and where every enquiry lands. */
 export const EMAIL = 'marketing@emptyagency.com'

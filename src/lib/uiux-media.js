@@ -9,12 +9,6 @@ const url = (path) => `${import.meta.env.BASE_URL}media/uiux/${path}.webp`
 const image = (path, w, h) => ({ src: url(path), w, h })
 
 export const UIUX = {
-  'mswipe': {
-    'cover': image('mswipe/cover', 1600, 1200),
-  },
-  'v2p': {
-    'cover': image('v2p/cover', 1600, 1200),
-  },
   'invest-app': {
     'cover': image('invest-app/cover', 1600, 1200),
     'discover': image('invest-app/discover', 2368, 1380),

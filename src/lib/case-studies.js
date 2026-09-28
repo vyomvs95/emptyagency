@@ -667,6 +667,7 @@ export const FOLDERS = [
     summary:
       'Seven products for one payments company: getting a merchant onboarded, the app on their terminal, rewards, business loans, the UAE merchant portal, the website and the emails that tie it together.',
     platform: 'ANDROID · POS · WEB · EMAIL',
+    cover: 'pos-merchant-app', // the card shows this chapter's cover
     children: ['merchant-onboarding', 'pos-merchant-app', 'merchant-rewards', 'loan-app', 'utap-portal', 'mswipe-website', 'emailers'],
   },
   {
@@ -677,6 +678,7 @@ export const FOLDERS = [
     summary:
       'A B2B payments portal designed twice — first vendor registration, a landing page and a risk-aware dashboard; then company onboarding and the full invoice-to-payment flow.',
     platform: 'WEB · DESKTOP',
+    cover: 'v2p-platform',
     children: ['v2p-platform', 'vendor-portal'],
   },
 ]

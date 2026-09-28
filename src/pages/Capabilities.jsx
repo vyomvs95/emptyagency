@@ -33,8 +33,8 @@ export default function CapabilitiesPage({ onNavigate }) {
           </div>
           <div className="col-span-12 lg:col-span-4">
             <p className="max-w-[40ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
-              four services, one simple process. we understand what you need,
-              plan it properly, then make it.
+              four disciplines, one team and one process — so everything we
+              make for a brand looks and feels like it belongs together.
             </p>
           </div>
         </div>

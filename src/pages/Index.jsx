@@ -4,11 +4,11 @@ import ProjectCard from '../components/ProjectCard.jsx'
 import Marquee from '../components/Marquee.jsx'
 import Reveal, { RuleIn } from '../components/Reveal.jsx'
 import { Block, Container, SectionHeader } from '../components/Section.jsx'
-import { FEATURED, HERO, MARQUEE_TEXT, PROJECTS } from '../lib/site.js'
+import { BRANDS, FAQ, FEATURED, HERO, MARQUEE_TEXT, PILLARS, PROJECTS } from '../lib/site.js'
 
 const HERO_FILM = HERO.assets[0]
 
-const HEADLINE = ['We clear the clutter.', 'You get the results.']
+const HEADLINE = ['A creative studio for', 'film, motion and', 'digital products.']
 
 export default function IndexPage({ onNavigate, onOpenProject }) {
   return (
@@ -37,7 +37,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.75, delay: 0.26, ease: [0.2, 0, 0, 1] }}
                 >
-                  We make campaign films, showreels, motion graphics, artwork and 3D visuals that people stop and look at.
+                  We clear the clutter. Campaign films, motion, artwork, 3D and the apps and websites behind a brand — designed by one team, so it all feels like one brand.
                 </motion.span>
               </h1>
 
@@ -74,7 +74,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                   ['STUDIO', 'EMPTY AGENCY'],
                   ['FOUNDED', '2026'],
                   ['WHERE', 'WORKING WORLDWIDE'],
-                  ['WE DO', 'VIDEO · MOTION · GRAPHICS · 3D'],
+                  ['WE DO', 'FILM · MOTION · GRAPHICS · 3D · UI/UX'],
                 ].map(([k, v]) => (
                   <div key={k} className="flex items-baseline justify-between gap-4">
                     <span className="label">{k}</span>
@@ -143,7 +143,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                   className="mt-6 w-full border px-5 py-[12px] text-[11px] font-medium uppercase tracking-[0.16em]"
                   style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
                 >
-                  [ SEE THE WHOLE CAMPAIGN ↗ ]
+                  [ WATCH THE FULL FILM ↗ ]
                 </button>
               </div>
             </motion.div>
@@ -166,13 +166,13 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
         <Container>
           <SectionHeader
             index="01"
-            title="RECENT WORK"
-            meta={`${String(FEATURED.length).padStart(2, '0')} PROJECTS // NEWEST FIRST`}
+            title="SELECTED WORK"
+            meta={`${String(FEATURED.length).padStart(2, '0')} PROJECTS // ONE PER DISCIPLINE`}
           />
 
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-14 md:grid-cols-2">
             {FEATURED.map((item, i) => (
-              <Reveal key={item.id} delay={i * 0.08}>
+              <Reveal key={item.slug} delay={i * 0.08}>
                 <ProjectCard project={item} ratio="16 / 9" onOpen={onOpenProject} />
               </Reveal>
             ))}
@@ -181,8 +181,8 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
           <Reveal className="mt-14" delay={0.1}>
             <div className="flex flex-col items-start gap-5 border-t border-hair pt-6 md:flex-row md:items-center md:justify-between">
               <p className="max-w-[46ch] text-[16px] leading-[1.45] lowercase text-muted md:text-[18px]">
-                see all {PROJECTS.length} projects on our work page, sorted into
-                videos, motion, graphics, 3d and ui/ux design.
+                {PROJECTS.length} projects across film, motion, graphics, 3d and
+                ui/ux design — each one opens with everything we made for it.
               </p>
               <button
                 type="button"
@@ -197,13 +197,81 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
         </Container>
       </Block>
 
+      {/* ========================= SERVICES ========================= */}
+      <Block className="mt-24 md:mt-32">
+        <Container>
+          <SectionHeader index="02" title="WHAT WE DO" meta={`${String(PILLARS.length).padStart(2, '0')} SERVICES`} />
+          <div className="mt-6 flex flex-col">
+            {PILLARS.map((p, i) => (
+              <Reveal key={p.index} delay={i * 0.05}>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('capabilities')}
+                  data-cursor={`[${p.tech}]`}
+                  className="group grid w-full grid-cols-12 items-baseline gap-x-6 gap-y-3 border-t border-hair py-7 text-left transition-colors duration-200 hover:border-[var(--c-accent)]"
+                >
+                  <span className="label tnum col-span-2 md:col-span-1">[{p.index}]</span>
+                  <span className="col-span-10 text-[clamp(24px,3.2vw,46px)] font-medium leading-[0.95] tracking-[-0.035em] transition-colors duration-200 group-hover:text-[var(--c-accent)] md:col-span-5">
+                    {p.title}
+                  </span>
+                  <span className="col-span-12 max-w-[52ch] text-[15px] leading-[1.55] lowercase text-muted md:col-span-6">
+                    {p.body}
+                  </span>
+                </button>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </Block>
+
+      {/* ========================== BRANDS ========================== */}
+      <Block className="mt-24 md:mt-32">
+        <Container>
+          <SectionHeader index="03" title="BRANDS OUR WORK HAS BEEN MADE FOR" meta={`${String(BRANDS.length).padStart(2, '0')} NAMES`} />
+          <ul className="mt-6 grid grid-cols-2 border-l border-t border-hair-soft sm:grid-cols-3 lg:grid-cols-5">
+            {BRANDS.map((b) => (
+              <li
+                key={b}
+                className="flex min-h-[92px] items-center justify-center border-b border-r border-hair-soft px-4 text-center text-[13px] font-medium uppercase tracking-[0.08em]"
+              >
+                {b}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 max-w-[80ch] text-[11px] leading-[1.6] text-muted">
+            Some of this work was made through partner agencies. Names and marks belong to their owners — see Credits &amp; Rights on Our Work.
+          </p>
+        </Container>
+      </Block>
+
+      {/* ============================ FAQ ============================ */}
+      <Block className="mt-24 md:mt-32">
+        <Container>
+          <SectionHeader index="04" title="QUESTIONS WE GET ASKED" meta={`${String(FAQ.length).padStart(2, '0')} ANSWERS`} />
+          <div className="mt-6 flex flex-col border-b border-hair">
+            {FAQ.map(([q, a]) => (
+              <details key={q} className="group border-t border-hair py-5">
+                <summary
+                  data-cursor="[OPEN]"
+                  className="flex cursor-pointer list-none items-baseline justify-between gap-6 text-[clamp(18px,1.8vw,24px)] font-medium tracking-[-0.02em] [&::-webkit-details-marker]:hidden"
+                >
+                  {q}
+                  <span className="label shrink-0 transition-transform duration-200 group-open:rotate-45">[ + ]</span>
+                </summary>
+                <p className="mt-4 max-w-[70ch] text-[15px] leading-[1.6] lowercase text-muted">{a}</p>
+              </details>
+            ))}
+          </div>
+        </Container>
+      </Block>
+
       {/* ========================= CTA STRIP ========================= */}
       <Block className="mt-24 md:mt-32">
         <Container>
           <RuleIn />
           <div className="flex flex-col items-start justify-between gap-8 py-14 md:flex-row md:items-end">
             <h2 className="max-w-[16ch] text-[clamp(30px,5vw,74px)] font-medium leading-[0.94] tracking-[-0.04em]">
-              Have a project in mind?
+              Have a project in mind? Let’s talk.
             </h2>
             <button
               type="button"

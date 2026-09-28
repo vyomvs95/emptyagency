@@ -54,7 +54,7 @@ export default function ArchivePage({ onOpenProject }) {
         {/* PAGE TITLE */}
         <div className="grid grid-cols-12 items-end gap-x-6 gap-y-6 border-b border-hair pb-8">
           <div className="col-span-12 lg:col-span-8">
-            <span className="label">OUR PORTFOLIO</span>
+            <span className="label">SELECTED WORK</span>
             <h1
               data-cursor="[ARCHIVE]"
               className="mt-3 text-[clamp(38px,7vw,104px)] font-medium leading-[0.9] tracking-[-0.045em]">
@@ -63,10 +63,10 @@ export default function ArchivePage({ onOpenProject }) {
           </div>
           <div className="col-span-12 lg:col-span-4">
             <p className="max-w-[40ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
-              {PROJECTS.length} projects, {PIECES} pieces — videos, motion,
-              graphics, 3d and ui/ux design for brands, artists, labels, film
-              studios and fintech products. open any project to see everything
-              we made for it.
+              selected work for brands, artists, film studios and fintech
+              companies — {PROJECTS.length} projects and {PIECES} pieces across
+              film, motion, graphics, 3d and ui/ux. every project opens with
+              everything we made for it.
             </p>
           </div>
         </div>

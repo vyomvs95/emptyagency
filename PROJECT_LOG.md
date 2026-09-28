@@ -91,7 +91,10 @@ TMC ×3, Adil Hussaini ×2, Event Soul ×2, Pasandida Ladies ×1.
 
 ## Open items — pick up here
 
-### 1. Eleven films never downloaded (Drive "Quota exceeded")
+### 1. Ten films never downloaded (Drive "Quota exceeded")
+The ELF master landed on 29 Sep and is now the home hero. The ten below are still
+missing; the quota had lifted by then, so they can likely be fetched now.
+
 Google blocked further downloads of these on 26 Sep. The quota usually resets
 within 24 h. **Their places already exist in `site.js`.** Each one appears
 automatically once its file is in `public/media/films/` and `films.js` is
@@ -99,7 +102,6 @@ regenerated. Until then they're hidden and nothing looks broken.
 
 | Slug | Drive file | Drive id | Size | Encode as |
 |---|---|---|---|---|
-| `elf-tamannaah-master` | TAMANNAH_MASTER_220126.mp4 | `13ryvVBUROdjt8GOU6I5oCQs9yHvSeiIu` | 361 MB | **full** (it's the hero; 1 min) |
 | `s-b-trailer` | S & B Trailer.mp4 | `1Oe4c6Ww61y5HCqzZCkFjYttyowz2nwpa` | 372 MB | excerpt |
 | `showreel-final-without-logo` | Showreel Final WithOut Logo.mp4 | `1CCWk1YzojB6dr5ksGiBVxsyvhKEWMT_6` | 237 MB | excerpt |
 | `st-live-kolkata-morning-show-v1` | ST Live Kolkata Morning show V1.mp4 | `1bYZxmUf77swDGnSUlPPF0sGR3bJzWK3G` | 195 MB | excerpt |
@@ -186,6 +188,17 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 ---
 
 ## Session history
+
+**29 Sep 2026**
+6. **Content and flow, after clay.global** (design unchanged): the home page now runs
+   statement → featured film → selected work (one per discipline, 2×2) → services →
+   brands → FAQ → "Let's talk". New copy uses only facts already on the site; the FAQ
+   is built from PILLARS, PIPELINE, BUDGETS and the email. Vision copy untouched.
+7. **ELF × Tamannaah master film** added (`elf-tamannaah-master`, 57 s, 1080p, 19 MB),
+   poster = the end card with Tamannaah and the brand name. Hero button is back to
+   "Watch the full film". `encode-film.sh` fixed: `ffmpeg -i` exits 1 by design, which
+   `pipefail` treated as a failure.
+8. Folder cards use one clean cover (Mswipe → POS app, V2P → V2P 2.0), not a mosaic.
 
 **28 Sep 2026 (later)**
 3. Background: dots back but lighter (`--c-grid` at half strength); the vertical

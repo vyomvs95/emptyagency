@@ -18,7 +18,8 @@ FF=${FFMPEG:-ffmpeg}
 IN=$1; SLUG=$2; MODE=${3:-full}
 OUT="$(cd "$(dirname "$0")/../.." && pwd)/public/media/films"
 mkdir -p "$OUT"
-DUR=$("$FF" -i "$IN" 2>&1 | sed -n 's/.*Duration: \([0-9:.]*\).*/\1/p' | awk -F: '{print $1*3600+$2*60+$3}')
+# `ffmpeg -i` with no output always exits 1 — don't let pipefail kill the script
+DUR=$({ "$FF" -i "$IN" 2>&1 || true; } | sed -n 's/.*Duration: \([0-9:.]*\).*/\1/p' | awk -F: '{print $1*3600+$2*60+$3}')
 
 if [ "$MODE" = excerpt ]; then
   START=$(awk -v d="$DUR" 'BEGIN{print (d<=60)?0:d*0.12}'); LEN=45; FO=44

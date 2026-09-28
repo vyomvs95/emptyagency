@@ -28,6 +28,7 @@ export const FILM = {
   'elf-glam-v': film('elf-glam-v', 608, 1080, 10.8),
   'elf-slim-green-h': film('elf-slim-green-h', 1080, 608, 10.2),
   'elf-slim-green-v': film('elf-slim-green-v', 608, 1080, 10.1),
+  'elf-tamannaah-master': film('elf-tamannaah-master', 1920, 1080, 57.3),
   'final-gift-song': film('final-gift-song', 1280, 720, 45.0, true),
   'jab-tu-meri-na-rahi-final-teaser-2k': film('jab-tu-meri-na-rahi-final-teaser-2k', 1280, 676, 27.8, true),
   'mehndi-final': film('mehndi-final', 1280, 720, 45.0, true),
