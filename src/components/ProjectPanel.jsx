@@ -11,7 +11,7 @@ const BUCKET = Object.fromEntries(BUCKETS.map((b) => [b.id, b]))
 /**
  * PROJECT PANEL — the "sub page" for one project.
  * ----------------------------------------------------------------
- * A full-viewport sheet in the same wireframe language as the rest of
+ * A sheet under the main nav (which stays usable) in the same wireframe language as the rest of
  * the site: meta rail on the left (client, what we did, credit), a stage
  * on the right showing one piece at a time, and a strip of every piece
  * in the project underneath.
@@ -143,7 +143,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
           role="dialog"
           aria-modal="true"
           aria-label={project.title}
-          className="fixed inset-0 z-[60] overflow-y-auto bg-void"
+          className="fixed inset-x-0 bottom-0 top-[59px] z-40 overflow-y-auto bg-void md:top-[85px]"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 16 }}

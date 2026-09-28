@@ -71,9 +71,16 @@ export default function App() {
     setProject(null)
   }, [route])
 
+  // The main nav stays visible over an open project, so a nav click also
+  // closes the project (same page: just close it).
   const navigate = useCallback(
     (id) => {
-      if (!ROUTE_IDS.includes(id) || id === route) return
+      if (!ROUTE_IDS.includes(id)) return
+      setProject(null)
+      if (id === route) {
+        window.location.hash = `/${id}`
+        return
+      }
       window.location.hash = `/${id}`
       setRoute(id)
       window.scrollTo({ top: 0, behavior: 'auto' })

@@ -49,12 +49,12 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
               >
                 <button
                   type="button"
-                  onClick={() => onNavigate('initiate')}
-                  data-cursor="[INITIATE_PROJECT]"
+                  onClick={() => onNavigate('vision')}
+                  data-cursor="[OUR VISION]"
                   className="border px-5 py-[11px] text-[11px] font-medium uppercase tracking-[0.16em] transition-colors duration-200"
                   style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
                 >
-                  [ START A PROJECT ↗ ]
+                  [ WHO WE ARE — OUR VISION → ]
                 </button>
                 <button
                   type="button"
@@ -64,14 +64,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                 >
                   [ SEE OUR WORK ]
                 </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('vision')}
-                  data-cursor="[OUR VISION]"
-                  className="border border-hair px-5 py-[11px] text-[11px] font-medium uppercase tracking-[0.16em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
-                >
-                  [ WHO WE ARE — OUR VISION → ]
-                </button>
+
               </motion.div>
             </div>
 

@@ -45,8 +45,8 @@ process, real outcome/quote where the client allows) and weaker older pieces are
   is applied everywhere (`PRIORITY` + `RANK` in `site.js`).
 - **Nav:** Home · Work · Services · About Us (Vision — **copy is the owner's, never
   rewrite**) · Start a Project. Cursor tags still show the technical names (`tech` fields).
-- **Home, in order:** headline + buttons (Start a project · See our work · **Who we are —
-  our vision** → About Us) → **ELF × Tamannaah master film** as hero piece (celebrity work
+- **Home, in order:** headline + buttons (**Who we are — our vision** (primary) → About Us ·
+  See our work) → **ELF × Tamannaah master film** as hero piece (celebrity work
   first, on purpose) → marquee → Selected work (Mswipe, enQuest, All Hub, Real estate,
   Product films, Sony) → Services → Industries (each links to its projects) → Brands
   (15 names) → FAQ → "Let's talk".
@@ -233,6 +233,10 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 ## Session history
 
 **29 Sep 2026 (latest)**
+14. Hero buttons: **"Who we are — our vision"** is now the primary (filled) button, then
+    "See our work"; "Start a project" left the hero (still in the nav, Let's talk and FAQ).
+    Project panel now opens **under the main nav** (nav stays visible); any nav click closes
+    the open project.
 13. Removed the two old 3D projects (Interior visualisation, Architecture & product
     renders) and their six images — owner found them too kiddish. 3D & CGI now = All Hub,
     Real estate, Product films folder.
