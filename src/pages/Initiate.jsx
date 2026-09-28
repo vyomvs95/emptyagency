@@ -385,7 +385,8 @@ export default function InitiatePage() {
 
           {/* CONTACT NODES */}
           <div className="col-span-12 lg:col-span-4">
-            <div className="flex flex-col lg:mt-[42px]">
+            <SectionHeader index="02" title="OTHER WAYS TO REACH US" rule={false} />
+            <div className="mt-8 flex flex-col">
               {[
                 ['EMAIL', EMAIL, `mailto:${EMAIL}`],
                 ['STUDIO DECK', 'ASK US FOR ONE', null],

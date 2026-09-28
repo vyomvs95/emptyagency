@@ -196,8 +196,8 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 12. Rights notice cut to three short sentences with no personal or agency names (only
     "in association with World Style"), shown **once per page, in the footer** — removed from
     Work, the project panel and the home brands grid. Footer socials removed (email only;
-    `SOCIALS` kept in site.js, unused). Contact page: no rule beside "Tell us about it", and
-    the "Other ways to reach us" header is gone (the details list stays).
+    `SOCIALS` kept in site.js, unused). Contact page: no rule beside "Tell us about it", or beside
+    "Other ways to reach us" (both headers stay, lines removed).
 11. Hero is back to "We clear the clutter. You get the results." with the ELF × Tamannaah
     film directly under it (celebrity work first as a trust signal); selected work below it
     stays UI/UX → 3D → film. Horizontal centre rule removed from the background (dots stay).
