@@ -12,7 +12,7 @@ and what is still open.** Newest session at the top.
 |---|---|
 | Live domain | `www.emptyagency.com` → **under-construction page** (`construction/index.html`) |
 | Work in progress | `www.emptyagency.com/mockup` → the full React site, **deployed for review** |
-| Last deployed commit | `7cba8ed` — colour on touch devices (all 29 Sep work is live) |
+| Last deployed commit | `5f2a4aa` — hero leads with "Who we are", nav stays over case studies (all 29 Sep work is live) |
 | Deploy | `git push origin main` → Vercel auto-deploys in ~1 min. No Vercel CLI needed. Push with `GIT_SSH_COMMAND="ssh -o BatchMode=yes"` — a plain push once hung for 7 min at SSH. |
 | Repo | `github.com/vyomvs95/emptyagency` (SSH) |
 | Stack | React 19 · JavaScript (JSX, not TypeScript) · Tailwind 4 · Framer Motion · Vite |
@@ -53,7 +53,8 @@ process, real outcome/quote where the client allows) and weaker older pieces are
 - **Work:** **32 cards** in 5 buckets — UI/UX 7 · 3D & CGI 3 · Film 10 · Motion 6 ·
   Graphics 6 — in an even 4:3 grid (3D & CGI is now 3) that reads left to right in priority order. A card
   opens the project panel (`#/archive/<slug>`); case studies open as long-form pages,
-  **folders** (Mswipe, V2P, Product films) list chapters.
+  **folders** (Mswipe, V2P, Product films) list chapters. The panel opens **under the main nav**,
+  which stays usable; a nav click closes the project.
 - **Contact:** `marketing@emptyagency.com` is the **only** inbox (footer shows only that —
   socials removed). Form sends through **FormSubmit**.
 - **Rights notice:** 3 short sentences, no personal/agency names ("in association with
