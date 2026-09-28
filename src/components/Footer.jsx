@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
-import { EMAIL, RIGHTS_NOTICE, SOCIALS } from '../lib/site.js'
+import { EMAIL, RIGHTS_NOTICE } from '../lib/site.js'
 
 /**
  * GLOBAL FOOTER — status read-out.
- * WE'RE ONLINE // YOUR TIME: <live>   [ EMAIL ] [ DRIBBBLE ] [ LINKEDIN ] [ X ]
+ * WE'RE ONLINE // YOUR TIME: <live>   [ EMAIL ]
+ *                    © 2026 EMPTY AGENCY · ALL RIGHTS RESERVED
+ *                    rights notice — the only place it appears on any page
  *                    © 2026 EMPTY AGENCY
  */
 
@@ -56,18 +58,6 @@ export default function Footer() {
             >
               {EMAIL}
             </a>
-            {SOCIALS.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noreferrer noopener"
-                data-cursor={`[Visit ${s.human} ↗]`}
-                className="group border border-hair px-3 py-[7px] text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
-              >
-                [ {s.label} ]
-              </a>
-            ))}
           </div>
         </div>
 

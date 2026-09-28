@@ -222,11 +222,6 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
                   ))}
                 </div>
 
-                <p className="mt-6 max-w-[52ch] text-[11px] leading-[1.6] text-muted">
-                  Shown as a record of work the team contributed to. All marks,
-                  artwork and likenesses belong to their owners. See Credits &amp;
-                  Rights on Our Work.
-                </p>
               </div>
 
               {/* STAGE + STRIP — or, for UI/UX work, the long-form case study */}

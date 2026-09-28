@@ -588,18 +588,9 @@ export const FAQ = [
  * the designer signed with a client or agency.
  */
 export const RIGHTS_NOTICE =
-  'The work shown here was created or edited by members of the empty agency ' +
-  'core team, including Umar Khan (World Style) and Vyom Shah (UI/UX), independently or while ' +
-  'working with agencies such as One Digital Entertainment. It is shown ' +
-  'solely as a record ' +
-  'of that professional experience. All trademarks, logos, film and music ' +
-  'artwork, and the names and likenesses of artists and brands belong to ' +
-  'their respective owners. empty agency claims no ownership of them, and ' +
-  'their appearance here does not imply endorsement by, or a current ' +
-  'relationship with, any rights holder. Videos marked as YouTube pieces are ' +
-  'played through YouTube’s standard embedded player and remain hosted by ' +
-  'their owners. To request a correction or removal, ' +
-  'email marketing@emptyagency.com and we will act promptly.'
+  'All work is shown for portfolio purposes only and was created in association with World Style. ' +
+  'All trademarks, artwork and likenesses remain the property of their respective owners; their appearance implies no ownership, endorsement or affiliation. ' +
+  'For corrections or removal, email marketing@emptyagency.com.'
 
 /* ------------------------------------------------------------------ */
 /*  CAPABILITIES                                                       */

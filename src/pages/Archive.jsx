@@ -2,11 +2,11 @@ import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import ProjectCard from '../components/ProjectCard.jsx'
 import { Block, Container, SectionHeader } from '../components/Section.jsx'
-import { BUCKETS, PROJECTS, RIGHTS_NOTICE } from '../lib/site.js'
+import { BUCKETS, PROJECTS } from '../lib/site.js'
 
 /**
  * OUR WORK (route: archive) — every project, one card each, filterable
- * by bucket, in a masonry grid; closed by the credits & rights notice.
+ * by bucket, in a masonry grid; the rights notice lives once, in the footer.
  * A card opens the project panel (App owns it) with every piece inside.
  */
 
@@ -119,11 +119,6 @@ export default function ArchivePage({ onOpenProject }) {
           <span className="block h-px flex-1 bg-hair" />
         </div>
 
-        {/* CREDITS & RIGHTS */}
-        <div className="mt-10 max-w-[92ch] border border-hair-soft p-5 md:p-6">
-          <span className="label label-ink">CREDITS &amp; RIGHTS</span>
-          <p className="mt-3 text-[12px] leading-[1.6] text-muted">{RIGHTS_NOTICE}</p>
-        </div>
       </Container>
     </Block>
   )

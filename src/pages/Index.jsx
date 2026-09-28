@@ -275,9 +275,6 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
               </li>
             ))}
           </ul>
-          <p className="mt-4 max-w-[80ch] text-[11px] leading-[1.6] text-muted">
-            Some of this work was made through partner agencies. Names and marks belong to their owners — see Credits &amp; Rights on Our Work.
-          </p>
         </Container>
       </Block>
 

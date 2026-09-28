@@ -214,7 +214,7 @@ export default function InitiatePage() {
             <SectionHeader
               index="01"
               title="TELL US ABOUT IT"
-              meta="04 QUESTIONS"
+              rule={false}
             />
 
             <form onSubmit={submit} className="mt-8" noValidate>
@@ -385,8 +385,7 @@ export default function InitiatePage() {
 
           {/* CONTACT NODES */}
           <div className="col-span-12 lg:col-span-4">
-            <SectionHeader index="02" title="OTHER WAYS TO REACH US" />
-            <div className="mt-8 flex flex-col">
+            <div className="flex flex-col lg:mt-[42px]">
               {[
                 ['EMAIL', EMAIL, `mailto:${EMAIL}`],
                 ['STUDIO DECK', 'ASK US FOR ONE', null],

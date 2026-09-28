@@ -142,7 +142,7 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 - [ ] **Confirm the 3D tool.** The What We Do tools list names Blender, but I found
       no evidence of it.
 - [ ] **Unknown artists** on the *Rangreza* and *Diamond* covers.
-- [ ] **Have a lawyer read `RIGHTS_NOTICE`** before going live on the main domain.
+- [ ] **Have a lawyer read the shortened `RIGHTS_NOTICE`** before going live on the main domain.
 - [ ] **Optional:** upload the long films (unlisted) to the studio's own YouTube or
       Vimeo, so full versions can replace the ~45 s excerpts.
 
@@ -193,6 +193,11 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 ## Session history
 
 **29 Sep 2026 (latest)**
+12. Rights notice cut to three short sentences with no personal or agency names (only
+    "in association with World Style"), shown **once per page, in the footer** — removed from
+    Work, the project panel and the home brands grid. Footer socials removed (email only;
+    `SOCIALS` kept in site.js, unused). Contact page: no rule beside "Tell us about it", and
+    the "Other ways to reach us" header is gone (the details list stays).
 11. Hero is back to "We clear the clutter. You get the results." with the ELF × Tamannaah
     film directly under it (celebrity work first as a trust signal); selected work below it
     stays UI/UX → 3D → film. Horizontal centre rule removed from the background (dots stay).

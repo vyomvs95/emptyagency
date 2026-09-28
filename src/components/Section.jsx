@@ -8,7 +8,7 @@ export function Container({ className = '', children }) {
 }
 
 /** Section marker: index chip, drawn rule, title, right-hand read-out. */
-export function SectionHeader({ index, title, meta, className = '' }) {
+export function SectionHeader({ index, title, meta, rule = true, className = '' }) {
   return (
     <div className={`w-full ${className}`}>
       <div className="flex items-center gap-4">
@@ -16,7 +16,7 @@ export function SectionHeader({ index, title, meta, className = '' }) {
           [ {index} ]
         </span>
         <span className="label label-ink shrink-0">{title}</span>
-        <RuleIn className="min-w-6 flex-1" />
+        {rule ? <RuleIn className="min-w-6 flex-1" /> : <span className="flex-1" />}
         {meta && <span className="label shrink-0">{meta}</span>}
       </div>
     </div>
