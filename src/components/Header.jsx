@@ -7,7 +7,7 @@ import { ROUTES } from '../lib/site.js'
 /**
  * GLOBAL HEADER
  * ----------------------------------------------------------------
- * ● empty agency  //  [ HOME ] [ OUR WORK ] [ WHAT WE DO ] [ ABOUT US ] [ START A PROJECT ↗ ]
+ * ● empty agency  //  [ HOME ] [ WORK ] [ SERVICES ] [ ABOUT US ] [ START A PROJECT ↗ ]
  *
  * Sticky. Buttons print the plain-English page name; hovering one puts
  * the original studio name (INDEX, ARCHIVE…) in the cursor tag. A second

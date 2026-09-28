@@ -120,6 +120,8 @@ src/
 │  ├─ films.js                GENERATED — every film + its measured size
 │  ├─ uiux-media.js           GENERATED — UI/UX case-study images + sizes
 │  ├─ case-studies.js         UI/UX case studies + client folders
+│  ├─ cgi-case-studies.js     3D & CGI case studies + the product-films folder
+│  ├─ cgi-media.js            GENERATED — 3D films (chapter clips) and stills
 │  └─ site.js                 routes, projects & buckets, credits notice, copy
 ├─ components/
 │  ├─ Cursor.jsx              Figma arrow + plain-English [label] tag
@@ -245,7 +247,8 @@ the back button work without a router dependency.
 
 Our Work is organised as **projects**, not loose files. Every piece
 belongs to exactly one project and every project to exactly one bucket —
-**Videos · Motion · Graphics · 3D · UI/UX Design** — so nothing appears twice on the
+**UI/UX Design · 3D & CGI · Film · Motion · Graphics** (that priority order is used
+everywhere: `PRIORITY`, then `RANK` within a bucket) — so nothing appears twice on the
 site. A poster and its motion version, a client's four showreels, ten
 lyric videos for one artist: each is one project, one card.
 

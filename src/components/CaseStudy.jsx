@@ -8,7 +8,8 @@ import Frame from './Frame.jsx'
  * scope, then numbered sections (kicker, title, body, screens), and the
  * deliverables to close.
  *
- * Screens sit in the same bounding-box frames as the rest of the site.
+ * Screens and films sit in the same bounding-box frames as the rest of
+ * the site (`kind: 'video'` plays inline with controls).
  * Long web pages (`scroll: true`) are shown in a fixed-height window you
  * scroll through, so a 9,000px landing page doesn't swallow the panel.
  * Every image opens full size in a new tab for a closer look. `narrow`
@@ -17,6 +18,21 @@ import Frame from './Frame.jsx'
 
 function Shot({ image }) {
   const { src, w, h, caption, scroll } = image
+
+  if (image.kind === 'video') {
+    return (
+      <Frame label={caption} meta={image.duration ? `${Math.round(image.duration)} S` : 'FILM'} dims={`${w} × ${h}`} ratio={`${w} / ${h}`} zoom={false} boxClassName="bg-black">
+        <video
+          src={src}
+          poster={image.poster}
+          controls
+          playsInline
+          preload="none"
+          className="h-full w-full bg-black object-contain"
+        />
+      </Frame>
+    )
+  }
 
   if (scroll) {
     return (
@@ -57,9 +73,13 @@ export default function CaseStudy({ project }) {
 
   return (
     <div>
-      <Frame label="CASE STUDY // COVER" dims={`${cover.w} × ${cover.h}`} ratio={`${cover.w} / ${cover.h}`} zoom={false}>
-        <img src={cover.src} alt={project.title} className="h-full w-full object-cover" />
-      </Frame>
+      {cover.kind === 'video' ? (
+        <Shot image={{ ...cover, caption: 'CASE STUDY // FILM' }} />
+      ) : (
+        <Frame label="CASE STUDY // COVER" dims={`${cover.w} × ${cover.h}`} ratio={`${cover.w} / ${cover.h}`} zoom={false}>
+          <img src={cover.src} alt={project.title} className="h-full w-full object-cover" />
+        </Frame>
+      )}
 
       {/* THE BRIEF */}
       <section className="mt-14 border-t border-hair pt-6">

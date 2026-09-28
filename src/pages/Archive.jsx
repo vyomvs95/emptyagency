@@ -58,15 +58,15 @@ export default function ArchivePage({ onOpenProject }) {
             <h1
               data-cursor="[ARCHIVE]"
               className="mt-3 text-[clamp(38px,7vw,104px)] font-medium leading-[0.9] tracking-[-0.045em]">
-              OUR WORK
+              WORK
             </h1>
           </div>
           <div className="col-span-12 lg:col-span-4">
             <p className="max-w-[40ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
-              selected work for brands, artists, film studios and fintech
-              companies — {PROJECTS.length} projects and {PIECES} pieces across
-              film, motion, graphics, 3d and ui/ux. every project opens with
-              everything we made for it.
+              {PROJECTS.length} projects across ui/ux design, 3d and cgi, film,
+              motion and graphics — for fintech, enterprise, industrial, real
+              estate, consumer and entertainment brands. case studies open in
+              full; client folders hold every product we designed for them.
             </p>
           </div>
         </div>

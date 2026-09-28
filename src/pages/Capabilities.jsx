@@ -24,11 +24,11 @@ export default function CapabilitiesPage({ onNavigate }) {
         {/* TITLE */}
         <div className="grid grid-cols-12 items-end gap-x-6 gap-y-6 border-b border-hair pb-8">
           <div className="col-span-12 lg:col-span-8">
-            <span className="label">OUR SERVICES</span>
+            <span className="label">WHAT WE DO</span>
             <h1
               data-cursor="[CAPABILITIES]"
               className="mt-3 text-[clamp(38px,7vw,104px)] font-medium leading-[0.9] tracking-[-0.045em]">
-              WHAT WE DO
+              SERVICES
             </h1>
           </div>
           <div className="col-span-12 lg:col-span-4">

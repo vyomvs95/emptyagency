@@ -1,6 +1,7 @@
 import { MEDIA, FILM, YT } from './media.js'
 import { CASE_STUDIES, FOLDERS, UIUX_CREDIT } from './case-studies.js'
 import { UIUX } from './uiux-media.js'
+import { CGI_FOLDERS, CGI_STUDIES } from './cgi-case-studies.js'
 
 /* ------------------------------------------------------------------ */
 /*  NAVIGATION                                                         */
@@ -12,8 +13,8 @@ import { UIUX } from './uiux-media.js'
  */
 export const ROUTES = [
   { id: 'index', label: 'HOME', tech: 'INDEX', path: '/' },
-  { id: 'archive', label: 'OUR WORK', tech: 'ARCHIVE', path: '/archive' },
-  { id: 'capabilities', label: 'WHAT WE DO', tech: 'CAPABILITIES', path: '/capabilities' },
+  { id: 'archive', label: 'WORK', tech: 'ARCHIVE', path: '/archive' },
+  { id: 'capabilities', label: 'SERVICES', tech: 'CAPABILITIES', path: '/capabilities' },
   { id: 'vision', label: 'ABOUT US', tech: 'VISION', path: '/vision' },
   {
     id: 'initiate',
@@ -38,13 +39,16 @@ export const ROUTE_IDS = ROUTES.map((r) => r.id)
  * `label` is printed; `tech` is the original name, shown in the cursor.
  */
 export const BUCKETS = [
-  { id: 'all', label: 'EVERYTHING', tech: 'SHOW_ALL' },
-  { id: 'videos', label: 'VIDEOS', tech: 'FOOTAGE' },
+  { id: 'all', label: 'ALL WORK', tech: 'SHOW_ALL' },
+  { id: 'uiux', label: 'UI/UX DESIGN', tech: 'INTERFACE' },
+  { id: '3d', label: '3D & CGI', tech: 'RENDER' },
+  { id: 'videos', label: 'FILM', tech: 'FOOTAGE' },
   { id: 'motion', label: 'MOTION', tech: 'KINETIC' },
   { id: 'graphics', label: 'GRAPHICS', tech: 'STATIC' },
-  { id: '3d', label: '3D', tech: 'RENDER' },
-  { id: 'uiux', label: 'UI/UX DESIGN', tech: 'INTERFACE' },
 ]
+
+/** Priority order used everywhere: UI/UX first, then 3D, then the rest. */
+export const PRIORITY = ['uiux', '3d', 'videos', 'motion', 'graphics']
 
 /** Kept for the cursor/filters, which still speak of categories. */
 export const CATEGORIES = BUCKETS
@@ -64,28 +68,31 @@ const yt = (id, caption) => ({ kind: 'youtube', id, caption, w: 1280, h: 720 })
  * project's cover falls through to its first piece that exists.
  */
 const exists = (a) => (a.kind === 'youtube' ? Boolean(a.id) : Boolean(a.src))
-/** The composed cover image of a UI/UX case study. */
-const UIUX_COVER = (slug) => UIUX[slug].cover
+/* ---------------------------- CASE STUDIES ---------------------------- */
+/* UI/UX (case-studies.js) and 3D (cgi-case-studies.js) share one shape. A
+   study's card cover is its `coverAsset` (a film, for 3D) or the composed
+   UI/UX cover image. Folders group several studies for one client or theme. */
+const STUDIES = [...CASE_STUDIES, ...CGI_STUDIES]
+const ALL_FOLDERS = [...FOLDERS, ...CGI_FOLDERS]
+const studyCover = (c) => c.coverAsset ?? img(UIUX[c.slug].cover, 'Cover')
 const csImages = (c) => c.caseStudy.sections.flatMap((sec) => sec.images.map((i) => img(i, i.caption)))
-const CS = Object.fromEntries(CASE_STUDIES.map((c) => [c.slug, c]))
-const IN_FOLDER = new Set(FOLDERS.flatMap((f) => f.children))
+const CS = Object.fromEntries(STUDIES.map((c) => [c.slug, c]))
+const IN_FOLDER = new Set(ALL_FOLDERS.flatMap((f) => f.children))
+const withDefaults = (c) => ({ bucket: 'uiux', credit: UIUX_CREDIT, ...c })
 
-const UIUX_PROJECTS = [
-  ...FOLDERS.map((f) => {
-    const chapters = f.children.map((slug) => ({ ...CS[slug], cover: img(UIUX_COVER(slug), 'Cover') }))
+const CASE_PROJECTS = [
+  ...ALL_FOLDERS.map((f) => {
+    const chapters = f.children.map((slug) => ({ ...withDefaults(CS[slug]), cover: studyCover(CS[slug]) }))
+    const cover = f.coverSlug ? studyCover(CS[f.coverSlug]) : img(UIUX[f.cover].cover, 'Cover')
     return {
-      ...f,
-      bucket: 'uiux',
-      credit: UIUX_CREDIT,
+      ...withDefaults(f),
       chapters,
-      assets: [img(UIUX_COVER(f.cover), 'Cover'), ...chapters.flatMap((c) => [c.cover, ...csImages(c)])],
+      assets: [cover, ...chapters.flatMap((c) => [c.cover, ...csImages(c)])],
     }
   }),
-  ...CASE_STUDIES.filter((c) => !IN_FOLDER.has(c.slug)).map((c) => ({
-    ...c,
-    bucket: 'uiux',
-    credit: UIUX_CREDIT,
-    assets: [img(UIUX_COVER(c.slug), 'Cover'), ...csImages(c)],
+  ...STUDIES.filter((c) => !IN_FOLDER.has(c.slug)).map((c) => ({
+    ...withDefaults(c),
+    assets: [studyCover(c), ...csImages(c)],
   })),
 ].map((p) => ({ ...p, cover: p.assets[0] }))
 
@@ -94,7 +101,7 @@ const project = (p) => {
   return { ...p, assets, cover: assets[0] }
 }
 
-export const PROJECTS = [
+const ALL_PROJECTS = [
   /* ================================ VIDEOS =============================== */
   project({
     slug: 'elf-tamannaah',
@@ -479,8 +486,19 @@ export const PROJECTS = [
      with several products is one folder card (its panel lists chapters);
      everything else is a card of its own. `assets` holds every image so
      counts and the cover work as usual. */
-  ...UIUX_PROJECTS,
+  ...CASE_PROJECTS,
 ]
+
+/** Every project, UI/UX first, then 3D, then film, motion and graphics;
+    within a bucket the strongest case studies lead (RANK). */
+const RANK = [
+  'mswipe', 'v2p', 'enquest-hrms', 'connectify', 'invest-app', 'fuel-card-app', 'ott-app',
+  'all-hub', 'real-estate-visualisation', 'product-films',
+]
+const rank = (p) => (RANK.includes(p.slug) ? RANK.indexOf(p.slug) : RANK.length)
+export const PROJECTS = [...ALL_PROJECTS].sort(
+  (a, b) => PRIORITY.indexOf(a.bucket) - PRIORITY.indexOf(b.bucket) || rank(a) - rank(b)
+)
 
 /* ------------------------------------------------------------------ */
 /*  HOME                                                               */
@@ -490,8 +508,28 @@ const bySlug = Object.fromEntries(PROJECTS.map((p) => [p.slug, p]))
 /** The hero project — in focus at the top of the home page. */
 export const HERO = bySlug['elf-tamannaah']
 
-/** Selected work under it — one per discipline, shown two by two. */
-export const FEATURED = [bySlug.mswipe, bySlug['sony-prime-video'], bySlug['osho-jain'], bySlug.tmc]
+/** Selected work on the home page — UI/UX first, then 3D, then film. */
+export const FEATURED = [
+  bySlug.mswipe,
+  bySlug['enquest-hrms'],
+  bySlug['all-hub'],
+  bySlug['real-estate-visualisation'],
+  bySlug['product-films'],
+  bySlug['elf-tamannaah'],
+]
+
+/**
+ * Industries, as on an agency site — each names only projects that exist
+ * here, and those project cards open straight from the home page.
+ */
+export const INDUSTRIES = [
+  ['FINTECH & PAYMENTS', 'Merchant apps, POS software, payment portals, lending and investing products.', ['mswipe', 'v2p', 'invest-app']],
+  ['ENTERPRISE SOFTWARE', 'HR systems, dashboards and B2B messaging platforms.', ['enquest-hrms', 'connectify']],
+  ['INDUSTRIAL & LOGISTICS', 'Explainer films that make complex operations easy to understand and buy.', ['all-hub']],
+  ['REAL ESTATE', 'Walkthroughs, township films and 3D floor plans for developers.', ['real-estate-visualisation']],
+  ['CONSUMER PRODUCTS', 'CGI launch films for accessories, luggage, watches and hardware.', ['product-films']],
+  ['ENTERTAINMENT & MUSIC', 'Campaign films, artwork and lyric videos for artists, labels and studios.', ['elf-tamannaah', 'sony-prime-video', 'osho-jain']],
+].map(([name, body, slugs]) => ({ name, body, projects: slugs.map((s) => bySlug[s]).filter(Boolean) }))
 
 /* ------------------------------------------------------------------ */
 /*  HOME — brands and FAQ                                             */
@@ -502,8 +540,9 @@ export const FEATURED = [bySlug.mswipe, bySlug['sony-prime-video'], bySlug['osho
  * page says right under the grid.
  */
 export const BRANDS = [
+  'MSWIPE', 'ETISALAT UTAP', 'V2P', 'ENQUEST ERP', 'CONNECTIFY',
+  'AMFICO', 'STUFFCOOL', 'EUME', 'LUCA', 'PROTECTLI',
   'ELF', 'SONY PICTURES', 'BADSHAH', 'VB MUSIC', 'CARRYMINATI',
-  'MSWIPE', 'ETISALAT UTAP', 'ENQUEST ERP', 'CONNECTIFY', 'V2P',
 ]
 
 /**
@@ -514,7 +553,7 @@ export const BRANDS = [
 export const FAQ = [
   [
     'What does empty agency do?',
-    'Four things under one roof: graphic design, video and motion, 3D visuals, and UI/UX design for apps, platforms and websites. Because it is one team, a campaign film, its artwork and the product it points to can be made to feel like one brand.',
+    'UI/UX design for apps, platforms and websites; 3D and CGI — product films, explainers, walkthroughs and renders; and the film, motion and graphic design that launch them. Because it is one team, everything we make for a brand feels like it belongs together.',
   ],
   [
     'How does a project run?',
@@ -566,43 +605,43 @@ export const RIGHTS_NOTICE =
 /*  CAPABILITIES                                                       */
 /* ------------------------------------------------------------------ */
 export const STACK = [
-  { id: 'PHOTOSHOP', name: 'PHOTOSHOP', human: 'Image Editing' },
-  { id: 'ILLUSTRATOR', name: 'ILLUSTRATOR', human: 'Logos & Vector Art' },
+  { id: 'FIGMA', name: 'FIGMA', human: 'UI/UX Design' },
+  { id: 'BLENDER', name: 'BLENDER', human: '3D Modeling' },
   { id: 'AFTER_EFFECTS', name: 'AFTER EFFECTS', human: 'Motion Software' },
   { id: 'PREMIERE_PRO', name: 'PREMIERE PRO', human: 'Video Editing' },
-  { id: 'BLENDER', name: 'BLENDER', human: '3D Modeling' },
-  { id: 'FIGMA', name: 'FIGMA', human: 'UI/UX Design' },
+  { id: 'PHOTOSHOP', name: 'PHOTOSHOP', human: 'Image Editing' },
+  { id: 'ILLUSTRATOR', name: 'ILLUSTRATOR', human: 'Logos & Vector Art' },
 ]
 
 /** `title` is printed; `tech` is the original name, shown in the cursor tag. */
 export const PILLARS = [
   {
     index: '01',
-    title: 'GRAPHIC DESIGN',
-    tech: 'STATIC',
-    body: 'Film and song artwork, thumbnails, social campaigns, posters and logos — built to be recognised at a glance and hold together across every format.',
-    outputs: ['SONG ARTWORK', 'THUMBNAILS', 'SOCIAL POSTS', 'LOGOS'],
+    title: 'UI/UX DESIGN',
+    tech: 'INTERFACE',
+    body: 'Mobile apps, web platforms, dashboards and websites — from research and user flows to wireframes, a design system and developer-ready screens.',
+    outputs: ['MOBILE APPS', 'WEB APPS & DASHBOARDS', 'WEBSITES', 'DESIGN SYSTEMS'],
   },
   {
     index: '02',
+    title: '3D & CGI',
+    tech: 'RENDER',
+    body: 'Product films, industrial explainers, real-estate walkthroughs, 3D floor plans and photoreal renders — so a product or a place can be seen, understood and sold before it exists.',
+    outputs: ['PRODUCT FILMS', 'EXPLAINER FILMS', 'WALKTHROUGHS & FLOOR PLANS', 'PHOTOREAL RENDERS'],
+  },
+  {
+    index: '03',
     title: 'VIDEO & MOTION',
     tech: 'KINETIC',
     body: 'Campaign films and their cut-downs, showreels, event films, lyric videos and motion graphics — edited for the screen they will be watched on.',
     outputs: ['CAMPAIGN FILMS', 'SHOWREELS & EVENTS', 'LYRIC VIDEOS', 'MOTION GRAPHICS'],
   },
   {
-    index: '03',
-    title: '3D VISUALS',
-    tech: 'RENDER',
-    body: 'Photoreal renders of interiors, architecture and products, so decisions can be made before anything is built.',
-    outputs: ['INTERIORS', 'ARCHITECTURE', 'PRODUCTS', 'CONCEPT RENDERS'],
-  },
-  {
     index: '04',
-    title: 'UI/UX DESIGN',
-    tech: 'INTERFACE',
-    body: 'Mobile apps, web platforms, dashboards and websites — from research and user flows to wireframes, a design system and developer-ready screens.',
-    outputs: ['MOBILE APPS', 'WEB APPS & DASHBOARDS', 'WEBSITES', 'DESIGN SYSTEMS'],
+    title: 'GRAPHIC DESIGN',
+    tech: 'STATIC',
+    body: 'Film and song artwork, thumbnails, social campaigns, posters and logos — built to be recognised at a glance and hold together across every format.',
+    outputs: ['SONG ARTWORK', 'THUMBNAILS', 'SOCIAL POSTS', 'LOGOS'],
   },
 ]
 
@@ -634,7 +673,7 @@ export const PIPELINE = [
 /*  MISC                                                               */
 /* ------------------------------------------------------------------ */
 export const MARQUEE_TEXT =
-  '// FILM // MOTION // GRAPHIC DESIGN // 3D VISUALS // UI/UX DESIGN // WE CLEAR THE CLUTTER '
+  '// UI/UX DESIGN // 3D & CGI // FILM // MOTION // GRAPHIC DESIGN // WE CLEAR THE CLUTTER '
 
 /** The studio's one inbox. Shown on the site and where every enquiry lands. */
 export const EMAIL = 'marketing@emptyagency.com'

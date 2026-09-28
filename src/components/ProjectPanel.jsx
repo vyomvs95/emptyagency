@@ -153,7 +153,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
           <div className="sticky top-0 z-10 border-b border-hair bg-void/90 backdrop-blur-[6px]">
             <div className="gutter mx-auto flex h-[58px] w-full max-w-[1680px] items-center justify-between gap-4">
               <span className="label hidden truncate sm:inline">
-                OUR WORK // {BUCKET[project.bucket].label} // PROJECT{' '}
+                WORK // {BUCKET[project.bucket].label} // PROJECT{' '}
                 {String(index + 1).padStart(2, '0')} OF {String(PROJECTS.length).padStart(2, '0')}
               </span>
               <div className="flex items-center gap-2">
@@ -208,7 +208,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
                     ...(study ? [['PLATFORM', project.platform ?? project.caseStudy.platform]] : []),
                     ['WHAT WE DID', project.role],
                     ...(chapters ? [['CASE STUDIES', String(chapters.length).padStart(2, '0')]] : []),
-                    [study ? 'SCREENS & BOARDS' : 'PIECES', String(project.assets.length).padStart(2, '0')],
+                    [study ? (project.bucket === '3d' ? 'FILMS & STILLS' : 'SCREENS & BOARDS') : 'PIECES', String(project.assets.length).padStart(2, '0')],
                     ['CREDIT', project.credit],
                     ...(project.agency ? [['VIA', project.agency]] : []),
                   ].map(([k, v]) => (

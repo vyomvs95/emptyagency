@@ -126,6 +126,9 @@ ELF project). After that, put the "watch the full film" wording back on the hero
 button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 
 ### 2. Waiting on the owner
+- [ ] **3D work — confirm credits and clients:** who made the 3D films (credited
+      `EMPTY AGENCY CORE TEAM` for now), whether AMFICO, Stuffcool, EUME, Clear X, LUCA,
+      Protectli, Cougar and Romaa Majestic can be named, and the brand behind Clear X.
 - [ ] **UI/UX case studies — confirm before go-live:** that every piece may be shown
       publicly (several are for Mswipe / Etisalat UTap and may be under NDA); the
       client names; whether the "undisclosed" ones can be named; and any results
@@ -188,6 +191,23 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 ---
 
 ## Session history
+
+**29 Sep 2026 (later)**
+9. **Agency structure, priority UI/UX → 3D → film/motion/graphics everywhere**: buckets,
+   project order (`PRIORITY` + `RANK` in site.js), services, tools, marquee, home.
+   Nav renamed WORK / SERVICES. Home: statement + buttons (incl. **"Who we are — our
+   vision"** → About Us), selected work (Mswipe, enQuest, All Hub, real estate, product
+   films, ELF), services, **industries** (each links to its projects), brands, FAQ.
+   The big ELF hero block is gone — ELF is now the last selected-work card.
+   **Vision / About Us copy untouched.**
+10. **3D & CGI case studies** from Drive folder `1L4RNthvL6RFFXmbCN5nSccqtZe8jGNDO`
+    (`src/lib/cgi-case-studies.js`, media `public/media/cgi/`, registry `cgi-media.js`, ~97 MB):
+    All Hub (AMFICO ISO-tank depot explainer, cut into 6 chapter clips), Real estate
+    (2BHK walkthrough, Romaa Majestic township, 3D floor plans), and a **Product films**
+    folder: Clear X, EUME Cabin Pro, Stuffcool (7 films), Product CGI (LUCA, Protectli,
+    Cougar, a wine spot, Mswipe device). Case studies can now play films (`kind: 'video'`).
+    Not used: the Dispatch EV pitch video (real people and LinkedIn names on screen), and an
+    early low-res luggage cut (same product as EUME).
 
 **29 Sep 2026**
 6. **Content and flow, after clay.global** (design unchanged): the home page now runs
