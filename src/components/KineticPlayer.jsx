@@ -37,7 +37,7 @@ function timecode(seconds) {
 
 /* Shared: greyscale by default, full colour while the frame is hovered. */
 const MEDIA_FILTER =
-  'h-full w-full grayscale transition-[filter,transform] duration-[600ms] ease-out group-hover:grayscale-0'
+  'media-rest h-full w-full grayscale transition-[filter,transform] duration-[600ms] ease-out group-hover:grayscale-0'
 
 /**
  * POSTER FRAME

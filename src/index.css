@@ -288,6 +288,23 @@
   opacity: 0;
 }
 
+/* Touch screens have no hover, so the monochrome rest state would never
+   lift. Phones and tablets show the work in full colour, with no screen or
+   scaffold over it; desktop keeps the reveal on hover. */
+@media (hover: none) {
+  .poster-plate {
+    opacity: 1;
+    filter: none;
+  }
+  .poster-screen,
+  .poster-wire {
+    opacity: 0;
+  }
+  .media-rest {
+    filter: none !important;
+  }
+}
+
 /* A hairline inner edge keeps the plate seated inside its frame. */
 .poster-edge {
   box-shadow: inset 0 0 0 1px var(--c-hair-soft);

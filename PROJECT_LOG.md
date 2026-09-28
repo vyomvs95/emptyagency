@@ -157,6 +157,14 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 
 ## Decisions worth remembering
 
+- **Portfolio is a living set (29 Sep).** As new projects come in, each gets a full case
+  study (brief, process, outcome with real numbers or quotes where the client allows),
+  and older or weaker pieces are retired. Aim over time for proof: outcomes, testimonials,
+  permission to name clients.
+- **Colour on touch, reveal on hover (29 Sep).** Desktop keeps the monochrome wireframe
+  rest state that lifts on hover; phones and tablets (`@media (hover: none)`) show the
+  work in full colour with no overlay.
+
 - **YouTube stays as YouTube ships it.** The owner asked to hide YouTube's
   branding and channel name. YouTube's embed terms forbid covering or restyling
   the player, so pieces play in the panel with YouTube's standard player. The
