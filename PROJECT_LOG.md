@@ -215,7 +215,8 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
   ● empty agency in Space Grotesk, a blue Figma-style selection box with anchor handles
   snaps around it every ~4 s; `signature-logo.png` = static fallback). The signature loads
   the GIF from that URL, so **keep `construction/mail/` (or move it to `public/`) when the
-  site goes live at the root**.
+  site goes live at the root**. Installed in Titan (marketing@emptyagency.com) on 29 Sep as
+  signature "empty agency", default for new mail and replies; the old "Vyom" one is kept.
 
 - **ffmpeg:** `python3 -c "import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())"`
   (installed via pip). Pass as `FFMPEG=...` to `encode-film.sh` / `gen-films.py`.
