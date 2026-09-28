@@ -455,32 +455,6 @@ const ALL_PROJECTS = [
     ],
   }),
 
-  /* ================================== 3D ================================= */
-  project({
-    slug: 'interior-visualisation',
-    bucket: '3d',
-    title: 'INTERIOR VISUALISATION',
-    client: 'RESIDENTIAL CONCEPTS',
-    role: 'Photoreal renders of interior concepts.',
-    summary: 'Interior concepts rendered before anything is built — bedrooms, a kitchen and kids’ rooms.',
-    credit: UMAR,
-    assets: [
-      img(MEDIA.oceanBedroom, 'Ocean-floor bedroom'),
-      img(MEDIA.redKitchen, 'Red kitchen'),
-      img(MEDIA.babyRoom, 'Baby room'),
-      img(MEDIA.kidsRoom, 'Kids’ room'),
-    ],
-  }),
-  project({
-    slug: 'architecture-product',
-    bucket: '3d',
-    title: 'ARCHITECTURE & PRODUCT RENDERS',
-    client: 'CONCEPT WORK',
-    role: 'Exterior and product renders.',
-    summary: 'An exterior render of a roadside restaurant, and a product render of a sofa.',
-    credit: UMAR,
-    assets: [img(MEDIA.dhaba, 'Dhaba — exterior'), img(MEDIA.sofaRender, 'Sofa — product render')],
-  }),
   /* ============================= UI/UX DESIGN ============================ */
   /* Long-form case studies — content lives in case-studies.js. A client
      with several products is one folder card (its panel lists chapters);

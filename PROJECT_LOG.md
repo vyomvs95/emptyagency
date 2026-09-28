@@ -50,8 +50,8 @@ process, real outcome/quote where the client allows) and weaker older pieces are
   first, on purpose) → marquee → Selected work (Mswipe, enQuest, All Hub, Real estate,
   Product films, Sony) → Services → Industries (each links to its projects) → Brands
   (15 names) → FAQ → "Let's talk".
-- **Work:** **34 cards** in 5 buckets — UI/UX 7 · 3D & CGI 5 · Film 10 · Motion 6 ·
-  Graphics 6 — in an even 4:3 grid that reads left to right in priority order. A card
+- **Work:** **32 cards** in 5 buckets — UI/UX 7 · 3D & CGI 3 · Film 10 · Motion 6 ·
+  Graphics 6 — in an even 4:3 grid (3D & CGI is now 3) that reads left to right in priority order. A card
   opens the project panel (`#/archive/<slug>`); case studies open as long-form pages,
   **folders** (Mswipe, V2P, Product films) list chapters.
 - **Contact:** `marketing@emptyagency.com` is the **only** inbox (footer shows only that —
@@ -233,6 +233,9 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 ## Session history
 
 **29 Sep 2026 (latest)**
+13. Removed the two old 3D projects (Interior visualisation, Architecture & product
+    renders) and their six images — owner found them too kiddish. 3D & CGI now = All Hub,
+    Real estate, Product films folder.
 12. Rights notice cut to three short sentences with no personal or agency names (only
     "in association with World Style"), shown **once per page, in the footer** — removed from
     Work, the project panel and the home brands grid. Footer socials removed (email only;

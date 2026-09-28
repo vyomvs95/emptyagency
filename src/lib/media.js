@@ -82,12 +82,6 @@ export const MEDIA = {
   ranveerDecade: video('videos/ranveer-singh-decade', 608, 1080),
 
   /* --------------------------------- 3D -------------------------------- */
-  oceanBedroom: image('3d/ocean-bedroom', 1280, 720),
-  redKitchen: image('3d/red-kitchen', 1280, 720),
-  babyRoom: image('3d/baby-room', 1280, 720),
-  dhaba: image('3d/dhaba', 1280, 720),
-  kidsRoom: image('3d/kids-room', 1280, 720),
-  sofaRender: image('3d/sofa-render', 640, 480),
 }
 
 /* ------------------------------------------------------------------ */
