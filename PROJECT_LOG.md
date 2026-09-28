@@ -210,6 +210,13 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 
 ## Tools and gotchas
 
+- **Email signature (Titan):** `construction/mail/` → served at `www.emptyagency.com/mail/`
+  (`signature.html` = copy-paste page with install steps; `signature-logo.gif` = animated
+  ● empty agency in Space Grotesk, a blue Figma-style selection box with anchor handles
+  snaps around it every ~4 s; `signature-logo.png` = static fallback). The signature loads
+  the GIF from that URL, so **keep `construction/mail/` (or move it to `public/`) when the
+  site goes live at the root**.
+
 - **ffmpeg:** `python3 -c "import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())"`
   (installed via pip). Pass as `FFMPEG=...` to `encode-film.sh` / `gen-films.py`.
 - **3D media** lives in `public/media/cgi/` with its own registry `src/lib/cgi-media.js`
