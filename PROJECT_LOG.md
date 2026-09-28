@@ -6,14 +6,14 @@ and what is still open.** Newest session at the top.
 
 ---
 
-## Current state — 28 Sep 2026
+## Current state — 29 Sep 2026
 
 | | |
 |---|---|
 | Live domain | `www.emptyagency.com` → **under-construction page** (`construction/index.html`) |
 | Work in progress | `www.emptyagency.com/mockup` → the full React site, **deployed for review** |
-| Last deployed commit | see *Session history* — 28 Sep: UI/UX case studies, dots removed |
-| Deploy | `git push origin main` → Vercel auto-deploys in ~1 min. No Vercel CLI needed. |
+| Last deployed commit | `7cba8ed` — colour on touch devices (all 29 Sep work is live) |
+| Deploy | `git push origin main` → Vercel auto-deploys in ~1 min. No Vercel CLI needed. Push with `GIT_SSH_COMMAND="ssh -o BatchMode=yes"` — a plain push once hung for 7 min at SSH. |
 | Repo | `github.com/vyomvs95/emptyagency` (SSH) |
 | Stack | React 19 · JavaScript (JSX, not TypeScript) · Tailwind 4 · Framer Motion · Vite |
 
@@ -22,26 +22,45 @@ stays the holding page until they say "go live" (steps in README → *Going live
 
 ---
 
+## The concept — do not change
+
+The **greyscale wireframe rest state** (monochrome plate, dot screen, scaffold lines,
+colour on hover) is the owner's personal identity and the story behind the studio.
+It stays, even as the studio grows. Improve *within* it; never suggest dropping it.
+Touch devices show full colour (no hover exists there); desktop keeps the reveal.
+White theme is the default on load; black is a toggle.
+
+**Ownership:** the owner (Vyom Shah) owns empty agency outright. World Style is a
+partner for bringing in projects, not a co-owner.
+
+**Portfolio plan:** a living set — each new project gets a full case study (brief,
+process, real outcome/quote where the client allows) and weaker older pieces are retired.
+
+---
+
 ## What the site is now
 
-- **Positioning:** a studio for **video, motion, graphic design, 3D and UI/UX design**.
-  UI/UX came back in on 28 Sep with Vyom Shah's product work (see below).
-- **Pages:** Home · Our Work · What We Do · About Us (Vision, **copy is the owner's —
-  don't rewrite it**) · Start a Project.
-- **Copy rule:** the UI prints plain English (HOME, OUR WORK…). Hovering shows the
-  original studio name in the cursor tag (INDEX, ARCHIVE…), from the `tech` fields
-  in `src/lib/site.js`.
-- **Home hero:** headline on the left, studio info on the right. Below it is the
-  **hero project, ELF × Tamannaah**, with 3 featured projects (TMC, Osho Jain, Sony).
-- **Our Work:** **31 cards** in 5 buckets, **Videos 10 · Motion 6 · Graphics 6 ·
-  3D 2 · UI/UX Design 7** (2 client folders + 5 single case studies). Each piece is in exactly one project and nothing is duplicated. A card opens
-  the **project panel**, deep-linkable as `#/archive/<slug>`.
-- **Contact:** `marketing@emptyagency.com` is the **only** inbox. It's on Start a
-  Project and in the footer. The form (name, email, need, budget) sends through
-  **FormSubmit** to that inbox.
-- **Credits & rights:** every card shows who made it (`DESIGN: UMAR KHAN / WORLD STYLE`
-  or `EMPTY AGENCY CORE TEAM`) and the agency (`VIA ONE DIGITAL ENTERTAINMENT`)
-  where relevant. `RIGHTS_NOTICE` appears on Our Work and in the footer.
+- **Positioning:** "We clear the clutter. You get the results." — a **UI/UX and 3D design
+  studio**, then film, motion and graphics. **Priority UI/UX → 3D → film/motion/graphics**
+  is applied everywhere (`PRIORITY` + `RANK` in `site.js`).
+- **Nav:** Home · Work · Services · About Us (Vision — **copy is the owner's, never
+  rewrite**) · Start a Project. Cursor tags still show the technical names (`tech` fields).
+- **Home, in order:** headline + buttons (Start a project · See our work · **Who we are —
+  our vision** → About Us) → **ELF × Tamannaah master film** as hero piece (celebrity work
+  first, on purpose) → marquee → Selected work (Mswipe, enQuest, All Hub, Real estate,
+  Product films, Sony) → Services → Industries (each links to its projects) → Brands
+  (15 names) → FAQ → "Let's talk".
+- **Work:** **34 cards** in 5 buckets — UI/UX 7 · 3D & CGI 5 · Film 10 · Motion 6 ·
+  Graphics 6 — in an even 4:3 grid that reads left to right in priority order. A card
+  opens the project panel (`#/archive/<slug>`); case studies open as long-form pages,
+  **folders** (Mswipe, V2P, Product films) list chapters.
+- **Contact:** `marketing@emptyagency.com` is the **only** inbox (footer shows only that —
+  socials removed). Form sends through **FormSubmit**.
+- **Rights notice:** 3 short sentences, no personal/agency names ("in association with
+  World Style"), shown **once per page — footer only**. Card credit lines still carry names
+  (`DESIGN: UMAR KHAN / WORLD STYLE`, `UI/UX DESIGN: VYOM SHAH`, `VIA ONE DIGITAL
+  ENTERTAINMENT`) — owner has been asked whether to change them too; no answer yet.
+- **Background:** light dot matrix only (no column lines, no horizon rule).
 
 ### UI/UX case studies (added 28 Sep)
 
@@ -147,6 +166,11 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
       Vimeo, so full versions can replace the ~45 s excerpts.
 
 ### 3. Known gaps
+- Film, motion and graphics projects are galleries, not case studies — their source
+  folders hold only finished pieces. Owner to send a few lines of brief/role for the key
+  ones (ELF, Sony, Osho Jain, TMC) to turn them into case studies. Don't invent them.
+- Nothing shows outcomes, testimonials or a team yet — the biggest credibility gap vs
+  established agencies (see the 29 Sep rating discussion). Add as real data arrives.
 - The YouTube link `jQiC5r0n7JI` (a Jumanji promo) has embedding disabled by its
   owner, so it can't be shown.
 - The per-client folders in Drive folder 3 (~90 folders) were only sampled.
@@ -184,6 +208,14 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 ---
 
 ## Tools and gotchas
+
+- **ffmpeg:** `python3 -c "import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())"`
+  (installed via pip). Pass as `FFMPEG=...` to `encode-film.sh` / `gen-films.py`.
+- **3D media** lives in `public/media/cgi/` with its own registry `src/lib/cgi-media.js`
+  (films.js marks everything non-ELF as an excerpt, so 3D films are kept separate).
+- **Figma → site images:** open the file in Chrome, select a section, *Copy as PNG*
+  (⇧⌘C, up to 2×), save the clipboard PNG, split frames by background/alpha gaps,
+  compose to WebP. The Figma MCP needs OAuth and wasn't used.
 
 - `scripts/media/drive-list.py <folder-id>…` lists a public Drive folder
   recursively with sizes, without downloading anything.
