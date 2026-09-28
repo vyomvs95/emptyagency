@@ -1,5 +1,5 @@
 import { MEDIA, FILM, YT } from './media.js'
-import { CASE_STUDIES, UIUX_CREDIT } from './case-studies.js'
+import { CASE_STUDIES, FOLDERS, UIUX_CREDIT } from './case-studies.js'
 import { UIUX } from './uiux-media.js'
 
 /* ------------------------------------------------------------------ */
@@ -66,6 +66,28 @@ const yt = (id, caption) => ({ kind: 'youtube', id, caption, w: 1280, h: 720 })
 const exists = (a) => (a.kind === 'youtube' ? Boolean(a.id) : Boolean(a.src))
 /** The composed cover image of a UI/UX case study. */
 const UIUX_COVER = (slug) => UIUX[slug].cover
+const csImages = (c) => c.caseStudy.sections.flatMap((sec) => sec.images.map((i) => img(i, i.caption)))
+const CS = Object.fromEntries(CASE_STUDIES.map((c) => [c.slug, c]))
+const IN_FOLDER = new Set(FOLDERS.flatMap((f) => f.children))
+
+const UIUX_PROJECTS = [
+  ...FOLDERS.map((f) => {
+    const chapters = f.children.map((slug) => ({ ...CS[slug], cover: img(UIUX_COVER(slug), 'Cover') }))
+    return {
+      ...f,
+      bucket: 'uiux',
+      credit: UIUX_CREDIT,
+      chapters,
+      assets: [img(UIUX_COVER(f.slug), 'Cover'), ...chapters.flatMap((c) => [c.cover, ...csImages(c)])],
+    }
+  }),
+  ...CASE_STUDIES.filter((c) => !IN_FOLDER.has(c.slug)).map((c) => ({
+    ...c,
+    bucket: 'uiux',
+    credit: UIUX_CREDIT,
+    assets: [img(UIUX_COVER(c.slug), 'Cover'), ...csImages(c)],
+  })),
+].map((p) => ({ ...p, cover: p.assets[0] }))
 
 const project = (p) => {
   const assets = p.assets.filter(exists)
@@ -453,20 +475,11 @@ export const PROJECTS = [
     assets: [img(MEDIA.dhaba, 'Dhaba — exterior'), img(MEDIA.sofaRender, 'Sofa — product render')],
   }),
   /* ============================= UI/UX DESIGN ============================ */
-  /* Long-form case studies — content lives in case-studies.js. The card
-     shows the cover; the panel renders `caseStudy` as a scrolling page.
-     `assets` holds every image so counts and the cover work as usual. */
-  ...CASE_STUDIES.map((c) =>
-    project({
-      ...c,
-      bucket: 'uiux',
-      credit: UIUX_CREDIT,
-      assets: [
-        img(UIUX_COVER(c.slug), 'Cover'),
-        ...c.caseStudy.sections.flatMap((sec) => sec.images.map((i) => img(i, i.caption))),
-      ],
-    })
-  ),
+  /* Long-form case studies — content lives in case-studies.js. A client
+     with several products is one folder card (its panel lists chapters);
+     everything else is a card of its own. `assets` holds every image so
+     counts and the cover work as usual. */
+  ...UIUX_PROJECTS,
 ]
 
 /* ------------------------------------------------------------------ */

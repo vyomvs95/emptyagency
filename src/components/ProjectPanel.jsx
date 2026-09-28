@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import CaseStudy from './CaseStudy.jsx'
 import Frame from './Frame.jsx'
@@ -89,8 +89,24 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
   const index = PROJECTS.findIndex((p) => p.slug === slug)
   const project = PROJECTS[index]
   const [active, setActive] = useState(0)
+  const [chapter, setChapter] = useState(0)
+  const sheet = useRef(null)
 
-  useEffect(() => setActive(0), [slug])
+  useEffect(() => {
+    setActive(0)
+    setChapter(0)
+  }, [slug])
+
+  const openChapter = (i) => setChapter(i)
+
+  // Every project and every chapter starts at the top of the sheet.
+  useEffect(() => {
+    if (sheet.current) sheet.current.scrollTop = 0
+  }, [slug, chapter])
+
+  // A folder (several case studies for one client) or a single case study.
+  const chapters = project?.chapters
+  const study = chapters ? chapters[chapter] : project?.caseStudy ? project : null
 
   // Lock page scroll underneath while open.
   useEffect(() => {
@@ -106,7 +122,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
     if (!project) return
     const onKey = (e) => {
       if (e.key === 'Escape') onClose()
-      if (project.caseStudy) return
+      if (project.caseStudy || project.chapters) return
       if (e.key === 'ArrowRight') setActive((i) => (i + 1) % project.assets.length)
       if (e.key === 'ArrowLeft')
         setActive((i) => (i - 1 + project.assets.length) % project.assets.length)
@@ -123,6 +139,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
       {project && (
         <motion.div
           key="panel"
+          ref={sheet}
           role="dialog"
           aria-modal="true"
           aria-label={project.title}
@@ -176,6 +193,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
                 <span className="label">
                   {BUCKET[project.bucket].label}
                   {project.caseStudy && ' // CASE STUDY'}
+                  {chapters && ` // FOLDER // ${String(chapters.length).padStart(2, '0')} CASE STUDIES`}
                 </span>
                 <h2 className="mt-3 text-[clamp(30px,4.2vw,64px)] font-medium leading-[0.95] tracking-[-0.04em]">
                   {project.title}
@@ -187,9 +205,10 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
                 <div className="mt-8 flex flex-col border-t border-hair">
                   {[
                     ['CLIENT', project.client],
-                    ...(project.caseStudy ? [['PLATFORM', project.caseStudy.platform]] : []),
+                    ...(study ? [['PLATFORM', project.platform ?? project.caseStudy.platform]] : []),
                     ['WHAT WE DID', project.role],
-                    [project.caseStudy ? 'SCREENS & BOARDS' : 'PIECES', String(project.assets.length).padStart(2, '0')],
+                    ...(chapters ? [['CASE STUDIES', String(chapters.length).padStart(2, '0')]] : []),
+                    [study ? 'SCREENS & BOARDS' : 'PIECES', String(project.assets.length).padStart(2, '0')],
                     ['CREDIT', project.credit],
                     ...(project.agency ? [['VIA', project.agency]] : []),
                   ].map(([k, v]) => (
@@ -212,13 +231,64 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
 
               {/* STAGE + STRIP — or, for UI/UX work, the long-form case study */}
               <div className="col-span-12 lg:col-span-8">
-                {project.caseStudy ? (
-                  <CaseStudy project={project} />
+                {chapters && (
+                  <nav aria-label="Case studies in this folder" className="mb-12">
+                    <span className="label label-ink">IN THIS FOLDER</span>
+                    <ol className="mt-3 grid grid-cols-1 border-t border-hair sm:grid-cols-2">
+                      {chapters.map((c, i) => (
+                        <li key={c.slug} className="border-b border-hair-soft sm:odd:border-r sm:odd:pr-4 sm:even:pl-4">
+                          <button
+                            type="button"
+                            onClick={() => openChapter(i)}
+                            data-cursor={`[${c.title}]`}
+                            aria-current={i === chapter ? 'true' : undefined}
+                            className="flex w-full items-baseline gap-3 py-[10px] text-left transition-colors duration-200 hover:text-[var(--c-accent)]"
+                            style={{ color: i === chapter ? 'var(--c-accent)' : undefined }}
+                          >
+                            <span className="label tnum shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                            <span className="text-[12px] font-medium uppercase leading-[1.35] tracking-[0.04em]">
+                              {c.title}
+                            </span>
+                          </button>
+                        </li>
+                      ))}
+                    </ol>
+                  </nav>
+                )}
+
+                {study ? (
+                  <>
+                    {chapters && (
+                      <div className="mb-8">
+                        <span className="label tnum">
+                          CASE STUDY {String(chapter + 1).padStart(2, '0')} OF {String(chapters.length).padStart(2, '0')} // {study.caseStudy.platform}
+                        </span>
+                        <h3 className="mt-3 text-[clamp(26px,3vw,44px)] font-medium leading-[0.98] tracking-[-0.035em]">
+                          {study.title}
+                        </h3>
+                        <p className="mt-4 max-w-[62ch] text-[15px] leading-[1.55] lowercase text-muted">{study.summary}</p>
+                      </div>
+                    )}
+                    <CaseStudy key={study.slug} project={chapters ? { ...study, assets: [study.cover] } : project} />
+                    {chapters && chapter < chapters.length - 1 && (
+                      <button
+                        type="button"
+                        onClick={() => openChapter(chapter + 1)}
+                        data-cursor="[NEXT CASE STUDY]"
+                        className="mt-16 flex w-full items-baseline justify-between gap-6 border-t border-hair pt-5 text-left transition-colors duration-200 hover:text-[var(--c-accent)]"
+                      >
+                        <span className="label">NEXT IN THIS FOLDER</span>
+                        <span className="text-[clamp(18px,2vw,28px)] font-medium uppercase tracking-[-0.02em]">
+                          {chapters[chapter + 1].title} →
+                        </span>
+                      </button>
+                    )}
+                  </>
                 ) : (
                   <Stage asset={project.assets[active]} />
                 )}
 
-                {!project.caseStudy && project.assets.length > 1 && (
+                {!study && project.assets.length > 1 && (
                   <div className="mt-12">
                     <div className="flex items-center justify-between border-b border-hair-soft pb-[6px]">
                       <span className="label label-ink">EVERY PIECE IN THIS PROJECT</span>

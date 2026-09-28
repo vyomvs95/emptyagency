@@ -17,7 +17,7 @@ import WireframePoster from './WireframePoster.jsx'
  * All of it is driven by the `group` class <Frame /> puts on the
  * bounding box — see `.poster-*` in index.css. No state, no JS.
  */
-export default function PosterImage({ src, alt = '', onError, className = '' }) {
+export default function PosterImage({ src, alt = '', onError, onLoad, className = '' }) {
   return (
     <div className={`relative h-full w-full overflow-hidden ${className}`}>
       <img
@@ -26,6 +26,7 @@ export default function PosterImage({ src, alt = '', onError, className = '' }) 
         draggable={false}
         loading="lazy"
         onError={onError}
+        onLoad={onLoad}
         className="poster-plate h-full w-full object-cover"
       />
       <span aria-hidden className="poster-screen pointer-events-none absolute inset-0" />

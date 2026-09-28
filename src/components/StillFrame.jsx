@@ -56,10 +56,20 @@ export default function StillFrame({
           src={src}
           alt={alt}
           // e.g. a YouTube upload with no maxres still: drop to hqdefault once.
+          // YouTube answers a missing maxres with a 120×90 grey placeholder
+          // (not always an error), so a too-small image counts as missing too.
           onError={
             fallback
               ? (e) => {
                   if (e.currentTarget.src !== fallback) e.currentTarget.src = fallback
+                }
+              : undefined
+          }
+          onLoad={
+            fallback
+              ? (e) => {
+                  const im = e.currentTarget
+                  if (im.naturalWidth <= 120 && im.src !== fallback) im.src = fallback
                 }
               : undefined
           }

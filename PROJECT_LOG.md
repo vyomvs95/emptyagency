@@ -33,8 +33,8 @@ stays the holding page until they say "go live" (steps in README → *Going live
   in `src/lib/site.js`.
 - **Home hero:** headline on the left, studio info on the right. Below it is the
   **hero project, ELF × Tamannaah**, with 3 featured projects (TMC, Osho Jain, Sony).
-- **Our Work:** **36 projects** in 5 buckets, **Videos 10 · Motion 6 · Graphics 6 ·
-  3D 2 · UI/UX Design 12**. Each piece is in exactly one project and nothing is duplicated. A card opens
+- **Our Work:** **31 cards** in 5 buckets, **Videos 10 · Motion 6 · Graphics 6 ·
+  3D 2 · UI/UX Design 7** (2 client folders + 5 single case studies). Each piece is in exactly one project and nothing is duplicated. A card opens
   the **project panel**, deep-linkable as `#/archive/<slug>`.
 - **Contact:** `marketing@emptyagency.com` is the **only** inbox. It's on Start a
   Project and in the footer. The form (name, email, need, budget) sends through
@@ -45,22 +45,28 @@ stays the holding page until they say "go live" (steps in README → *Going live
 
 ### UI/UX case studies (added 28 Sep)
 
-Twelve case studies, one per page of the Figma file **"Vyom Shah"**
-(`figma.com/design/VYuIuAtGLVVaaMT1OAhEPP`), credited `UI/UX DESIGN: VYOM SHAH`:
-Invest (mutual fund & SIP app) · Business loan app · Merchant onboarding (POS device) ·
-POS merchant app · Merchant rewards (scratch cards) · V2P vendor payments portal ·
-Connectify (WhatsApp commerce: web, app, website) · Field app for fuel cards ·
-Mswipe website (India & UAE) · UTap merchant portal & terminal app · OTT streaming app ·
-Mswipe emailers.
+Fourteen case studies from three Figma files — **"Vyom Shah"** (12 pages),
+**"Vyoms UI Design"** (enQuest HR) and **"V2 - V2P"** (V2P version 2), all credited
+`UI/UX DESIGN: VYOM SHAH`. The team folder's third file, "VS", is an older copy of
+the HR screens and adds nothing new.
 
-- Text is in `src/lib/case-studies.js` and describes only what the screens show —
-  no metrics, dates or outcomes. Add those only if the owner supplies them.
+On Our Work they show as **7 cards**. A client with several products is one
+**folder** card, and its panel lists chapters, each a full case study:
+- **Mswipe** folder (7): merchant onboarding · POS merchant app · scratch-card rewards ·
+  business loan · UTap portal & terminal app (Etisalat UTap is Mswipe's UAE partnership) ·
+  website India & UAE · emailers
+- **V2P** folder (2): V2P 2.0 (onboarding, invoices, payments, GST) · vendor portal v1
+- Singles: Connectify · enQuest HRMS · Invest (SIP app) · fuel-card field app · OTT app
+
+- Text is in `src/lib/case-studies.js` (`CASE_STUDIES` + `FOLDERS`) and describes only
+  what the screens show — no metrics, dates or outcomes.
 - Clients are named only where the brand is on the screens (Mswipe, Etisalat UTap,
-  Connectify, V2P). The rest say `UNDISCLOSED CLIENT` or `CONCEPT WORK`.
+  Connectify, V2P, enQuest ERP). The loan app is in the Mswipe folder because its
+  screens say "Ease your repayments with Mswipe".
 - **How the images were made:** each Figma section was selected in Chrome and copied
-  with *Copy as PNG* (⇧⌘C, exports at up to 2×), saved from the clipboard, split into
-  screens by detecting frame edges, composed into strips and covers, and saved as WebP
-  (~8 MB total). The helper scripts were throwaway; to redo, repeat that process.
+  with *Copy as PNG* (⇧⌘C), saved from the clipboard, split into screens by detecting
+  frame edges or transparent gaps, composed into strips, grids and covers, and saved
+  as WebP (~10 MB total). The helper scripts were throwaway.
 
 ### Where the work came from
 
@@ -180,6 +186,15 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 ---
 
 ## Session history
+
+**28 Sep 2026 (later)**
+3. Background: dots back but lighter (`--c-grid` at half strength); the vertical
+   12-column lines are gone. The horizontal centre rule stays.
+4. Fixed the blank TMC thumbnail on the home page: YouTube has no maxres still for
+   that video and answers with a 120×90 placeholder instead of an error, so
+   `StillFrame` now also falls back when the image loads that small.
+5. Added enQuest HRMS and V2P 2.0 from the Figma team folder, and grouped the UI/UX
+   work into client folders (Mswipe, V2P) with a chapter list in the panel.
 
 **28 Sep 2026**
 1. Removed the black dot matrix from the page background (`GridCanvas.jsx`).

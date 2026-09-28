@@ -69,7 +69,7 @@ export const CASE_STUDIES = [
   {
     slug: 'loan-app',
     title: 'BUSINESS LOAN — APPLY IN MINUTES',
-    client: 'UNDISCLOSED CLIENT',
+    client: 'MSWIPE',
     role: 'End-to-end loan journey for small merchants: apply, KYC, sanction and repayment.',
     summary:
       'A mobile flow that takes a shop owner from “how much can I borrow?” to a sanctioned loan, with KYC split into three short steps and repayment tied to their payment device.',
@@ -526,5 +526,157 @@ export const CASE_STUDIES = [
       ],
       deliverables: ['4 EMAILERS', 'MOBILE + DESKTOP'],
     },
+  },
+  /* ------------------------------------------------------------------ */
+  {
+    slug: 'v2p-platform',
+    title: 'V2P 2.0 — ONBOARDING, INVOICES & PAYMENTS',
+    client: 'V2P',
+    role: 'Second version of the V2P portal: a new login and onboarding, invoice approval, payments and GST.',
+    summary:
+      'The next version of the V2P B2B payments portal — a redesigned sign-in and company onboarding, then the full invoice-to-payment loop with credit, card payments and GST challans.',
+    caseStudy: {
+      platform: 'WEB · DESKTOP',
+      scope: ['ONBOARDING FLOW', 'PAYMENT FLOWS', 'MODALS & STATES', 'HI-FI UI'],
+      brief:
+        'Version one proved the idea. Version two had to onboard whole companies — GSTIN, partners, CIN, users — and take an invoice all the way to a paid receipt without leaving the portal.',
+      sections: [
+        {
+          kicker: 'SIGN IN',
+          title: 'Email or mobile, then one OTP',
+          body: 'A split screen keeps a rotating brand message and illustration on the left — “last mile in B2B payments”, “bringing all the processes on a single platform” — and a single short form on the right: email and password, or mobile number, then a six-digit verification.',
+          images: [shot('v2p-platform', 'login', 'Email login, mobile login, verification')],
+        },
+        {
+          kicker: 'COMPANY ONBOARDING',
+          title: 'A company in three steps',
+          body: 'A three-step progress bar walks through GSTIN details, the list of partners, CIN details and the users to add, and ends on a declaration that shows everything captured before submitting.',
+          images: [shot('v2p-platform', 'onboarding', 'GSTIN, partners, CIN, users, declaration')],
+        },
+        {
+          kicker: 'INVOICES',
+          title: 'Create, approve, pay',
+          body: 'Creating an invoice starts with a nudge to clear recent invoices using pre-approved credit. Approval lists every pending invoice with approve and reject actions, and a bulk view lets a whole batch be selected and paid at once.',
+          images: [
+            shot('v2p-platform', 'create-invoice', 'Create invoice'),
+            shot('v2p-platform', 'invoice-approval', 'Invoice approval'),
+            shot('v2p-platform', 'bulk-approval', 'Select and pay in bulk'),
+          ],
+        },
+        {
+          kicker: 'PAYMENT',
+          title: 'Every step confirmed',
+          body: 'Paying is guarded by clear modals — OTP verification, a confirmation with the exact amount, an insufficient-funds warning that offers pre-approved credit instead, and a redirect loader. Card payment and the payment-status receipt close the loop.',
+          images: [
+            shot('v2p-platform', 'confirm-pay', 'Verification, confirmation, insufficient funds, redirect'),
+            shot('v2p-platform', 'card-payment', 'Credit card payment'),
+            shot('v2p-platform', 'payment-status', 'Payment status and receipt'),
+          ],
+        },
+        {
+          kicker: 'GST',
+          title: 'GST in the same flow',
+          body: 'GST challans are uploaded and paid with the same form pattern as invoices, and invoices can be raised by a maker for approval.',
+          images: [shot('v2p-platform', 'gst', 'Upload challan, upload invoice by maker, payment status')],
+        },
+      ],
+      deliverables: ['NEW ONBOARDING', 'INVOICE & PAYMENT FLOWS', 'GST FLOW', 'MODAL STATES'],
+    },
+  },
+
+  /* ------------------------------------------------------------------ */
+  {
+    slug: 'enquest-hrms',
+    title: 'ENQUEST — HR MANAGEMENT SYSTEM',
+    client: 'ENQUEST ERP SOFTWARE',
+    role: 'Login, dashboards and HR modules for the HR suite of an ERP.',
+    summary:
+      'An HR system inside an ERP: a company-aware login, a dashboard for every module, employee records, disciplinary cases and leave — laid out as clear, sectioned screens.',
+    caseStudy: {
+      platform: 'WEB · DESKTOP',
+      scope: ['REDESIGN', 'DASHBOARDS', 'FORMS', 'DESIGN SYSTEM'],
+      brief:
+        'HR screens carry a lot of fields. The design had to keep every one an HR team relies on while making each screen readable at a glance and consistent across a dozen modules.',
+      sections: [
+        {
+          kicker: 'LOGIN',
+          title: 'Company first, then the person',
+          body: 'Because one install serves several companies, login starts with a searchable company code, then email or username and password. Every state was designed — the company list open, fields filled, “stay logged in”, and an invalid-username error.',
+          images: [
+            shot('enquest-hrms', 'login', 'Login'),
+            shot('enquest-hrms', 'login-states', 'Company search, filled, stay logged in, error'),
+          ],
+        },
+        {
+          kicker: 'DASHBOARD',
+          title: 'The month at the top, the person below',
+          body: 'Colour-coded tiles show present days, hours, overtime, absences and leave for the current period. Below sit the profile, leave balance and approvals, reporting lines, files, useful links and a monthly trend. The same layout carries through every module in the side navigation — general setup, master, employee, leave, appraisal, recruitment, project tracking, earnings, assets, training and medical claims.',
+          images: [
+            shot('enquest-hrms', 'dashboard', 'Employee dashboard'),
+            shot('enquest-hrms', 'dashboard-modules', 'The same frame across modules'),
+          ],
+        },
+        {
+          kicker: 'EMPLOYEE',
+          title: 'A long record, broken into sections',
+          body: 'Employee details are grouped into collapsible sections — employment, personal, other and customised fields — with a left index of every sub-page, and an edit mode that keeps the same layout.',
+          images: [
+            shot('enquest-hrms', 'employee', 'Employee details'),
+            shot('enquest-hrms', 'employee-edit', 'Employee details — edit'),
+          ],
+        },
+        {
+          kicker: 'DISCIPLINARY CASE',
+          title: 'From a single column to a structured case',
+          body: 'The reference form kept in the file was one long column of fields. The new version lays the case out in a three-column grid — dates and times, who is involved, type and severity, description, files, invitees and CC — with dedicated view and edit states.',
+          images: [
+            shot('enquest-hrms', 'disciplinary-before', 'Before — the reference form', { narrow: true }),
+            shot('enquest-hrms', 'disciplinary-form', 'After — new disciplinary case'),
+            shot('enquest-hrms', 'disciplinary-views', 'View and edit states'),
+          ],
+        },
+        {
+          kicker: 'LEAVE',
+          title: 'Apply with the calendar in view',
+          body: 'The leave application sits next to a colour-coded calendar and a table of leave balances, so an employee sees what they have left and what is already booked while they fill it in.',
+          images: [
+            shot('enquest-hrms', 'leave', 'Leave application'),
+            shot('enquest-hrms', 'leave-request', 'Leave request details'),
+          ],
+        },
+      ],
+      deliverables: ['LOGIN STATES', '12 MODULE DASHBOARDS', 'HR FORMS', 'COMPONENTS'],
+    },
+  },
+]
+
+/**
+ * CLIENT FOLDERS
+ * ----------------------------------------------------------------
+ * Several products for one client are shown as ONE card on Our Work — a
+ * folder — the same way a client's many videos sit in one project. The
+ * panel opens with a chapter list; each chapter is a full case study.
+ * Case studies not listed in a folder get a card of their own.
+ */
+export const FOLDERS = [
+  {
+    slug: 'mswipe',
+    title: 'MSWIPE — MERCHANT PAYMENTS, INDIA & UAE',
+    client: 'MSWIPE TECHNOLOGIES · ETISALAT UTAP',
+    role: 'Apps, portals, website and emailers across Mswipe’s merchant products — including UTap, its UAE partnership with Etisalat.',
+    summary:
+      'Seven products for one payments company: getting a merchant onboarded, the app on their terminal, rewards, business loans, the UAE merchant portal, the website and the emails that tie it together.',
+    platform: 'ANDROID · POS · WEB · EMAIL',
+    children: ['merchant-onboarding', 'pos-merchant-app', 'merchant-rewards', 'loan-app', 'utap-portal', 'mswipe-website', 'emailers'],
+  },
+  {
+    slug: 'v2p',
+    title: 'V2P — B2B PAYMENTS PORTAL',
+    client: 'V2P',
+    role: 'Two versions of a vendor-payments portal: registration and dashboard, then onboarding, invoicing and payments.',
+    summary:
+      'A B2B payments portal designed twice — first vendor registration, a landing page and a risk-aware dashboard; then company onboarding and the full invoice-to-payment flow.',
+    platform: 'WEB · DESKTOP',
+    children: ['v2p-platform', 'vendor-portal'],
   },
 ]

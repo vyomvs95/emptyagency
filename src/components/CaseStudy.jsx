@@ -11,7 +11,8 @@ import Frame from './Frame.jsx'
  * Screens sit in the same bounding-box frames as the rest of the site.
  * Long web pages (`scroll: true`) are shown in a fixed-height window you
  * scroll through, so a 9,000px landing page doesn't swallow the panel.
- * Every image opens full size in a new tab for a closer look.
+ * Every image opens full size in a new tab for a closer look. `narrow`
+ * keeps a small reference image (e.g. a phone screenshot) at its own size.
  */
 
 function Shot({ image }) {
@@ -35,7 +36,14 @@ function Shot({ image }) {
   }
 
   return (
-    <a href={src} target="_blank" rel="noreferrer" className="block" data-cursor="[OPEN FULL SIZE ↗]">
+    <a
+      href={src}
+      target="_blank"
+      rel="noreferrer"
+      className="block"
+      style={image.narrow ? { maxWidth: 440 } : undefined}
+      data-cursor="[OPEN FULL SIZE ↗]"
+    >
       <Frame label={caption} meta="FULL SIZE ↗" dims={`${w} × ${h}`} ratio={`${w} / ${h}`} zoom={false} boxClassName="bg-white">
         <img src={src} alt={caption} width={w} height={h} loading="lazy" className="h-full w-full object-contain" />
       </Frame>

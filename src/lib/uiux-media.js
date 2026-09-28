@@ -1,13 +1,20 @@
 /**
- * UI/UX CASE-STUDY MEDIA — generated from the Figma file "Vyom Shah"
- * (exported 28 Sep 2026 with Copy as PNG, composed into strips and
- * covers, WebP). One folder per case study in public/media/uiux/.
- * Regenerate rather than hand-edit sizes.
+ * UI/UX CASE-STUDY MEDIA — generated from the Figma files "Vyom Shah",
+ * "Vyoms UI Design" and "V2 - V2P" (exported 28 Sep 2026 with Copy as PNG,
+ * composed into strips, grids and covers, WebP). One folder per case study
+ * (or client folder cover) in public/media/uiux/. Regenerate rather than
+ * hand-edit sizes.
  */
 const url = (path) => `${import.meta.env.BASE_URL}media/uiux/${path}.webp`
 const image = (path, w, h) => ({ src: url(path), w, h })
 
 export const UIUX = {
+  'mswipe': {
+    'cover': image('mswipe/cover', 1600, 1200),
+  },
+  'v2p': {
+    'cover': image('v2p/cover', 1600, 1200),
+  },
   'invest-app': {
     'cover': image('invest-app/cover', 1600, 1200),
     'discover': image('invest-app/discover', 2368, 1380),
@@ -56,6 +63,18 @@ export const UIUX = {
     'dashboard-5': image('vendor-portal/dashboard-5', 1600, 895),
     'dashboard-6': image('vendor-portal/dashboard-6', 1600, 895),
     'dashboard-7': image('vendor-portal/dashboard-7', 1600, 906),
+  },
+  'v2p-platform': {
+    'cover': image('v2p-platform/cover', 1600, 1200),
+    'login': image('v2p-platform/login', 2400, 524),
+    'onboarding': image('v2p-platform/onboarding', 2400, 971),
+    'create-invoice': image('v2p-platform/create-invoice', 1600, 1339),
+    'invoice-approval': image('v2p-platform/invoice-approval', 1600, 932),
+    'bulk-approval': image('v2p-platform/bulk-approval', 1600, 903),
+    'confirm-pay': image('v2p-platform/confirm-pay', 2360, 1402),
+    'card-payment': image('v2p-platform/card-payment', 1600, 900),
+    'payment-status': image('v2p-platform/payment-status', 1600, 902),
+    'gst': image('v2p-platform/gst', 2400, 518),
   },
   'connectify': {
     'cover': image('connectify/cover', 1600, 1200),
@@ -116,5 +135,19 @@ export const UIUX = {
     'emailer-2': image('emailers/emailer-2', 1200, 3461),
     'emailer-3': image('emailers/emailer-3', 1200, 1253),
     'emailer-4': image('emailers/emailer-4', 1200, 2403),
+  },
+  'enquest-hrms': {
+    'cover': image('enquest-hrms/cover', 1600, 1200),
+    'login': image('enquest-hrms/login', 1600, 835),
+    'login-states': image('enquest-hrms/login-states', 2360, 1322),
+    'dashboard': image('enquest-hrms/dashboard', 1600, 900),
+    'dashboard-modules': image('enquest-hrms/dashboard-modules', 2360, 1396),
+    'employee': image('enquest-hrms/employee', 1600, 1512),
+    'employee-edit': image('enquest-hrms/employee-edit', 1600, 1534),
+    'disciplinary-before': image('enquest-hrms/disciplinary-before', 900, 1325),
+    'disciplinary-form': image('enquest-hrms/disciplinary-form', 1600, 902),
+    'disciplinary-views': image('enquest-hrms/disciplinary-views', 2360, 735),
+    'leave': image('enquest-hrms/leave', 1600, 926),
+    'leave-request': image('enquest-hrms/leave-request', 1600, 900),
   },
 }

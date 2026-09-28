@@ -13,7 +13,7 @@
   --c-ink: #0b0b0b; /* type + solid marks */
   --c-hair: rgba(11, 11, 11, 0.28); /* 1px structural borders */
   --c-hair-soft: rgba(11, 11, 11, 0.14);
-  --c-grid: rgba(11, 11, 11, 0.16); /* the canvas grid */
+  --c-grid: rgba(11, 11, 11, 0.08); /* the canvas dots — kept light */
   --c-muted: rgba(11, 11, 11, 0.5); /* technical labels */
   --c-accent: #0091ff; /* figma blue — selection + cursor */
   --c-signal: #ff3b30; /* rec dot / alerts */
@@ -29,7 +29,7 @@
   --c-ink: #f2f2f0;
   --c-hair: rgba(242, 242, 240, 0.26);
   --c-hair-soft: rgba(242, 242, 240, 0.12);
-  --c-grid: rgba(242, 242, 240, 0.14);
+  --c-grid: rgba(242, 242, 240, 0.07);
   --c-muted: rgba(242, 242, 240, 0.46);
   --c-accent: #21c7ff;
   --c-signal: #ff5449;

@@ -119,12 +119,12 @@ src/
 │  ├─ youtube.js              shared IFrame API loader + player params
 │  ├─ films.js                GENERATED — every film + its measured size
 │  ├─ uiux-media.js           GENERATED — UI/UX case-study images + sizes
-│  ├─ case-studies.js         the 12 UI/UX case studies (text + screens)
+│  ├─ case-studies.js         UI/UX case studies + client folders
 │  └─ site.js                 routes, projects & buckets, credits notice, copy
 ├─ components/
 │  ├─ Cursor.jsx              Figma arrow + plain-English [label] tag
 │  ├─ LogoLoader.jsx          logo-built loader that docks into the header
-│  ├─ GridCanvas.jsx          fixed 12-col layout grid (dot matrix removed)
+│  ├─ GridCanvas.jsx          light fixed dot matrix + horizon rule
 │  ├─ CaseStudy.jsx           long-form body of a UI/UX project panel
 │  ├─ Frame.jsx               THE BOUNDING BOX (1px border + 4 anchor points)
 │  ├─ KineticPlayer.jsx       hover-to-play video + 1px progress bar
@@ -258,7 +258,9 @@ can be linked to directly; Esc closes it, ← / → step through pieces.
 **UI/UX Design** projects are case studies. They carry a `caseStudy`
 block (platform, brief, scope, numbered sections of screens, deliverables)
 and the panel renders it as a scrolling page (`CaseStudy.jsx`) instead of
-the one-piece stage. Content lives in `case-studies.js`; images are in
+the one-piece stage. Several products for one client are grouped as a
+**folder** (`FOLDERS`): one card, and a panel that lists chapters, each a full
+case study. Content lives in `case-studies.js`; images are in
 `public/media/uiux/<slug>/`, registered in `uiux-media.js`. Long web pages
 set `scroll: true` and show in a fixed-height window you scroll through.
 
