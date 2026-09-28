@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import CaseStudy from './CaseStudy.jsx'
 import Frame from './Frame.jsx'
 import PosterImage from './PosterImage.jsx'
 import { thumbnail } from '../lib/youtube.js'
@@ -105,6 +106,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
     if (!project) return
     const onKey = (e) => {
       if (e.key === 'Escape') onClose()
+      if (project.caseStudy) return
       if (e.key === 'ArrowRight') setActive((i) => (i + 1) % project.assets.length)
       if (e.key === 'ArrowLeft')
         setActive((i) => (i - 1 + project.assets.length) % project.assets.length)
@@ -170,8 +172,11 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
           <div className="gutter mx-auto w-full max-w-[1680px] pb-24 pt-10 md:pt-14">
             <div className="grid grid-cols-12 gap-x-6 gap-y-10">
               {/* META RAIL */}
-              <div className="col-span-12 lg:col-span-4">
-                <span className="label">{BUCKET[project.bucket].label}</span>
+              <div className="col-span-12 self-start lg:sticky lg:top-[82px] lg:col-span-4">
+                <span className="label">
+                  {BUCKET[project.bucket].label}
+                  {project.caseStudy && ' // CASE STUDY'}
+                </span>
                 <h2 className="mt-3 text-[clamp(30px,4.2vw,64px)] font-medium leading-[0.95] tracking-[-0.04em]">
                   {project.title}
                 </h2>
@@ -182,8 +187,9 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
                 <div className="mt-8 flex flex-col border-t border-hair">
                   {[
                     ['CLIENT', project.client],
+                    ...(project.caseStudy ? [['PLATFORM', project.caseStudy.platform]] : []),
                     ['WHAT WE DID', project.role],
-                    ['PIECES', String(project.assets.length).padStart(2, '0')],
+                    [project.caseStudy ? 'SCREENS & BOARDS' : 'PIECES', String(project.assets.length).padStart(2, '0')],
                     ['CREDIT', project.credit],
                     ...(project.agency ? [['VIA', project.agency]] : []),
                   ].map(([k, v]) => (
@@ -204,11 +210,15 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
                 </p>
               </div>
 
-              {/* STAGE + STRIP */}
+              {/* STAGE + STRIP — or, for UI/UX work, the long-form case study */}
               <div className="col-span-12 lg:col-span-8">
-                <Stage asset={project.assets[active]} />
+                {project.caseStudy ? (
+                  <CaseStudy project={project} />
+                ) : (
+                  <Stage asset={project.assets[active]} />
+                )}
 
-                {project.assets.length > 1 && (
+                {!project.caseStudy && project.assets.length > 1 && (
                   <div className="mt-12">
                     <div className="flex items-center justify-between border-b border-hair-soft pb-[6px]">
                       <span className="label label-ink">EVERY PIECE IN THIS PROJECT</span>

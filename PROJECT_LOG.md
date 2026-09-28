@@ -6,13 +6,13 @@ and what is still open.** Newest session at the top.
 
 ---
 
-## Current state — 26 Sep 2026
+## Current state — 28 Sep 2026
 
 | | |
 |---|---|
 | Live domain | `www.emptyagency.com` → **under-construction page** (`construction/index.html`) |
 | Work in progress | `www.emptyagency.com/mockup` → the full React site, **deployed for review** |
-| Last deployed commit | `c219b06` — projects, buckets, pop-up panel, video work |
+| Last deployed commit | see *Session history* — 28 Sep: UI/UX case studies, dots removed |
 | Deploy | `git push origin main` → Vercel auto-deploys in ~1 min. No Vercel CLI needed. |
 | Repo | `github.com/vyomvs95/emptyagency` (SSH) |
 | Stack | React 19 · JavaScript (JSX, not TypeScript) · Tailwind 4 · Framer Motion · Vite |
@@ -24,8 +24,8 @@ stays the holding page until they say "go live" (steps in README → *Going live
 
 ## What the site is now
 
-- **Positioning:** a studio for **video, motion, graphic design and 3D**. It was
-  originally pitched as apps/web; that changed once the real portfolio came in.
+- **Positioning:** a studio for **video, motion, graphic design, 3D and UI/UX design**.
+  UI/UX came back in on 28 Sep with Vyom Shah's product work (see below).
 - **Pages:** Home · Our Work · What We Do · About Us (Vision, **copy is the owner's —
   don't rewrite it**) · Start a Project.
 - **Copy rule:** the UI prints plain English (HOME, OUR WORK…). Hovering shows the
@@ -33,8 +33,8 @@ stays the holding page until they say "go live" (steps in README → *Going live
   in `src/lib/site.js`.
 - **Home hero:** headline on the left, studio info on the right. Below it is the
   **hero project, ELF × Tamannaah**, with 3 featured projects (TMC, Osho Jain, Sony).
-- **Our Work:** **24 projects** in 4 buckets, **Videos 10 · Motion 6 · Graphics 6 ·
-  3D 2**. Each piece is in exactly one project and nothing is duplicated. A card opens
+- **Our Work:** **36 projects** in 5 buckets, **Videos 10 · Motion 6 · Graphics 6 ·
+  3D 2 · UI/UX Design 12**. Each piece is in exactly one project and nothing is duplicated. A card opens
   the **project panel**, deep-linkable as `#/archive/<slug>`.
 - **Contact:** `marketing@emptyagency.com` is the **only** inbox. It's on Start a
   Project and in the footer. The form (name, email, need, budget) sends through
@@ -42,6 +42,25 @@ stays the holding page until they say "go live" (steps in README → *Going live
 - **Credits & rights:** every card shows who made it (`DESIGN: UMAR KHAN / WORLD STYLE`
   or `EMPTY AGENCY CORE TEAM`) and the agency (`VIA ONE DIGITAL ENTERTAINMENT`)
   where relevant. `RIGHTS_NOTICE` appears on Our Work and in the footer.
+
+### UI/UX case studies (added 28 Sep)
+
+Twelve case studies, one per page of the Figma file **"Vyom Shah"**
+(`figma.com/design/VYuIuAtGLVVaaMT1OAhEPP`), credited `UI/UX DESIGN: VYOM SHAH`:
+Invest (mutual fund & SIP app) · Business loan app · Merchant onboarding (POS device) ·
+POS merchant app · Merchant rewards (scratch cards) · V2P vendor payments portal ·
+Connectify (WhatsApp commerce: web, app, website) · Field app for fuel cards ·
+Mswipe website (India & UAE) · UTap merchant portal & terminal app · OTT streaming app ·
+Mswipe emailers.
+
+- Text is in `src/lib/case-studies.js` and describes only what the screens show —
+  no metrics, dates or outcomes. Add those only if the owner supplies them.
+- Clients are named only where the brand is on the screens (Mswipe, Etisalat UTap,
+  Connectify, V2P). The rest say `UNDISCLOSED CLIENT` or `CONCEPT WORK`.
+- **How the images were made:** each Figma section was selected in Chrome and copied
+  with *Copy as PNG* (⇧⌘C, exports at up to 2×), saved from the clipboard, split into
+  screens by detecting frame edges, composed into strips and covers, and saved as WebP
+  (~8 MB total). The helper scripts were throwaway; to redo, repeat that process.
 
 ### Where the work came from
 
@@ -99,6 +118,10 @@ ELF project). After that, put the "watch the full film" wording back on the hero
 button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 
 ### 2. Waiting on the owner
+- [ ] **UI/UX case studies — confirm before go-live:** that every piece may be shown
+      publicly (several are for Mswipe / Etisalat UTap and may be under NDA); the
+      client names; whether the "undisclosed" ones can be named; and any results
+      worth adding (launch dates, numbers).
 - [ ] **Activate the enquiry form.** After a real submission from the live site, click
       the "Activate form" email FormSubmit sends to marketing@emptyagency.com.
       No enquiries are delivered until this is done.
@@ -157,6 +180,12 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 ---
 
 ## Session history
+
+**28 Sep 2026**
+1. Removed the black dot matrix from the page background (`GridCanvas.jsx`).
+2. Added the **UI/UX Design** bucket: 12 long-form case studies built from the
+   "Vyom Shah" Figma file, a `CaseStudy` panel layout, a fourth service (UI/UX) and
+   Figma in the tools on What We Do, and UI/UX in the copy, marquee and title.
 
 **26 Sep 2026**
 1. `670032c`: plain-English nav with original names on hover; hero layout swapped;

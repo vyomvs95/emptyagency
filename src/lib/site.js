@@ -1,4 +1,6 @@
 import { MEDIA, FILM, YT } from './media.js'
+import { CASE_STUDIES, UIUX_CREDIT } from './case-studies.js'
+import { UIUX } from './uiux-media.js'
 
 /* ------------------------------------------------------------------ */
 /*  NAVIGATION                                                         */
@@ -41,6 +43,7 @@ export const BUCKETS = [
   { id: 'motion', label: 'MOTION', tech: 'KINETIC' },
   { id: 'graphics', label: 'GRAPHICS', tech: 'STATIC' },
   { id: '3d', label: '3D', tech: 'RENDER' },
+  { id: 'uiux', label: 'UI/UX DESIGN', tech: 'INTERFACE' },
 ]
 
 /** Kept for the cursor/filters, which still speak of categories. */
@@ -61,6 +64,9 @@ const yt = (id, caption) => ({ kind: 'youtube', id, caption, w: 1280, h: 720 })
  * project's cover falls through to its first piece that exists.
  */
 const exists = (a) => (a.kind === 'youtube' ? Boolean(a.id) : Boolean(a.src))
+/** The composed cover image of a UI/UX case study. */
+const UIUX_COVER = (slug) => UIUX[slug].cover
+
 const project = (p) => {
   const assets = p.assets.filter(exists)
   return { ...p, assets, cover: assets[0] }
@@ -446,6 +452,21 @@ export const PROJECTS = [
     credit: UMAR,
     assets: [img(MEDIA.dhaba, 'Dhaba — exterior'), img(MEDIA.sofaRender, 'Sofa — product render')],
   }),
+  /* ============================= UI/UX DESIGN ============================ */
+  /* Long-form case studies — content lives in case-studies.js. The card
+     shows the cover; the panel renders `caseStudy` as a scrolling page.
+     `assets` holds every image so counts and the cover work as usual. */
+  ...CASE_STUDIES.map((c) =>
+    project({
+      ...c,
+      bucket: 'uiux',
+      credit: UIUX_CREDIT,
+      assets: [
+        img(UIUX_COVER(c.slug), 'Cover'),
+        ...c.caseStudy.sections.flatMap((sec) => sec.images.map((i) => img(i, i.caption))),
+      ],
+    })
+  ),
 ]
 
 /* ------------------------------------------------------------------ */
@@ -471,7 +492,7 @@ export const FEATURED = [bySlug.tmc, bySlug['osho-jain'], bySlug['sony-prime-vid
  */
 export const RIGHTS_NOTICE =
   'The work shown here was created or edited by members of the empty agency ' +
-  'core team, including Umar Khan (World Style), independently or while ' +
+  'core team, including Umar Khan (World Style) and Vyom Shah (UI/UX), independently or while ' +
   'working with agencies such as One Digital Entertainment. It is shown ' +
   'solely as a record ' +
   'of that professional experience. All trademarks, logos, film and music ' +
@@ -492,6 +513,7 @@ export const STACK = [
   { id: 'AFTER_EFFECTS', name: 'AFTER EFFECTS', human: 'Motion Software' },
   { id: 'PREMIERE_PRO', name: 'PREMIERE PRO', human: 'Video Editing' },
   { id: 'BLENDER', name: 'BLENDER', human: '3D Modeling' },
+  { id: 'FIGMA', name: 'FIGMA', human: 'UI/UX Design' },
 ]
 
 /** `title` is printed; `tech` is the original name, shown in the cursor tag. */
@@ -516,6 +538,13 @@ export const PILLARS = [
     tech: 'RENDER',
     body: 'Realistic 3D renders of interiors, spaces and products, so you can see it before it is built.',
     outputs: ['INTERIORS', 'ARCHITECTURE', 'PRODUCTS', 'CONCEPT RENDERS'],
+  },
+  {
+    index: '04',
+    title: 'UI/UX DESIGN',
+    tech: 'INTERFACE',
+    body: 'Apps, dashboards and websites designed from user flow to wireframe to a finished, developer-ready interface.',
+    outputs: ['MOBILE APPS', 'WEB APPS & DASHBOARDS', 'WEBSITES', 'DESIGN SYSTEMS'],
   },
 ]
 
@@ -547,7 +576,7 @@ export const PIPELINE = [
 /*  MISC                                                               */
 /* ------------------------------------------------------------------ */
 export const MARQUEE_TEXT =
-  '// VIDEO // MOTION // GRAPHIC DESIGN // 3D VISUALS // KEEP IT SIMPLE '
+  '// VIDEO // MOTION // GRAPHIC DESIGN // 3D VISUALS // UI/UX DESIGN // KEEP IT SIMPLE '
 
 /** The studio's one inbox. Shown on the site and where every enquiry lands. */
 export const EMAIL = 'marketing@emptyagency.com'

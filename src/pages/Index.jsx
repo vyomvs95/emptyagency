@@ -182,7 +182,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
             <div className="flex flex-col items-start gap-5 border-t border-hair pt-6 md:flex-row md:items-center md:justify-between">
               <p className="max-w-[46ch] text-[16px] leading-[1.45] lowercase text-muted md:text-[18px]">
                 see all {PROJECTS.length} projects on our work page, sorted into
-                videos, motion, graphics and 3d.
+                videos, motion, graphics, 3d and ui/ux design.
               </p>
               <button
                 type="button"

@@ -21,7 +21,9 @@ export default function ProjectCard({ project: p, ratio, onOpen }) {
   const c = p.cover
   const frameRatio = ratio ?? `${c.w} / ${c.h}`
   const pieces = String(p.assets.length).padStart(2, '0')
-  const label = `${BUCKET[p.bucket].label} // ${pieces} ${p.assets.length === 1 ? 'PIECE' : 'PIECES'}`
+  const label = p.caseStudy
+    ? `${BUCKET[p.bucket].label} // CASE STUDY // ${p.caseStudy.platform}`
+    : `${BUCKET[p.bucket].label} // ${pieces} ${p.assets.length === 1 ? 'PIECE' : 'PIECES'}`
   const open = () => onOpen(p.slug)
 
   return (
@@ -45,7 +47,7 @@ export default function ProjectCard({ project: p, ratio, onOpen }) {
           meta={c.kind === 'youtube' ? '▶ VIDEO' : undefined}
           dims={`${c.w} × ${c.h}`}
           ratio={frameRatio}
-          cursor="[OPEN PROJECT]"
+          cursor={p.caseStudy ? '[READ CASE STUDY]' : '[OPEN PROJECT]'}
           onClick={open}
         />
       )}

@@ -5,7 +5,7 @@ import { Block, Container, SectionHeader } from '../components/Section.jsx'
 import { PILLARS, PIPELINE, STACK } from '../lib/site.js'
 
 /**
- * WHAT WE DO (route: capabilities) — tools, three services, the process.
+ * WHAT WE DO (route: capabilities) — tools, four services, the process.
  */
 export default function CapabilitiesPage({ onNavigate }) {
   // All tools engaged by default; toggling reads out as a live config.
@@ -33,7 +33,7 @@ export default function CapabilitiesPage({ onNavigate }) {
           </div>
           <div className="col-span-12 lg:col-span-4">
             <p className="max-w-[40ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
-              three services, one simple process. we understand what you need,
+              four services, one simple process. we understand what you need,
               plan it properly, then make it.
             </p>
           </div>
@@ -79,10 +79,10 @@ export default function CapabilitiesPage({ onNavigate }) {
           </p>
         </div>
 
-        {/* ====================== THREE PILLARS ===================== */}
+        {/* ====================== THE SERVICES ====================== */}
         <div className="mt-24">
-          <SectionHeader index="02" title="WHAT WE OFFER" meta="03 SERVICES" />
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-12 lg:grid-cols-3">
+          <SectionHeader index="02" title="WHAT WE OFFER" meta={`${String(PILLARS.length).padStart(2, '0')} SERVICES`} />
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-12 md:grid-cols-2 xl:grid-cols-4">
             {PILLARS.map((p, i) => (
               <Reveal key={p.index} delay={i * 0.08}>
                 <article

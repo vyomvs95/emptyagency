@@ -64,8 +64,9 @@ export default function ArchivePage({ onOpenProject }) {
           <div className="col-span-12 lg:col-span-4">
             <p className="max-w-[40ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
               {PROJECTS.length} projects, {PIECES} pieces — videos, motion,
-              graphics and 3d for brands, artists, labels and film studios. open
-              any project to see everything we made for it.
+              graphics, 3d and ui/ux design for brands, artists, labels, film
+              studios and fintech products. open any project to see everything
+              we made for it.
             </p>
           </div>
         </div>
@@ -99,7 +100,7 @@ export default function ArchivePage({ onOpenProject }) {
         <div key={filter} className="columns-1 gap-x-6 sm:columns-2 lg:columns-3">
           {visible.map((p, i) => (
             <motion.div
-              key={p.id}
+              key={p.slug}
               className="mb-16 break-inside-avoid"
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}

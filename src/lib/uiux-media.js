@@ -1,0 +1,120 @@
+/**
+ * UI/UX CASE-STUDY MEDIA — generated from the Figma file "Vyom Shah"
+ * (exported 28 Sep 2026 with Copy as PNG, composed into strips and
+ * covers, WebP). One folder per case study in public/media/uiux/.
+ * Regenerate rather than hand-edit sizes.
+ */
+const url = (path) => `${import.meta.env.BASE_URL}media/uiux/${path}.webp`
+const image = (path, w, h) => ({ src: url(path), w, h })
+
+export const UIUX = {
+  'invest-app': {
+    'cover': image('invest-app/cover', 1600, 1200),
+    'discover': image('invest-app/discover', 2368, 1380),
+    'sip-flow': image('invest-app/sip-flow', 2368, 1381),
+    'cart': image('invest-app/cart', 1800, 1381),
+    'design-system': image('invest-app/design-system', 1800, 2085),
+  },
+  'loan-app': {
+    'cover': image('loan-app/cover', 1600, 1200),
+    'apply': image('loan-app/apply', 2400, 964),
+    'offer': image('loan-app/offer', 966, 1885),
+    'kyc': image('loan-app/kyc', 2279, 1629),
+    'post-approval': image('loan-app/post-approval', 2400, 1318),
+    'repayment': image('loan-app/repayment', 2400, 895),
+  },
+  'merchant-onboarding': {
+    'cover': image('merchant-onboarding/cover', 1600, 1200),
+    'signin': image('merchant-onboarding/signin', 2368, 1769),
+    'device': image('merchant-onboarding/device', 2400, 1222),
+    'kyc': image('merchant-onboarding/kyc', 2368, 1496),
+    'checkout': image('merchant-onboarding/checkout', 1232, 1398),
+  },
+  'pos-merchant-app': {
+    'cover': image('pos-merchant-app/cover', 1600, 1200),
+    'home': image('pos-merchant-app/home', 1920, 4113),
+    'reports': image('pos-merchant-app/reports', 1920, 2481),
+  },
+  'merchant-rewards': {
+    'cover': image('merchant-rewards/cover', 1600, 1200),
+    'user-flow': image('merchant-rewards/user-flow', 1600, 1971),
+    'journey': image('merchant-rewards/journey', 2400, 1177),
+  },
+  'vendor-portal': {
+    'cover': image('vendor-portal/cover', 1600, 1200),
+    'onboarding-1': image('vendor-portal/onboarding-1', 1600, 879),
+    'onboarding-2': image('vendor-portal/onboarding-2', 1600, 879),
+    'onboarding-3': image('vendor-portal/onboarding-3', 1600, 895),
+    'onboarding-4': image('vendor-portal/onboarding-4', 1600, 895),
+    'onboarding-5': image('vendor-portal/onboarding-5', 1600, 886),
+    'onboarding-6': image('vendor-portal/onboarding-6', 1600, 886),
+    'landing': image('vendor-portal/landing', 1440, 4262),
+    'dashboard-1': image('vendor-portal/dashboard-1', 1600, 1031),
+    'dashboard-2': image('vendor-portal/dashboard-2', 1600, 1003),
+    'dashboard-3': image('vendor-portal/dashboard-3', 1600, 1122),
+    'dashboard-4': image('vendor-portal/dashboard-4', 1600, 895),
+    'dashboard-5': image('vendor-portal/dashboard-5', 1600, 895),
+    'dashboard-6': image('vendor-portal/dashboard-6', 1600, 895),
+    'dashboard-7': image('vendor-portal/dashboard-7', 1600, 906),
+  },
+  'connectify': {
+    'cover': image('connectify/cover', 1600, 1200),
+    'web-1': image('connectify/web-1', 1600, 1050),
+    'web-2': image('connectify/web-2', 1600, 1050),
+    'web-3': image('connectify/web-3', 1600, 898),
+    'web-4': image('connectify/web-4', 1600, 898),
+    'web-5': image('connectify/web-5', 1600, 892),
+    'web-6': image('connectify/web-6', 1600, 956),
+    'web-7': image('connectify/web-7', 1600, 950),
+    'web-8': image('connectify/web-8', 1600, 898),
+    'web-9': image('connectify/web-9', 1600, 898),
+    'web-10': image('connectify/web-10', 1600, 894),
+    'web-11': image('connectify/web-11', 1600, 898),
+    'mobile': image('connectify/mobile', 2400, 865),
+    'website': image('connectify/website', 1440, 8373),
+  },
+  'fuel-card-app': {
+    'cover': image('fuel-card-app/cover', 1600, 1200),
+    'card': image('fuel-card-app/card', 1800, 1272),
+    'clients': image('fuel-card-app/clients', 2368, 1496),
+    'collections': image('fuel-card-app/collections', 2368, 1340),
+  },
+  'mswipe-website': {
+    'cover': image('mswipe-website/cover', 1600, 1200),
+    'india-home': image('mswipe-website/india-home', 1440, 9784),
+    'utap-home': image('mswipe-website/utap-home', 1440, 6271),
+    'utap-device': image('mswipe-website/utap-device', 1440, 6612),
+    'utap-callback': image('mswipe-website/utap-callback', 1440, 1300),
+  },
+  'utap-portal': {
+    'cover': image('utap-portal/cover', 1600, 1200),
+    'portal-1': image('utap-portal/portal-1', 1600, 1089),
+    'portal-2': image('utap-portal/portal-2', 1600, 882),
+    'portal-3': image('utap-portal/portal-3', 1600, 880),
+    'portal-4': image('utap-portal/portal-4', 1600, 881),
+    'portal-5': image('utap-portal/portal-5', 1600, 881),
+    'portal-6': image('utap-portal/portal-6', 1600, 880),
+    'portal-7': image('utap-portal/portal-7', 1600, 881),
+    'portal-8': image('utap-portal/portal-8', 1600, 880),
+    'portal-9': image('utap-portal/portal-9', 1600, 881),
+    'portal-10': image('utap-portal/portal-10', 1600, 880),
+    'portal-11': image('utap-portal/portal-11', 1600, 987),
+    'portal-12': image('utap-portal/portal-12', 1600, 989),
+    'app-pay': image('utap-portal/app-pay', 2400, 1030),
+    'app-emi': image('utap-portal/app-emi', 2400, 1021),
+    'app-home': image('utap-portal/app-home', 1800, 1392),
+  },
+  'ott-app': {
+    'cover': image('ott-app/cover', 1600, 1200),
+    'research': image('ott-app/research', 2000, 947),
+    'onboarding': image('ott-app/onboarding', 2368, 1223),
+    'browse': image('ott-app/browse', 1800, 1223),
+  },
+  'emailers': {
+    'cover': image('emailers/cover', 1600, 1200),
+    'emailer-1': image('emailers/emailer-1', 1200, 1464),
+    'emailer-2': image('emailers/emailer-2', 1200, 3461),
+    'emailer-3': image('emailers/emailer-3', 1200, 1253),
+    'emailer-4': image('emailers/emailer-4', 1200, 2403),
+  },
+}

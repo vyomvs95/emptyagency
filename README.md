@@ -118,11 +118,14 @@ src/
 │  ├─ media.js                ← every media file + its pixel size
 │  ├─ youtube.js              shared IFrame API loader + player params
 │  ├─ films.js                GENERATED — every film + its measured size
+│  ├─ uiux-media.js           GENERATED — UI/UX case-study images + sizes
+│  ├─ case-studies.js         the 12 UI/UX case studies (text + screens)
 │  └─ site.js                 routes, projects & buckets, credits notice, copy
 ├─ components/
 │  ├─ Cursor.jsx              Figma arrow + plain-English [label] tag
 │  ├─ LogoLoader.jsx          logo-built loader that docks into the header
-│  ├─ GridCanvas.jsx          fixed dot matrix + 12-col layout grid
+│  ├─ GridCanvas.jsx          fixed 12-col layout grid (dot matrix removed)
+│  ├─ CaseStudy.jsx           long-form body of a UI/UX project panel
 │  ├─ Frame.jsx               THE BOUNDING BOX (1px border + 4 anchor points)
 │  ├─ KineticPlayer.jsx       hover-to-play video + 1px progress bar
 │  ├─ StillFrame.jsx          image counterpart to KineticPlayer
@@ -242,7 +245,7 @@ the back button work without a router dependency.
 
 Our Work is organised as **projects**, not loose files. Every piece
 belongs to exactly one project and every project to exactly one bucket —
-**Videos · Motion · Graphics · 3D** — so nothing appears twice on the
+**Videos · Motion · Graphics · 3D · UI/UX Design** — so nothing appears twice on the
 site. A poster and its motion version, a client's four showreels, ten
 lyric videos for one artist: each is one project, one card.
 
@@ -251,6 +254,13 @@ full-screen sheet with the meta rail (client, what we did, credit, agency),
 a stage that plays one piece at a time, and a strip of every piece in the
 project. The slug rides in the hash — `#/archive/tmc` — so any project
 can be linked to directly; Esc closes it, ← / → step through pieces.
+
+**UI/UX Design** projects are case studies. They carry a `caseStudy`
+block (platform, brief, scope, numbered sections of screens, deliverables)
+and the panel renders it as a scrolling page (`CaseStudy.jsx`) instead of
+the one-piece stage. Content lives in `case-studies.js`; images are in
+`public/media/uiux/<slug>/`, registered in `uiux-media.js`. Long web pages
+set `scroll: true` and show in a fixed-height window you scroll through.
 
 The home page puts `HERO` (ELF × Tamannaah) in focus, with `FEATURED`
 below it. Both are set at the bottom of the projects list in `site.js`.
@@ -263,6 +273,7 @@ below it. Both are set at the bottom of the projects list in `site.js`.
 | Short motion / video | `public/media/{motion,videos}/*.mp4` + `-poster.webp` | `MEDIA` | native video |
 | Films | `public/media/films/*.mp4` + `-poster.webp` | `FILM` in `films.js` (**generated**) | native video with sound |
 | YouTube work | not stored — id only | `YT` in `media.js` | YouTube's standard embed |
+| UI/UX screens | `public/media/uiux/<slug>/*.webp` | `UIUX` in `uiux-media.js` (**generated**) | image, in a case study |
 
 - **Films** longer than a minute are ~45-second **excerpts** (720p, ~6.6 MB,
   marked `EXCERPT`). The originals are in the "Video Edits" Drive folder;
