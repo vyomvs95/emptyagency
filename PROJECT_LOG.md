@@ -192,6 +192,13 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 
 ## Session history
 
+**29 Sep 2026 (latest)**
+11. Hero is back to "We clear the clutter. You get the results." with the ELF × Tamannaah
+    film directly under it (celebrity work first as a trust signal); selected work below it
+    stays UI/UX → 3D → film. Horizontal centre rule removed from the background (dots stay).
+    Connectify screens: real-looking names, emails and phone numbers pixelated (chat list,
+    headers, users/channels tables, mobile screens, cover).
+
 **29 Sep 2026 (later)**
 9. **Agency structure, priority UI/UX → 3D → film/motion/graphics everywhere**: buckets,
    project order (`PRIORITY` + `RANK` in site.js), services, tools, marquee, home.

@@ -18,11 +18,6 @@ export default function GridCanvas() {
         }}
       />
 
-      {/* horizon rule — a single fixed baseline through the viewport */}
-      <div
-        className="absolute inset-x-0 top-1/2 h-px"
-        style={{ background: 'var(--c-hair-soft)', opacity: 0.6 }}
-      />
     </div>
   )
 }

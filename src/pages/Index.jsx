@@ -3,9 +3,12 @@ import ProjectCard from '../components/ProjectCard.jsx'
 import Marquee from '../components/Marquee.jsx'
 import Reveal, { RuleIn } from '../components/Reveal.jsx'
 import { Block, Container, SectionHeader } from '../components/Section.jsx'
-import { BRANDS, FAQ, FEATURED, INDUSTRIES, MARQUEE_TEXT, PILLARS, PROJECTS } from '../lib/site.js'
+import KineticPlayer from '../components/KineticPlayer.jsx'
+import { BRANDS, FAQ, FEATURED, HERO, INDUSTRIES, MARQUEE_TEXT, PILLARS, PROJECTS } from '../lib/site.js'
 
-const HEADLINE = ['A UI/UX and 3D', 'design studio.']
+const HERO_FILM = HERO.assets[0]
+
+const HEADLINE = ['We clear the clutter.', 'You get the results.']
 
 export default function IndexPage({ onNavigate, onOpenProject }) {
   return (
@@ -34,7 +37,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.75, delay: 0.26, ease: [0.2, 0, 0, 1] }}
                 >
-                  We design apps, platforms and websites, build products and places in 3D, and make the films and artwork that launch them. One team, so everything we make for a brand belongs together.
+                  A UI/UX and 3D design studio. We design apps, platforms and websites, build products and places in 3D, and make the films that launch them — one team, so everything belongs together.
                 </motion.span>
               </h1>
 
@@ -89,6 +92,69 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
               </div>
             </div>
 
+          </div>
+        </Container>
+
+        {/* HERO PROJECT — in focus, 70% of the canvas */}
+        <Container className="mt-14 md:mt-20">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
+            <motion.div
+              className="w-full lg:w-[70%]"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.35, ease: [0.2, 0, 0, 1] }}
+            >
+              <KineticPlayer
+                src={HERO_FILM.src}
+                image={HERO_FILM.poster}
+                label={`FEATURED PROJECT // ${HERO.title}`}
+                dims={`${HERO_FILM.w} × ${HERO_FILM.h}`}
+                ratio={`${HERO_FILM.w} / ${HERO_FILM.h}`}
+                onClick={() => onOpenProject(HERO.slug)}
+              />
+            </motion.div>
+
+            <motion.div
+              className="w-full lg:w-[30%] lg:pt-7"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.6 }}
+            >
+              <div className="border-t border-hair pt-3">
+                <span className="label label-ink">FEATURED PROJECT</span>
+                <h2 className="mt-3 text-[clamp(22px,2.2vw,32px)] font-medium leading-[1.05] tracking-[-0.03em]">
+                  {HERO.title}
+                </h2>
+                <p className="mt-4 max-w-[38ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
+                  {HERO.summary}
+                </p>
+                <div className="mt-6 flex flex-col gap-[10px]">
+                  {[
+                    ['CLIENT', HERO.client],
+                    ['WHAT WE DID', 'CAMPAIGN FILM + CUT-DOWNS'],
+                    ['PIECES', String(HERO.assets.length).padStart(2, '0')],
+                    ['HOW TO WATCH', 'HOVER TO PREVIEW'],
+                  ].map(([k, v]) => (
+                    <div
+                      key={k}
+                      className="flex items-baseline justify-between gap-4 border-b border-hair-soft pb-[8px]"
+                    >
+                      <span className="label">{k}</span>
+                      <span className="tnum label label-ink">{v}</span>
+                    </div>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => onOpenProject(HERO.slug)}
+                  data-cursor="[OPEN PROJECT]"
+                  className="mt-6 w-full border px-5 py-[12px] text-[11px] font-medium uppercase tracking-[0.16em]"
+                  style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
+                >
+                  [ WATCH THE FULL FILM ↗ ]
+                </button>
+              </div>
+            </motion.div>
           </div>
         </Container>
 

@@ -508,14 +508,14 @@ const bySlug = Object.fromEntries(PROJECTS.map((p) => [p.slug, p]))
 /** The hero project — in focus at the top of the home page. */
 export const HERO = bySlug['elf-tamannaah']
 
-/** Selected work on the home page — UI/UX first, then 3D, then film. */
+/** Selected work under the ELF hero film — UI/UX first, then 3D, then film. */
 export const FEATURED = [
   bySlug.mswipe,
   bySlug['enquest-hrms'],
   bySlug['all-hub'],
   bySlug['real-estate-visualisation'],
   bySlug['product-films'],
-  bySlug['elf-tamannaah'],
+  bySlug['sony-prime-video'],
 ]
 
 /**
