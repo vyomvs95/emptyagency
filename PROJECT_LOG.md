@@ -234,6 +234,10 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 ## Session history
 
 **29 Sep 2026 (latest)**
+15. Nothing opens in a new tab any more: images and films expand in a themed **lightbox**
+    (`Lightbox.jsx` — label bar, framed piece with corner anchors, ← / → through the set,
+    Esc closes only the lightbox). Used in case studies (every screen, long page and film)
+    and in gallery projects (stills).
 14. Hero buttons: **"Who we are — our vision"** is now the primary (filled) button, then
     "See our work"; "Start a project" left the hero (still in the nav, Let's talk and FAQ).
     Project panel now opens **under the main nav** (nav stays visible); any nav click closes

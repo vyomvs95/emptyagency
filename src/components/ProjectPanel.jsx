@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import CaseStudy from './CaseStudy.jsx'
 import Frame from './Frame.jsx'
+import Lightbox from './Lightbox.jsx'
 import PosterImage from './PosterImage.jsx'
 import { thumbnail } from '../lib/youtube.js'
 import { BUCKETS, PROJECTS } from '../lib/site.js'
@@ -31,7 +32,7 @@ const assetThumb = (a) =>
   a.kind === 'youtube' ? thumbnail(a.id, 'hqdefault') : a.kind === 'video' ? a.poster : a.src
 
 /* -------------------------------- STAGE -------------------------------- */
-function Stage({ asset }) {
+function Stage({ asset, onExpand }) {
   const { w, h } = asset
   // Fit the piece inside the stage: full width for landscape, height-capped
   // for square and vertical work so a 9:16 story never runs off-screen.
@@ -52,7 +53,9 @@ function Stage({ asset }) {
         dims={`${w} × ${h}`}
         ratio={`${w} / ${h}`}
         zoom={false}
-        cursor={asset.kind === 'image' ? '[STILL]' : '[PLAYING HERE]'}
+        cursor={asset.kind === 'image' ? '[EXPAND]' : '[PLAYING HERE]'}
+        onClick={asset.kind === 'image' ? onExpand : undefined}
+        meta={asset.kind === 'image' ? 'EXPAND ↗' : undefined}
         boxClassName="bg-void"
       >
         {asset.kind === 'image' && (
@@ -90,11 +93,13 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
   const project = PROJECTS[index]
   const [active, setActive] = useState(0)
   const [chapter, setChapter] = useState(0)
+  const [zoomed, setZoomed] = useState(null)
   const sheet = useRef(null)
 
   useEffect(() => {
     setActive(0)
     setChapter(0)
+    setZoomed(null)
   }, [slug])
 
   const openChapter = (i) => setChapter(i)
@@ -280,7 +285,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
                     )}
                   </>
                 ) : (
-                  <Stage asset={project.assets[active]} />
+                  <Stage asset={project.assets[active]} onExpand={() => setZoomed(project.assets.filter((a) => a.kind === 'image').indexOf(project.assets[active]))} />
                 )}
 
                 {!study && project.assets.length > 1 && (
@@ -315,6 +320,13 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
               </div>
             </div>
           </div>
+          {!study && (
+            <Lightbox
+              items={project.assets.filter((a) => a.kind === 'image')}
+              index={zoomed}
+              onIndex={setZoomed}
+            />
+          )}
         </motion.div>
       )}
     </AnimatePresence>

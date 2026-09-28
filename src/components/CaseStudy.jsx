@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import Frame from './Frame.jsx'
+import Lightbox from './Lightbox.jsx'
 
 /**
  * CASE STUDY — the long-form body of a UI/UX project panel.
@@ -12,25 +14,36 @@ import Frame from './Frame.jsx'
  * the site (`kind: 'video'` plays inline with controls).
  * Long web pages (`scroll: true`) are shown in a fixed-height window you
  * scroll through, so a 9,000px landing page doesn't swallow the panel.
- * Every image opens full size in a new tab for a closer look. `narrow`
+ * Every image and film expands in a themed lightbox in the same tab. `narrow`
  * keeps a small reference image (e.g. a phone screenshot) at its own size.
  */
 
-function Shot({ image }) {
+const expandBtn =
+  'label label-ink shrink-0 border border-hair px-2 py-[3px] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]'
+
+function Shot({ image, onExpand }) {
   const { src, w, h, caption, scroll } = image
 
   if (image.kind === 'video') {
     return (
-      <Frame label={caption} meta={image.duration ? `${Math.round(image.duration)} S` : 'FILM'} dims={`${w} × ${h}`} ratio={`${w} / ${h}`} zoom={false} boxClassName="bg-black">
-        <video
-          src={src}
-          poster={image.poster}
-          controls
-          playsInline
-          preload="none"
-          className="h-full w-full bg-black object-contain"
-        />
-      </Frame>
+      <figure>
+        <div className="mb-[10px] flex items-baseline justify-between gap-4 border-b border-hair-soft pb-[6px]">
+          <span className="label label-ink truncate">{caption}</span>
+          <button type="button" onClick={onExpand} data-cursor="[EXPAND]" className={expandBtn}>
+            {image.duration ? `${Math.round(image.duration)} S // ` : ''}EXPAND ↗
+          </button>
+        </div>
+        <Frame dims={`${w} × ${h}`} ratio={`${w} / ${h}`} zoom={false} boxClassName="bg-black">
+          <video
+            src={src}
+            poster={image.poster}
+            controls
+            playsInline
+            preload="none"
+            className="h-full w-full bg-black object-contain"
+          />
+        </Frame>
+      </figure>
     )
   }
 
@@ -39,7 +52,12 @@ function Shot({ image }) {
       <figure>
         <div className="mb-[10px] flex items-baseline justify-between gap-4 border-b border-hair-soft pb-[6px]">
           <span className="label label-ink truncate">{caption}</span>
-          <span className="label shrink-0">SCROLL THE PAGE ↓</span>
+          <span className="flex shrink-0 items-baseline gap-3">
+            <span className="label hidden sm:inline">SCROLL THE PAGE ↓</span>
+            <button type="button" onClick={onExpand} data-cursor="[EXPAND]" className={expandBtn}>
+              EXPAND ↗
+            </button>
+          </span>
         </div>
         <div
           className="h-[min(78vh,900px)] overflow-y-auto overscroll-contain border border-hair bg-white"
@@ -52,33 +70,40 @@ function Shot({ image }) {
   }
 
   return (
-    <a
-      href={src}
-      target="_blank"
-      rel="noreferrer"
-      className="block"
+    <button
+      type="button"
+      onClick={onExpand}
+      className="block w-full text-left"
       style={image.narrow ? { maxWidth: 440 } : undefined}
-      data-cursor="[OPEN FULL SIZE ↗]"
+      data-cursor="[EXPAND]"
     >
-      <Frame label={caption} meta="FULL SIZE ↗" dims={`${w} × ${h}`} ratio={`${w} / ${h}`} zoom={false} boxClassName="bg-white">
+      <Frame label={caption} meta="EXPAND ↗" dims={`${w} × ${h}`} ratio={`${w} / ${h}`} zoom={false} boxClassName="bg-white">
         <img src={src} alt={caption} width={w} height={h} loading="lazy" className="h-full w-full object-contain" />
       </Frame>
-    </a>
+    </button>
   )
 }
 
 export default function CaseStudy({ project }) {
   const cs = project.caseStudy
   const cover = project.assets[0]
+  const [open, setOpen] = useState(null)
+
+  // Everything that can expand, in reading order — the lightbox steps through it.
+  const coverItem = cover.kind === 'video' ? { ...cover, caption: 'CASE STUDY // FILM' } : { ...cover, caption: project.title }
+  const items = [coverItem, ...cs.sections.flatMap((sec) => sec.images)]
+  const expand = (item) => () => setOpen(items.indexOf(item))
 
   return (
     <div>
       {cover.kind === 'video' ? (
-        <Shot image={{ ...cover, caption: 'CASE STUDY // FILM' }} />
+        <Shot image={coverItem} onExpand={expand(coverItem)} />
       ) : (
-        <Frame label="CASE STUDY // COVER" dims={`${cover.w} × ${cover.h}`} ratio={`${cover.w} / ${cover.h}`} zoom={false}>
-          <img src={cover.src} alt={project.title} className="h-full w-full object-cover" />
-        </Frame>
+        <button type="button" onClick={expand(coverItem)} className="block w-full text-left" data-cursor="[EXPAND]">
+          <Frame label="CASE STUDY // COVER" meta="EXPAND ↗" dims={`${cover.w} × ${cover.h}`} ratio={`${cover.w} / ${cover.h}`} zoom={false}>
+            <img src={cover.src} alt={project.title} className="h-full w-full object-cover" />
+          </Frame>
+        </button>
       )}
 
       {/* THE BRIEF */}
@@ -115,7 +140,7 @@ export default function CaseStudy({ project }) {
           </div>
           <div className="mt-8 flex flex-col gap-10">
             {sec.images.map((img) => (
-              <Shot key={img.src} image={img} />
+              <Shot key={img.src} image={img} onExpand={expand(img)} />
             ))}
           </div>
         </section>
@@ -136,6 +161,8 @@ export default function CaseStudy({ project }) {
           ))}
         </div>
       </section>
+
+      <Lightbox items={items} index={open} onIndex={setOpen} />
     </div>
   )
 }
