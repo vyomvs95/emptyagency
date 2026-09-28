@@ -115,7 +115,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-14 md:grid-cols-2">
             {FEATURED.map((item, i) => (
               <Reveal key={item.slug} delay={i * 0.08}>
-                <ProjectCard project={item} ratio="16 / 9" onOpen={onOpenProject} />
+                <ProjectCard project={item} ratio="4 / 3" onOpen={onOpenProject} />
               </Reveal>
             ))}
           </div>

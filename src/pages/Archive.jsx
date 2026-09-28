@@ -95,18 +95,19 @@ export default function ArchivePage({ onOpenProject }) {
           className="mb-10"
         />
 
-        {/* GRID — masonry columns, so every piece keeps its own shape
-            (square covers, 16:9 thumbnails, 9:16 stories) uncropped. */}
-        <div key={filter} className="columns-1 gap-x-6 sm:columns-2 lg:columns-3">
+        {/* GRID — an even grid that reads left to right in priority order
+            (UI/UX, 3D, then film, motion, graphics). Covers share one 4:3
+            frame; every piece is shown uncropped inside its project. */}
+        <div key={filter} className="grid grid-cols-1 gap-x-6 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((p, i) => (
             <motion.div
               key={p.slug}
-              className="mb-16 break-inside-avoid"
+              className="mb-16"
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: Math.min(i * 0.035, 0.28), ease: [0.2, 0, 0, 1] }}
             >
-              <ProjectCard project={p} onOpen={onOpenProject} />
+              <ProjectCard project={p} ratio="4 / 3" onOpen={onOpenProject} />
             </motion.div>
           ))}
         </div>
