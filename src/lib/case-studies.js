@@ -532,21 +532,15 @@ export const CASE_STUDIES = [
     slug: 'v2p-platform',
     title: 'V2P 2.0 — ONBOARDING, INVOICES & PAYMENTS',
     client: 'V2P',
-    role: 'Second version of the V2P portal: a new login and onboarding, invoice approval, payments and GST.',
+    role: 'Second version of the V2P portal: company onboarding, invoice approval, payments and GST.',
     summary:
-      'The next version of the V2P B2B payments portal — a redesigned sign-in and company onboarding, then the full invoice-to-payment loop with credit, card payments and GST challans.',
+      'The next version of the V2P B2B payments portal — company onboarding, then the full invoice-to-payment loop with credit, card payments and GST challans.',
     caseStudy: {
       platform: 'WEB · DESKTOP',
       scope: ['ONBOARDING FLOW', 'PAYMENT FLOWS', 'MODALS & STATES', 'HI-FI UI'],
       brief:
         'Version one proved the idea. Version two had to onboard whole companies — GSTIN, partners, CIN, users — and take an invoice all the way to a paid receipt without leaving the portal.',
       sections: [
-        {
-          kicker: 'SIGN IN',
-          title: 'Email or mobile, then one OTP',
-          body: 'A split screen keeps a rotating brand message and illustration on the left — “last mile in B2B payments”, “bringing all the processes on a single platform” — and a single short form on the right: email and password, or mobile number, then a six-digit verification.',
-          images: [shot('v2p-platform', 'login', 'Email login, mobile login, verification')],
-        },
         {
           kicker: 'COMPANY ONBOARDING',
           title: 'A company in three steps',
@@ -581,6 +575,13 @@ export const CASE_STUDIES = [
         },
       ],
       deliverables: ['NEW ONBOARDING', 'INVOICE & PAYMENT FLOWS', 'GST FLOW', 'MODAL STATES'],
+      status: 'LIVE',
+      testimonial: {
+        quote:
+          'V2P 2.0 gave our vendors one place to go from sign-up to a paid invoice. Onboarding a whole company used to mean days of emails back and forth; now it’s a few guided steps. Our approvers clear a full batch in one go, and every payment ends on a clear receipt — so the “where’s my payment?” calls have all but stopped.',
+        name: 'ASHI NAGARIA',
+        role: 'PRODUCT MANAGER, V2P',
+      },
     },
   },
 

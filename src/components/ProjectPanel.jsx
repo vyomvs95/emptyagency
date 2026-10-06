@@ -212,6 +212,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
                     ['CLIENT', project.client],
                     ...(study ? [['PLATFORM', project.platform ?? project.caseStudy.platform]] : []),
                     ['WHAT WE DID', project.role],
+                    ...(study?.caseStudy?.status ? [['STATUS', `● ${study.caseStudy.status}`]] : []),
                     ...(chapters ? [['CASE STUDIES', String(chapters.length).padStart(2, '0')]] : []),
                     [study ? (project.bucket === '3d' ? 'FILMS & STILLS' : 'SCREENS & BOARDS') : 'PIECES', String(project.assets.length).padStart(2, '0')],
                     ['CREDIT', project.credit],

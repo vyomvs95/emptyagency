@@ -6,7 +6,7 @@ and what is still open.** Newest session at the top.
 
 ---
 
-## Current state — 29 Sep 2026
+## Current state — 6 Oct 2026
 
 | | |
 |---|---|
@@ -50,10 +50,10 @@ process, real outcome/quote where the client allows) and weaker older pieces are
   first, on purpose) → marquee → Selected work (Mswipe, enQuest, All Hub, Real estate,
   Product films, Sony) → Services → Industries (each links to its projects) → Brands
   (15 names) → FAQ → "Let's talk".
-- **Work:** **32 cards** in 5 buckets — UI/UX 7 · 3D & CGI 3 · Film 10 · Motion 6 ·
-  Graphics 6 — in an even 4:3 grid (3D & CGI is now 3) that reads left to right in priority order. A card
+- **Work:** **35 cards** in 5 buckets — UI/UX 7 · 3D & CGI 9 · Film 10 · Motion 4 ·
+  Graphics 5 — in an even 4:3 grid that reads left to right in priority order. A card
   opens the project panel (`#/archive/<slug>`); case studies open as long-form pages,
-  **folders** (Mswipe, V2P, Product films) list chapters. The panel opens **under the main nav**,
+  **folders** (Mswipe, V2P) list chapters. 3D has no folders — each product film is its own card. The panel opens **under the main nav**,
   which stays usable; a nav click closes the project.
 - **Contact:** `marketing@emptyagency.com` is the **only** inbox (footer shows only that —
   socials removed). Form sends through **FormSubmit**.
@@ -240,6 +240,18 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 ---
 
 ## Session history
+
+**6 Oct 2026**
+16. Removed three projects: Social Nation (festival identity), One Digital (sting & stories),
+    Logo design (Dangal Dawgs etc.). Media files stay in `public/media/`, unused.
+17. V2P 2.0: dropped the sign-in strip (a stray Figma line crossed every screen), rebuilt the
+    card cover from the invoice-approval screen, cropped a red designer note off another screen.
+    Added a **client testimonial** (Ashi Nagaria, Product Manager, V2P) and **status: LIVE**
+    (`caseStudy.status` / `caseStudy.testimonial`, rendered by `CaseStudy.jsx`; STATUS row in the
+    panel rail). The quote was written by Claude at the owner's request — get Ashi's sign-off.
+18. Product films folder split into separate 3D projects: Clear X, EUME, Stuffcool, LUCA,
+    Protectli, Cougar, Product spots (wine + Mswipe device). Home selected work uses Stuffcool.
+19. Hero sub-text now describes the whole studio, not only UI/UX + 3D.
 
 **29 Sep 2026 (latest)**
 15. Nothing opens in a new tab any more: images and films expand in a themed **lightbox**

@@ -146,6 +146,30 @@ export default function CaseStudy({ project }) {
         </section>
       ))}
 
+      {/* CLIENT TESTIMONIAL — only where the client has given one */}
+      {cs.testimonial && (
+        <section className="mt-16 border-t border-hair pt-6 md:mt-20">
+          <div className="flex items-baseline justify-between gap-4">
+            <span className="label">CLIENT TESTIMONIAL</span>
+            {cs.status && (
+              <span className="label label-ink flex items-center gap-2 border border-hair px-2 py-[3px]">
+                <span className="inline-block h-[6px] w-[6px] rounded-full" style={{ background: 'var(--c-accent)' }} />
+                STATUS // {cs.status}
+              </span>
+            )}
+          </div>
+          <blockquote className="mt-6 border-l pl-6 md:pl-8" style={{ borderColor: 'var(--c-ink)' }}>
+            <p className="max-w-[56ch] text-[clamp(20px,2vw,28px)] font-medium leading-[1.3] tracking-[-0.015em]">
+              “{cs.testimonial.quote}”
+            </p>
+            <footer className="mt-6 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-t border-hair-soft pt-[10px]">
+              <span className="label label-ink">{cs.testimonial.name}</span>
+              <span className="label">{cs.testimonial.role}</span>
+            </footer>
+          </blockquote>
+        </section>
+      )}
+
       {/* DELIVERABLES */}
       <section className="mt-16 border-t border-hair pt-6 md:mt-20">
         <span className="label">DELIVERABLES</span>

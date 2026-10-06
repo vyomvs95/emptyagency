@@ -236,56 +236,122 @@ export const CGI_STUDIES = [
 
   /* ------------------------------------------------------------------ */
   {
-    slug: 'product-cgi',
+    slug: 'luca-chronograph',
     bucket: '3d',
     credit: TEAM,
-    title: 'PRODUCT CGI — WATCHES, HARDWARE & MORE',
-    client: 'LUCA · PROTECTLI · COUGAR · MSWIPE',
-    role: 'Short CGI films for a watch, network hardware, a gaming chair, a wine and a payment device.',
+    title: 'LUCA — CHRONOGRAPH PRODUCT FILM',
+    client: 'LUCA',
+    role: 'Macro CGI film for a chronograph watch.',
     summary:
-      'Short CGI spots across very different products — each lit and animated to show the one thing that matters about it.',
+      'A CGI film that gets closer to a watch than a camera could — dial, bezel and strap in macro, ending on the full watch and the logo.',
     coverAsset: clip('luca-chronograph', 'LUCA chronograph'),
+    caseStudy: {
+      platform: 'CGI PRODUCT FILM',
+      scope: ['3D PRODUCT MODEL', 'LOOK DEVELOPMENT', 'MACRO ANIMATION'],
+      brief:
+        'A watch sells on detail. The film had to make the dial, the bezel and the finish of the strap read as clearly as they do in the hand.',
+      sections: [
+        {
+          kicker: 'THE FILM',
+          title: 'Close enough to read the dial',
+          body: 'The camera moves across the dial, bezel and strap in macro before the full watch lands on the logo.',
+          images: [clip('luca-chronograph', 'LUCA chronograph')],
+        },
+      ],
+      deliverables: ['CGI PRODUCT FILM'],
+    },
+  },
+
+  /* ------------------------------------------------------------------ */
+  {
+    slug: 'protectli-vault-pro',
+    bucket: '3d',
+    credit: TEAM,
+    title: 'PROTECTLI — VAULT PRO VP2410 FILM',
+    client: 'PROTECTLI',
+    role: 'CGI product film for a network appliance.',
+    summary:
+      'A CGI film for the Protectli Vault Pro VP2410 that puts the specs on the product itself — every port labelled, every dimension drawn.',
+    coverAsset: clip('protectli-vault-pro', 'Protectli Vault Pro VP2410'),
+    caseStudy: {
+      platform: 'CGI PRODUCT FILM',
+      scope: ['3D PRODUCT MODEL', 'ANIMATION', 'SPEC GRAPHICS'],
+      brief:
+        'Network hardware is bought on its ports and its size. The film had to show both without a spec sheet.',
+      sections: [
+        {
+          kicker: 'THE FILM',
+          title: 'Specs you can see',
+          body: 'The film labels the ports and draws the dimensions on the box as it turns.',
+          images: [clip('protectli-vault-pro', 'Protectli Vault Pro VP2410')],
+        },
+      ],
+      deliverables: ['CGI PRODUCT FILM'],
+    },
+  },
+
+  /* ------------------------------------------------------------------ */
+  {
+    slug: 'cougar-chair',
+    bucket: '3d',
+    credit: TEAM,
+    title: 'COUGAR — 2023 SERIES CHAIR FILM',
+    client: 'COUGAR',
+    role: 'CGI product film for a gaming chair.',
+    summary:
+      'A CGI film for Cougar’s 2023 series chair that names each material as the camera passes over it.',
+    coverAsset: clip('cougar-chair', 'Cougar 2023 series chair'),
+    caseStudy: {
+      platform: 'CGI PRODUCT FILM',
+      scope: ['3D PRODUCT MODEL', 'MATERIALS', 'ANIMATION', 'ON-SCREEN TYPE'],
+      brief:
+        'Every gaming chair looks alike from across the room. The film had to get close enough to show what this one is made of.',
+      sections: [
+        {
+          kicker: 'THE FILM',
+          title: 'Materials, named on screen',
+          body: 'The camera passes over the chair and calls out its PRIME 2.0 PU leather and cold-cure foam as it goes.',
+          images: [clip('cougar-chair', 'Cougar 2023 series chair')],
+        },
+      ],
+      deliverables: ['CGI PRODUCT FILM'],
+    },
+  },
+
+  /* ------------------------------------------------------------------ */
+  {
+    slug: 'product-spots',
+    bucket: '3d',
+    credit: TEAM,
+    title: 'PRODUCT SPOTS — WINE & PAYMENT DEVICE',
+    client: 'MSWIPE · UNDISCLOSED CLIENT',
+    role: 'Short CGI spots for a red wine and a payment device.',
+    summary:
+      'Two short CGI spots — a slow-motion pour for a red wine, and a Mswipe payment device on a clean set.',
+    coverAsset: clip('red-wine', 'Red wine spot'),
     caseStudy: {
       platform: 'CGI PRODUCT FILMS',
       scope: ['3D PRODUCT MODELS', 'LOOK DEVELOPMENT', 'ANIMATION'],
       brief:
-        'Every product has one detail that sells it. These films find it — the dial of a watch, the ports on a box, the stitching on a chair — and build the shot around it.',
+        'Short spots have one job: one product, one moment, shown so it sticks.',
       sections: [
         {
-          kicker: 'LUXURY',
-          title: 'Close enough to read the dial',
-          body: 'The LUCA chronograph film moves across the dial, bezel and strap in macro before the full watch lands on the logo. A wine spot builds a pour in slow motion to the bottle and the line “red wine since 2003”.',
-          images: [clip('luca-chronograph', 'LUCA chronograph'), clip('red-wine', 'Red wine spot')],
+          kicker: 'WINE',
+          title: 'A pour in slow motion',
+          body: 'The spot builds a pour in slow motion to the bottle and the line “red wine since 2003”.',
+          images: [clip('red-wine', 'Red wine spot')],
         },
         {
-          kicker: 'HARDWARE',
-          title: 'Specs you can see',
-          body: 'The Protectli Vault Pro VP2410 film labels the ports and draws the dimensions on the box; the Cougar chair film names its PRIME 2.0 PU leather and cold-cure foam as the camera passes over them; a Mswipe payment device turns on a clean set.',
-          images: [
-            clip('protectli-vault-pro', 'Protectli Vault Pro VP2410'),
-            clip('cougar-chair', 'Cougar 2023 series chair'),
-            clip('mswipe-pos-stand', 'Mswipe payment device'),
-          ],
+          kicker: 'PAYMENT DEVICE',
+          title: 'A clean turn',
+          body: 'A Mswipe payment device turns on a clean set.',
+          images: [clip('mswipe-pos-stand', 'Mswipe payment device')],
         },
       ],
-      deliverables: ['5 PRODUCT FILMS'],
+      deliverables: ['2 CGI SPOTS'],
     },
   },
 ]
 
-/** Product films grouped into one folder card on Work. */
-export const CGI_FOLDERS = [
-  {
-    slug: 'product-films',
-    bucket: '3d',
-    credit: TEAM,
-    title: 'PRODUCT FILMS — CGI FOR LAUNCHES',
-    client: 'CLEAR X · EUME · STUFFCOOL · LUCA · PROTECTLI · COUGAR',
-    role: 'CGI launch films and social cuts for consumer products and hardware.',
-    summary:
-      'Product films made entirely in 3D — no studio, no reshoots — for phone cases, luggage, chargers, watches and hardware, in landscape for the web and vertical for social.',
-    platform: 'CGI PRODUCT FILMS · 16:9 + 9:16',
-    coverSlug: 'clear-x',
-    children: ['clear-x', 'eume-cabin-pro', 'stuffcool', 'product-cgi'],
-  },
-]
+/** No 3D folders — each product film is its own project, so each gets its own card. */
+export const CGI_FOLDERS = []

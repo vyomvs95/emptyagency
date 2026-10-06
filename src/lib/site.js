@@ -316,23 +316,6 @@ const ALL_PROJECTS = [
     ],
   }),
   project({
-    slug: 'social-nation',
-    bucket: 'motion',
-    title: 'SOCIAL NATION — FESTIVAL IDENTITY',
-    client: 'SOCIAL NATION',
-    role: 'Hand-lettered logo and animated Instagram stickers.',
-    summary:
-      'A hand-lettered logo for the creator festival and a set of animated GIF stickers for its Instagram.',
-    credit: UMAR,
-    assets: [
-      vid(MEDIA.snMakeSomeNoise, 'Sticker — Make Some Noise'),
-      vid(MEDIA.snCheckThisOut, 'Sticker — Check This Out'),
-      vid(MEDIA.snPerformance, 'Sticker — What a Performance'),
-      vid(MEDIA.snYeApna, 'Sticker — Ye Apna Festival Hai'),
-      img(MEDIA.logoSocialNation, 'Logo'),
-    ],
-  }),
-  project({
     slug: 'hyper-octane',
     bucket: 'motion',
     title: 'HYPER OCTANE — LOGO & ANIMATION',
@@ -343,23 +326,6 @@ const ALL_PROJECTS = [
     assets: [
       vid(MEDIA.hyperOctaneLogo, 'Logo animation'),
       img(MEDIA.logoHyperOctane, 'Logo'),
-    ],
-  }),
-  project({
-    slug: 'one-digital',
-    bucket: 'motion',
-    title: 'ONE DIGITAL — STING & ANIMATED STORIES',
-    client: ONE_DIGITAL,
-    agency: ONE_DIGITAL,
-    role: 'Logo sting and animated Instagram stories.',
-    summary:
-      'The network’s animated logo sting, and animated Instagram stories for its film and celebrity pages.',
-    credit: UMAR,
-    assets: [
-      vid(MEDIA.oneDigitalSting, 'Logo sting'),
-      vid(MEDIA.alia40m, 'Alia Bhatt — 40M followers'),
-      vid(MEDIA.smzs, '#FilmsThisMonth — Shubh Mangal Zyada Saavdhan'),
-      vid(MEDIA.ranveerDecade, '#2019Recap — Ranveer Singh'),
     ],
   }),
 
@@ -440,20 +406,6 @@ const ALL_PROJECTS = [
       img(MEDIA.pocketSeat, 'Pocket Seat 2018'),
     ],
   }),
-  project({
-    slug: 'logo-design',
-    bucket: 'graphics',
-    title: 'LOGO DESIGN',
-    client: 'CLUBS, ARTISTS & LABELS',
-    role: 'Logos and monograms.',
-    summary: 'Logos for a cricket club, a singer and a fashion label.',
-    credit: UMAR,
-    assets: [
-      img(MEDIA.logoDangalDawgs, 'Dangal Dawgs Cricket Club'),
-      img(MEDIA.logoShivangi, 'Shivangi Bhayana — monogram'),
-      img(MEDIA.logoShailshri, 'Shailshri Couture'),
-    ],
-  }),
 
   /* ============================= UI/UX DESIGN ============================ */
   /* Long-form case studies — content lives in case-studies.js. A client
@@ -467,7 +419,8 @@ const ALL_PROJECTS = [
     within a bucket the strongest case studies lead (RANK). */
 const RANK = [
   'mswipe', 'v2p', 'enquest-hrms', 'connectify', 'invest-app', 'fuel-card-app', 'ott-app',
-  'all-hub', 'real-estate-visualisation', 'product-films',
+  'all-hub', 'real-estate-visualisation', 'clear-x', 'eume-cabin-pro', 'stuffcool',
+  'luca-chronograph', 'protectli-vault-pro', 'cougar-chair', 'product-spots',
 ]
 const rank = (p) => (RANK.includes(p.slug) ? RANK.indexOf(p.slug) : RANK.length)
 export const PROJECTS = [...ALL_PROJECTS].sort(
@@ -488,7 +441,7 @@ export const FEATURED = [
   bySlug['enquest-hrms'],
   bySlug['all-hub'],
   bySlug['real-estate-visualisation'],
-  bySlug['product-films'],
+  bySlug.stuffcool,
   bySlug['sony-prime-video'],
 ]
 
@@ -501,7 +454,7 @@ export const INDUSTRIES = [
   ['ENTERPRISE SOFTWARE', 'HR systems, dashboards and B2B messaging platforms.', ['enquest-hrms', 'connectify']],
   ['INDUSTRIAL & LOGISTICS', 'Explainer films that make complex operations easy to understand and buy.', ['all-hub']],
   ['REAL ESTATE', 'Walkthroughs, township films and 3D floor plans for developers.', ['real-estate-visualisation']],
-  ['CONSUMER PRODUCTS', 'CGI launch films for accessories, luggage, watches and hardware.', ['product-films']],
+  ['CONSUMER PRODUCTS', 'CGI launch films for accessories, luggage, watches and hardware.', ['clear-x', 'eume-cabin-pro', 'stuffcool', 'luca-chronograph', 'protectli-vault-pro', 'cougar-chair']],
   ['ENTERTAINMENT & MUSIC', 'Campaign films, artwork and lyric videos for artists, labels and studios.', ['elf-tamannaah', 'sony-prime-video', 'osho-jain']],
 ].map(([name, body, slugs]) => ({ name, body, projects: slugs.map((s) => bySlug[s]).filter(Boolean) }))
 

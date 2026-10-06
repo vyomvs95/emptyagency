@@ -60,10 +60,9 @@ export const UIUX = {
   },
   'v2p-platform': {
     'cover': image('v2p-platform/cover', 1600, 1200),
-    'login': image('v2p-platform/login', 2400, 524),
     'onboarding': image('v2p-platform/onboarding', 2400, 971),
     'create-invoice': image('v2p-platform/create-invoice', 1600, 1339),
-    'invoice-approval': image('v2p-platform/invoice-approval', 1600, 932),
+    'invoice-approval': image('v2p-platform/invoice-approval', 1600, 901),
     'bulk-approval': image('v2p-platform/bulk-approval', 1600, 903),
     'confirm-pay': image('v2p-platform/confirm-pay', 2360, 1402),
     'card-payment': image('v2p-platform/card-payment', 1600, 900),
