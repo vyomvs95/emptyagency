@@ -112,6 +112,8 @@ const NativeEngine = forwardRef(function NativeEngine({ src, zoom, onState }, re
       onLoadedMetadata={(e) =>
         onState((s) => ({ ...s, duration: e.currentTarget.duration }))
       }
+      // paused by another player starting (see lib/playback.js) — bring the poster back
+      onPause={() => onState((s) => ({ ...s, playing: false }))}
     />
   )
 })

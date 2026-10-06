@@ -89,14 +89,20 @@ export default function CaseStudy({ project }) {
   const cover = project.assets[0]
   const [open, setOpen] = useState(null)
 
+  // Nothing plays twice on one page: when the cover film is also shown in a
+  // section (every 3D study opens on one of its own films), the section
+  // keeps it — with its explanation — and the cover is not repeated above.
+  const sectionShots = cs.sections.flatMap((sec) => sec.images)
+  const showCover = !sectionShots.some((img) => img.src === cover.src)
+
   // Everything that can expand, in reading order — the lightbox steps through it.
   const coverItem = cover.kind === 'video' ? { ...cover, caption: 'case study // film' } : { ...cover, caption: project.title }
-  const items = [coverItem, ...cs.sections.flatMap((sec) => sec.images)]
+  const items = [...(showCover ? [coverItem] : []), ...sectionShots]
   const expand = (item) => () => setOpen(items.indexOf(item))
 
   return (
     <div>
-      {cover.kind === 'video' ? (
+      {!showCover ? null : cover.kind === 'video' ? (
         <Shot image={coverItem} onExpand={expand(coverItem)} />
       ) : (
         <button type="button" onClick={expand(coverItem)} className="block w-full text-left" data-cursor="[expand]">
@@ -107,7 +113,7 @@ export default function CaseStudy({ project }) {
       )}
 
       {/* THE BRIEF */}
-      <section className="mt-14 border-t border-hair pt-6">
+      <section className={`${showCover ? 'mt-14' : ''} border-t border-hair pt-6`}>
         <span className="label">overview</span>
         <p className="mt-4 max-w-[62ch] text-[clamp(18px,1.7vw,24px)] font-medium leading-[1.35] tracking-[-0.01em]">
           {cs.brief}

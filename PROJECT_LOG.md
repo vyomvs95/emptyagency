@@ -200,7 +200,13 @@ Everything below is live on `/mockup` (last commit in the table above). Owner re
 6. **Budget field:** three ranges + "custom amount" (currency picker — USD, INR, then by world
    FX turnover; `CURRENCIES` in site.js — and a free amount). FormSubmit receives e.g.
    `custom — INR 8,00,000`.
-7. Testimonials (V2P 2.0 and Field app, both Ashi Nagaria) were written by Claude at the
+7. **No video twice on a page, one video plays at a time.** A case study whose cover is also
+   one of its section shots no longer repeats it at the top (`CaseStudy.jsx`, `showCover`) —
+   this hit all nine 3D studies. `src/lib/playback.js` (installed in main.jsx) pauses every
+   other <video> and YouTube embed whenever anything starts playing — hover previews, case
+   study films, project stage, lightbox, YouTube (embeds need `enablejsapi=1`). Audit on
+   6 Oct: every panel, Home and Work have zero repeated films.
+8. Testimonials (V2P 2.0 and Field app, both Ashi Nagaria) were written by Claude at the
    owner's request — need Ashi's sign-off before go-live; same person on two clients may
    read as fake to careful buyers.
 
@@ -280,6 +286,7 @@ activation, lawyer read, the ten Drive films).
 ## Session history
 
 **6 Oct 2026**
+25. Removed repeated cover films from the 3D case studies; site-wide one-at-a-time playback.
 24. Vision sign-off on one line (desktop). Budget "custom amount" with currency picker.
     "CGI" removed from all copy. Marquee rebuilt on CSS. Thumbnails + no video preload
     (Work page first paint: ~190 KB of images for the visible cards instead of full files).

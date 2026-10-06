@@ -5,6 +5,7 @@ import Frame from './Frame.jsx'
 import Lightbox from './Lightbox.jsx'
 import PosterImage from './PosterImage.jsx'
 import { thumbnail } from '../lib/youtube.js'
+import { listenToYouTube } from '../lib/playback.js'
 import { BUCKETS, PROJECTS } from '../lib/site.js'
 import { brandCase } from '../lib/brand.jsx'
 
@@ -77,7 +78,8 @@ function Stage({ asset, onExpand }) {
           <iframe
             key={asset.id}
             title={asset.caption}
-            src={`https://www.youtube-nocookie.com/embed/${asset.id}?autoplay=1&rel=0&playsinline=1`}
+            src={`https://www.youtube-nocookie.com/embed/${asset.id}?autoplay=1&rel=0&playsinline=1&enablejsapi=1`}
+            onLoad={(e) => listenToYouTube(e.currentTarget)}
             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
             allowFullScreen
             className="h-full w-full border-0"
