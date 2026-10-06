@@ -1,7 +1,7 @@
 import { CGI, CGI_STILL } from './cgi-media.js'
 
 /**
- * 3D & CGI CASE STUDIES
+ * 3D CASE STUDIES
  * ----------------------------------------------------------------
  * Built from the "3D" Drive folder (29 Sep 2026): an industrial explainer,
  * real-estate walkthroughs and floor plans, and product films. Same shape
@@ -129,12 +129,12 @@ export const CGI_STUDIES = [
     credit: TEAM,
     title: 'Clear X — clear case launch film',
     client: 'Clear X',
-    role: 'CGI launch film and vertical reel for a clear MagSafe phone case.',
+    role: '3D launch film and vertical reel for a clear MagSafe phone case.',
     summary:
-      'A CGI launch film for a clear phone case, made for web and social, that proves each claim on screen: it stays clear, resists scratches and comes in every colour.',
+      'A 3D launch film for a clear phone case, made for web and social, that proves each claim on screen: it stays clear, resists scratches and comes in every colour.',
     coverAsset: clip('clearx-film', 'Launch film'),
     caseStudy: {
-      platform: 'CGI product film · 16:9 + 9:16',
+      platform: '3D product film · 16:9 + 9:16',
       scope: ['3D product model', 'look development', 'animation', 'edit & type'],
       brief:
         'A clear case looks like every other clear case in a photo. The film had to make the differences visible — the coloured frames, the clarity over time, the scratch resistance.',
@@ -163,12 +163,12 @@ export const CGI_STUDIES = [
     credit: TEAM,
     title: 'EUME Cabin Pro — luggage launch',
     client: 'EUME',
-    role: 'CGI launch film for a cabin suitcase, in landscape and vertical.',
+    role: '3D launch film for a cabin suitcase, in landscape and vertical.',
     summary:
-      'A bright, fast CGI film for the EUME Cabin Pro that walks through its features one close-up at a time, cut for web and for social.',
+      'A bright, fast 3D film for the EUME Cabin Pro that walks through its features one close-up at a time, cut for web and for social.',
     coverAsset: clip('eume-cabin-pro', 'Launch film'),
     caseStudy: {
-      platform: 'CGI product film · 16:9 + 9:16',
+      platform: '3D product film · 16:9 + 9:16',
       scope: ['3D product model', 'set design', 'animation', 'edit & type'],
       brief:
         'A suitcase is sold on details you can’t see in a catalogue photo. The film had to get close enough to show them, and keep the brand’s yellow unmistakable.',
@@ -197,12 +197,12 @@ export const CGI_STUDIES = [
     credit: TEAM,
     title: 'Stuffcool — product film series',
     client: 'Stuffcool',
-    role: 'Seven CGI films across a range of chargers, power banks, cables and cases.',
+    role: 'Seven 3D films across a range of chargers, power banks, cables and cases.',
     summary:
-      'A series of CGI product films for a mobile-accessories brand — one visual system across chargers, power banks, cables and cases, so the whole range feels like one family.',
+      'A series of 3D product films for a mobile-accessories brand — one visual system across chargers, power banks, cables and cases, so the whole range feels like one family.',
     coverAsset: clip('stuffcool-click-duo', 'Click Duo'),
     caseStudy: {
-      platform: 'CGI product films · 7 films',
+      platform: '3D product films · 7 films',
       scope: ['3D product models', 'lighting & materials', 'animation', 'spec graphics'],
       brief:
         'Accessories compete on specs that all sound alike. Each film had to make one or two specs visible — size, wattage, what it charges — and end on the same brand sign-off.',
@@ -241,12 +241,12 @@ export const CGI_STUDIES = [
     credit: TEAM,
     title: 'LUCA — chronograph product film',
     client: 'LUCA',
-    role: 'Macro CGI film for a chronograph watch.',
+    role: 'Macro 3D film for a chronograph watch.',
     summary:
-      'A CGI film that gets closer to a watch than a camera could — dial, bezel and strap in macro, ending on the full watch and the logo.',
+      'A 3D film that gets closer to a watch than a camera could — dial, bezel and strap in macro, ending on the full watch and the logo.',
     coverAsset: clip('luca-chronograph', 'LUCA chronograph'),
     caseStudy: {
-      platform: 'CGI product film',
+      platform: '3D product film',
       scope: ['3D product model', 'look development', 'macro animation'],
       brief:
         'A watch sells on detail. The film had to make the dial, the bezel and the finish of the strap read as clearly as they do in the hand.',
@@ -258,7 +258,7 @@ export const CGI_STUDIES = [
           images: [clip('luca-chronograph', 'LUCA chronograph')],
         },
       ],
-      deliverables: ['CGI product film'],
+      deliverables: ['3D product film'],
     },
   },
 
@@ -269,12 +269,12 @@ export const CGI_STUDIES = [
     credit: TEAM,
     title: 'Protectli — Vault Pro VP2410 film',
     client: 'Protectli',
-    role: 'CGI product film for a network appliance.',
+    role: '3D product film for a network appliance.',
     summary:
-      'A CGI film for the Protectli Vault Pro VP2410 that puts the specs on the product itself — every port labelled, every dimension drawn.',
+      'A 3D film for the Protectli Vault Pro VP2410 that puts the specs on the product itself — every port labelled, every dimension drawn.',
     coverAsset: clip('protectli-vault-pro', 'Protectli Vault Pro VP2410'),
     caseStudy: {
-      platform: 'CGI product film',
+      platform: '3D product film',
       scope: ['3D product model', 'animation', 'spec graphics'],
       brief:
         'Network hardware is bought on its ports and its size. The film had to show both without a spec sheet.',
@@ -286,7 +286,7 @@ export const CGI_STUDIES = [
           images: [clip('protectli-vault-pro', 'Protectli Vault Pro VP2410')],
         },
       ],
-      deliverables: ['CGI product film'],
+      deliverables: ['3D product film'],
     },
   },
 
@@ -297,12 +297,12 @@ export const CGI_STUDIES = [
     credit: TEAM,
     title: 'Cougar — 2023 series chair film',
     client: 'Cougar',
-    role: 'CGI product film for a gaming chair.',
+    role: '3D product film for a gaming chair.',
     summary:
-      'A CGI film for Cougar’s 2023 series chair that names each material as the camera passes over it.',
+      'A 3D film for Cougar’s 2023 series chair that names each material as the camera passes over it.',
     coverAsset: clip('cougar-chair', 'Cougar 2023 series chair'),
     caseStudy: {
-      platform: 'CGI product film',
+      platform: '3D product film',
       scope: ['3D product model', 'materials', 'animation', 'on-screen type'],
       brief:
         'Every gaming chair looks alike from across the room. The film had to get close enough to show what this one is made of.',
@@ -314,7 +314,7 @@ export const CGI_STUDIES = [
           images: [clip('cougar-chair', 'Cougar 2023 series chair')],
         },
       ],
-      deliverables: ['CGI product film'],
+      deliverables: ['3D product film'],
     },
   },
 
@@ -325,12 +325,12 @@ export const CGI_STUDIES = [
     credit: TEAM,
     title: 'product spots — wine & payment device',
     client: 'Mswipe · undisclosed client',
-    role: 'Short CGI spots for a red wine and a payment device.',
+    role: 'Short 3D spots for a red wine and a payment device.',
     summary:
-      'Two short CGI spots — a slow-motion pour for a red wine, and a Mswipe payment device on a clean set.',
+      'Two short 3D spots — a slow-motion pour for a red wine, and a Mswipe payment device on a clean set.',
     coverAsset: clip('red-wine', 'Red wine spot'),
     caseStudy: {
-      platform: 'CGI product films',
+      platform: '3D product films',
       scope: ['3D product models', 'look development', 'animation'],
       brief:
         'Short spots have one job: one product, one moment, shown so it sticks.',
@@ -348,7 +348,7 @@ export const CGI_STUDIES = [
           images: [clip('mswipe-pos-stand', 'Mswipe payment device')],
         },
       ],
-      deliverables: ['2 CGI spots'],
+      deliverables: ['two 3D spots'],
     },
   },
 ]

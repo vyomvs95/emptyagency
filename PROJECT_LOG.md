@@ -50,7 +50,7 @@ process, real outcome/quote where the client allows) and weaker older pieces are
   first, on purpose) → marquee → Selected work (Mswipe, enQuest, All Hub, Real estate,
   Product films, Sony) → Services → Industries (each links to its projects) → Brands
   (15 names) → FAQ → "Let's talk".
-- **Work:** **35 cards** in 5 buckets — UI/UX 7 · 3D & CGI 9 · Film 10 · Motion 4 ·
+- **Work:** **35 cards** in 5 buckets — UI/UX 7 · 3D 9 · Film 10 · Motion 4 ·
   Graphics 5 — in an even 4:3 grid that reads left to right in priority order. A card
   opens the project panel (`#/archive/<slug>`); case studies open as long-form pages,
   **folders** (Mswipe, V2P) list chapters. 3D has no folders — each product film is its own card. The panel opens **under the main nav**,
@@ -180,6 +180,33 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 
 ---
 
+## Where we left off — 6 Oct 2026 (read this first)
+
+Everything below is live on `/mockup` (last commit in the table above). Owner reviews there;
+`/` is still the holding page. The rules now in force:
+
+1. **No all-caps anywhere**, lowercase labels/nav/titles, names and acronyms keep capitals.
+2. **No "CGI" anywhere** — the discipline is just **3D** (filter "3D", service "3D design",
+   "3D product film"…). Code names (`cgi-media.js`, `CGI_STUDIES`) are internal and stay.
+3. **● tab icon** on every page (sources in `public/`).
+4. **Thumbnails first:** every image in `public/media` has a `.thumb.webp` (640px, q60).
+   The grid shows the thumb, fetches the full file on first hover (on touch: when it scrolls
+   into view) — `PosterImage.jsx`. **After adding any media, run
+   `python3 scripts/media/gen-thumbs.py`.** Grid films use `preload="none"` (nothing streams
+   until hover).
+5. **Marquee** is a CSS keyframe animation (`.marquee-track` in index.css) — it used to be
+   Framer Motion and froze on devices with "reduce motion" on and stuttered on phones; now
+   it never stops (slows to 1/3 speed under reduce-motion).
+6. **Budget field:** three ranges + "custom amount" (currency picker — USD, INR, then by world
+   FX turnover; `CURRENCIES` in site.js — and a free amount). FormSubmit receives e.g.
+   `custom — INR 8,00,000`.
+7. Testimonials (V2P 2.0 and Field app, both Ashi Nagaria) were written by Claude at the
+   owner's request — need Ashi's sign-off before go-live; same person on two clients may
+   read as fake to careful buyers.
+
+Still open from before: the owner-input list under *Open items* (credits, NDA check, form
+activation, lawyer read, the ten Drive films).
+
 ## Decisions worth remembering
 
 - **No all-caps anywhere (6 Oct, owner's rule).** Every label, nav item, button, title and
@@ -253,6 +280,9 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 ## Session history
 
 **6 Oct 2026**
+24. Vision sign-off on one line (desktop). Budget "custom amount" with currency picker.
+    "CGI" removed from all copy. Marquee rebuilt on CSS. Thumbnails + no video preload
+    (Work page first paint: ~190 KB of images for the visible cards instead of full files).
 23. All-caps removed site-wide (~560 strings, labels, nav, titles, holding page) and the tab
     icon added on every page — see Decisions.
 22. Case audit (computed styles, every page): service names, the three steps, industries and

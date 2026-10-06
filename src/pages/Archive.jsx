@@ -63,7 +63,7 @@ export default function ArchivePage({ onOpenProject }) {
           </div>
           <div className="col-span-12 lg:col-span-4">
             <p className="max-w-[40ch] text-[14px] leading-[1.55] text-muted md:text-[15px]">
-              {PROJECTS.length} projects across UI/UX design, 3D and CGI, film,
+              {PROJECTS.length} projects across UI/UX design, 3D, film,
               motion and graphics — for fintech, enterprise, industrial, real
               estate, consumer and entertainment brands. Case studies open in
               full; client folders hold every product we designed for them.

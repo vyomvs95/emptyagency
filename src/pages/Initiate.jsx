@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Block, Container, SectionHeader } from '../components/Section.jsx'
 import Reveal from '../components/Reveal.jsx'
-import { BUDGETS, EMAIL, FORM_ENDPOINT } from '../lib/site.js'
+import { BUDGETS, CURRENCIES, EMAIL, FORM_ENDPOINT } from '../lib/site.js'
 
 /**
  * START A PROJECT (route: initiate)
@@ -46,9 +46,17 @@ function PromptRow({ index, prompt, error, message = 'please fill this in', chil
 }
 
 /* --------------------------- DROPDOWN ---------------------------- */
+const CUSTOM = 'custom amount'
+
 function BudgetSelect({ value, onChange, error }) {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
+  // A custom budget is an amount in any currency; the form receives it as
+  // one line, e.g. "custom — INR 8,00,000", and stays empty until typed.
+  const [custom, setCustom] = useState(false)
+  const [currency, setCurrency] = useState('USD')
+  const [amount, setAmount] = useState('')
+  const emit = (cur, amt) => onChange(amt.trim() ? `custom — ${cur} ${amt.trim()}` : '')
 
   useEffect(() => {
     if (!open) return
@@ -76,10 +84,10 @@ function BudgetSelect({ value, onChange, error }) {
         style={{ borderColor: error ? 'var(--c-signal)' : 'var(--c-hair)' }}
       >
         <span className="flex items-baseline gap-[2px]">
-          <span style={{ color: value ? 'var(--c-ink)' : 'var(--c-muted)' }}>
-            {value ? `[ ${value} ]` : 'choose a range'}
+          <span style={{ color: value || custom ? 'var(--c-ink)' : 'var(--c-muted)' }}>
+            {custom ? `[ ${CUSTOM} ]` : value ? `[ ${value} ]` : 'choose a range'}
           </span>
-          <Caret show={!value && !open} />
+          <Caret show={!value && !custom && !open} />
         </span>
         <motion.span
           animate={{ rotate: open ? 180 : 0 }}
@@ -100,12 +108,18 @@ function BudgetSelect({ value, onChange, error }) {
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: [0.2, 0, 0, 1] }}
           >
-            {BUDGETS.map((b, i) => (
-              <li key={b} role="option" aria-selected={value === b}>
+            {[...BUDGETS, CUSTOM].map((b, i) => (
+              <li key={b} role="option" aria-selected={b === CUSTOM ? custom : value === b}>
                 <button
                   type="button"
                   onClick={() => {
-                    onChange(b)
+                    if (b === CUSTOM) {
+                      setCustom(true)
+                      emit(currency, amount)
+                    } else {
+                      setCustom(false)
+                      onChange(b)
+                    }
                     setOpen(false)
                   }}
                   data-cursor="[Select This Range]"
@@ -116,7 +130,7 @@ function BudgetSelect({ value, onChange, error }) {
                 >
                   <span>[ {b} ]</span>
                   <span className="label" style={{ color: 'inherit', opacity: 0.6 }}>
-                    {value === b ? 'selected' : ''}
+                    {(b === CUSTOM ? custom : !custom && value === b) ? 'selected' : ''}
                   </span>
                 </button>
               </li>
@@ -124,6 +138,46 @@ function BudgetSelect({ value, onChange, error }) {
           </motion.ul>
         )}
       </AnimatePresence>
+
+      {custom && (
+        <div className="mt-5 flex items-end gap-4">
+          <label className="flex shrink-0 flex-col gap-2">
+            <span className="label">currency</span>
+            <select
+              value={currency}
+              onChange={(e) => {
+                setCurrency(e.target.value)
+                emit(e.target.value, amount)
+              }}
+              data-cursor="[Choose Currency]"
+              className="border-b border-hair bg-transparent pb-3 text-[15px] md:text-[17px]"
+              style={{ color: 'var(--c-ink)' }}
+            >
+              {CURRENCIES.map(([code, sign]) => (
+                <option key={code} value={code} style={{ background: 'var(--c-void)' }}>
+                  {code} {sign !== code ? sign : ''}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="flex min-w-0 flex-1 flex-col gap-2">
+            <span className="label">amount</span>
+            <input
+              type="text"
+              inputMode="decimal"
+              value={amount}
+              placeholder="e.g. 15,000"
+              onChange={(e) => {
+                setAmount(e.target.value)
+                emit(currency, e.target.value)
+              }}
+              data-cursor="[Type Here]"
+              className="w-full border-b bg-transparent pb-3 text-[15px] tracking-[0.01em] placeholder:text-[var(--c-muted)] md:text-[17px]"
+              style={{ caretColor: 'var(--c-accent)', borderColor: error ? 'var(--c-signal)' : 'var(--c-hair)' }}
+            />
+          </label>
+        </div>
+      )}
     </div>
   )
 }

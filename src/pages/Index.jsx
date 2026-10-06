@@ -76,7 +76,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                   ['studio', 'empty agency'],
                   ['founded', '2026'],
                   ['where', 'working worldwide'],
-                  ['we do', 'UI/UX · 3D & CGI · film · motion · graphics'],
+                  ['we do', 'UI/UX · 3D · film · motion · graphics'],
                 ].map(([k, v]) => (
                   <div key={k} className="flex items-baseline justify-between gap-4">
                     <span className="label">{k}</span>
@@ -183,7 +183,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
           <Reveal className="mt-14" delay={0.1}>
             <div className="flex flex-col items-start gap-5 border-t border-hair pt-6 md:flex-row md:items-center md:justify-between">
               <p className="max-w-[46ch] text-[16px] leading-[1.45] text-muted md:text-[18px]">
-                {PROJECTS.length} projects across UI/UX design, 3D and CGI, film,
+                {PROJECTS.length} projects across UI/UX design, 3D, film,
                 motion and graphics — each one opens as a full case study or with
                 everything we made for it.
               </p>

@@ -1,5 +1,5 @@
 /**
- * 3D & CGI MEDIA — GENERATED from the "3D" Drive folder (29 Sep 2026).
+ * 3D MEDIA — GENERATED from the "3D" Drive folder (29 Sep 2026).
  * Films re-encoded to H.264 ≤1280px with a -poster.webp still; long films
  * (All Hub, Romaa Majestic) are cut into chapter clips. Stills are WebP.
  * Files live in public/media/cgi/.

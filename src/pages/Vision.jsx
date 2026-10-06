@@ -168,7 +168,7 @@ export default function VisionPage({ onNavigate }) {
           <div className="flex flex-col items-start justify-between gap-6 border-t border-hair pt-8 md:flex-row md:items-end">
             <div>
               <span className="label">end_of_manifesto</span>
-              <p className="mt-3 max-w-[20ch] text-[clamp(26px,4vw,52px)] font-medium leading-[0.98] tracking-[-0.04em]">
+              <p className="mt-3 text-[clamp(26px,3.6vw,52px)] font-medium leading-[0.98] tracking-[-0.04em] md:whitespace-nowrap">
                 Nothing to remove. Only what remains.
               </p>
             </div>

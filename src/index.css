@@ -324,3 +324,25 @@
     transition: none;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/*  MARQUEE — compositor-driven, never stops                           */
+/* ------------------------------------------------------------------ */
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.marquee-track {
+  animation: marquee var(--marquee-duration, 26s) linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation-duration: calc(var(--marquee-duration, 26s) * 3);
+  }
+}

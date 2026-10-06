@@ -98,7 +98,9 @@ const NativeEngine = forwardRef(function NativeEngine({ src, zoom, onState }, re
       muted
       loop
       playsInline
-      preload="metadata"
+      // Nothing streams until someone hovers — a grid of 18 films would
+      // otherwise fetch every file's header on first load.
+      preload="none"
       tabIndex={-1}
       className={`${MEDIA_FILTER} object-cover`}
       animate={{ scale: zoom ? 1.05 : 1 }}

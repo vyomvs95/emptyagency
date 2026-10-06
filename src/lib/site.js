@@ -41,7 +41,7 @@ export const ROUTE_IDS = ROUTES.map((r) => r.id)
 export const BUCKETS = [
   { id: 'all', label: 'all work', tech: 'show_all' },
   { id: 'uiux', label: 'UI/UX design', tech: 'interface' },
-  { id: '3d', label: '3D & CGI', tech: 'render' },
+  { id: '3d', label: '3D', tech: 'render' },
   { id: 'videos', label: 'film', tech: 'footage' },
   { id: 'motion', label: 'motion', tech: 'kinetic' },
   { id: 'graphics', label: 'graphics', tech: 'static' },
@@ -454,7 +454,7 @@ export const INDUSTRIES = [
   ['enterprise software', 'HR systems, dashboards and B2B messaging platforms.', ['enquest-hrms', 'connectify']],
   ['industrial & logistics', 'Explainer films that make complex operations easy to understand and buy.', ['all-hub']],
   ['real estate', 'Walkthroughs, township films and 3D floor plans for developers.', ['real-estate-visualisation']],
-  ['consumer products', 'CGI launch films for accessories, luggage, watches and hardware.', ['clear-x', 'eume-cabin-pro', 'stuffcool', 'luca-chronograph', 'protectli-vault-pro', 'cougar-chair']],
+  ['consumer products', '3D launch films for accessories, luggage, watches and hardware.', ['clear-x', 'eume-cabin-pro', 'stuffcool', 'luca-chronograph', 'protectli-vault-pro', 'cougar-chair']],
   ['entertainment & music', 'Campaign films, artwork and lyric videos for artists, labels and studios.', ['elf-tamannaah', 'sony-prime-video', 'osho-jain']],
 ].map(([name, body, slugs]) => ({ name, body, projects: slugs.map((s) => bySlug[s]).filter(Boolean) }))
 
@@ -480,7 +480,7 @@ export const BRANDS = [
 export const FAQ = [
   [
     'What does empty agency do?',
-    'UI/UX design for apps, platforms and websites; 3D and CGI — product films, explainers, walkthroughs and renders; and the film, motion and graphic design that launch them. Because it is one team, everything we make for a brand feels like it belongs together.',
+    'UI/UX design for apps, platforms and websites; 3D — product films, explainers, walkthroughs and renders; and the film, motion and graphic design that launch them. Because it is one team, everything we make for a brand feels like it belongs together.',
   ],
   [
     'How does a project run?',
@@ -542,7 +542,7 @@ export const PILLARS = [
   },
   {
     index: '02',
-    title: '3D & CGI',
+    title: '3D design',
     tech: 'render',
     body: 'Product films, industrial explainers, real-estate walkthroughs, 3D floor plans and photoreal renders — so a product or a place can be seen, understood and sold before it exists.',
     outputs: ['product films', 'explainer films', 'walkthroughs & floor plans', 'photoreal renders'],
@@ -591,7 +591,7 @@ export const PIPELINE = [
 /*  MISC                                                               */
 /* ------------------------------------------------------------------ */
 export const MARQUEE_TEXT =
-  '// UI/UX design // 3D & CGI // film // motion // graphic design // we clear the clutter '
+  '// UI/UX design // 3D // film // motion // graphic design // we clear the clutter '
 
 /** The studio's one inbox. Shown on the site and where every enquiry lands. */
 export const EMAIL = 'marketing@emptyagency.com'
@@ -611,3 +611,17 @@ export const SOCIALS = [
 ]
 
 export const BUDGETS = ['$10k - $25k', '$25k - $50k', '$50k+']
+
+/**
+ * Currencies for a custom budget: US dollar first, Indian rupee second,
+ * then the rest in order of how widely they are traded worldwide.
+ */
+export const CURRENCIES = [
+  ['USD', '$'], ['INR', '₹'], ['EUR', '€'], ['JPY', '¥'], ['GBP', '£'], ['CNY', '¥'],
+  ['AUD', 'A$'], ['CAD', 'C$'], ['CHF', 'Fr'], ['HKD', 'HK$'], ['SGD', 'S$'], ['SEK', 'kr'],
+  ['KRW', '₩'], ['NOK', 'kr'], ['NZD', 'NZ$'], ['MXN', 'Mex$'], ['ZAR', 'R'], ['BRL', 'R$'],
+  ['AED', 'AED'], ['SAR', 'SAR'], ['TRY', '₺'], ['PLN', 'zł'], ['DKK', 'kr'], ['THB', '฿'],
+  ['MYR', 'RM'], ['IDR', 'Rp'], ['TWD', 'NT$'], ['PHP', '₱'], ['ILS', '₪'], ['QAR', 'QAR'],
+  ['CZK', 'Kč'], ['HUF', 'Ft'], ['KWD', 'KWD'], ['BHD', 'BHD'], ['OMR', 'OMR'], ['LKR', 'Rs'],
+  ['BDT', '৳'], ['NPR', 'Rs'], ['PKR', 'Rs'], ['EGP', 'E£'], ['NGN', '₦'], ['KES', 'KSh'],
+]
