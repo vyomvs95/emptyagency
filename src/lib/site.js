@@ -79,6 +79,8 @@ const csImages = (c) => c.caseStudy.sections.flatMap((sec) => sec.images.map((i)
 const CS = Object.fromEntries(STUDIES.map((c) => [c.slug, c]))
 const IN_FOLDER = new Set(ALL_FOLDERS.flatMap((f) => f.children))
 const withDefaults = (c) => ({ bucket: 'uiux', credit: UIUX_CREDIT, ...c })
+/** Each piece once — a cover that is also a section shot is not counted twice. */
+const unique = (assets) => assets.filter((a, i) => assets.findIndex((b) => b.src === a.src) === i)
 
 const CASE_PROJECTS = [
   ...ALL_FOLDERS.map((f) => {
@@ -87,12 +89,12 @@ const CASE_PROJECTS = [
     return {
       ...withDefaults(f),
       chapters,
-      assets: [cover, ...chapters.flatMap((c) => [c.cover, ...csImages(c)])],
+      assets: unique([cover, ...chapters.flatMap((c) => [c.cover, ...csImages(c)])]),
     }
   }),
   ...STUDIES.filter((c) => !IN_FOLDER.has(c.slug)).map((c) => ({
     ...withDefaults(c),
-    assets: [studyCover(c), ...csImages(c)],
+    assets: unique([studyCover(c), ...csImages(c)]),
   })),
 ].map((p) => ({ ...p, cover: p.assets[0] }))
 
