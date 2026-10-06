@@ -41,7 +41,7 @@ export default function Lightbox({ items, index, onIndex }) {
 
   const tall = item && item.kind !== 'video' && item.h / item.w > 1.6
   const btn =
-    'border border-hair px-3 py-[7px] text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]'
+    'border border-hair px-3 py-[7px] text-[10px] font-medium tracking-[0.08em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]'
 
   return createPortal(
     <AnimatePresence>
@@ -76,7 +76,7 @@ export default function Lightbox({ items, index, onIndex }) {
                     <button
                       type="button"
                       className={btn}
-                      data-cursor="[PREVIOUS · ←]"
+                      data-cursor="[previous · ←]"
                       onClick={() => onIndex((index - 1 + items.length) % items.length)}
                     >
                       [ ← ]
@@ -84,7 +84,7 @@ export default function Lightbox({ items, index, onIndex }) {
                     <button
                       type="button"
                       className={btn}
-                      data-cursor="[NEXT · →]"
+                      data-cursor="[next · →]"
                       onClick={() => onIndex((index + 1) % items.length)}
                     >
                       [ → ]
@@ -95,10 +95,10 @@ export default function Lightbox({ items, index, onIndex }) {
                   type="button"
                   onClick={() => onIndex(null)}
                   data-cursor="[Close · Esc]"
-                  className="border px-3 py-[7px] text-[10px] font-medium uppercase tracking-[0.16em]"
+                  className="border px-3 py-[7px] text-[10px] font-medium tracking-[0.08em]"
                   style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
                 >
-                  [ CLOSE ✕ ]
+                  [ close ✕ ]
                 </button>
               </div>
             </div>

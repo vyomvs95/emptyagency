@@ -265,7 +265,7 @@ export default function KineticPlayer({
   const metaNode = placeholder ? (
     <>
       {meta}
-      <span style={{ color: 'var(--c-signal)' }}> // PLACEHOLDER</span>
+      <span style={{ color: 'var(--c-signal)' }}> // placeholder</span>
       {credit && <span> © {credit}</span>}
     </>
   ) : (
@@ -313,7 +313,7 @@ export default function KineticPlayer({
               className={`block size-[6px] rounded-full ${playing ? 'pulse-dot' : 'opacity-30'}`}
               style={{ background: 'var(--c-signal)' }}
             />
-            <span className="label label-ink">{playing ? 'PLAYING' : 'PAUSED'}</span>
+            <span className="label label-ink">{playing ? 'playing' : 'paused'}</span>
           </div>
 
           {/* TIMECODE */}

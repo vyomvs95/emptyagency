@@ -33,6 +33,12 @@ if (phase === 'clean') {
 
   cpSync(SHELL, DIST, { recursive: true })
 
+  // The tab icon lives in public/ (so it survives going live) and is served
+  // from the root, where every page — holding page, /mockup, /mail — links it.
+  for (const f of ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png']) {
+    cpSync(join(DIST, 'mockup', f), join(DIST, f))
+  }
+
   const root = readdirSync(DIST).sort().join('  ')
   console.log(`· holding page → dist/index.html`)
   console.log(`· mockup       → dist/mockup/`)

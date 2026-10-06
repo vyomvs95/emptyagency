@@ -182,12 +182,16 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 
 ## Decisions worth remembering
 
-- **Type case rules (6 Oct).** Brand name **always lowercase** — "empty agency", even inside
-  uppercase labels (`brandCase()` in `src/lib/brand.jsx`), on the stamp, letterhead and mail.
-  Display headlines are lowercase (hero, page h1s, closing statements — via the `lowercase`
-  class, text itself untouched). Labels/nav stay UPPERCASE (the wireframe annotation layer).
-  Body copy, quotes and client names are sentence case with proper capitals (UI/UX, 3D, B2B,
-  ELF…) — never force-lowercase body text again. Project titles stay uppercase (they carry names).
+- **No all-caps anywhere (6 Oct, owner's rule).** Every label, nav item, button, title and
+  tag is lowercase; only names and acronyms keep their own capitals (UI/UX, 3D, CGI, ELF, V2P,
+  GST, Mswipe, Sony Pictures…). Body copy and quotes are sentence case. The brand is always
+  "empty agency". `.label` no longer transforms case (tracking 0.08em), and there are no
+  `uppercase` classes left — write new strings in the case they should display in.
+  The holding page (`construction/index.html`) follows the same rule.
+- **Tab icon (6 Oct).** ● black circle (the logo mark) with a pale rim that only reads on dark
+  tab bars. Source files live in `public/` (favicon.svg, favicon.ico, apple-touch-icon.png) so
+  they survive going live; `scripts/dist.mjs` copies them to the site root, and every page
+  links `/favicon.svg` + `/favicon.ico`. Any new page must include the same `<link rel="icon">` tags.
 
 - **Portfolio is a living set (29 Sep).** As new projects come in, each gets a full case
   study (brief, process, outcome with real numbers or quotes where the client allows),
@@ -249,6 +253,8 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 ## Session history
 
 **6 Oct 2026**
+23. All-caps removed site-wide (~560 strings, labels, nav, titles, holding page) and the tab
+    icon added on every page — see Decisions.
 22. Case audit (computed styles, every page): service names, the three steps, industries and
     the Vision "A/B/C" list were display-size caps → lowercase (acronyms kept: UI/UX, 3D & CGI).
     noscript brand lowercase. Left in caps on purpose: labels/nav/marquee, project titles.

@@ -12,14 +12,14 @@ import { CGI_FOLDERS, CGI_STUDIES } from './cgi-case-studies.js'
  * stays readable and the technical character lives in the cursor.
  */
 export const ROUTES = [
-  { id: 'index', label: 'HOME', tech: 'INDEX', path: '/' },
-  { id: 'archive', label: 'WORK', tech: 'ARCHIVE', path: '/archive' },
-  { id: 'capabilities', label: 'SERVICES', tech: 'CAPABILITIES', path: '/capabilities' },
-  { id: 'vision', label: 'ABOUT US', tech: 'VISION', path: '/vision' },
+  { id: 'index', label: 'home', tech: 'index', path: '/' },
+  { id: 'archive', label: 'work', tech: 'archive', path: '/archive' },
+  { id: 'capabilities', label: 'services', tech: 'capabilities', path: '/capabilities' },
+  { id: 'vision', label: 'about us', tech: 'vision', path: '/vision' },
   {
     id: 'initiate',
-    label: 'START A PROJECT ↗',
-    tech: 'INITIATE',
+    label: 'start a project ↗',
+    tech: 'initiate',
     path: '/initiate',
     cta: true,
   },
@@ -39,12 +39,12 @@ export const ROUTE_IDS = ROUTES.map((r) => r.id)
  * `label` is printed; `tech` is the original name, shown in the cursor.
  */
 export const BUCKETS = [
-  { id: 'all', label: 'ALL WORK', tech: 'SHOW_ALL' },
-  { id: 'uiux', label: 'UI/UX DESIGN', tech: 'INTERFACE' },
-  { id: '3d', label: '3D & CGI', tech: 'RENDER' },
-  { id: 'videos', label: 'FILM', tech: 'FOOTAGE' },
-  { id: 'motion', label: 'MOTION', tech: 'KINETIC' },
-  { id: 'graphics', label: 'GRAPHICS', tech: 'STATIC' },
+  { id: 'all', label: 'all work', tech: 'show_all' },
+  { id: 'uiux', label: 'UI/UX design', tech: 'interface' },
+  { id: '3d', label: '3D & CGI', tech: 'render' },
+  { id: 'videos', label: 'film', tech: 'footage' },
+  { id: 'motion', label: 'motion', tech: 'kinetic' },
+  { id: 'graphics', label: 'graphics', tech: 'static' },
 ]
 
 /** Priority order used everywhere: UI/UX first, then 3D, then the rest. */
@@ -53,9 +53,9 @@ export const PRIORITY = ['uiux', '3d', 'videos', 'motion', 'graphics']
 /** Kept for the cursor/filters, which still speak of categories. */
 export const CATEGORIES = BUCKETS
 
-const UMAR = 'DESIGN: UMAR KHAN / WORLD STYLE'
-const TEAM = 'EMPTY AGENCY CORE TEAM'
-const ONE_DIGITAL = 'ONE DIGITAL ENTERTAINMENT'
+const UMAR = 'design: Umar Khan / World Style'
+const TEAM = 'empty agency core team'
+const ONE_DIGITAL = 'One Digital Entertainment'
 
 /* asset helpers — every piece carries a caption for the panel */
 const img = (m, caption) => ({ kind: 'image', ...m, caption })
@@ -107,8 +107,8 @@ const ALL_PROJECTS = [
     slug: 'elf-tamannaah',
     hero: true,
     bucket: 'videos',
-    title: 'ELF × TAMANNAAH — 2026 JEWELLERY CAMPAIGN',
-    client: 'ELF · TAMANNAAH BHATIA',
+    title: 'ELF × Tamannaah — 2026 jewellery campaign',
+    client: 'ELF · Tamannaah Bhatia',
     role: 'Campaign film and social cut-downs across three looks.',
     summary:
       'A jewellery campaign starring Tamannaah Bhatia, shot across three looks — Denim, Glam and Slim Green — and cut for every screen, horizontal and vertical.',
@@ -126,8 +126,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'tmc',
     bucket: 'videos',
-    title: 'TMC — TALENT MANAGEMENT COMPANY',
-    client: 'TMC TALENT MANAGEMENT COMPANY',
+    title: 'TMC — talent management company',
+    client: 'TMC talent management company',
     role: 'Company reel and artist showreels for the agency roster.',
     summary:
       'The agency’s own company reel and showreels for the artists it represents — anchors, hosts and performers — cut for bookings and events.',
@@ -142,8 +142,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'adil-hussaini',
     bucket: 'videos',
-    title: 'ADIL HUSSAINI — SUFI SINGER',
-    client: 'ADIL HUSSAINI',
+    title: 'Adil Hussaini — Sufi singer',
+    client: 'Adil Hussaini',
     role: 'Performance showreels and a music release.',
     summary:
       'Showreels for the Sufi singer’s live act, and the release of his love song Daayera.',
@@ -157,8 +157,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'event-soul',
     bucket: 'videos',
-    title: 'EVENT SOUL — WEDDING PLANNER',
-    client: 'EVENT SOUL',
+    title: 'Event Soul — wedding planner',
+    client: 'Event Soul',
     role: 'Planner showreel and a destination wedding song.',
     summary:
       'The wedding planner’s 2024 showreel, and a wedding song film shot at a destination wedding in Bahrain.',
@@ -171,8 +171,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'shaarib-toshi-live',
     bucket: 'videos',
-    title: 'SHAARIB & TOSHI — REELS & LIVE',
-    client: 'SHAARIB & TOSHI',
+    title: 'Shaarib & Toshi — reels & live',
+    client: 'Shaarib & Toshi',
     role: 'Music showreel, live-show films and an award reel.',
     summary:
       'The composer duo’s music showreel, films of their live shows in Kolkata, Rajkot and Udaipur, and an award-nomination reel.',
@@ -189,8 +189,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'wedding-films',
     bucket: 'videos',
-    title: 'WEDDING FILMS',
-    client: 'PRIVATE CLIENTS',
+    title: 'wedding films',
+    client: 'private clients',
     role: 'Wedding trailers, highlight films and ceremony edits.',
     summary:
       'Trailers and highlight films from weddings — the mehndi, the baraat, the ceremony and the gift song.',
@@ -207,8 +207,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'event-aftermovies',
     bucket: 'videos',
-    title: 'EVENT AFTERMOVIES',
-    client: 'EVENTS & VENUES',
+    title: 'event aftermovies',
+    client: 'events & venues',
     role: 'Aftermovies and reels from concerts, parties and nights out.',
     summary:
       'Fast-cut aftermovies from live events — a Dubai Atlantis event, Bollywood club nights, New Year’s Eve and Republic Day shows.',
@@ -223,8 +223,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'artist-showreels',
     bucket: 'videos',
-    title: 'ARTIST SHOWREELS',
-    client: 'PERFORMERS & HOSTS',
+    title: 'artist showreels',
+    client: 'performers & hosts',
     role: 'Showreels for singers, hosts and performing acts.',
     summary:
       'Showreels cut for performers and hosts to book live shows, weddings and corporate events.',
@@ -241,8 +241,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'jab-tu-meri-na-rahi',
     bucket: 'videos',
-    title: 'JAB TU MERI NA RAHI — TEASER',
-    client: 'MUSIC RELEASE',
+    title: 'Jab Tu Meri Na Rahi — teaser',
+    client: 'music release',
     role: 'Teaser for the music video.',
     summary: 'The teaser cut for the music video, released ahead of the song.',
     credit: TEAM,
@@ -251,8 +251,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'pasandida-ladies',
     bucket: 'videos',
-    title: 'PASANDIDA LADIES — EP. 6',
-    client: 'JANICE SEQUEIRA',
+    title: 'Pasandida Ladies — Ep. 6',
+    client: 'Janice Sequeira',
     role: 'Episode edit for the interview series.',
     summary:
       'An episode of Janice Sequeira’s interview series, with Karishma Kewalramani on building FAE Beauty.',
@@ -264,8 +264,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'osho-jain',
     bucket: 'motion',
-    title: 'OSHO JAIN — LYRIC VIDEOS',
-    client: 'OSHO JAIN',
+    title: 'Osho Jain — lyric videos',
+    client: 'Osho Jain',
     role: 'A series of ten painted lyric videos.',
     summary:
       'Ten lyric videos for the singer-songwriter, each built around a single painted, slowly moving scene.',
@@ -286,8 +286,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'vb-music',
     bucket: 'motion',
-    title: 'VB MUSIC — MASK KHO GAYA & DHOOP AANE DO',
-    client: 'VB MUSIC · VISHAL BHARDWAJ',
+    title: 'VB Music — Mask Kho Gaya & Dhoop Aane Do',
+    client: 'VB Music · Vishal Bhardwaj',
     agency: ONE_DIGITAL,
     role: 'Label logo, illustrated and animated song posters.',
     summary:
@@ -304,8 +304,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'zindagi',
     bucket: 'motion',
-    title: 'ZINDAGI — CARRYMINATI × WILY FRENZY',
-    client: 'CARRYMINATI × WILY FRENZY',
+    title: 'Zindagi — CarryMinati × Wily Frenzy',
+    client: 'CarryMinati × Wily Frenzy',
     agency: ONE_DIGITAL,
     role: 'Release poster and its motion version.',
     summary: 'The release poster for the single, and the animated version made for launch.',
@@ -318,8 +318,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'hyper-octane',
     bucket: 'motion',
-    title: 'HYPER OCTANE — LOGO & ANIMATION',
-    client: 'HYPER OCTANE',
+    title: 'Hyper Octane — logo & animation',
+    client: 'Hyper Octane',
     role: 'Logo design and its animated reveal.',
     summary: 'A logo for Hyper Octane, and the animated reveal built from it.',
     credit: UMAR,
@@ -333,8 +333,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'sony-prime-video',
     bucket: 'graphics',
-    title: 'SONY PICTURES — PRIME VIDEO THUMBNAILS',
-    client: 'SONY PICTURES',
+    title: 'Sony Pictures — Prime Video thumbnails',
+    client: 'Sony Pictures',
     agency: ONE_DIGITAL,
     role: 'Streaming thumbnails for the film catalogue.',
     summary: 'Thumbnails for Sony Pictures films on Prime Video.',
@@ -348,8 +348,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'badshah',
     bucket: 'graphics',
-    title: 'BADSHAH — ILZAAM & THE POWER OF DREAMS',
-    client: 'BADSHAH',
+    title: 'Badshah — Ilzaam & The Power of Dreams',
+    client: 'Badshah',
     agency: ONE_DIGITAL,
     role: 'Cover artwork and song posters.',
     summary: 'Cover artwork for Ilzaam and the poster for The Power of Dreams.',
@@ -362,8 +362,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'song-artwork',
     bucket: 'graphics',
-    title: 'SONG ARTWORK — SELECTED COVERS',
-    client: 'ARTISTS & LABELS',
+    title: 'song artwork — selected covers',
+    client: 'artists & labels',
     role: 'Cover artwork for singles across Punjabi, hip-hop and indie.',
     summary:
       'A selection of single covers — Indian Wine, Sanju, Rangreza, Musafir, Rona Pai Gaya and Diamond.',
@@ -380,8 +380,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'youtube-thumbnails',
     bucket: 'graphics',
-    title: 'YOUTUBE THUMBNAILS & MILESTONES',
-    client: 'ARTISTS & CREATORS',
+    title: 'YouTube thumbnails & milestones',
+    client: 'artists & creators',
     role: 'Thumbnails and milestone posts for music and creator channels.',
     summary: 'Thumbnails for music videos, and posts celebrating view milestones.',
     credit: UMAR,
@@ -394,8 +394,8 @@ const ALL_PROJECTS = [
   project({
     slug: 'design-competitions',
     bucket: 'graphics',
-    title: 'DESIGN COMPETITION CAMPAIGNS',
-    client: 'UNBOX 2017 · POCKET SEAT 2018',
+    title: 'design competition campaigns',
+    client: 'UNBOX 2017 · Pocket Seat 2018',
     role: 'Launch and countdown posters for international competitions.',
     summary:
       'Poster campaigns for two international design competitions — the UNBOX 2017 architecture competition, with its daily countdown series, and Pocket Seat 2018.',
@@ -467,9 +467,9 @@ export const INDUSTRIES = [
  * page says right under the grid.
  */
 export const BRANDS = [
-  'MSWIPE', 'ETISALAT UTAP', 'V2P', 'ENQUEST ERP', 'CONNECTIFY',
-  'AMFICO', 'STUFFCOOL', 'EUME', 'LUCA', 'PROTECTLI',
-  'ELF', 'SONY PICTURES', 'BADSHAH', 'VB MUSIC', 'CARRYMINATI',
+  'Mswipe', 'Etisalat UTap', 'V2P', 'enQuest ERP', 'Connectify',
+  'AMFICO', 'Stuffcool', 'EUME', 'LUCA', 'Protectli',
+  'ELF', 'Sony Pictures', 'Badshah', 'VB Music', 'CarryMinati',
 ]
 
 /**
@@ -523,12 +523,12 @@ export const RIGHTS_NOTICE =
 /*  CAPABILITIES                                                       */
 /* ------------------------------------------------------------------ */
 export const STACK = [
-  { id: 'FIGMA', name: 'FIGMA', human: 'UI/UX Design' },
-  { id: 'BLENDER', name: 'BLENDER', human: '3D Modeling' },
-  { id: 'AFTER_EFFECTS', name: 'AFTER EFFECTS', human: 'Motion Software' },
-  { id: 'PREMIERE_PRO', name: 'PREMIERE PRO', human: 'Video Editing' },
-  { id: 'PHOTOSHOP', name: 'PHOTOSHOP', human: 'Image Editing' },
-  { id: 'ILLUSTRATOR', name: 'ILLUSTRATOR', human: 'Logos & Vector Art' },
+  { id: 'FIGMA', name: 'Figma', human: 'UI/UX design' },
+  { id: 'BLENDER', name: 'Blender', human: '3D modelling' },
+  { id: 'AFTER_EFFECTS', name: 'After Effects', human: 'motion software' },
+  { id: 'PREMIERE_PRO', name: 'Premiere Pro', human: 'video editing' },
+  { id: 'PHOTOSHOP', name: 'Photoshop', human: 'image editing' },
+  { id: 'ILLUSTRATOR', name: 'Illustrator', human: 'logos & vector art' },
 ]
 
 /** `title` is printed; `tech` is the original name, shown in the cursor tag. */
@@ -536,54 +536,54 @@ export const PILLARS = [
   {
     index: '01',
     title: 'UI/UX design',
-    tech: 'INTERFACE',
+    tech: 'interface',
     body: 'Mobile apps, web platforms, dashboards and websites — from research and user flows to wireframes, a design system and developer-ready screens.',
-    outputs: ['MOBILE APPS', 'WEB APPS & DASHBOARDS', 'WEBSITES', 'DESIGN SYSTEMS'],
+    outputs: ['mobile apps', 'web apps & dashboards', 'websites', 'design systems'],
   },
   {
     index: '02',
     title: '3D & CGI',
-    tech: 'RENDER',
+    tech: 'render',
     body: 'Product films, industrial explainers, real-estate walkthroughs, 3D floor plans and photoreal renders — so a product or a place can be seen, understood and sold before it exists.',
-    outputs: ['PRODUCT FILMS', 'EXPLAINER FILMS', 'WALKTHROUGHS & FLOOR PLANS', 'PHOTOREAL RENDERS'],
+    outputs: ['product films', 'explainer films', 'walkthroughs & floor plans', 'photoreal renders'],
   },
   {
     index: '03',
     title: 'video & motion',
-    tech: 'KINETIC',
+    tech: 'kinetic',
     body: 'Campaign films and their cut-downs, showreels, event films, lyric videos and motion graphics — edited for the screen they will be watched on.',
-    outputs: ['CAMPAIGN FILMS', 'SHOWREELS & EVENTS', 'LYRIC VIDEOS', 'MOTION GRAPHICS'],
+    outputs: ['campaign films', 'showreels & events', 'lyric videos', 'motion graphics'],
   },
   {
     index: '04',
     title: 'graphic design',
-    tech: 'STATIC',
+    tech: 'static',
     body: 'Film and song artwork, thumbnails, social campaigns, posters and logos — built to be recognised at a glance and hold together across every format.',
-    outputs: ['SONG ARTWORK', 'THUMBNAILS', 'SOCIAL POSTS', 'LOGOS'],
+    outputs: ['song artwork', 'thumbnails', 'social posts', 'logos'],
   },
 ]
 
 export const PIPELINE = [
   {
-    step: 'STEP 1',
+    step: 'step 1',
     title: 'simplify.',
-    tech: 'SUBTRACT',
+    tech: 'subtract',
     body: 'We talk through your idea and narrow it down to what really matters. Nothing extra.',
-    duration: '1 WEEK',
+    duration: '1 week',
   },
   {
-    step: 'STEP 2',
+    step: 'step 2',
     title: 'plan.',
-    tech: 'WIREFRAME',
+    tech: 'wireframe',
     body: 'We lay out the structure first and make sure it works before anything gets styled.',
-    duration: '2–3 WEEKS',
+    duration: '2–3 weeks',
   },
   {
-    step: 'STEP 3',
+    step: 'step 3',
     title: 'build.',
-    tech: 'RENDER',
+    tech: 'render',
     body: 'We design and deliver the finished work: artwork, animation, video, 3D or a product ready for development.',
-    duration: '4–8 WEEKS',
+    duration: '4–8 weeks',
   },
 ]
 
@@ -591,7 +591,7 @@ export const PIPELINE = [
 /*  MISC                                                               */
 /* ------------------------------------------------------------------ */
 export const MARQUEE_TEXT =
-  '// UI/UX DESIGN // 3D & CGI // FILM // MOTION // GRAPHIC DESIGN // WE CLEAR THE CLUTTER '
+  '// UI/UX design // 3D & CGI // film // motion // graphic design // we clear the clutter '
 
 /** The studio's one inbox. Shown on the site and where every enquiry lands. */
 export const EMAIL = 'marketing@emptyagency.com'
@@ -605,8 +605,8 @@ export const EMAIL = 'marketing@emptyagency.com'
 export const FORM_ENDPOINT = `https://formsubmit.co/ajax/${EMAIL}`
 
 export const SOCIALS = [
-  { label: 'DRIBBBLE', human: 'Dribbble', href: 'https://dribbble.com' },
-  { label: 'LINKEDIN', human: 'LinkedIn', href: 'https://linkedin.com' },
+  { label: 'Dribbble', human: 'Dribbble', href: 'https://dribbble.com' },
+  { label: 'LinkedIn', human: 'LinkedIn', href: 'https://linkedin.com' },
   { label: 'X', human: 'X (Twitter)', href: 'https://x.com' },
 ]
 

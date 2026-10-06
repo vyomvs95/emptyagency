@@ -27,7 +27,7 @@ export default function Marquee({
           <span
             key={i}
             aria-hidden={i === 1}
-            className="shrink-0 pr-0 text-[13px] font-medium uppercase tracking-[0.18em] md:text-[15px]"
+            className="shrink-0 pr-0 text-[13px] font-medium tracking-[0.08em] md:text-[15px]"
           >
             {strip}
           </span>

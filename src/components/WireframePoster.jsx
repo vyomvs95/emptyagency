@@ -224,7 +224,7 @@ function TypeSpecimen() {
       <span className="relative select-none text-[clamp(48px,18vw,150px)] font-medium leading-none tracking-[-0.05em]">
         Aa
       </span>
-      <span className="label absolute bottom-[6%] left-[4%]">X-HEIGHT // BASELINE // CAP</span>
+      <span className="label absolute bottom-[6%] left-[4%]">x-height // baseline // cap</span>
     </div>
   )
 }
@@ -268,7 +268,7 @@ function BaselineGrid() {
           <line key={yy} x1="0" y1={yy} x2="100" y2={yy} stroke="var(--c-hair-soft)" strokeWidth="1" {...stroke} />
         ))}
       </svg>
-      <span className="label absolute bottom-[4%] left-[4%]">12_COL // 8PT_BASELINE</span>
+      <span className="label absolute bottom-[4%] left-[4%]">12_col // 8pt_baseline</span>
     </div>
   )
 }
@@ -289,7 +289,7 @@ function VideoPlate() {
         <svg width="9" height="11" viewBox="0 0 9 11" fill="var(--c-ink)">
           <path d="M0 0 L9 5.5 L0 11 Z" />
         </svg>
-        <span className="label label-ink">HOVER TO PLAY</span>
+        <span className="label label-ink">hover to play</span>
       </div>
     </div>
   )

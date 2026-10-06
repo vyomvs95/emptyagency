@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>empty agency // under construction</title>
     <meta
       name="description"
@@ -146,8 +149,7 @@
       .label {
         font-size: 10px;
         line-height: 1.4;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
+        letter-spacing: 0.08em;
         font-weight: 500;
         color: var(--c-muted);
       }
@@ -715,8 +717,8 @@
       <div class="status">
         <div class="gutter shell">
           <div class="status__row">
-            <span class="label label-ink">ROOT / — BUILD_IN_PROGRESS</span>
-            <span class="label tnum status__vp" id="viewport">VIEWPORT: —</span>
+            <span class="label label-ink">root / — build_in_progress</span>
+            <span class="label tnum status__vp" id="viewport">viewport: —</span>
           </div>
         </div>
       </div>
@@ -729,7 +731,7 @@
           <div class="frame__label">
             <span class="rec">
               <span class="rec__dot" aria-hidden="true"></span>
-              <span class="label label-ink">SITE_UNDER_CONSTRUCTION</span>
+              <span class="label label-ink">site_under_construction</span>
             </span>
             <span class="label">01 / 01</span>
           </div>
@@ -740,7 +742,7 @@
             <span class="anchor anchor--bl" aria-hidden="true"></span>
             <span class="anchor anchor--br" aria-hidden="true"></span>
 
-            <span class="label">STATUS_READOUT</span>
+            <span class="label">status_readout</span>
 
             <h1>
               we clear<br />the clutter<span class="caret" aria-hidden="true"
@@ -760,9 +762,9 @@
               </div>
               <div class="loader__meta">
                 <span class="label" role="status"
-                  >LOADING<span class="ellipsis" id="ellipsis">...</span></span
+                  >loading<span class="ellipsis" id="ellipsis">...</span></span
                 >
-                <span class="label">AVAILABLE_SOON</span>
+                <span class="label">available_soon</span>
               </div>
             </div>
           </div>
@@ -777,12 +779,12 @@
           <div class="footer__left">
             <span class="rec">
               <span class="pulse-dot" aria-hidden="true"></span>
-              <span class="label label-ink">STATUS: BUILDING</span>
+              <span class="label label-ink">status: building</span>
             </span>
             <span class="label">//</span>
-            <span class="label label-ink tnum" id="clock">LOCAL_TIME: —</span>
+            <span class="label label-ink tnum" id="clock">local_time: —</span>
           </div>
-          <span class="label">© 2026 EMPTY AGENCY</span>
+          <span class="label">© 2026 empty agency</span>
         </div>
       </div>
     </footer>
@@ -821,7 +823,7 @@
 
         /* ---------------- CLOCK ---------------- */
         var clock = document.getElementById('clock')
-        var zone = 'LOCAL'
+        var zone = 'local'
         try {
           var tz = Intl.DateTimeFormat().resolvedOptions().timeZone
           if (tz) zone = tz.split('/').pop().toUpperCase()
@@ -829,7 +831,7 @@
 
         function tick() {
           clock.textContent =
-            'LOCAL_TIME: ' +
+            'local_time: ' +
             new Date().toLocaleTimeString('en-GB', {
               hour: '2-digit',
               minute: '2-digit',
@@ -846,7 +848,7 @@
         var vp = document.getElementById('viewport')
         function sync() {
           vp.textContent =
-            'VIEWPORT: ' + window.innerWidth + ' × ' + window.innerHeight
+            'viewport: ' + window.innerWidth + ' × ' + window.innerHeight
         }
         sync()
         window.addEventListener('resize', sync)

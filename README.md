@@ -80,6 +80,8 @@ Move the SPA back to the root when the work is ready:
 2. `package.json` — `"build": "vite build"`
 3. delete `construction/`, `scripts/dist.mjs`, and the `/mockup` header blocks
    in `vercel.json`
+   (keep the tab icon: it lives in `public/`, so it lands at the root on its own — the
+   `<link rel="icon">` tags in `index.html` already point at `/favicon.svg`)
 4. add `{"source": "/(.*)", "destination": "/index.html"}` under `rewrites`
    only if you also move off hash routing
 

@@ -51,19 +51,19 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                 <button
                   type="button"
                   onClick={() => onNavigate('vision')}
-                  data-cursor="[OUR VISION]"
-                  className="border px-5 py-[11px] text-[11px] font-medium uppercase tracking-[0.16em] transition-colors duration-200"
+                  data-cursor="[our vision]"
+                  className="border px-5 py-[11px] text-[11px] font-medium tracking-[0.08em] transition-colors duration-200"
                   style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
                 >
-                  [ WHO WE ARE — OUR VISION → ]
+                  [ who we are — our vision → ]
                 </button>
                 <button
                   type="button"
                   onClick={() => onNavigate('archive')}
-                  data-cursor="[VIEW_ARCHIVE]"
-                  className="border border-hair px-5 py-[11px] text-[11px] font-medium uppercase tracking-[0.16em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
+                  data-cursor="[view_archive]"
+                  className="border border-hair px-5 py-[11px] text-[11px] font-medium tracking-[0.08em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
                 >
-                  [ SEE OUR WORK ]
+                  [ see our work ]
                 </button>
 
               </motion.div>
@@ -73,10 +73,10 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
             <div className="col-span-12 lg:col-span-3 lg:pt-4">
               <div className="flex flex-col gap-3 border-t border-hair pt-3">
                 {[
-                  ['STUDIO', 'EMPTY AGENCY'],
-                  ['FOUNDED', '2026'],
-                  ['WHERE', 'WORKING WORLDWIDE'],
-                  ['WE DO', 'UI/UX · 3D & CGI · FILM · MOTION · GRAPHICS'],
+                  ['studio', 'empty agency'],
+                  ['founded', '2026'],
+                  ['where', 'working worldwide'],
+                  ['we do', 'UI/UX · 3D & CGI · film · motion · graphics'],
                 ].map(([k, v]) => (
                   <div key={k} className="flex items-baseline justify-between gap-4">
                     <span className="label">{k}</span>
@@ -101,7 +101,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
               <KineticPlayer
                 src={HERO_FILM.src}
                 image={HERO_FILM.poster}
-                label={`FEATURED PROJECT // ${HERO.title}`}
+                label={`featured project // ${HERO.title}`}
                 dims={`${HERO_FILM.w} × ${HERO_FILM.h}`}
                 ratio={`${HERO_FILM.w} / ${HERO_FILM.h}`}
                 onClick={() => onOpenProject(HERO.slug)}
@@ -115,7 +115,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
               transition={{ duration: 0.7, delay: 0.6 }}
             >
               <div className="border-t border-hair pt-3">
-                <span className="label label-ink">FEATURED PROJECT</span>
+                <span className="label label-ink">featured project</span>
                 <h2 className="mt-3 text-[clamp(22px,2.2vw,32px)] font-medium leading-[1.05] tracking-[-0.03em]">
                   {HERO.title}
                 </h2>
@@ -124,10 +124,10 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                 </p>
                 <div className="mt-6 flex flex-col gap-[10px]">
                   {[
-                    ['CLIENT', HERO.client],
-                    ['WHAT WE DID', 'CAMPAIGN FILM + CUT-DOWNS'],
-                    ['PIECES', String(HERO.assets.length).padStart(2, '0')],
-                    ['HOW TO WATCH', 'HOVER TO PREVIEW'],
+                    ['client', HERO.client],
+                    ['what we did', 'campaign film + cut-downs'],
+                    ['pieces', String(HERO.assets.length).padStart(2, '0')],
+                    ['how to watch', 'hover to preview'],
                   ].map(([k, v]) => (
                     <div
                       key={k}
@@ -141,11 +141,11 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                 <button
                   type="button"
                   onClick={() => onOpenProject(HERO.slug)}
-                  data-cursor="[OPEN PROJECT]"
-                  className="mt-6 w-full border px-5 py-[12px] text-[11px] font-medium uppercase tracking-[0.16em]"
+                  data-cursor="[open project]"
+                  className="mt-6 w-full border px-5 py-[12px] text-[11px] font-medium tracking-[0.08em]"
                   style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
                 >
-                  [ WATCH THE FULL FILM ↗ ]
+                  [ watch the full film ↗ ]
                 </button>
               </div>
             </motion.div>
@@ -168,8 +168,8 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
         <Container>
           <SectionHeader
             index="01"
-            title="SELECTED WORK"
-            meta={`${String(FEATURED.length).padStart(2, '0')} PROJECTS // UI/UX · 3D · FILM`}
+            title="selected work"
+            meta={`${String(FEATURED.length).padStart(2, '0')} projects // UI/UX · 3D · film`}
           />
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-14 md:grid-cols-2">
@@ -190,10 +190,10 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
               <button
                 type="button"
                 onClick={() => onNavigate('archive')}
-                data-cursor="[OPEN_ARCHIVE]"
-                className="shrink-0 border border-hair px-5 py-[11px] text-[11px] font-medium uppercase tracking-[0.16em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
+                data-cursor="[open_archive]"
+                className="shrink-0 border border-hair px-5 py-[11px] text-[11px] font-medium tracking-[0.08em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
               >
-                [ SEE ALL OUR WORK ↗ ]
+                [ see all our work ↗ ]
               </button>
             </div>
           </Reveal>
@@ -203,7 +203,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
       {/* ========================= SERVICES ========================= */}
       <Block className="mt-24 md:mt-32">
         <Container>
-          <SectionHeader index="02" title="SERVICES" meta={`${String(PILLARS.length).padStart(2, '0')} SERVICES`} />
+          <SectionHeader index="02" title="services" meta={`${String(PILLARS.length).padStart(2, '0')} services`} />
           <div className="mt-6 flex flex-col">
             {PILLARS.map((p, i) => (
               <Reveal key={p.index} delay={i * 0.05}>
@@ -230,7 +230,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
       {/* ======================== INDUSTRIES ======================== */}
       <Block className="mt-24 md:mt-32">
         <Container>
-          <SectionHeader index="03" title="INDUSTRIES" meta={`${String(INDUSTRIES.length).padStart(2, '0')} SECTORS`} />
+          <SectionHeader index="03" title="industries" meta={`${String(INDUSTRIES.length).padStart(2, '0')} sectors`} />
           <div className="mt-6 grid grid-cols-1 border-l border-t border-hair-soft md:grid-cols-2 lg:grid-cols-3">
             {INDUSTRIES.map((ind) => (
               <div key={ind.name} className="flex flex-col gap-4 border-b border-r border-hair-soft p-6">
@@ -242,8 +242,8 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                       key={p.slug}
                       type="button"
                       onClick={() => onOpenProject(p.slug)}
-                      data-cursor={p.chapters ? '[OPEN FOLDER]' : p.caseStudy ? '[READ CASE STUDY]' : '[OPEN PROJECT]'}
-                      className="border border-hair px-3 py-[6px] text-[10px] font-medium uppercase tracking-[0.14em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
+                      data-cursor={p.chapters ? '[open folder]' : p.caseStudy ? '[read case study]' : '[open project]'}
+                      className="border border-hair px-3 py-[6px] text-[10px] font-medium tracking-[0.08em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
                     >
                       {p.title.split(' — ')[0]} ↗
                     </button>
@@ -258,12 +258,12 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
       {/* ========================== BRANDS ========================== */}
       <Block className="mt-24 md:mt-32">
         <Container>
-          <SectionHeader index="04" title="BRANDS OUR WORK HAS BEEN MADE FOR" meta={`${String(BRANDS.length).padStart(2, '0')} NAMES`} />
+          <SectionHeader index="04" title="brands our work has been made for" meta={`${String(BRANDS.length).padStart(2, '0')} names`} />
           <ul className="mt-6 grid grid-cols-2 border-l border-t border-hair-soft sm:grid-cols-3 lg:grid-cols-5">
             {BRANDS.map((b) => (
               <li
                 key={b}
-                className="flex min-h-[92px] items-center justify-center border-b border-r border-hair-soft px-4 text-center text-[13px] font-medium uppercase tracking-[0.08em]"
+                className="flex min-h-[92px] items-center justify-center border-b border-r border-hair-soft px-4 text-center text-[13px] font-medium tracking-[0.08em]"
               >
                 {b}
               </li>
@@ -275,12 +275,12 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
       {/* ============================ FAQ ============================ */}
       <Block className="mt-24 md:mt-32">
         <Container>
-          <SectionHeader index="05" title="QUESTIONS WE GET ASKED" meta={`${String(FAQ.length).padStart(2, '0')} ANSWERS`} />
+          <SectionHeader index="05" title="questions we get asked" meta={`${String(FAQ.length).padStart(2, '0')} answers`} />
           <div className="mt-6 flex flex-col border-b border-hair">
             {FAQ.map(([q, a]) => (
               <details key={q} className="group border-t border-hair py-5">
                 <summary
-                  data-cursor="[OPEN]"
+                  data-cursor="[open]"
                   className="flex cursor-pointer list-none items-baseline justify-between gap-6 text-[clamp(18px,1.8vw,24px)] font-medium tracking-[-0.02em] [&::-webkit-details-marker]:hidden"
                 >
                   {q}
@@ -304,11 +304,11 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
             <button
               type="button"
               onClick={() => onNavigate('initiate')}
-              data-cursor="[SYSTEM.INITIATE_PROJECT()]"
-              className="border px-6 py-[13px] text-[11px] font-medium uppercase tracking-[0.16em]"
+              data-cursor="[system.initiate_project()]"
+              className="border px-6 py-[13px] text-[11px] font-medium tracking-[0.08em]"
               style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
             >
-              [ START A PROJECT ↗ ]
+              [ start a project ↗ ]
             </button>
           </div>
           <RuleIn />

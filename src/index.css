@@ -132,12 +132,12 @@
 /*  UTILITIES                                                          */
 /* ------------------------------------------------------------------ */
 @layer utilities {
-  /* Every structural label in the system: uppercase, tracked, tiny. */
+  /* Every structural label in the system: lowercase, tracked, tiny.
+     No all-caps anywhere — names and acronyms keep their own capitals. */
   .label {
     font-size: 10px;
     line-height: 1.4;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    letter-spacing: 0.08em;
     font-weight: 500;
     color: var(--c-muted);
   }

@@ -40,12 +40,12 @@ function Stage({ asset, onExpand }) {
   const sizing = { width: `min(100%, calc(64vh * ${w} / ${h}))` }
   const label =
     asset.kind === 'youtube'
-      ? 'VIDEO // PLAYS HERE'
+      ? 'video // plays here'
       : asset.kind === 'video'
         ? asset.excerpt
-          ? 'FILM // EXCERPT'
-          : 'FILM'
-        : 'STILL'
+          ? 'film // excerpt'
+          : 'film'
+        : 'still'
 
   return (
     <div className="mx-auto" style={sizing}>
@@ -54,9 +54,9 @@ function Stage({ asset, onExpand }) {
         dims={`${w} × ${h}`}
         ratio={`${w} / ${h}`}
         zoom={false}
-        cursor={asset.kind === 'image' ? '[EXPAND]' : '[PLAYING HERE]'}
+        cursor={asset.kind === 'image' ? '[expand]' : '[playing here]'}
         onClick={asset.kind === 'image' ? onExpand : undefined}
-        meta={asset.kind === 'image' ? 'EXPAND ↗' : undefined}
+        meta={asset.kind === 'image' ? 'expand ↗' : undefined}
         boxClassName="bg-void"
       >
         {asset.kind === 'image' && (
@@ -159,34 +159,34 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
           <div className="sticky top-0 z-10 border-b border-hair bg-void/90 backdrop-blur-[6px]">
             <div className="gutter mx-auto flex h-[58px] w-full max-w-[1680px] items-center justify-between gap-4">
               <span className="label hidden truncate sm:inline">
-                WORK // {BUCKET[project.bucket].label} // PROJECT{' '}
-                {String(index + 1).padStart(2, '0')} OF {String(PROJECTS.length).padStart(2, '0')}
+                work // {BUCKET[project.bucket].label} // project{' '}
+                {String(index + 1).padStart(2, '0')} of {String(PROJECTS.length).padStart(2, '0')}
               </span>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={() => onOpen(prev.slug)}
                   data-cursor={`[${prev.title}]`}
-                  className="border border-hair px-3 py-[7px] text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
+                  className="border border-hair px-3 py-[7px] text-[10px] font-medium tracking-[0.08em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
                 >
-                  [ ← PREV ]
+                  [ ← prev ]
                 </button>
                 <button
                   type="button"
                   onClick={() => onOpen(next.slug)}
                   data-cursor={`[${next.title}]`}
-                  className="border border-hair px-3 py-[7px] text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
+                  className="border border-hair px-3 py-[7px] text-[10px] font-medium tracking-[0.08em] transition-colors duration-200 hover:border-[var(--c-accent)] hover:text-[var(--c-accent)]"
                 >
-                  [ NEXT → ]
+                  [ next → ]
                 </button>
                 <button
                   type="button"
                   onClick={onClose}
                   data-cursor="[Close · Esc]"
-                  className="border px-3 py-[7px] text-[10px] font-medium uppercase tracking-[0.16em]"
+                  className="border px-3 py-[7px] text-[10px] font-medium tracking-[0.08em]"
                   style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
                 >
-                  [ CLOSE ✕ ]
+                  [ close ✕ ]
                 </button>
               </div>
             </div>
@@ -198,8 +198,8 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
               <div className="col-span-12 self-start lg:sticky lg:top-[82px] lg:col-span-4">
                 <span className="label">
                   {BUCKET[project.bucket].label}
-                  {project.caseStudy && ' // CASE STUDY'}
-                  {chapters && ` // FOLDER // ${String(chapters.length).padStart(2, '0')} CASE STUDIES`}
+                  {project.caseStudy && ' // case study'}
+                  {chapters && ` // folder // ${String(chapters.length).padStart(2, '0')} case studies`}
                 </span>
                 <h2 className="mt-3 text-[clamp(30px,4.2vw,64px)] font-medium leading-[0.95] tracking-[-0.04em]">
                   {project.title}
@@ -210,14 +210,14 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
 
                 <div className="mt-8 flex flex-col border-t border-hair">
                   {[
-                    ['CLIENT', project.client],
-                    ...(study ? [['PLATFORM', project.platform ?? project.caseStudy.platform]] : []),
-                    ['WHAT WE DID', project.role],
-                    ...(study?.caseStudy?.status ? [['STATUS', `● ${study.caseStudy.status}`]] : []),
-                    ...(chapters ? [['CASE STUDIES', String(chapters.length).padStart(2, '0')]] : []),
-                    [study ? (project.bucket === '3d' ? 'FILMS & STILLS' : 'SCREENS & BOARDS') : 'PIECES', String(project.assets.length).padStart(2, '0')],
-                    ['CREDIT', project.credit],
-                    ...(project.agency ? [['VIA', project.agency]] : []),
+                    ['client', project.client],
+                    ...(study ? [['platform', project.platform ?? project.caseStudy.platform]] : []),
+                    ['what we did', project.role],
+                    ...(study?.caseStudy?.status ? [['status', `● ${study.caseStudy.status}`]] : []),
+                    ...(chapters ? [['case studies', String(chapters.length).padStart(2, '0')]] : []),
+                    [study ? (project.bucket === '3d' ? 'films & stills' : 'screens & boards') : 'pieces', String(project.assets.length).padStart(2, '0')],
+                    ['credit', project.credit],
+                    ...(project.agency ? [['via', project.agency]] : []),
                   ].map(([k, v]) => (
                     <div
                       key={k}
@@ -235,7 +235,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
               <div className="col-span-12 lg:col-span-8">
                 {chapters && (
                   <nav aria-label="Case studies in this folder" className="mb-12">
-                    <span className="label label-ink">IN THIS FOLDER</span>
+                    <span className="label label-ink">in this folder</span>
                     <ol className="mt-3 grid grid-cols-1 border-t border-hair sm:grid-cols-2">
                       {chapters.map((c, i) => (
                         <li key={c.slug} className="border-b border-hair-soft sm:odd:border-r sm:odd:pr-4 sm:even:pl-4">
@@ -248,7 +248,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
                             style={{ color: i === chapter ? 'var(--c-accent)' : undefined }}
                           >
                             <span className="label tnum shrink-0">{String(i + 1).padStart(2, '0')}</span>
-                            <span className="text-[12px] font-medium uppercase leading-[1.35] tracking-[0.04em]">
+                            <span className="text-[12px] font-medium leading-[1.35] tracking-[0.04em]">
                               {c.title}
                             </span>
                           </button>
@@ -263,7 +263,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
                     {chapters && (
                       <div className="mb-8">
                         <span className="label tnum">
-                          CASE STUDY {String(chapter + 1).padStart(2, '0')} OF {String(chapters.length).padStart(2, '0')} // {study.caseStudy.platform}
+                          case study {String(chapter + 1).padStart(2, '0')} of {String(chapters.length).padStart(2, '0')} // {study.caseStudy.platform}
                         </span>
                         <h3 className="mt-3 text-[clamp(26px,3vw,44px)] font-medium leading-[0.98] tracking-[-0.035em]">
                           {study.title}
@@ -276,11 +276,11 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
                       <button
                         type="button"
                         onClick={() => openChapter(chapter + 1)}
-                        data-cursor="[NEXT CASE STUDY]"
+                        data-cursor="[next case study]"
                         className="mt-16 flex w-full items-baseline justify-between gap-6 border-t border-hair pt-5 text-left transition-colors duration-200 hover:text-[var(--c-accent)]"
                       >
-                        <span className="label">NEXT IN THIS FOLDER</span>
-                        <span className="text-[clamp(18px,2vw,28px)] font-medium uppercase tracking-[-0.02em]">
+                        <span className="label">next in this folder</span>
+                        <span className="text-[clamp(18px,2vw,28px)] font-medium tracking-[-0.02em]">
                           {chapters[chapter + 1].title} →
                         </span>
                       </button>
@@ -293,7 +293,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
                 {!study && project.assets.length > 1 && (
                   <div className="mt-12">
                     <div className="flex items-center justify-between border-b border-hair-soft pb-[6px]">
-                      <span className="label label-ink">EVERY PIECE IN THIS PROJECT</span>
+                      <span className="label label-ink">every piece in this project</span>
                       <span className="label tnum">
                         {String(active + 1).padStart(2, '0')} / {String(project.assets.length).padStart(2, '0')} // ← →
                       </span>

@@ -29,8 +29,8 @@ export default function Footer() {
     hour12: false,
   })
   const zone =
-    Intl.DateTimeFormat().resolvedOptions().timeZone?.split('/').pop()?.toUpperCase() ??
-    'LOCAL'
+    Intl.DateTimeFormat().resolvedOptions().timeZone?.split('/').pop()?.replace(/_/g, ' ') ??
+    'local'
 
   return (
     <footer className="relative z-10 mt-32 w-full border-t border-hair bg-void">
@@ -43,11 +43,11 @@ export default function Footer() {
                 className="pulse-dot block size-[6px] rounded-full"
                 style={{ background: 'var(--c-accent)' }}
               />
-              <span className="label label-ink">WE&apos;RE ONLINE</span>
+              <span className="label label-ink">we&apos;re online</span>
             </span>
             <span className="label">//</span>
             <span className="tnum label label-ink">
-              YOUR TIME: {time} {zone}
+              your time: {time} {zone}
             </span>
           </div>
 
@@ -70,7 +70,7 @@ export default function Footer() {
             <span className="block h-px w-8 bg-hair" />
           </div>
           <span className="label opacity-60">
-            ALL RIGHTS RESERVED
+            all rights reserved
           </span>
           <p className="mt-2 max-w-[110ch] text-center text-[10px] leading-[1.6] text-muted opacity-80">
             {RIGHTS_NOTICE}

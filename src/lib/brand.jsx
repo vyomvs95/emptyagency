@@ -1,7 +1,7 @@
 /**
- * The studio's name is always lowercase — "empty agency" — even inside the
- * uppercase labels. `brandCase` keeps the rest of a label as it is and
- * lifts the name out of the label's text-transform.
+ * The studio's name is always lowercase — "empty agency". Nothing on the site
+ * is set in caps any more, so this is a guard: wherever a label value might
+ * spell the name in capitals, `brandCase` forces it back to lowercase.
  */
 const NAME = /(empty agency)/i
 

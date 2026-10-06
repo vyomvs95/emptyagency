@@ -24,11 +24,11 @@ export default function CapabilitiesPage({ onNavigate }) {
         {/* TITLE */}
         <div className="grid grid-cols-12 items-end gap-x-6 gap-y-6 border-b border-hair pb-8">
           <div className="col-span-12 lg:col-span-8">
-            <span className="label">WHAT WE DO</span>
+            <span className="label">what we do</span>
             <h1
-              data-cursor="[CAPABILITIES]"
+              data-cursor="[capabilities]"
               className="lowercase mt-3 text-[clamp(38px,7vw,104px)] font-medium leading-[0.9] tracking-[-0.045em]">
-              SERVICES
+              services
             </h1>
           </div>
           <div className="col-span-12 lg:col-span-4">
@@ -43,8 +43,8 @@ export default function CapabilitiesPage({ onNavigate }) {
         <div className="mt-12">
           <SectionHeader
             index="01"
-            title="TOOLS WE USE"
-            meta={`${String(engaged.size).padStart(2, '0')} OF ${STACK.length} SELECTED // TAP TO TOGGLE`}
+            title="tools we use"
+            meta={`${String(engaged.size).padStart(2, '0')} of ${STACK.length} selected // tap to toggle`}
           />
           <div className="mt-6 flex flex-wrap items-center gap-2">
             {STACK.map((tool) => {
@@ -56,7 +56,7 @@ export default function CapabilitiesPage({ onNavigate }) {
                   onClick={() => toggle(tool.id)}
                   data-cursor={`[${tool.human}]`}
                   whileTap={{ scale: 0.96 }}
-                  className="flex items-center gap-[10px] border px-4 py-[10px] text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-200"
+                  className="flex items-center gap-[10px] border px-4 py-[10px] text-[11px] font-medium tracking-[0.08em] transition-colors duration-200"
                   style={{
                     borderColor: on ? 'var(--c-ink)' : 'var(--c-hair)',
                     color: on ? 'var(--c-ink)' : 'var(--c-muted)',
@@ -71,17 +71,17 @@ export default function CapabilitiesPage({ onNavigate }) {
               )
             })}
           </div>
-          <p className="tnum mt-4 text-[11px] uppercase tracking-[0.14em] text-muted">
-            USING:{' '}
+          <p className="tnum mt-4 text-[11px] tracking-[0.08em] text-muted">
+            using:{' '}
             {STACK.filter((t) => engaged.has(t.id))
               .map((t) => t.name)
-              .join(' + ') || 'NO TOOLS SELECTED'}
+              .join(' + ') || 'no tools selected'}
           </p>
         </div>
 
         {/* ====================== THE SERVICES ====================== */}
         <div className="mt-24">
-          <SectionHeader index="02" title="WHAT WE OFFER" meta={`${String(PILLARS.length).padStart(2, '0')} SERVICES`} />
+          <SectionHeader index="02" title="what we offer" meta={`${String(PILLARS.length).padStart(2, '0')} services`} />
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-12 md:grid-cols-2 xl:grid-cols-4">
             {PILLARS.map((p, i) => (
               <Reveal key={p.index} delay={i * 0.08}>
@@ -122,7 +122,7 @@ export default function CapabilitiesPage({ onNavigate }) {
 
         {/* ======================== PIPELINE ======================== */}
         <div className="mt-24">
-          <SectionHeader index="03" title="HOW WE WORK" meta="03 STEPS" />
+          <SectionHeader index="03" title="how we work" meta="03 steps" />
 
           <div className="mt-10 flex flex-col">
             {PIPELINE.map((s, i) => (
@@ -163,11 +163,11 @@ export default function CapabilitiesPage({ onNavigate }) {
             <button
               type="button"
               onClick={() => onNavigate('initiate')}
-              data-cursor="[INITIATE]"
-              className="shrink-0 border px-6 py-[13px] text-[11px] font-medium uppercase tracking-[0.16em]"
+              data-cursor="[initiate]"
+              className="shrink-0 border px-6 py-[13px] text-[11px] font-medium tracking-[0.08em]"
               style={{ background: 'var(--c-ink)', color: 'var(--c-void)', borderColor: 'var(--c-ink)' }}
             >
-              [ START A PROJECT ↗ ]
+              [ start a project ↗ ]
             </button>
           </div>
         </Reveal>

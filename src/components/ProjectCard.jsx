@@ -23,10 +23,10 @@ export default function ProjectCard({ project: p, ratio, onOpen }) {
   const frameRatio = ratio ?? `${c.w} / ${c.h}`
   const pieces = String(p.assets.length).padStart(2, '0')
   const label = p.chapters
-    ? `${BUCKET[p.bucket].label} // FOLDER // ${String(p.chapters.length).padStart(2, '0')} CASE STUDIES`
+    ? `${BUCKET[p.bucket].label} // folder // ${String(p.chapters.length).padStart(2, '0')} case studies`
     : p.caseStudy
-    ? `${BUCKET[p.bucket].label} // CASE STUDY // ${p.caseStudy.platform}`
-    : `${BUCKET[p.bucket].label} // ${pieces} ${p.assets.length === 1 ? 'PIECE' : 'PIECES'}`
+    ? `${BUCKET[p.bucket].label} // case study // ${p.caseStudy.platform}`
+    : `${BUCKET[p.bucket].label} // ${pieces} ${p.assets.length === 1 ? 'piece' : 'pieces'}`
   const open = () => onOpen(p.slug)
 
   return (
@@ -36,7 +36,7 @@ export default function ProjectCard({ project: p, ratio, onOpen }) {
           src={c.src}
           image={c.poster}
           label={label}
-          meta={p.hero ? 'FEATURED' : undefined}
+          meta={p.hero ? 'featured' : undefined}
           dims={`${c.w} × ${c.h}`}
           ratio={frameRatio}
           onClick={open}
@@ -47,26 +47,26 @@ export default function ProjectCard({ project: p, ratio, onOpen }) {
           fallback={c.kind === 'youtube' ? thumbnail(c.id, 'hqdefault') : undefined}
           alt={`${p.title} — ${p.client}`}
           label={label}
-          meta={c.kind === 'youtube' ? '▶ VIDEO' : undefined}
+          meta={c.kind === 'youtube' ? '▶ video' : undefined}
           dims={`${c.w} × ${c.h}`}
           ratio={frameRatio}
-          cursor={p.chapters ? '[OPEN FOLDER]' : p.caseStudy ? '[READ CASE STUDY]' : '[OPEN PROJECT]'}
+          cursor={p.chapters ? '[open folder]' : p.caseStudy ? '[read case study]' : '[open project]'}
           onClick={open}
         />
       )}
 
-      <button type="button" onClick={open} data-cursor="[OPEN PROJECT]" className="mt-5 border-t border-hair pt-3 text-left">
-        <h3 className="text-[14px] font-medium uppercase leading-[1.3] tracking-[0.02em]">
+      <button type="button" onClick={open} data-cursor="[open project]" className="mt-5 border-t border-hair pt-3 text-left">
+        <h3 className="text-[14px] font-medium leading-[1.3] tracking-[0.02em]">
           {p.title}
         </h3>
         <p className="mt-[6px] text-[13px] leading-[1.5] text-muted">{p.role}</p>
         <span className="mt-3 flex items-baseline justify-between gap-3 border-t border-hair-soft pt-[8px]">
           <span className="label">{p.client}</span>
-          <span className="label shrink-0 label-ink">[ OPEN ↗ ]</span>
+          <span className="label shrink-0 label-ink">[ open ↗ ]</span>
         </span>
         <span className="label mt-[6px] block opacity-70">
           {brandCase(p.credit)}
-          {p.agency && <> // VIA {p.agency}</>}
+          {p.agency && <> // via {p.agency}</>}
         </span>
       </button>
     </article>

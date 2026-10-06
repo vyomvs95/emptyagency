@@ -9,7 +9,7 @@ import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motio
  * the tag rides a looser one, so the label organically trails behind
  * the point — exactly the lag you feel in a live Figma session.
  *
- * Any element can retitle the tag by declaring `data-cursor="[LABEL]"`.
+ * Any element can retitle the tag by declaring `data-cursor="[label]"`.
  * Elements are detected by hit-testing on move, so nothing has to be
  * wired up through context.
  *
@@ -107,7 +107,7 @@ export default function Cursor() {
               transition={{ duration: 0.16 }}
             >
               <div
-                className="tnum absolute select-none whitespace-nowrap px-[6px] py-[3px] text-[10px] font-medium uppercase tracking-[0.14em]"
+                className="tnum absolute select-none whitespace-nowrap px-[6px] py-[3px] text-[10px] font-medium tracking-[0.08em]"
                 style={{
                   left: 16,
                   top: 20,

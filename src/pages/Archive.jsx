@@ -16,7 +16,7 @@ function FilterToggle({ active, label, tech, count, onClick }) {
       type="button"
       onClick={onClick}
       data-cursor={`[${tech}]`}
-      className="relative border px-4 py-[9px] text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-200"
+      className="relative border px-4 py-[9px] text-[11px] font-medium tracking-[0.08em] transition-colors duration-200"
       style={{
         borderColor: active ? 'var(--c-ink)' : 'var(--c-hair)',
         background: active ? 'var(--c-ink)' : 'transparent',
@@ -54,11 +54,11 @@ export default function ArchivePage({ onOpenProject }) {
         {/* PAGE TITLE */}
         <div className="grid grid-cols-12 items-end gap-x-6 gap-y-6 border-b border-hair pb-8">
           <div className="col-span-12 lg:col-span-8">
-            <span className="label">SELECTED WORK</span>
+            <span className="label">selected work</span>
             <h1
-              data-cursor="[ARCHIVE]"
+              data-cursor="[archive]"
               className="lowercase mt-3 text-[clamp(38px,7vw,104px)] font-medium leading-[0.9] tracking-[-0.045em]">
-              WORK
+              work
             </h1>
           </div>
           <div className="col-span-12 lg:col-span-4">
@@ -84,14 +84,14 @@ export default function ArchivePage({ onOpenProject }) {
             />
           ))}
           <span className="tnum label ml-auto hidden md:inline">
-            SHOWING {String(visible.length).padStart(2, '0')} OF{' '}
-            {String(PROJECTS.length).padStart(2, '0')} PROJECTS
+            showing {String(visible.length).padStart(2, '0')} of{' '}
+            {String(PROJECTS.length).padStart(2, '0')} projects
           </span>
         </div>
 
         <SectionHeader
           index="02"
-          title={`SHOWING: ${LABEL[filter]}`}
+          title={`showing: ${LABEL[filter]}`}
           className="mb-10"
         />
 
@@ -115,7 +115,7 @@ export default function ArchivePage({ onOpenProject }) {
         {/* END OF DIRECTORY */}
         <div className="mt-20 flex items-center gap-3">
           <span className="block h-px flex-1 bg-hair" />
-          <span className="label">THAT&apos;S EVERYTHING // {visible.length} PROJECTS</span>
+          <span className="label">that&apos;s everything // {visible.length} projects</span>
           <span className="block h-px flex-1 bg-hair" />
         </div>
 

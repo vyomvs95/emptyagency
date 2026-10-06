@@ -29,8 +29,8 @@ function Shot({ image, onExpand }) {
       <figure>
         <div className="mb-[10px] flex items-baseline justify-between gap-4 border-b border-hair-soft pb-[6px]">
           <span className="label label-ink truncate">{caption}</span>
-          <button type="button" onClick={onExpand} data-cursor="[EXPAND]" className={expandBtn}>
-            {image.duration ? `${Math.round(image.duration)} S // ` : ''}EXPAND ↗
+          <button type="button" onClick={onExpand} data-cursor="[expand]" className={expandBtn}>
+            {image.duration ? `${Math.round(image.duration)} s // ` : ''}expand ↗
           </button>
         </div>
         <Frame dims={`${w} × ${h}`} ratio={`${w} / ${h}`} zoom={false} boxClassName="bg-black">
@@ -53,15 +53,15 @@ function Shot({ image, onExpand }) {
         <div className="mb-[10px] flex items-baseline justify-between gap-4 border-b border-hair-soft pb-[6px]">
           <span className="label label-ink truncate">{caption}</span>
           <span className="flex shrink-0 items-baseline gap-3">
-            <span className="label hidden sm:inline">SCROLL THE PAGE ↓</span>
-            <button type="button" onClick={onExpand} data-cursor="[EXPAND]" className={expandBtn}>
-              EXPAND ↗
+            <span className="label hidden sm:inline">scroll the page ↓</span>
+            <button type="button" onClick={onExpand} data-cursor="[expand]" className={expandBtn}>
+              expand ↗
             </button>
           </span>
         </div>
         <div
           className="h-[min(78vh,900px)] overflow-y-auto overscroll-contain border border-hair bg-white"
-          data-cursor="[SCROLL]"
+          data-cursor="[scroll]"
         >
           <img src={src} alt={caption} width={w} height={h} loading="lazy" className="block h-auto w-full" />
         </div>
@@ -75,9 +75,9 @@ function Shot({ image, onExpand }) {
       onClick={onExpand}
       className="block w-full text-left"
       style={image.narrow ? { maxWidth: 440 } : undefined}
-      data-cursor="[EXPAND]"
+      data-cursor="[expand]"
     >
-      <Frame label={caption} meta="EXPAND ↗" dims={`${w} × ${h}`} ratio={`${w} / ${h}`} zoom={false} boxClassName="bg-white">
+      <Frame label={caption} meta="expand ↗" dims={`${w} × ${h}`} ratio={`${w} / ${h}`} zoom={false} boxClassName="bg-white">
         <img src={src} alt={caption} width={w} height={h} loading="lazy" className="h-full w-full object-contain" />
       </Frame>
     </button>
@@ -90,7 +90,7 @@ export default function CaseStudy({ project }) {
   const [open, setOpen] = useState(null)
 
   // Everything that can expand, in reading order — the lightbox steps through it.
-  const coverItem = cover.kind === 'video' ? { ...cover, caption: 'CASE STUDY // FILM' } : { ...cover, caption: project.title }
+  const coverItem = cover.kind === 'video' ? { ...cover, caption: 'case study // film' } : { ...cover, caption: project.title }
   const items = [coverItem, ...cs.sections.flatMap((sec) => sec.images)]
   const expand = (item) => () => setOpen(items.indexOf(item))
 
@@ -99,8 +99,8 @@ export default function CaseStudy({ project }) {
       {cover.kind === 'video' ? (
         <Shot image={coverItem} onExpand={expand(coverItem)} />
       ) : (
-        <button type="button" onClick={expand(coverItem)} className="block w-full text-left" data-cursor="[EXPAND]">
-          <Frame label="CASE STUDY // COVER" meta="EXPAND ↗" dims={`${cover.w} × ${cover.h}`} ratio={`${cover.w} / ${cover.h}`} zoom={false}>
+        <button type="button" onClick={expand(coverItem)} className="block w-full text-left" data-cursor="[expand]">
+          <Frame label="case study // cover" meta="expand ↗" dims={`${cover.w} × ${cover.h}`} ratio={`${cover.w} / ${cover.h}`} zoom={false}>
             <img src={cover.src} alt={project.title} className="h-full w-full object-cover" />
           </Frame>
         </button>
@@ -108,14 +108,14 @@ export default function CaseStudy({ project }) {
 
       {/* THE BRIEF */}
       <section className="mt-14 border-t border-hair pt-6">
-        <span className="label">OVERVIEW</span>
+        <span className="label">overview</span>
         <p className="mt-4 max-w-[62ch] text-[clamp(18px,1.7vw,24px)] font-medium leading-[1.35] tracking-[-0.01em]">
           {cs.brief}
         </p>
-        <span className="label mt-8 block">SERVICES</span>
+        <span className="label mt-8 block">services</span>
         <div className="mt-3 flex flex-wrap gap-2">
           {cs.scope.map((s) => (
-            <span key={s} className="border border-hair px-3 py-[6px] text-[10px] font-medium uppercase tracking-[0.16em]">
+            <span key={s} className="border border-hair px-3 py-[6px] text-[10px] font-medium tracking-[0.08em]">
               {s}
             </span>
           ))}
@@ -150,11 +150,11 @@ export default function CaseStudy({ project }) {
       {cs.testimonial && (
         <section className="mt-16 border-t border-hair pt-6 md:mt-20">
           <div className="flex items-baseline justify-between gap-4">
-            <span className="label">CLIENT TESTIMONIAL</span>
+            <span className="label">client testimonial</span>
             {cs.status && (
               <span className="label label-ink flex items-center gap-2 border border-hair px-2 py-[3px]">
                 <span className="inline-block h-[6px] w-[6px] rounded-full" style={{ background: 'var(--c-accent)' }} />
-                STATUS // {cs.status}
+                status // {cs.status}
               </span>
             )}
           </div>
@@ -172,12 +172,12 @@ export default function CaseStudy({ project }) {
 
       {/* DELIVERABLES */}
       <section className="mt-16 border-t border-hair pt-6 md:mt-20">
-        <span className="label">DELIVERABLES</span>
+        <span className="label">deliverables</span>
         <div className="mt-4 flex flex-wrap gap-2">
           {cs.deliverables.map((d) => (
             <span
               key={d}
-              className="border px-3 py-[6px] text-[10px] font-medium uppercase tracking-[0.16em]"
+              className="border px-3 py-[6px] text-[10px] font-medium tracking-[0.08em]"
               style={{ borderColor: 'var(--c-ink)' }}
             >
               {d}

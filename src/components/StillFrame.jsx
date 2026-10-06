@@ -32,7 +32,7 @@ export default function StillFrame({
   const metaNode = placeholder ? (
     <>
       {meta}
-      <span style={{ color: 'var(--c-signal)' }}> // PLACEHOLDER</span>
+      <span style={{ color: 'var(--c-signal)' }}> // placeholder</span>
       {credit && <span> © {credit}</span>}
     </>
   ) : (

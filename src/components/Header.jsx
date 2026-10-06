@@ -22,7 +22,7 @@ function NavItem({ route, active, onClick }) {
       onClick={onClick}
       data-cursor={`[${route.tech}]`}
       aria-current={active ? 'page' : undefined}
-      className="group relative px-[10px] py-[6px] text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-200"
+      className="group relative px-[10px] py-[6px] text-[11px] font-medium tracking-[0.08em] transition-colors duration-200"
       style={{ color: active ? 'var(--c-void)' : 'var(--c-ink)' }}
     >
       {active && (
@@ -62,7 +62,7 @@ export default function Header({ current, onNavigate }) {
   }, [current])
 
   const active = ROUTES.find((r) => r.id === current)
-  const here = (active?.label ?? 'HOME').replace(' ↗', '')
+  const here = (active?.label ?? 'home').replace(' ↗', '')
 
   const go = (id) => {
     onNavigate(id)
@@ -96,9 +96,9 @@ export default function Header({ current, onNavigate }) {
             type="button"
             onClick={() => setMenu((m) => !m)}
             data-cursor={menu ? '[Close Menu]' : '[Open Menu]'}
-            className="border border-hair px-3 py-[7px] text-[11px] font-medium uppercase tracking-[0.14em] lg:hidden"
+            className="border border-hair px-3 py-[7px] text-[11px] font-medium tracking-[0.08em] lg:hidden"
           >
-            {menu ? '[ CLOSE ]' : '[ MENU ]'}
+            {menu ? '[ close ]' : '[ menu ]'}
           </button>
         </div>
       </div>
@@ -106,10 +106,10 @@ export default function Header({ current, onNavigate }) {
       {/* STATUS ROW */}
       <div className="gutter mx-auto hidden h-[26px] w-full max-w-[1680px] items-center justify-between border-t border-hair-soft md:flex">
         <span className="label">
-          YOU ARE HERE: {here} <span className="caret">|</span>
+          you are here: {here} <span className="caret">|</span>
         </span>
         <span className="tnum label">
-          YOUR SCREEN: {vp.w} × {vp.h}
+          your screen: {vp.w} × {vp.h}
         </span>
       </div>
 
@@ -135,12 +135,12 @@ export default function Header({ current, onNavigate }) {
                   transition={{ delay: 0.04 * i }}
                   className="flex items-baseline justify-between border-b border-hair-soft py-4 text-left"
                 >
-                  <span className="text-[18px] font-medium uppercase tracking-[0.06em]">
+                  <span className="text-[18px] font-medium tracking-[0.06em]">
                     [ {r.label} ]
                   </span>
                   <span className="label">
                     {String(i + 1).padStart(2, '0')}
-                    {current === r.id ? ' // YOU ARE HERE' : ''}
+                    {current === r.id ? ' // you are here' : ''}
                   </span>
                 </motion.button>
               ))}

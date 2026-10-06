@@ -28,7 +28,7 @@ function Caret({ show }) {
   )
 }
 
-function PromptRow({ index, prompt, error, message = 'PLEASE FILL THIS IN', children }) {
+function PromptRow({ index, prompt, error, message = 'please fill this in', children }) {
   return (
     <div className="border-t border-hair py-6">
       <div className="flex items-baseline gap-4">
@@ -77,7 +77,7 @@ function BudgetSelect({ value, onChange, error }) {
       >
         <span className="flex items-baseline gap-[2px]">
           <span style={{ color: value ? 'var(--c-ink)' : 'var(--c-muted)' }}>
-            {value ? `[ ${value} ]` : 'CHOOSE A RANGE'}
+            {value ? `[ ${value} ]` : 'choose a range'}
           </span>
           <Caret show={!value && !open} />
         </span>
@@ -116,7 +116,7 @@ function BudgetSelect({ value, onChange, error }) {
                 >
                   <span>[ {b} ]</span>
                   <span className="label" style={{ color: 'inherit', opacity: 0.6 }}>
-                    {value === b ? 'SELECTED' : ''}
+                    {value === b ? 'selected' : ''}
                   </span>
                 </button>
               </li>
@@ -157,7 +157,7 @@ export default function InitiatePage() {
     setStatus('sending')
     try {
       const res = await fetch(FORM_ENDPOINT, {
-        method: 'POST',
+        method: 'post',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           _subject: `New enquiry from ${form.name.trim()}`,
@@ -180,12 +180,12 @@ export default function InitiatePage() {
 
   const buttonText =
     status === 'sending'
-      ? '[ SENDING... ]'
+      ? '[ sending... ]'
       : status === 'sent'
-        ? '[ SENT, THANK YOU ]'
+        ? '[ sent, thank you ]'
         : status === 'failed'
-          ? '[ TRY AGAIN ]'
-          : '[ SEND ]'
+          ? '[ try again ]'
+          : '[ send ]'
 
   return (
     <Block className="pt-10 md:pt-16">
@@ -193,11 +193,11 @@ export default function InitiatePage() {
         {/* TITLE */}
         <div className="grid grid-cols-12 items-end gap-x-6 gap-y-6 border-b border-hair pb-8">
           <div className="col-span-12 lg:col-span-9">
-            <span className="label">GET IN TOUCH</span>
+            <span className="label">get in touch</span>
             <h1
-              data-cursor="[SYSTEM.INITIATE_PROJECT()]"
+              data-cursor="[system.initiate_project()]"
               className="lowercase mt-3 break-words text-[clamp(28px,5.6vw,84px)] font-medium leading-[0.92] tracking-[-0.045em]">
-              START A PROJECT
+              start a project
             </h1>
           </div>
           <div className="col-span-12 lg:col-span-3">
@@ -213,12 +213,12 @@ export default function InitiatePage() {
           <div className="col-span-12 lg:col-span-8">
             <SectionHeader
               index="01"
-              title="TELL US ABOUT IT"
+              title="tell us about it"
               rule={false}
             />
 
             <form onSubmit={submit} className="mt-8" noValidate>
-              <PromptRow index="01" prompt="YOUR NAME OR COMPANY" error={errors.name}>
+              <PromptRow index="01" prompt="your name or company" error={errors.name}>
                 <div className="flex max-w-[520px] items-baseline gap-[2px] border-b pb-3"
                   style={{ borderColor: errors.name ? 'var(--c-signal)' : 'var(--c-hair)' }}
                 >
@@ -239,9 +239,9 @@ export default function InitiatePage() {
 
               <PromptRow
                 index="02"
-                prompt="YOUR EMAIL"
+                prompt="your email"
                 error={errors.email}
-                message={form.email.trim() ? 'CHECK THIS EMAIL' : 'PLEASE FILL THIS IN'}
+                message={form.email.trim() ? 'check this email' : 'please fill this in'}
               >
                 <div className="flex max-w-[520px] items-baseline gap-[2px] border-b pb-3"
                   style={{ borderColor: errors.email ? 'var(--c-signal)' : 'var(--c-hair)' }}
@@ -273,7 +273,7 @@ export default function InitiatePage() {
                 className="hidden"
               />
 
-              <PromptRow index="03" prompt="WHAT DO YOU NEED?" error={errors.scope}>
+              <PromptRow index="03" prompt="what do you need?" error={errors.scope}>
                 <div className="flex max-w-[640px] items-start gap-[2px] border-b pb-3"
                   style={{ borderColor: errors.scope ? 'var(--c-signal)' : 'var(--c-hair)' }}
                 >
@@ -292,11 +292,11 @@ export default function InitiatePage() {
                   />
                 </div>
                 <div className="tnum label mt-2">
-                  {form.scope.length} CHARACTERS
+                  {form.scope.length} characters
                 </div>
               </PromptRow>
 
-              <PromptRow index="04" prompt="YOUR BUDGET" error={errors.budget}>
+              <PromptRow index="04" prompt="your budget" error={errors.budget}>
                 <BudgetSelect value={form.budget} onChange={set('budget')} error={errors.budget} />
               </PromptRow>
 
@@ -308,7 +308,7 @@ export default function InitiatePage() {
                     status === 'sending' ? '[Sending…]' : status === 'sent' ? '[Sent]' : '[Send My Brief]'
                   }
                   whileTap={status === 'idle' || status === 'failed' ? { scale: 0.985 } : undefined}
-                  className="w-full border px-6 py-[16px] text-[12px] font-medium uppercase tracking-[0.18em] transition-colors duration-300 md:w-auto md:px-10"
+                  className="w-full border px-6 py-[16px] text-[12px] font-medium tracking-[0.08em] transition-colors duration-300 md:w-auto md:px-10"
                   style={{
                     background:
                       status === 'sent'
@@ -356,14 +356,14 @@ export default function InitiatePage() {
                     >
                       <div className="flex flex-col gap-2 p-5">
                         {[
-                          '> SENDING YOUR DETAILS...',
-                          `> NAME: ${form.name.toUpperCase() || '—'}`,
-                          `> BUDGET: ${form.budget || '—'}`,
+                          '> sending your details...',
+                          `> name: ${form.name || '—'}`,
+                          `> budget: ${form.budget || '—'}`,
                           status === 'sent'
-                            ? '> GOT IT. A REAL PERSON WILL REPLY WITHIN 24 HOURS.'
+                            ? '> got it. a real person will reply within 24 hours.'
                             : status === 'failed'
-                              ? `> THAT DIDN'T GO THROUGH. TRY AGAIN, OR EMAIL US AT ${EMAIL.toUpperCase()}.`
-                              : '> CONNECTING...',
+                              ? `> that didn't go through. try again, or email us at ${EMAIL}.`
+                              : '> connecting...',
                         ].map((line, i) => (
                           <motion.span
                             key={line}
@@ -385,13 +385,13 @@ export default function InitiatePage() {
 
           {/* CONTACT NODES */}
           <div className="col-span-12 lg:col-span-4">
-            <SectionHeader index="02" title="OTHER WAYS TO REACH US" rule={false} />
+            <SectionHeader index="02" title="other ways to reach us" rule={false} />
             <div className="mt-8 flex flex-col">
               {[
-                ['EMAIL', EMAIL, `mailto:${EMAIL}`],
-                ['STUDIO DECK', 'ASK US FOR ONE', null],
-                ['LOCATION', 'REMOTE, WORLDWIDE', null],
-                ['REPLY TIME', 'WITHIN 24 HOURS', null],
+                ['email', EMAIL, `mailto:${EMAIL}`],
+                ['studio deck', 'ask us for one', null],
+                ['location', 'remote, worldwide', null],
+                ['reply time', 'within 24 hours', null],
               ].map(([k, v, href]) => (
                 <Reveal key={k}>
                   <div className="flex items-baseline justify-between gap-4 border-t border-hair py-5">
@@ -405,7 +405,7 @@ export default function InitiatePage() {
                         {v}
                       </a>
                     ) : (
-                      <span className="text-[13px] font-medium uppercase tracking-[0.06em]">
+                      <span className="text-[13px] font-medium tracking-[0.06em]">
                         {v}
                       </span>
                     )}
@@ -416,7 +416,7 @@ export default function InitiatePage() {
             </div>
 
             <div className="mt-10 border border-hair p-6">
-              <span className="label">GOOD TO KNOW</span>
+              <span className="label">good to know</span>
               <p className="mt-3 text-[14px] leading-[1.55] text-muted">
                 We take on only four projects every three months, so each one
                 gets our full attention.
