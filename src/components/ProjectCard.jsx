@@ -2,6 +2,7 @@ import KineticPlayer from './KineticPlayer.jsx'
 import StillFrame from './StillFrame.jsx'
 import { thumbnail } from '../lib/youtube.js'
 import { BUCKETS } from '../lib/site.js'
+import { brandCase } from '../lib/brand.jsx'
 
 const BUCKET = Object.fromEntries(BUCKETS.map((b) => [b.id, b]))
 
@@ -58,13 +59,13 @@ export default function ProjectCard({ project: p, ratio, onOpen }) {
         <h3 className="text-[14px] font-medium uppercase leading-[1.3] tracking-[0.02em]">
           {p.title}
         </h3>
-        <p className="mt-[6px] text-[13px] leading-[1.5] lowercase text-muted">{p.role}</p>
+        <p className="mt-[6px] text-[13px] leading-[1.5] text-muted">{p.role}</p>
         <span className="mt-3 flex items-baseline justify-between gap-3 border-t border-hair-soft pt-[8px]">
           <span className="label">{p.client}</span>
           <span className="label shrink-0 label-ink">[ OPEN ↗ ]</span>
         </span>
         <span className="label mt-[6px] block opacity-70">
-          {p.credit}
+          {brandCase(p.credit)}
           {p.agency && <> // VIA {p.agency}</>}
         </span>
       </button>

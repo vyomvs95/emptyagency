@@ -57,15 +57,15 @@ export default function ArchivePage({ onOpenProject }) {
             <span className="label">SELECTED WORK</span>
             <h1
               data-cursor="[ARCHIVE]"
-              className="mt-3 text-[clamp(38px,7vw,104px)] font-medium leading-[0.9] tracking-[-0.045em]">
+              className="lowercase mt-3 text-[clamp(38px,7vw,104px)] font-medium leading-[0.9] tracking-[-0.045em]">
               WORK
             </h1>
           </div>
           <div className="col-span-12 lg:col-span-4">
-            <p className="max-w-[40ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
-              {PROJECTS.length} projects across ui/ux design, 3d and cgi, film,
+            <p className="max-w-[40ch] text-[14px] leading-[1.55] text-muted md:text-[15px]">
+              {PROJECTS.length} projects across UI/UX design, 3D and CGI, film,
               motion and graphics — for fintech, enterprise, industrial, real
-              estate, consumer and entertainment brands. case studies open in
+              estate, consumer and entertainment brands. Case studies open in
               full; client folders hold every product we designed for them.
             </p>
           </div>

@@ -196,13 +196,13 @@ export default function InitiatePage() {
             <span className="label">GET IN TOUCH</span>
             <h1
               data-cursor="[SYSTEM.INITIATE_PROJECT()]"
-              className="mt-3 break-words text-[clamp(28px,5.6vw,84px)] font-medium leading-[0.92] tracking-[-0.045em]">
+              className="lowercase mt-3 break-words text-[clamp(28px,5.6vw,84px)] font-medium leading-[0.92] tracking-[-0.045em]">
               START A PROJECT
             </h1>
           </div>
           <div className="col-span-12 lg:col-span-3">
-            <p className="max-w-[34ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
-              just three questions, no long forms. we reply within one working
+            <p className="max-w-[34ch] text-[14px] leading-[1.55] text-muted md:text-[15px]">
+              Just three questions, no long forms. We reply within one working
               day.
             </p>
           </div>
@@ -417,8 +417,8 @@ export default function InitiatePage() {
 
             <div className="mt-10 border border-hair p-6">
               <span className="label">GOOD TO KNOW</span>
-              <p className="mt-3 text-[14px] leading-[1.55] lowercase text-muted">
-                we take on only four projects every three months, so each one
+              <p className="mt-3 text-[14px] leading-[1.55] text-muted">
+                We take on only four projects every three months, so each one
                 gets our full attention.
               </p>
             </div>

@@ -6,6 +6,7 @@ import Lightbox from './Lightbox.jsx'
 import PosterImage from './PosterImage.jsx'
 import { thumbnail } from '../lib/youtube.js'
 import { BUCKETS, PROJECTS } from '../lib/site.js'
+import { brandCase } from '../lib/brand.jsx'
 
 const BUCKET = Object.fromEntries(BUCKETS.map((b) => [b.id, b]))
 
@@ -203,7 +204,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
                 <h2 className="mt-3 text-[clamp(30px,4.2vw,64px)] font-medium leading-[0.95] tracking-[-0.04em]">
                   {project.title}
                 </h2>
-                <p className="mt-5 max-w-[44ch] text-[15px] leading-[1.55] lowercase text-muted">
+                <p className="mt-5 max-w-[44ch] text-[15px] leading-[1.55] text-muted">
                   {project.summary}
                 </p>
 
@@ -223,7 +224,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
                       className="flex items-baseline justify-between gap-6 border-b border-hair-soft py-[10px]"
                     >
                       <span className="label shrink-0">{k}</span>
-                      <span className="label label-ink text-right">{v}</span>
+                      <span className="label label-ink text-right">{brandCase(v)}</span>
                     </div>
                   ))}
                 </div>
@@ -267,7 +268,7 @@ export default function ProjectPanel({ slug, onClose, onOpen }) {
                         <h3 className="mt-3 text-[clamp(26px,3vw,44px)] font-medium leading-[0.98] tracking-[-0.035em]">
                           {study.title}
                         </h3>
-                        <p className="mt-4 max-w-[62ch] text-[15px] leading-[1.55] lowercase text-muted">{study.summary}</p>
+                        <p className="mt-4 max-w-[62ch] text-[15px] leading-[1.55] text-muted">{study.summary}</p>
                       </div>
                     )}
                     <CaseStudy key={study.slug} project={chapters ? { ...study, assets: [study.cover] } : project} />

@@ -5,6 +5,7 @@ import Reveal, { RuleIn } from '../components/Reveal.jsx'
 import { Block, Container, SectionHeader } from '../components/Section.jsx'
 import KineticPlayer from '../components/KineticPlayer.jsx'
 import { BRANDS, FAQ, FEATURED, HERO, INDUSTRIES, MARQUEE_TEXT, PILLARS, PROJECTS } from '../lib/site.js'
+import { brandCase } from '../lib/brand.jsx'
 
 const HERO_FILM = HERO.assets[0]
 
@@ -19,11 +20,11 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
           <div className="grid grid-cols-12 gap-x-6 gap-y-10">
             {/* HEADLINE */}
             <div className="col-span-12 lg:col-span-9">
-              <h1 className="text-[clamp(38px,7.2vw,112px)] font-medium leading-[0.9] tracking-[-0.045em]">
+              <h1 className="w-fit max-w-full text-[clamp(38px,7.2vw,112px)] font-medium leading-[0.9] tracking-[-0.045em]">
                 {HEADLINE.map((line, i) => (
                   <motion.span
                     key={line}
-                    className="block"
+                    className="-ml-[0.05em] block lowercase"
                     initial={{ opacity: 0, y: 26 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.75, delay: 0.06 + i * 0.09, ease: [0.2, 0, 0, 1] }}
@@ -32,7 +33,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                   </motion.span>
                 ))}
                 <motion.span
-                  className="mt-5 block max-w-[30ch] text-[clamp(18px,2.1vw,32px)] font-normal leading-[1.15] tracking-[-0.02em] text-muted"
+                  className="mt-5 block w-0 min-w-full text-[clamp(18px,2.1vw,32px)] font-normal leading-[1.15] tracking-[-0.02em] text-muted"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.75, delay: 0.26, ease: [0.2, 0, 0, 1] }}
@@ -79,7 +80,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                 ].map(([k, v]) => (
                   <div key={k} className="flex items-baseline justify-between gap-4">
                     <span className="label">{k}</span>
-                    <span className="label label-ink text-right">{v}</span>
+                    <span className="label label-ink text-right">{brandCase(v)}</span>
                   </div>
                 ))}
               </div>
@@ -118,7 +119,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                 <h2 className="mt-3 text-[clamp(22px,2.2vw,32px)] font-medium leading-[1.05] tracking-[-0.03em]">
                   {HERO.title}
                 </h2>
-                <p className="mt-4 max-w-[38ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
+                <p className="mt-4 max-w-[38ch] text-[14px] leading-[1.55] text-muted md:text-[15px]">
                   {HERO.summary}
                 </p>
                 <div className="mt-6 flex flex-col gap-[10px]">
@@ -181,8 +182,8 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
 
           <Reveal className="mt-14" delay={0.1}>
             <div className="flex flex-col items-start gap-5 border-t border-hair pt-6 md:flex-row md:items-center md:justify-between">
-              <p className="max-w-[46ch] text-[16px] leading-[1.45] lowercase text-muted md:text-[18px]">
-                {PROJECTS.length} projects across ui/ux design, 3d and cgi, film,
+              <p className="max-w-[46ch] text-[16px] leading-[1.45] text-muted md:text-[18px]">
+                {PROJECTS.length} projects across UI/UX design, 3D and CGI, film,
                 motion and graphics — each one opens as a full case study or with
                 everything we made for it.
               </p>
@@ -216,7 +217,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                   <span className="col-span-10 text-[clamp(24px,3.2vw,46px)] font-medium leading-[0.95] tracking-[-0.035em] transition-colors duration-200 group-hover:text-[var(--c-accent)] md:col-span-5">
                     {p.title}
                   </span>
-                  <span className="col-span-12 max-w-[52ch] text-[15px] leading-[1.55] lowercase text-muted md:col-span-6">
+                  <span className="col-span-12 max-w-[52ch] text-[15px] leading-[1.55] text-muted md:col-span-6">
                     {p.body}
                   </span>
                 </button>
@@ -234,7 +235,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
             {INDUSTRIES.map((ind) => (
               <div key={ind.name} className="flex flex-col gap-4 border-b border-r border-hair-soft p-6">
                 <h3 className="text-[clamp(18px,1.6vw,22px)] font-medium uppercase leading-[1.1] tracking-[-0.01em]">{ind.name}</h3>
-                <p className="text-[14px] leading-[1.55] lowercase text-muted">{ind.body}</p>
+                <p className="text-[14px] leading-[1.55] text-muted">{ind.body}</p>
                 <div className="mt-auto flex flex-wrap gap-2 pt-2">
                   {ind.projects.map((p) => (
                     <button
@@ -285,7 +286,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                   {q}
                   <span className="label shrink-0 transition-transform duration-200 group-open:rotate-45">[ + ]</span>
                 </summary>
-                <p className="mt-4 max-w-[70ch] text-[15px] leading-[1.6] lowercase text-muted">{a}</p>
+                <p className="mt-4 max-w-[70ch] text-[15px] leading-[1.6] text-muted">{a}</p>
               </details>
             ))}
           </div>
@@ -297,7 +298,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
         <Container>
           <RuleIn />
           <div className="flex flex-col items-start justify-between gap-8 py-14 md:flex-row md:items-end">
-            <h2 className="max-w-[16ch] text-[clamp(30px,5vw,74px)] font-medium leading-[0.94] tracking-[-0.04em]">
+            <h2 className="max-w-[16ch] lowercase text-[clamp(30px,5vw,74px)] font-medium leading-[0.94] tracking-[-0.04em]">
               Have a project in mind? Let’s talk.
             </h2>
             <button

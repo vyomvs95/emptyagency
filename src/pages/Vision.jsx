@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import Reveal, { RuleIn } from '../components/Reveal.jsx'
 import { Block, Container, SectionHeader } from '../components/Section.jsx'
+import { brandCase } from '../lib/brand.jsx'
 
 /**
  * VISION — the manifesto. Editorial, text-heavy, built on deliberate
@@ -15,7 +16,7 @@ export default function VisionPage({ onNavigate }) {
         <div className="grid grid-cols-12 items-end gap-x-6 gap-y-6 border-b border-hair pb-8">
           <div className="col-span-12 lg:col-span-9">
             <span className="label">DIRECTORY // ~/root/vision</span>
-            <h1 className="mt-3 text-[clamp(32px,6.4vw,96px)] font-medium leading-[0.9] tracking-[-0.045em]">
+            <h1 className="lowercase mt-3 text-[clamp(32px,6.4vw,96px)] font-medium leading-[0.9] tracking-[-0.045em]">
               WHY_WE_ARE_EMPTY
             </h1>
           </div>
@@ -28,7 +29,7 @@ export default function VisionPage({ onNavigate }) {
               ].map(([k, v]) => (
                 <div key={k} className="flex items-baseline justify-between gap-4">
                   <span className="label">{k}</span>
-                  <span className="label label-ink">{v}</span>
+                  <span className="label label-ink">{brandCase(v)}</span>
                 </div>
               ))}
             </div>

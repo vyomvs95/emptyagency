@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { EMAIL, RIGHTS_NOTICE } from '../lib/site.js'
+import { brandCase } from '../lib/brand.jsx'
 
 /**
  * GLOBAL FOOTER — status read-out.
@@ -65,7 +66,7 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-2 border-t border-hair-soft py-6">
           <div className="flex items-center gap-3">
             <span className="block h-px w-8 bg-hair" />
-            <span className="label">© 2026 EMPTY AGENCY</span>
+            <span className="label">© 2026 {brandCase('empty agency')}</span>
             <span className="block h-px w-8 bg-hair" />
           </div>
           <span className="label opacity-60">

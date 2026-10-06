@@ -27,13 +27,13 @@ export default function CapabilitiesPage({ onNavigate }) {
             <span className="label">WHAT WE DO</span>
             <h1
               data-cursor="[CAPABILITIES]"
-              className="mt-3 text-[clamp(38px,7vw,104px)] font-medium leading-[0.9] tracking-[-0.045em]">
+              className="lowercase mt-3 text-[clamp(38px,7vw,104px)] font-medium leading-[0.9] tracking-[-0.045em]">
               SERVICES
             </h1>
           </div>
           <div className="col-span-12 lg:col-span-4">
-            <p className="max-w-[40ch] text-[14px] leading-[1.55] lowercase text-muted md:text-[15px]">
-              four disciplines, one team and one process — so everything we
+            <p className="max-w-[40ch] text-[14px] leading-[1.55] text-muted md:text-[15px]">
+              Four disciplines, one team and one process — so everything we
               make for a brand looks and feels like it belongs together.
             </p>
           </div>
@@ -96,7 +96,7 @@ export default function CapabilitiesPage({ onNavigate }) {
                     </h2>
                   </div>
 
-                  <p className="mt-5 max-w-[36ch] text-[15px] leading-[1.5] lowercase text-muted md:text-[16px]">
+                  <p className="mt-5 max-w-[36ch] text-[15px] leading-[1.5] text-muted md:text-[16px]">
                     {p.body}
                   </p>
 
@@ -143,7 +143,7 @@ export default function CapabilitiesPage({ onNavigate }) {
                   </div>
 
                   <div className="col-span-12 md:col-span-5">
-                    <p className="max-w-[46ch] text-[16px] leading-[1.45] lowercase text-muted md:text-[18px]">
+                    <p className="max-w-[46ch] text-[16px] leading-[1.45] text-muted md:text-[18px]">
                       {s.body}
                     </p>
                   </div>
@@ -157,7 +157,7 @@ export default function CapabilitiesPage({ onNavigate }) {
         {/* CTA */}
         <Reveal className="mt-20">
           <div className="flex flex-col items-start justify-between gap-6 border border-hair p-8 md:flex-row md:items-center md:p-12">
-            <h2 className="max-w-[20ch] text-[clamp(24px,3.4vw,44px)] font-medium leading-[1] tracking-[-0.03em]">
+            <h2 className="lowercase max-w-[20ch] text-[clamp(24px,3.4vw,44px)] font-medium leading-[1] tracking-[-0.03em]">
               Tell us about your project. We&apos;ll keep it simple.
             </h2>
             <button

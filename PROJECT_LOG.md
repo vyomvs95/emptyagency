@@ -182,6 +182,13 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 
 ## Decisions worth remembering
 
+- **Type case rules (6 Oct).** Brand name **always lowercase** — "empty agency", even inside
+  uppercase labels (`brandCase()` in `src/lib/brand.jsx`), on the stamp, letterhead and mail.
+  Display headlines are lowercase (hero, page h1s, closing statements — via the `lowercase`
+  class, text itself untouched). Labels/nav stay UPPERCASE (the wireframe annotation layer).
+  Body copy, quotes and client names are sentence case with proper capitals (UI/UX, 3D, B2B,
+  ELF…) — never force-lowercase body text again. Project titles stay uppercase (they carry names).
+
 - **Portfolio is a living set (29 Sep).** As new projects come in, each gets a full case
   study (brief, process, outcome with real numbers or quotes where the client allows),
   and older or weaker pieces are retired. Aim over time for proof: outcomes, testimonials,
@@ -242,6 +249,9 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 ## Session history
 
 **6 Oct 2026**
+21. Case rules applied (see Decisions). Hero sub-text now spans exactly the width of the
+    first headline line (`w-fit` h1 + `w-0 min-w-full` sub-text), and the headline is pulled
+    left 0.05em so its glyphs optically align with the sub-text and buttons.
 16. Removed three projects: Social Nation (festival identity), One Digital (sting & stories),
     Logo design (Dangal Dawgs etc.). Media files stay in `public/media/`, unused.
 17. V2P 2.0: dropped the sign-in strip (a stray Figma line crossed every screen), rebuilt the

@@ -134,7 +134,7 @@ export default function CaseStudy({ project }) {
                 {sec.title}
               </h3>
             </div>
-            <p className="col-span-12 max-w-[62ch] text-[15px] leading-[1.6] lowercase text-muted md:col-span-8">
+            <p className="col-span-12 max-w-[62ch] text-[15px] leading-[1.6] text-muted md:col-span-8">
               {sec.body}
             </p>
           </div>
