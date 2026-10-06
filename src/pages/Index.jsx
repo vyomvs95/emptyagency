@@ -234,7 +234,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
           <div className="mt-6 grid grid-cols-1 border-l border-t border-hair-soft md:grid-cols-2 lg:grid-cols-3">
             {INDUSTRIES.map((ind) => (
               <div key={ind.name} className="flex flex-col gap-4 border-b border-r border-hair-soft p-6">
-                <h3 className="text-[clamp(18px,1.6vw,22px)] font-medium uppercase leading-[1.1] tracking-[-0.01em]">{ind.name}</h3>
+                <h3 className="text-[clamp(18px,1.6vw,22px)] font-medium leading-[1.1] tracking-[-0.01em]">{ind.name}</h3>
                 <p className="text-[14px] leading-[1.55] text-muted">{ind.body}</p>
                 <div className="mt-auto flex flex-wrap gap-2 pt-2">
                   {ind.projects.map((p) => (

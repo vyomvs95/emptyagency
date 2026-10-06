@@ -135,7 +135,7 @@ export default function VisionPage({ onNavigate }) {
                   <Reveal key={k} delay={0.06 * i}>
                     <div className="flex items-baseline gap-6 border-t border-hair py-5">
                       <span className="label label-ink">{k}</span>
-                      <span className="text-[clamp(18px,2.4vw,32px)] font-medium uppercase leading-[1.1] tracking-[-0.02em]">
+                      <span className="text-[clamp(18px,2.4vw,32px)] font-medium lowercase leading-[1.1] tracking-[-0.02em]">
                         {v}
                       </span>
                     </div>

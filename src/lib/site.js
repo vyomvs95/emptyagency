@@ -450,12 +450,12 @@ export const FEATURED = [
  * here, and those project cards open straight from the home page.
  */
 export const INDUSTRIES = [
-  ['FINTECH & PAYMENTS', 'Merchant apps, POS software, payment portals, lending and investing products.', ['mswipe', 'v2p', 'invest-app']],
-  ['ENTERPRISE SOFTWARE', 'HR systems, dashboards and B2B messaging platforms.', ['enquest-hrms', 'connectify']],
-  ['INDUSTRIAL & LOGISTICS', 'Explainer films that make complex operations easy to understand and buy.', ['all-hub']],
-  ['REAL ESTATE', 'Walkthroughs, township films and 3D floor plans for developers.', ['real-estate-visualisation']],
-  ['CONSUMER PRODUCTS', 'CGI launch films for accessories, luggage, watches and hardware.', ['clear-x', 'eume-cabin-pro', 'stuffcool', 'luca-chronograph', 'protectli-vault-pro', 'cougar-chair']],
-  ['ENTERTAINMENT & MUSIC', 'Campaign films, artwork and lyric videos for artists, labels and studios.', ['elf-tamannaah', 'sony-prime-video', 'osho-jain']],
+  ['fintech & payments', 'Merchant apps, POS software, payment portals, lending and investing products.', ['mswipe', 'v2p', 'invest-app']],
+  ['enterprise software', 'HR systems, dashboards and B2B messaging platforms.', ['enquest-hrms', 'connectify']],
+  ['industrial & logistics', 'Explainer films that make complex operations easy to understand and buy.', ['all-hub']],
+  ['real estate', 'Walkthroughs, township films and 3D floor plans for developers.', ['real-estate-visualisation']],
+  ['consumer products', 'CGI launch films for accessories, luggage, watches and hardware.', ['clear-x', 'eume-cabin-pro', 'stuffcool', 'luca-chronograph', 'protectli-vault-pro', 'cougar-chair']],
+  ['entertainment & music', 'Campaign films, artwork and lyric videos for artists, labels and studios.', ['elf-tamannaah', 'sony-prime-video', 'osho-jain']],
 ].map(([name, body, slugs]) => ({ name, body, projects: slugs.map((s) => bySlug[s]).filter(Boolean) }))
 
 /* ------------------------------------------------------------------ */
@@ -535,7 +535,7 @@ export const STACK = [
 export const PILLARS = [
   {
     index: '01',
-    title: 'UI/UX DESIGN',
+    title: 'UI/UX design',
     tech: 'INTERFACE',
     body: 'Mobile apps, web platforms, dashboards and websites — from research and user flows to wireframes, a design system and developer-ready screens.',
     outputs: ['MOBILE APPS', 'WEB APPS & DASHBOARDS', 'WEBSITES', 'DESIGN SYSTEMS'],
@@ -549,14 +549,14 @@ export const PILLARS = [
   },
   {
     index: '03',
-    title: 'VIDEO & MOTION',
+    title: 'video & motion',
     tech: 'KINETIC',
     body: 'Campaign films and their cut-downs, showreels, event films, lyric videos and motion graphics — edited for the screen they will be watched on.',
     outputs: ['CAMPAIGN FILMS', 'SHOWREELS & EVENTS', 'LYRIC VIDEOS', 'MOTION GRAPHICS'],
   },
   {
     index: '04',
-    title: 'GRAPHIC DESIGN',
+    title: 'graphic design',
     tech: 'STATIC',
     body: 'Film and song artwork, thumbnails, social campaigns, posters and logos — built to be recognised at a glance and hold together across every format.',
     outputs: ['SONG ARTWORK', 'THUMBNAILS', 'SOCIAL POSTS', 'LOGOS'],
@@ -566,21 +566,21 @@ export const PILLARS = [
 export const PIPELINE = [
   {
     step: 'STEP 1',
-    title: 'SIMPLIFY.',
+    title: 'simplify.',
     tech: 'SUBTRACT',
     body: 'We talk through your idea and narrow it down to what really matters. Nothing extra.',
     duration: '1 WEEK',
   },
   {
     step: 'STEP 2',
-    title: 'PLAN.',
+    title: 'plan.',
     tech: 'WIREFRAME',
     body: 'We lay out the structure first and make sure it works before anything gets styled.',
     duration: '2–3 WEEKS',
   },
   {
     step: 'STEP 3',
-    title: 'BUILD.',
+    title: 'build.',
     tech: 'RENDER',
     body: 'We design and deliver the finished work: artwork, animation, video, 3D or a product ready for development.',
     duration: '4–8 WEEKS',

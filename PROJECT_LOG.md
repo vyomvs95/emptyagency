@@ -249,6 +249,9 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
 ## Session history
 
 **6 Oct 2026**
+22. Case audit (computed styles, every page): service names, the three steps, industries and
+    the Vision "A/B/C" list were display-size caps → lowercase (acronyms kept: UI/UX, 3D & CGI).
+    noscript brand lowercase. Left in caps on purpose: labels/nav/marquee, project titles.
 21. Case rules applied (see Decisions). Hero sub-text now spans exactly the width of the
     first headline line (`w-fit` h1 + `w-0 min-w-full` sub-text), and the headline is pulled
     left 0.05em so its glyphs optically align with the sub-text and buttons.
