@@ -369,6 +369,12 @@ export const CASE_STUDIES = [
         },
       ],
       deliverables: ['20 SCREENS', 'CARD CONTROLS', 'AGENT DASHBOARD'],
+      testimonial: {
+        quote:
+          'Fuel spend used to be a pile of paper bills we reconciled at month-end. Now every fill-up is on the card and shows against its limit the moment it happens, so we track every rupee as it’s spent — and when a bill is disputed, the transaction is already there to back us up. Our agents manage cards, follow-ups and collections in one app, and the whole process just runs.',
+        name: 'ASHI NAGARIA',
+        role: 'PRODUCT MANAGER',
+      },
     },
   },
 

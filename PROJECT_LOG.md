@@ -251,7 +251,10 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
     panel rail). The quote was written by Claude at the owner's request — get Ashi's sign-off.
 18. Product films folder split into separate 3D projects: Clear X, EUME, Stuffcool, LUCA,
     Protectli, Cougar, Product spots (wine + Mswipe device). Home selected work uses Stuffcool.
-19. Hero sub-text now describes the whole studio, not only UI/UX + 3D.
+19. Hero sub-text now describes the whole studio, not only UI/UX + 3D. Opens "A full-service
+    creative studio." — "independent" was dropped because it reads small to corporate buyers.
+20. Field app (fuel cards) case study: testimonial from Ashi Nagaria, Product Manager (client
+    undisclosed, so no company named). Also written by Claude at the owner's request — needs sign-off.
 
 **29 Sep 2026 (latest)**
 15. Nothing opens in a new tab any more: images and films expand in a themed **lightbox**
