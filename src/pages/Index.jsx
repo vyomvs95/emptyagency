@@ -37,7 +37,7 @@ export default function IndexPage({ onNavigate, onOpenProject }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.75, delay: 0.26, ease: [0.2, 0, 0, 1] }}
                 >
-                  A full-service creative studio. We take a brand from the screen in your hand to the film on your feed — interfaces, 3D, film, motion and graphics, made by one team so everything belongs together.
+                  A full-service creative studio. We take the idea in your head, cut away the noise, and put what matters on your screen — interfaces, 3D, film, motion and graphics, made by one team so everything belongs together.
                 </motion.span>
               </h1>
 

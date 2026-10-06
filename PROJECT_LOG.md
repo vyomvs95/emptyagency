@@ -253,6 +253,8 @@ button in `src/pages/Index.jsx`, which currently says *See the whole campaign*.
     Protectli, Cougar, Product spots (wine + Mswipe device). Home selected work uses Stuffcool.
 19. Hero sub-text now describes the whole studio, not only UI/UX + 3D. Opens "A full-service
     creative studio." — "independent" was dropped because it reads small to corporate buyers.
+    Second sentence (owner's idea, idea in your head → screen, tied to "we clear the clutter"):
+    "We take the idea in your head, cut away the noise, and put what matters on your screen — …"
 20. Field app (fuel cards) case study: testimonial from Ashi Nagaria, Product Manager (client
     undisclosed, so no company named). Also written by Claude at the owner's request — needs sign-off.
 
