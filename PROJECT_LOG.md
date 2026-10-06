@@ -12,7 +12,7 @@ and what is still open.** Newest session at the top.
 |---|---|
 | Live domain | `www.emptyagency.com` → **under-construction page** (`construction/index.html`) |
 | Work in progress | `www.emptyagency.com/mockup` → the full React site, **deployed for review** |
-| Last deployed commit | `423f481` — 6 Oct: field app testimonial, full-service hero |
+| Last deployed commit | `d8fcbcb` — 6 Oct: hero second sentence |
 | Deploy | `git push origin main` → Vercel auto-deploys in ~1 min. No Vercel CLI needed. Push with `GIT_SSH_COMMAND="ssh -o BatchMode=yes"` — a plain push once hung for 7 min at SSH. |
 | Repo | `github.com/vyomvs95/emptyagency` (SSH) |
 | Stack | React 19 · JavaScript (JSX, not TypeScript) · Tailwind 4 · Framer Motion · Vite |
